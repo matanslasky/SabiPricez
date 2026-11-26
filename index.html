@@ -27,7 +27,15 @@
       --shadow-md: 0 8px 24px rgba(17, 24, 39, 0.08);
     }
 
-    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    *, *::before, *::after {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html, body {
+      max-width: 100%;
+      overflow-x: clip;
+    }
 
     body {
       margin: 0;
@@ -61,17 +69,18 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
+      gap: 10px;
       margin-bottom: 10px;
     }
 
     .brand {
-      display: flex;
+      display: inline-flex;
       align-items: center;
       gap: 8px;
-      font-size: 1.25rem;
+      font-size: 1.2rem;
       font-weight: 800;
       letter-spacing: -0.02em;
+      flex-shrink: 0;
     }
 
     .brand-mark {
@@ -84,6 +93,7 @@
       place-items: center;
       font-size: 0.95rem;
       font-weight: 800;
+      flex-shrink: 0;
     }
 
     .brand span { color: var(--accent); }
@@ -92,12 +102,15 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      font-size: 0.78rem;
+      font-size: 0.75rem;
       color: var(--muted);
       background: var(--bg);
       padding: 4px 10px;
       border-radius: 999px;
       white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 55%;
     }
 
     .freshness-dot {
@@ -105,16 +118,19 @@
       height: 7px;
       border-radius: 50%;
       background: var(--accent);
+      flex-shrink: 0;
     }
 
     /* Search */
     .search-wrap {
       position: relative;
       margin-bottom: 10px;
+      width: 100%;
     }
 
     .search-input {
       width: 100%;
+      min-width: 0;
       padding: 10px 38px 10px 14px;
       border-radius: var(--radius-md);
       border: 1px solid var(--border);
@@ -213,7 +229,7 @@
       margin: 14px auto 0;
       padding: 0 16px;
       display: grid;
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
       gap: 14px;
     }
 
@@ -234,6 +250,7 @@
       overflow: hidden;
       display: flex;
       flex-direction: column;
+      min-width: 0;
     }
 
     .card-head {
@@ -273,6 +290,7 @@
       font-weight: 600;
       cursor: pointer;
       white-space: nowrap;
+      flex-shrink: 0;
       transition: all 0.15s;
     }
 
@@ -423,6 +441,7 @@
       font-size: 0.82rem;
       font-weight: 700;
       white-space: nowrap;
+      flex-shrink: 0;
     }
 
     /* Basket Slide-Up Drawer */
@@ -532,9 +551,9 @@
 <header class="topbar">
   <div class="topbar-inner">
     <div class="brand-row">
-      <div class="brand">
+      <div class="brand" dir="ltr">
         <div class="brand-mark">₪</div>
-        Sabi<span>Pricez</span>
+        <div>Sabi<span>Pricez</span></div>
       </div>
       <div class="freshness" id="freshnessBadge">
         <span class="freshness-dot"></span>
@@ -680,7 +699,6 @@
       const shown = isExpanded ? matches : matches.slice(0, 3);
       const inBasket = basket.has(item.name);
 
-      // Savings vs next different store
       let savePct = 0;
       if (matches.length >= 2) {
         const best = matches[0];
@@ -821,7 +839,7 @@
 
   function toggleStore(label) {
     if (activeStores.has(label)) {
-      if (activeStores.size === 1) return; // keep at least 1 store active
+      if (activeStores.size === 1) return;
       activeStores.delete(label);
     } else {
       activeStores.add(label);
