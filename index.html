@@ -24,6 +24,12 @@
       --accent: #16A34A;
       --accent-soft: #ECFDF5;
       --accent-border: #BBF7D0;
+      --warn-soft: #FFFBEB;
+      --warn-border: #FDE68A;
+      --warn-ink: #92400E;
+      --promo-soft: #FFF7ED;
+      --promo-border: #FED7AA;
+      --promo-ink: #C2410C;
       --radius-lg: 16px;
       --radius-md: 12px;
       --shadow-sm: 0 1px 2px rgba(17, 24, 39, 0.05);
@@ -80,9 +86,6 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      font-size: 1.2rem;
-      font-weight: 800;
-      letter-spacing: -0.02em;
       flex-shrink: 0;
     }
 
@@ -154,7 +157,7 @@
       font-size: 0.95rem;
     }
 
-    /* Horizontal Scrollers (Stores & Categories) */
+    /* Horizontal Scrollers */
     .scroll-row {
       display: flex;
       gap: 8px;
@@ -309,6 +312,8 @@
       border-radius: var(--radius-md);
       background: #FAFAFB;
       border: 1px solid transparent;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
     }
 
     .offer.best {
@@ -316,12 +321,17 @@
       border-color: var(--accent-border);
     }
 
+    .offer.pinned {
+      border-color: var(--ink);
+      box-shadow: inset 0 0 0 1px var(--ink);
+    }
+
     .offer-info { min-width: 0; flex: 1; }
 
     .offer-meta {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
       flex-wrap: wrap;
       margin-bottom: 3px;
     }
@@ -348,6 +358,22 @@
       border-radius: 999px;
     }
 
+    .pin-badge {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: #fff;
+      background: var(--ink);
+      padding: 2px 7px;
+      border-radius: 999px;
+    }
+
+    .product-row {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      min-width: 0;
+    }
+
     .product-name {
       font-size: 0.88rem;
       font-weight: 500;
@@ -355,6 +381,43 @@
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+    }
+
+    .verify-link {
+      flex-shrink: 0;
+      text-decoration: none;
+      font-size: 0.76rem;
+      opacity: 0.55;
+      padding: 2px 3px;
+      border-radius: 6px;
+      transition: opacity 0.15s, background 0.15s;
+    }
+
+    .verify-link:hover {
+      opacity: 1;
+      background: rgba(17, 24, 39, 0.08);
+    }
+
+    .promo-line {
+      margin-top: 4px;
+      display: inline-block;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--promo-ink);
+      background: var(--promo-soft);
+      border: 1px solid var(--promo-border);
+      padding: 1px 7px;
+      border-radius: 999px;
+    }
+
+    .promo-line.club {
+      color: var(--warn-ink);
+      background: var(--warn-soft);
+      border-color: var(--warn-border);
     }
 
     .offer-price {
@@ -377,8 +440,15 @@
       color: var(--muted);
     }
 
+    .old-price {
+      font-size: 0.73rem;
+      color: var(--muted);
+      text-decoration: line-through;
+      margin-top: 1px;
+    }
+
     .shelf-price {
-      font-size: 0.75rem;
+      font-size: 0.74rem;
       color: var(--muted);
       margin-top: 2px;
     }
@@ -457,7 +527,7 @@
       background: var(--surface);
       width: 100%;
       max-width: 560px;
-      max-height: 82vh;
+      max-height: 85vh;
       overflow-y: auto;
       border-radius: 20px 20px 0 0;
       padding: 18px 18px max(22px, env(safe-area-inset-bottom));
@@ -468,7 +538,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
 
     .drawer-head h2 { margin: 0; font-size: 1.15rem; }
@@ -486,10 +556,40 @@
       cursor: pointer;
     }
 
+    /* Walk vs Drive Decision Banner */
+    .decision-banner {
+      padding: 11px 13px;
+      border-radius: 12px;
+      font-size: 0.86rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+      border: 1px solid transparent;
+    }
+
+    .decision-banner.drive {
+      background: var(--accent-soft);
+      border-color: var(--accent-border);
+      color: #166534;
+    }
+
+    .decision-banner.walk {
+      background: var(--warn-soft);
+      border-color: var(--warn-border);
+      color: var(--warn-ink);
+    }
+
+    .decision-sub {
+      font-size: 0.74rem;
+      font-weight: 400;
+      opacity: 0.85;
+      margin-top: 2px;
+    }
+
     .store-total-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 10px;
       padding: 11px 12px;
       border-radius: 12px;
       border: 1px solid var(--border);
@@ -501,32 +601,82 @@
       border-color: var(--accent-border);
     }
 
-    .basket-items-list {
-      margin-top: 14px;
-      padding-top: 12px;
-      border-top: 1px solid var(--border);
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
+    .missing-pill {
+      display: inline-block;
+      margin-top: 3px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--warn-ink);
+      background: var(--warn-soft);
+      border: 1px solid var(--warn-border);
+      padding: 1px 7px;
+      border-radius: 999px;
     }
 
-    .basket-pill {
+    /* Basket Item Quantity Rows */
+    .basket-section-title {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--muted);
+      margin: 14px 0 8px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+    }
+
+    .basket-qty-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 8px 0;
+      border-bottom: 1px solid #F3F4F6;
+    }
+
+    .basket-qty-info { min-width: 0; flex: 1; }
+    .basket-qty-name { font-size: 0.9rem; font-weight: 600; }
+    .basket-qty-pin { font-size: 0.73rem; color: var(--muted); }
+
+    .stepper {
       display: inline-flex;
       align-items: center;
       gap: 6px;
       background: var(--bg);
-      padding: 5px 10px;
+      border: 1px solid var(--border);
       border-radius: 999px;
-      font-size: 0.8rem;
+      padding: 3px 6px;
+      flex-shrink: 0;
     }
 
-    .basket-pill button {
+    .stepper button {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      border: none;
+      background: var(--surface);
+      color: var(--ink);
+      font-size: 1rem;
+      font-weight: 700;
+      line-height: 1;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .stepper-val {
+      min-width: 46px;
+      text-align: center;
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+
+    .remove-item-btn {
       border: none;
       background: none;
       color: var(--muted);
+      font-size: 0.95rem;
       cursor: pointer;
-      font-weight: 700;
-      padding: 0;
+      padding: 4px 6px;
     }
 
     /* Skeleton Loader */
@@ -559,7 +709,7 @@
 
     <div class="search-wrap">
       <span class="search-icon">🔍</span>
-      <input id="searchInput" class="search-input" type="search" placeholder="חיפוש מוצר או מותג (למשל: חזה עוף, בסמטי, שמן זית)..." />
+      <input id="searchInput" class="search-input" type="search" placeholder="חיפוש מוצר או מותג (למשל: חזה עוף, בסמטי, חמאה)..." />
     </div>
 
     <div class="scroll-row" id="storeFilters"></div>
@@ -595,8 +745,10 @@
         <button class="ghost-btn" onclick="closeDrawer()">סגור</button>
       </div>
     </div>
+    <div id="decisionBanner"></div>
     <div id="drawerTotals"></div>
-    <div class="basket-items-list" id="drawerItems"></div>
+    <div class="basket-section-title">כמויות בסל (מבצעי כמות מחושבים אוטומטית כשהכמות מתאימה)</div>
+    <div id="drawerItems"></div>
   </div>
 </div>
 
@@ -609,14 +761,37 @@
   };
 
   let appData = null;
+  let categories = ['הכל'];
   let activeStores = new Set();
   let activeCategory = 'הכל';
   let searchQuery = '';
   let expandedCards = new Set();
-  let basket = new Set(JSON.parse(localStorage.getItem('sabipricez_basket') || '[]'));
+  let basket = loadBasket();
+
+  function loadBasket() {
+    try {
+      const raw = JSON.parse(localStorage.getItem('sabipricez_basket') || '{}');
+      if (Array.isArray(raw)) {
+        const migrated = {};
+        raw.forEach(name => { migrated[name] = { qty: 1, pins: {} }; });
+        localStorage.setItem('sabipricez_basket', JSON.stringify(migrated));
+        return migrated;
+      }
+      if (raw && typeof raw === 'object') {
+        Object.keys(raw).forEach(k => {
+          if (!raw[k] || typeof raw[k].qty !== 'number') raw[k] = { qty: 1, pins: {} };
+          if (!raw[k].pins) raw[k].pins = {};
+        });
+        return raw;
+      }
+      return {};
+    } catch {
+      return {};
+    }
+  }
 
   function saveBasket() {
-    localStorage.setItem('sabipricez_basket', JSON.stringify([...basket]));
+    localStorage.setItem('sabipricez_basket', JSON.stringify(basket));
   }
 
   function splitTitle(fullName) {
@@ -630,6 +805,36 @@
     return STORE_COLORS[storeObj?.chain] || '#6B7280';
   }
 
+  function getEffectivePrice(m) {
+    return (typeof m.effective_unit_price === 'number') ? m.effective_unit_price : m.unit_price;
+  }
+
+  // Quantity-aware promo price for Smart Basket
+  function getBasketUnitPrice(m, qty) {
+    const p = m.promo;
+    if (p && !p.is_club && !p.is_conditional && typeof p.promo_unit_price === 'number') {
+      const minQty = p.min_qty || 1;
+      if (qty >= minQty) return p.promo_unit_price;
+    }
+    return m.unit_price;
+  }
+
+  function getItemUnitInfo(item) {
+    const unit = item.matches?.[0]?.unit || "יח'";
+    const isKg = unit.includes('ק"ג') || unit.includes('קילו');
+    return { unit, step: isKg ? 0.5 : 1 };
+  }
+
+  function getStoreMatchForItem(item, storeLabel) {
+    const entry = basket[item.name];
+    const pinnedProduct = entry?.pins?.[storeLabel];
+    if (pinnedProduct) {
+      const pinned = item.matches.find(m => m.store === storeLabel && m.product === pinnedProduct);
+      if (pinned) return pinned;
+    }
+    return item.matches.find(m => m.store === storeLabel) || null;
+  }
+
   function formatUpdated(ts) {
     if (!ts) return 'לא ידוע';
     const [datePart, timePart] = ts.split(' ');
@@ -637,13 +842,22 @@
     return datePart === today ? `עודכן היום ב-${timePart}` : `עודכן ${datePart} · ${timePart}`;
   }
 
+  function formatQty(qty) {
+    return Number.isInteger(qty) ? String(qty) : qty.toFixed(1);
+  }
+
+  function buildVerifyUrl(m) {
+    const q = m.item_code ? `${m.item_code} ${m.product}` : `${m.short_store || ''} ${m.product}`;
+    return `https://www.google.com/search?q=${encodeURIComponent(q.trim())}`;
+  }
+
   function renderStoreFilters() {
     const el = document.getElementById('storeFilters');
-    el.innerHTML = appData.stores.map(s => {
+    el.innerHTML = appData.stores.map((s, idx) => {
       const isOn = activeStores.has(s.label);
       const color = STORE_COLORS[s.chain] || '#6B7280';
       return `
-        <button class="store-chip ${isOn ? 'active' : ''}" onclick="toggleStore('${s.label.replace(/'/g, "\\'")}')">
+        <button class="store-chip ${isOn ? 'active' : ''}" onclick="toggleStore(${idx})">
           <span class="store-dot" style="background:${color}"></span>
           ${s.short_name || s.label}
         </button>`;
@@ -651,10 +865,10 @@
   }
 
   function renderCategoryTabs() {
-    const cats = ['הכל', ...new Set(appData.items.map(i => i.category || 'כללי'))];
+    categories = ['הכל', ...new Set(appData.items.map(i => i.category || 'כללי'))];
     const el = document.getElementById('categoryTabs');
-    el.innerHTML = cats.map(c => `
-      <button class="cat-chip ${activeCategory === c ? 'active' : ''}" onclick="setCategory('${c.replace(/'/g, "\\'")}')">
+    el.innerHTML = categories.map((c, idx) => `
+      <button class="cat-chip ${activeCategory === c ? 'active' : ''}" onclick="setCategory(${idx})">
         ${c}
       </button>
     `).join('');
@@ -662,55 +876,74 @@
 
   function getFilteredMatches(item) {
     const q = searchQuery.trim().toLowerCase();
-    return item.matches.filter(m => {
-      if (!activeStores.has(m.store)) return false;
-      if (!q) return true;
-      return (
-        item.name.toLowerCase().includes(q) ||
-        m.product.toLowerCase().includes(q) ||
-        (m.short_store || '').toLowerCase().includes(q)
-      );
-    });
+    return item.matches
+      .map((m, origIdx) => ({ m, origIdx }))
+      .filter(({ m }) => {
+        if (!activeStores.has(m.store)) return false;
+        if (!q) return true;
+        return (
+          item.name.toLowerCase().includes(q) ||
+          m.product.toLowerCase().includes(q) ||
+          (m.short_store || '').toLowerCase().includes(q) ||
+          (m.promo?.desc || '').toLowerCase().includes(q)
+        );
+      });
   }
 
   function renderCards() {
     const grid = document.getElementById('cardsGrid');
     const q = searchQuery.trim().toLowerCase();
 
-    const visibleItems = appData.items.filter(item => {
-      if (activeCategory !== 'הכל' && (item.category || 'כללי') !== activeCategory) return false;
-      if (!q) return true;
-      return item.name.toLowerCase().includes(q) || getFilteredMatches(item).length > 0;
-    });
+    const visibleItems = appData.items
+      .map((item, itemIdx) => ({ item, itemIdx }))
+      .filter(({ item }) => {
+        if (activeCategory !== 'הכל' && (item.category || 'כללי') !== activeCategory) return false;
+        if (!q) return true;
+        return item.name.toLowerCase().includes(q) || getFilteredMatches(item).length > 0;
+      });
 
     if (!visibleItems.length) {
       grid.innerHTML = '<div class="card"><div class="empty-state">לא נמצאו מוצרים התואמים לחיפוש.</div></div>';
       return;
     }
 
-    grid.innerHTML = visibleItems.map(item => {
+    grid.innerHTML = visibleItems.map(({ item, itemIdx }) => {
       const { he, en } = splitTitle(item.name);
       const matches = getFilteredMatches(item);
       const isExpanded = expandedCards.has(item.name);
       const shown = isExpanded ? matches : matches.slice(0, 3);
-      const inBasket = basket.has(item.name);
+      const basketEntry = basket[item.name];
+      const inBasket = Boolean(basketEntry);
 
       let savePct = 0;
       if (matches.length >= 2) {
-        const best = matches[0];
-        const nextStore = matches.find(m => m.store !== best.store) || matches[1];
-        if (nextStore && nextStore.unit_price > best.unit_price) {
-          savePct = Math.round(((nextStore.unit_price - best.unit_price) / nextStore.unit_price) * 100);
+        const best = matches[0].m;
+        const nextStore = (matches.find(x => x.m.store !== best.store) || matches[1]).m;
+        const bestEff = getEffectivePrice(best);
+        const nextEff = getEffectivePrice(nextStore);
+        if (nextStore && nextEff > bestEff) {
+          savePct = Math.round(((nextEff - bestEff) / nextEff) * 100);
         }
       }
 
       const offersHtml = shown.length
-        ? shown.map((m, idx) => {
+        ? shown.map(({ m, origIdx }, idx) => {
             const isBest = idx === 0;
+            const isPinned = basketEntry?.pins?.[m.store] === m.product;
             const color = getStoreColor(m.store);
-            const showShelf = Math.abs(m.price - m.unit_price) > 0.05;
+            const effPrice = getEffectivePrice(m);
+            const hasActiveDiscount = effPrice < m.unit_price - 0.01;
+            const showShelf = !hasActiveDiscount && Math.abs(m.price - m.unit_price) > 0.05;
+
+            let promoHtml = '';
+            if (m.promo && m.promo.desc) {
+              const isRestricted = m.promo.is_club || m.promo.is_conditional;
+              const tagSuffix = m.promo.is_club ? ' · מועדון' : (m.promo.is_conditional ? ' · מותנה' : '');
+              promoHtml = `<div class="promo-line ${isRestricted ? 'club' : ''}" title="${m.promo.desc}">🏷️ ${m.promo.desc}${tagSuffix}</div>`;
+            }
+
             return `
-              <div class="offer ${isBest ? 'best' : ''}">
+              <div class="offer ${isBest ? 'best' : ''} ${isPinned ? 'pinned' : ''}" onclick="togglePin(${itemIdx}, ${origIdx})" title="לחץ כדי לנעוץ מוצר זה בסל">
                 <div class="offer-info">
                   <div class="offer-meta">
                     <span class="store-pill">
@@ -718,11 +951,17 @@
                       ${m.short_store || m.store}
                     </span>
                     ${isBest && savePct >= 3 ? `<span class="save-badge">זול ב-${savePct}%</span>` : ''}
+                    ${isPinned ? `<span class="pin-badge">📌 נבחר לסל</span>` : ''}
                   </div>
-                  <div class="product-name" title="${m.product}">${m.product}</div>
+                  <div class="product-row">
+                    <div class="product-name">${m.product}</div>
+                    <a class="verify-link" href="${buildVerifyUrl(m)}" target="_blank" rel="noopener" onclick="event.stopPropagation()" title="אימות מוצר וברקוד בגוגל">🔍</a>
+                  </div>
+                  ${promoHtml}
                 </div>
                 <div class="offer-price num">
-                  <div class="unit-price">₪${m.unit_price.toFixed(2)} <span class="unit-label">/ ${m.unit}</span></div>
+                  <div class="unit-price">₪${effPrice.toFixed(2)} <span class="unit-label">/ ${m.unit}</span></div>
+                  ${hasActiveDiscount ? `<div class="old-price">₪${m.unit_price.toFixed(2)} רגיל</div>` : ''}
                   ${showShelf ? `<div class="shelf-price">₪${m.price.toFixed(2)} ליח'</div>` : ''}
                 </div>
               </div>`;
@@ -731,7 +970,7 @@
 
       const moreCount = matches.length - 3;
       const expandHtml = moreCount > 0
-        ? `<button class="expand-btn" onclick="toggleExpand('${item.name.replace(/'/g, "\\'")}')">
+        ? `<button class="expand-btn" onclick="toggleExpand(${itemIdx})">
              ${isExpanded ? 'הצג פחות ▲' : `הצג עוד ${moreCount} אפשרויות ▼`}
            </button>`
         : '';
@@ -743,8 +982,8 @@
               <h2 class="card-title">${he}</h2>
               ${en ? `<div class="card-sub">${en}</div>` : ''}
             </div>
-            <button class="basket-btn ${inBasket ? 'in-basket' : ''}" onclick="toggleBasket('${item.name.replace(/'/g, "\\'")}')">
-              ${inBasket ? '✓ בסל' : '+ לסל'}
+            <button class="basket-btn ${inBasket ? 'in-basket' : ''}" onclick="toggleBasket(${itemIdx})">
+              ${inBasket ? `✓ בסל (${formatQty(basketEntry.qty)})` : '+ לסל'}
             </button>
           </div>
           <div class="offers">${offersHtml}</div>
@@ -754,20 +993,27 @@
   }
 
   function computeBasketTotals() {
-    const selectedItems = appData.items.filter(i => basket.has(i.name));
+    const selectedItems = appData.items.filter(i => Boolean(basket[i.name]));
     const perStore = appData.stores
       .filter(s => activeStores.has(s.label))
       .map(store => {
         let total = 0;
         let found = 0;
+        let promosApplied = 0;
+        const itemPrices = {};
         for (const item of selectedItems) {
-          const match = item.matches.find(m => m.store === store.label);
+          const match = getStoreMatchForItem(item, store.label);
           if (match) {
-            total += match.unit_price;
+            const qty = basket[item.name].qty;
+            const unitCost = getBasketUnitPrice(match, qty);
+            if (unitCost < match.unit_price - 0.01) promosApplied += 1;
+            const cost = unitCost * qty;
+            total += cost;
             found += 1;
+            itemPrices[item.name] = cost;
           }
         }
-        return { store, total, found, missing: selectedItems.length - found };
+        return { store, total, found, missing: selectedItems.length - found, promosApplied, itemPrices };
       })
       .filter(s => s.found > 0)
       .sort((a, b) => (b.found - a.found) || (a.total - b.total));
@@ -775,25 +1021,61 @@
     let splitTotal = 0;
     let splitFound = 0;
     for (const item of selectedItems) {
-      const best = item.matches.find(m => activeStores.has(m.store));
-      if (best) {
-        splitTotal += best.unit_price;
+      const qty = basket[item.name].qty;
+      let bestPrice = Infinity;
+      for (const s of appData.stores) {
+        if (!activeStores.has(s.label)) continue;
+        const match = getStoreMatchForItem(item, s.label);
+        if (match) {
+          const unitCost = getBasketUnitPrice(match, qty);
+          if (unitCost < bestPrice) bestPrice = unitCost;
+        }
+      }
+      if (bestPrice < Infinity) {
+        splitTotal += bestPrice * qty;
         splitFound += 1;
       }
     }
 
-    return { count: selectedItems.length, perStore, splitTotal, splitFound };
+    const bestBigBox = perStore.find(e => e.store.tier === 'big_box');
+    const bestNeighborhood = perStore.find(e => e.store.tier === 'neighborhood');
+    let decision = null;
+
+    if (bestBigBox && bestNeighborhood) {
+      let overlapCount = 0;
+      let bigBoxSum = 0;
+      let neighSum = 0;
+      for (const item of selectedItems) {
+        if (bestBigBox.itemPrices[item.name] !== undefined && bestNeighborhood.itemPrices[item.name] !== undefined) {
+          overlapCount += 1;
+          bigBoxSum += bestBigBox.itemPrices[item.name];
+          neighSum += bestNeighborhood.itemPrices[item.name];
+        }
+      }
+      if (overlapCount > 0) {
+        decision = {
+          bigBoxName: bestBigBox.store.short_name,
+          neighName: bestNeighborhood.store.short_name,
+          diff: neighSum - bigBoxSum,
+          overlapCount,
+          totalCount: selectedItems.length,
+        };
+      }
+    }
+
+    return { count: selectedItems.length, perStore, splitTotal, splitFound, decision };
   }
 
   function renderBasketUI() {
+    const basketKeys = Object.keys(basket).filter(k => appData.items.some(i => i.name === k));
     const bar = document.getElementById('basketBar');
-    if (basket.size === 0) {
+    if (basketKeys.length === 0) {
       bar.classList.remove('visible');
       closeDrawer();
       return;
     }
 
-    const { count, perStore, splitTotal } = computeBasketTotals();
+    const { count, perStore, splitTotal, decision } = computeBasketTotals();
     bar.classList.add('visible');
 
     const winner = perStore[0];
@@ -802,18 +1084,51 @@
       ? `הכי זול בסניף אחד: ${winner.store.short_name} (₪${winner.total.toFixed(2)} · ${winner.found}/${count})`
       : 'אין התאמות בסניפים הנבחרים';
 
+    const bannerEl = document.getElementById('decisionBanner');
+    if (decision) {
+      const overlapNote = decision.overlapCount < decision.totalCount
+        ? `<div class="decision-sub">מחושב על ${decision.overlapCount} מתוך ${decision.totalCount} מוצרים שקיימים בשני הסניפים</div>`
+        : '';
+      if (decision.diff >= 25) {
+        bannerEl.innerHTML = `
+          <div class="decision-banner drive">
+            🚗 נסיעה ל${decision.bigBoxName} חוסכת ₪${decision.diff.toFixed(0)} לעומת ${decision.neighName}
+            ${overlapNote}
+          </div>`;
+      } else if (decision.diff > 0) {
+        bannerEl.innerHTML = `
+          <div class="decision-banner walk">
+            🚶 פער קטן של ₪${decision.diff.toFixed(0)} בלבד — שווה להישאר בבן יהודה (${decision.neighName})
+            ${overlapNote}
+          </div>`;
+      } else {
+        bannerEl.innerHTML = `
+          <div class="decision-banner walk">
+            🚶 ${decision.neighName} זול יותר או זהה ל${decision.bigBoxName} בסל הזה — אין סיבה לנסוע
+            ${overlapNote}
+          </div>`;
+      }
+    } else {
+      bannerEl.innerHTML = '';
+    }
+
     const totalsEl = document.getElementById('drawerTotals');
-    let html = perStore.map((entry, idx) => `
-      <div class="store-total-row ${idx === 0 ? 'winner' : ''}">
-        <div>
-          <strong>${entry.store.short_name}</strong>
-          <div style="font-size:0.78rem;color:var(--muted)">
-            ${entry.found}/${count} מוצרים נמצאו${entry.missing > 0 ? ` (חסרים ${entry.missing})` : ''}
+    let html = perStore.map((entry, idx) => {
+      const isWinner = idx === 0 && entry.missing === 0;
+      const fallbackWinner = idx === 0 && perStore.every(p => p.missing > 0);
+      const promoNote = entry.promosApplied > 0 ? ` · 🏷️ ${entry.promosApplied} מבצעים הופעלו` : '';
+      return `
+        <div class="store-total-row ${(isWinner || fallbackWinner) ? 'winner' : ''}">
+          <div>
+            <strong>${entry.store.short_name}</strong>
+            <div style="font-size:0.78rem;color:var(--muted)">
+              ${entry.found}/${count} מוצרים נמצאו${promoNote}
+            </div>
+            ${entry.missing > 0 ? `<span class="missing-pill">חסרים ${entry.missing} מוצרים — לא כולל במחיר</span>` : ''}
           </div>
-        </div>
-        <div class="num" style="font-size:1.1rem;font-weight:800;">₪${entry.total.toFixed(2)}</div>
-      </div>
-    `).join('');
+          <div class="num" style="font-size:1.1rem;font-weight:800;">₪${entry.total.toFixed(2)}</div>
+        </div>`;
+    }).join('');
 
     if (splitTotal > 0 && perStore.length > 1) {
       html += `
@@ -827,13 +1142,31 @@
     }
     totalsEl.innerHTML = html || '<div class="empty-state">אין נתונים להשוואה</div>';
 
-    document.getElementById('drawerItems').innerHTML = [...basket].map(name => {
+    document.getElementById('drawerItems').innerHTML = basketKeys.map(name => {
+      const itemIdx = appData.items.findIndex(i => i.name === name);
+      const item = appData.items[itemIdx];
       const { he } = splitTitle(name);
-      return `<span class="basket-pill">${he} <button onclick="toggleBasket('${name.replace(/'/g, "\\'")}')">✕</button></span>`;
+      const { unit, step } = getItemUnitInfo(item);
+      const entry = basket[name];
+      const pinCount = Object.keys(entry.pins || {}).length;
+      return `
+        <div class="basket-qty-row">
+          <div class="basket-qty-info">
+            <div class="basket-qty-name">${he}</div>
+            ${pinCount > 0 ? `<div class="basket-qty-pin">📌 ${pinCount} מותגים נעוצים</div>` : ''}
+          </div>
+          <div class="stepper num">
+            <button onclick="changeQty(${itemIdx}, -${step})">−</button>
+            <span class="stepper-val">${formatQty(entry.qty)} ${unit}</span>
+            <button onclick="changeQty(${itemIdx}, ${step})">+</button>
+          </div>
+          <button class="remove-item-btn" onclick="toggleBasket(${itemIdx})" title="הסר מהסל">✕</button>
+        </div>`;
     }).join('');
   }
 
-  function toggleStore(label) {
+  function toggleStore(storeIdx) {
+    const label = appData.stores[storeIdx].label;
     if (activeStores.has(label)) {
       if (activeStores.size === 1) return;
       activeStores.delete(label);
@@ -845,28 +1178,64 @@
     renderBasketUI();
   }
 
-  function setCategory(cat) {
-    activeCategory = cat;
+  function setCategory(catIdx) {
+    activeCategory = categories[catIdx];
     renderCategoryTabs();
     renderCards();
   }
 
-  function toggleExpand(itemName) {
-    if (expandedCards.has(itemName)) expandedCards.delete(itemName);
-    else expandedCards.add(itemName);
+  function toggleExpand(itemIdx) {
+    const name = appData.items[itemIdx].name;
+    if (expandedCards.has(name)) expandedCards.delete(name);
+    else expandedCards.add(name);
     renderCards();
   }
 
-  function toggleBasket(itemName) {
-    if (basket.has(itemName)) basket.delete(itemName);
-    else basket.add(itemName);
+  function toggleBasket(itemIdx) {
+    const name = appData.items[itemIdx].name;
+    if (basket[name]) delete basket[name];
+    else basket[name] = { qty: 1, pins: {} };
+    saveBasket();
+    renderCards();
+    renderBasketUI();
+  }
+
+  function changeQty(itemIdx, delta) {
+    const item = appData.items[itemIdx];
+    const entry = basket[item.name];
+    if (!entry) return;
+    const { step } = getItemUnitInfo(item);
+    const next = Math.round((entry.qty + delta) * 10) / 10;
+    if (next < step) {
+      delete basket[item.name];
+    } else {
+      entry.qty = next;
+    }
+    saveBasket();
+    renderCards();
+    renderBasketUI();
+  }
+
+  function togglePin(itemIdx, origMatchIdx) {
+    const item = appData.items[itemIdx];
+    const match = item.matches[origMatchIdx];
+    if (!match) return;
+    if (!basket[item.name]) {
+      basket[item.name] = { qty: 1, pins: {} };
+    }
+    const pins = basket[item.name].pins;
+    if (pins[match.store] === match.product) {
+      delete pins[match.store];
+    } else {
+      pins[match.store] = match.product;
+    }
     saveBasket();
     renderCards();
     renderBasketUI();
   }
 
   function clearBasket() {
-    basket.clear();
+    basket = {};
     saveBasket();
     renderCards();
     renderBasketUI();
