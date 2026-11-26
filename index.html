@@ -1,39 +1,890 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SabiPricez - השוואת מחירים</title>
-<style>
-  body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; margin: 12px; background: #f7f7f8; color: #111; }
-  h1 { font-size: 1.3rem; margin-bottom: 4px; }
-  .meta { color: #666; font-size: 0.85rem; margin-bottom: 12px; }
-  .filters { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
-  .chip { padding: 6px 10px; border-radius: 16px; border: 1px solid #ccc; background: #fff; font-size: 0.8rem; cursor: pointer; }
-  .chip.active { background: #111; color: #fff; border-color: #111; }
-  .card { background: #fff; border-radius: 10px; padding: 12px; margin-bottom: 14px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
-  .card h2 { font-size: 1.05rem; margin: 0 0 8px 0; border-bottom: 1px solid #eee; padding-bottom: 6px; }
-  table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
-  th, td { text-align: right; padding: 6px 4px; border-bottom: 1px solid #f0f0f0; }
-  .best { background: #e8f8ee; font-weight: 600; }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#FFFFFF" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="SabiPricez" />
+  <title>SabiPricez · השוואת מחירי סופר</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #F5F6F8;
+      --surface: #FFFFFF;
+      --ink: #111827;
+      --muted: #6B7280;
+      --border: #E5E7EB;
+      --accent: #16A34A;
+      --accent-soft: #ECFDF5;
+      --accent-border: #BBF7D0;
+      --radius-lg: 16px;
+      --radius-md: 12px;
+      --shadow-sm: 0 1px 2px rgba(17, 24, 39, 0.05);
+      --shadow-md: 0 8px 24px rgba(17, 24, 39, 0.08);
+    }
+
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+    body {
+      margin: 0;
+      font-family: 'Heebo', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.4;
+      padding-bottom: 96px;
+    }
+
+    .num { font-variant-numeric: tabular-nums; }
+
+    /* Sticky Top App Bar */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .topbar-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 12px 16px 10px;
+    }
+
+    .brand-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 1.25rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-mark {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: var(--accent);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-size: 0.95rem;
+      font-weight: 800;
+    }
+
+    .brand span { color: var(--accent); }
+
+    .freshness {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.78rem;
+      color: var(--muted);
+      background: var(--bg);
+      padding: 4px 10px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    .freshness-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    /* Search */
+    .search-wrap {
+      position: relative;
+      margin-bottom: 10px;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 10px 38px 10px 14px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      background: var(--bg);
+      font-family: inherit;
+      font-size: 0.95rem;
+      color: var(--ink);
+      outline: none;
+      transition: border-color 0.15s, background 0.15s;
+    }
+
+    .search-input:focus {
+      background: var(--surface);
+      border-color: var(--accent);
+    }
+
+    .search-icon {
+      position: absolute;
+      inset-inline-start: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+      pointer-events: none;
+      font-size: 0.95rem;
+    }
+
+    /* Horizontal Scrollers (Stores & Categories) */
+    .scroll-row {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      padding-bottom: 2px;
+    }
+    .scroll-row::-webkit-scrollbar { display: none; }
+
+    .store-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--muted);
+      font-family: inherit;
+      font-size: 0.82rem;
+      font-weight: 500;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .store-chip.active {
+      background: var(--ink);
+      color: #fff;
+      border-color: var(--ink);
+    }
+
+    .store-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .cat-bar {
+      max-width: 1120px;
+      margin: 12px auto 0;
+      padding: 0 16px;
+    }
+
+    .cat-chip {
+      padding: 7px 14px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      background: var(--surface);
+      color: var(--muted);
+      font-family: inherit;
+      font-size: 0.86rem;
+      font-weight: 600;
+      white-space: nowrap;
+      cursor: pointer;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .cat-chip.active {
+      background: var(--accent-soft);
+      color: var(--accent);
+      border-color: var(--accent-border);
+    }
+
+    /* Main Grid */
+    .container {
+      max-width: 1120px;
+      margin: 14px auto 0;
+      padding: 0 16px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+
+    @media (min-width: 768px) {
+      .container { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (min-width: 1080px) {
+      .container { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+
+    /* Item Card */
+    .card {
+      background: var(--surface);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 14px 14px 10px;
+      border-bottom: 1px solid #F3F4F6;
+    }
+
+    .card-title-wrap { min-width: 0; }
+
+    .card-title {
+      margin: 0;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .card-sub {
+      font-size: 0.76rem;
+      color: var(--muted);
+    }
+
+    .basket-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 6px 11px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--ink);
+      font-family: inherit;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.15s;
+    }
+
+    .basket-btn.in-basket {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+
+    /* Offer Rows */
+    .offers { padding: 8px 10px 10px; display: flex; flex-direction: column; gap: 6px; }
+
+    .offer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 10px 11px;
+      border-radius: var(--radius-md);
+      background: #FAFAFB;
+      border: 1px solid transparent;
+    }
+
+    .offer.best {
+      background: var(--accent-soft);
+      border-color: var(--accent-border);
+    }
+
+    .offer-info { min-width: 0; flex: 1; }
+
+    .offer-meta {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 3px;
+    }
+
+    .store-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.74rem;
+      font-weight: 600;
+      color: var(--ink);
+      background: var(--surface);
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+    }
+
+    .save-badge {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--accent);
+      background: #DCFCE7;
+      padding: 2px 7px;
+      border-radius: 999px;
+    }
+
+    .product-name {
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--ink);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .offer-price {
+      text-align: left;
+      flex-shrink: 0;
+    }
+
+    .unit-price {
+      font-size: 1.02rem;
+      font-weight: 800;
+      color: var(--ink);
+      line-height: 1.15;
+    }
+
+    .offer.best .unit-price { color: #15803D; }
+
+    .unit-label {
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: var(--muted);
+    }
+
+    .shelf-price {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .expand-btn {
+      margin: 2px 10px 10px;
+      padding: 8px;
+      border: none;
+      border-radius: 10px;
+      background: var(--bg);
+      color: var(--muted);
+      font-family: inherit;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .expand-btn:hover { color: var(--ink); background: #EAECEF; }
+
+    .empty-state {
+      padding: 20px 14px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    /* Sticky Bottom Smart Basket Bar */
+    .basket-bar {
+      position: fixed;
+      inset-inline: 16px;
+      bottom: max(14px, env(safe-area-inset-bottom));
+      max-width: 540px;
+      margin: 0 auto;
+      z-index: 40;
+      background: var(--ink);
+      color: #fff;
+      border-radius: 16px;
+      padding: 12px 16px;
+      box-shadow: 0 12px 32px rgba(17, 24, 39, 0.25);
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      cursor: pointer;
+    }
+
+    .basket-bar.visible { display: flex; }
+
+    .basket-bar-title { font-size: 0.92rem; font-weight: 700; }
+    .basket-bar-sub { font-size: 0.78rem; color: #D1D5DB; }
+
+    .basket-bar-cta {
+      background: var(--accent);
+      color: #fff;
+      padding: 7px 12px;
+      border-radius: 10px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    /* Basket Slide-Up Drawer */
+    .drawer-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(17, 24, 39, 0.45);
+      z-index: 50;
+      display: none;
+      align-items: flex-end;
+      justify-content: center;
+    }
+    .drawer-backdrop.open { display: flex; }
+
+    .drawer {
+      background: var(--surface);
+      width: 100%;
+      max-width: 560px;
+      max-height: 82vh;
+      overflow-y: auto;
+      border-radius: 20px 20px 0 0;
+      padding: 18px 18px max(22px, env(safe-area-inset-bottom));
+      box-shadow: var(--shadow-md);
+    }
+
+    .drawer-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+
+    .drawer-head h2 { margin: 0; font-size: 1.15rem; }
+
+    .drawer-actions { display: flex; gap: 8px; }
+
+    .ghost-btn {
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--muted);
+      padding: 5px 10px;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 0.8rem;
+      cursor: pointer;
+    }
+
+    .store-total-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 11px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      margin-bottom: 8px;
+    }
+
+    .store-total-row.winner {
+      background: var(--accent-soft);
+      border-color: var(--accent-border);
+    }
+
+    .basket-items-list {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .basket-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--bg);
+      padding: 5px 10px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+    }
+
+    .basket-pill button {
+      border: none;
+      background: none;
+      color: var(--muted);
+      cursor: pointer;
+      font-weight: 700;
+      padding: 0;
+    }
+
+    /* Skeleton Loader */
+    .skeleton {
+      height: 180px;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(90deg, #ECEEF2 25%, #F5F6F8 50%, #ECEEF2 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.2s infinite;
+    }
+    @keyframes shimmer {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+  </style>
 </head>
 <body>
-<h1>SabiPricez - השוואת מחירים</h1>
-<div class="meta">עודכן לאחרונה: 2026-11-26 23:27</div>
-<div class="filters" id="storeFilters">
-  <button class="chip active" onclick="toggleStore(this, `Rami Levy BaShchuna (Ben Yehuda 23)`)">Rami Levy BaShchuna (Ben Yehuda 23)</button><button class="chip active" onclick="toggleStore(this, `Rami Levy (Ayalon Bnei Brak)`)">Rami Levy (Ayalon Bnei Brak)</button><button class="chip active" onclick="toggleStore(this, `Osher Ad (Kremenetski TLV)`)">Osher Ad (Kremenetski TLV)</button><button class="chip active" onclick="toggleStore(this, `AM:PM (Ben Yehuda 61)`)">AM:PM (Ben Yehuda 61)</button><button class="chip active" onclick="toggleStore(this, `Shufersal Sheli (Ben Yehuda 79)`)">Shufersal Sheli (Ben Yehuda 79)</button>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand-row">
+      <div class="brand">
+        <div class="brand-mark">₪</div>
+        Sabi<span>Pricez</span>
+      </div>
+      <div class="freshness" id="freshnessBadge">
+        <span class="freshness-dot"></span>
+        <span id="updatedAt">טוען מחירים...</span>
+      </div>
+    </div>
+
+    <div class="search-wrap">
+      <span class="search-icon">🔍</span>
+      <input id="searchInput" class="search-input" type="search" placeholder="חיפוש מוצר או מותג (למשל: חזה עוף, בסמטי, שמן זית)..." />
+    </div>
+
+    <div class="scroll-row" id="storeFilters"></div>
+  </div>
+</header>
+
+<div class="cat-bar">
+  <div class="scroll-row" id="categoryTabs"></div>
 </div>
-<div class="card"><h2>Chicken Breast (חזה עוף)</h2><table><tr><th>חנות</th><th>מוצר</th><th>מחיר</th><th>ליחידה</th></tr><tr class="best" data-store="Osher Ad (Kremenetski TLV)"><td>אושר עד</td><td>חזה עוף טרי עוף הכפר</td><td>₪38.90</td><td>₪38.90 (ק"ג)</td></tr><tr class="" data-store="Osher Ad (Kremenetski TLV)"><td>אושר עד</td><td>חזה עוף טרי פרימה</td><td>₪39.90</td><td>₪39.90 (ק"ג)</td></tr><tr class="" data-store="Osher Ad (Kremenetski TLV)"><td>אושר עד</td><td>חזה עוף טרי עטרה הרב</td><td>₪39.90</td><td>₪39.90 (ק"ג)</td></tr><tr class="" data-store="Shufersal Sheli (Ben Yehuda 79)"><td>שופרסל שלי</td><td>חזה עוף טרי ארוז שלי</td><td>₪39.90</td><td>₪39.90 (ק"ג)</td></tr><tr class="" data-store="Shufersal Sheli (Ben Yehuda 79)"><td>שופרסל שלי</td><td>חזה עוף טרי שופרסל</td><td>₪39.90</td><td>₪39.90 (ק"ג)</td></tr><tr class="" data-store="Shufersal Sheli (Ben Yehuda 79)"><td>שופרסל שלי</td><td>חזה עוף טרי ארוז</td><td>₪39.90</td><td>₪39.90 (ק"ג)</td></tr><tr class="" data-store="Shufersal Sheli (Ben Yehuda 79)"><td>שופרסל שלי</td><td>חזה עוף טרי ארוז שלי קג</td><td>₪39.90</td><td>₪39.90 (ק"ג)</td></tr><tr class="" data-store="Shufersal Sheli (Ben Yehuda 79)"><td>שופרסל שלי</td><td>חזה עוף טרי פרימיום קג</td><td>₪44.90</td><td>₪44.90 (ק"ג)</td></tr><tr class="" data-store="Osher Ad (Kremenetski TLV)"><td>אושר עד</td><td>חזה עוף טרי קהילות</td><td>₪47.90</td><td>₪47.90 (ק"ג)</td></tr><tr class="" data-store="Rami Levy (Ayalon Bnei Brak)"><td>רמי לוי איילון</td><td>חזה עוף פרימיום</td><td>₪49.90</td><td>₪49.90 (ק"ג)</td></tr></table></div><div class="card"><h2>Ground Beef (בשר טחון)</h2><table><tr><th>חנות</th><th>מוצר</th><th>מחיר</th><th>ליחידה</th></tr><tr class="best" data-store="Osher Ad (Kremenetski TLV)"><td>אושר עד</td><td>בקר טחון עטרה 1.2 ק"</td><td>₪44.90</td><td>₪37.42 (ק"ג)</td></tr><tr class="" data-store="Rami Levy (Ayalon Bnei Brak)"><td>רמי לוי איילון</td><td>בקר טחון 500 גרם ארו</td><td>₪19.50</td><td>₪39.00 (ק"ג)</td></tr><tr class="" data-store="Osher Ad (Kremenetski TLV)"><td>אושר עד</td><td>בקר טחון 100% עטרה 1</td><td>₪54.90</td><td>₪54.90 (ק"ג)</td></tr><tr class="" data-store="Rami Levy BaShchuna (Ben Yehuda 23)"><td>רמי לוי בן יהודה</td><td>בשר טחון נקי 1 ק"ג מ</td><td>₪55.90</td><td>₪55.90 (ק"ג)</td></tr><tr class="" data-store="Rami Levy (Ayalon Bnei Brak)"><td>רמי לוי איילון</td><td>בשר טחון נקי 1 ק"ג מ</td><td>₪57.90</td><td>₪57.90 (ק"ג)</td></tr><tr class="" data-store="Rami Levy (Ayalon Bnei Brak)"><td>רמי לוי איילון</td><td>בשר בקר טחון טרי</td><td>₪64.90</td><td>₪64.90 (ק"ג)</td></tr><tr class="" data-store="Shufersal Sheli (Ben Yehuda 79)"><td>שופרסל שלי</td><td>בשר טחון מובחר 500 גרם</td><td>₪34.90</td><td>₪69.80 (ק"ג)</td></tr><tr class="" data-store="Osher Ad (Kremenetski TLV)"><td>אושר עד</td><td>בקר טחון 100% קהילות</td><td>₪74.90</td><td>₪74.90 (ק"ג)</td></tr><tr class="" data-store="Shufersal Sheli (Ben Yehuda 79)"><td>שופרסל שלי</td><td>בשר בקר טחון טרי קג</td><td>₪79.90</td><td>₪79.90 (ק"ג)</td></tr><tr class="" data-store="Shufersal Sheli (Ben Yehuda 79)"><td>שופרסל שלי</td><td>בשר טחון טרי</td><td>₪79.90</td><td>₪79.90 (ק"ג)</td></tr><tr class="" data-store="Shufersal Sheli (Ben Yehuda 79)"><td>שופרסל שלי</td><td>בשר טחון טרי חלק</td><td>₪79.90</td><td>₪79.90 (ק"ג)</td></tr><tr class="" data-store="Osher Ad (Kremenetski TLV)"><td>אושר עד</td><td>בקר טחון 100% גלאט א</td><td>₪44.90</td><td>₪89.80 (ק"ג)</td></tr><tr class="" data-store="Osher Ad (Kremenetski TLV)"><td>אושר עד</td><td>בקר טחון 500 גרם אחד</td><td>₪44.90</td><td>₪89.80 (ק"ג)</td></tr><tr class="" data-store="Rami Levy (Ayalon Bnei Brak)"><td>רמי לוי איילון</td><td>בשר טחון ביונד מיט 2</td><td>₪30.90</td><td>₪123.60 (ק"ג)</td></tr></table></div><div class="card"><h2>Extra Virgin Olive Oil (שמן זית)</h2><table><tr><th>חנות</th><th>מוצר</th><th>מחיר</th><th>ליחידה</th></tr><tr class="best" data-store="Osher Ad (Kremenetski TLV)"><td>אושר עד</td><td>שמן זית כתית  מעולה</td><td>₪14.90</td><td>₪14.90 (ליטר)</td></tr><tr class="" data-store="Osher Ad (Kremenetski TLV)"><td>אושר עד</td><td>שמן זית כתית ספרדי ט</td><td>₪24.90</td><td>₪30.00 (ליטר)</td></tr><tr class="" data-store="Osher Ad (Kremenetski TLV)"><td>אושר עד</td><td>שמן זית כתית שקדיה 7</td><td>₪19.90</td><td>₪30.00 (ליטר)</td></tr><tr class="" data-store="Osher Ad (Kremenetski TLV)"><td>אושר עד</td><td>שמן זית כתית מעולה פ</td><td>₪19.90</td><td>₪30.00 (ליטר)</td></tr><tr class="" data-store="Osher Ad (Kremenetski TLV)"><td>אושר עד</td><td>שמן זית כתית מעולה ק</td><td>₪19.90</td><td>₪30.00 (ליטר)</td></tr><tr class="" data-store="Osher Ad (Kremenetski TLV)"><td>אושר עד</td><td>שמן זית כתית מעולה א</td><td>₪19.90</td><td>₪30.00 (ליטר)</td></tr><tr class="" data-store="Rami Levy (Ayalon Bnei Brak)"><td>רמי לוי איילון</td><td>שמן זית כתית מעולה ס</td><td>₪29.70</td><td>₪39.60 (ליטר)</td></tr><tr class="" data-store="Rami Levy (Ayalon Bnei Brak)"><td>רמי לוי איילון</td><td>שמן זית כתית מספר 2</td><td>₪29.80</td><td>₪39.73 (ליטר)</td></tr><tr class="" data-store="Osher Ad (Kremenetski TLV)"><td>אושר עד</td><td>שמן זית כתית קלאסי י</td><td>₪29.90</td><td>₪40.00 (ליטר)</td></tr><tr class="" data-store="Shufersal Sheli (Ben Yehuda 79)"><td>שופרסל שלי</td><td>שמן זית כתית 3ל נריה</td><td>₪129.90</td><td>₪43.30 (ליטר)</td></tr><tr class="" data-store="Rami Levy BaShchuna (Ben Yehuda 23)"><td>רמי לוי בן יהודה</td><td>שמן זית כתית מעולה ס</td><td>₪32.90</td><td>₪43.87 (ליטר)</td></tr><tr class="" data-store="Rami Levy (Ayalon Bnei Brak)"><td>רמי לוי איילון</td><td>שמן זית כתית מעולה א</td><td>₪32.90</td><td>₪43.87 (ליטר)</td></tr><tr class="" data-store="Osher Ad (Kremenetski TLV)"><td>אושר עד</td><td>שמן זית כתית מעולה 1</td><td>₪44.90</td><td>₪44.90 (ליטר)</td></tr><tr class="" data-store="Rami Levy BaShchuna (Ben Yehuda 23)"><td>רמי לוי בן יהודה</td><td>שמן זית כתית מספר 2</td><td>₪34.30</td><td>₪45.73 (ליטר)</td></tr><tr class="" data-store="Rami Levy (Ayalon Bnei Brak)"><td>רמי לוי איילון</td><td>שמן זית כתית מעולה 7</td><td>₪34.90</td><td>₪46.53 (ליטר)</td></tr></table></div><div class="card"><h2>Neutral Oil (שמן קנולה / חמניות)</h2><table><tr><th>חנות</th><th>מוצר</th><th>מחיר</th><th>ליחידה</th></tr><tr class="best" data-store="Rami Levy (Ayalon Bnei Brak)"><td>רמי לוי איילון</td><td>שמן קנולה הולנד 1 לי</td><td>₪8.90</td><td>₪8.90 (ליטר)</td></tr><tr class="" data-store="Rami Levy (Ayalon Bnei Brak)"><td>רמי לוי איילון</td><td>שמן קנולה 1 ליטר רמי</td><td>₪8.90</td><td>₪8.90 (ליטר)</td></tr><tr class="" data-store="Osher Ad (Kremenetski TLV)"><td>אושר עד</td><td>שמן קנולה אלומות 1 ל</td><td>₪8.90</td><td>₪8.90 (ליטר)</td></tr><tr class="" data-store="Osher Ad (Kremenetski TLV)"><td>אושר עד</td><td>שמן קנולה אינדירה 1</td><td>₪8.90</td><td>₪8.90 (ליטר)</td></tr><tr class="" data-store="Osher Ad (Kremenetski TLV)"><td>אושר עד</td><td>שמן קנולה פילד גוד 1</td><td>₪8.90</td><td>₪8.90 (ליטר)</td></tr><tr class="" data-store="Rami Levy BaShchuna (Ben Yehuda 23)"><td>רמי לוי בן יהודה</td><td>שמן קנולה 1 ליטר רמי</td><td>₪9.90</td><td>₪9.90 (ליטר)</td></tr><tr class="" data-store="Rami Levy BaShchuna (Ben Yehuda 23)"><td>רמי לוי בן יהודה</td><td>שמן קנולה הולנד 1 לי</td><td>₪9.90</td><td>₪9.90 (ליטר)</td></tr><tr class="" data-store="Rami Levy (Ayalon Bnei Brak)"><td>רמי לוי איילון</td><td>ויליפוד שמן חמניות 1</td><td>₪9.90</td><td>₪9.90 (ליטר)</td></tr><tr class="" data-store="Rami Levy (Ayalon Bnei Brak)"><td>רמי לוי איילון</td><td>שמן חמניות מילומור 1</td><td>₪9.90</td><td>₪9.90 (ליטר)</td></tr><tr class="" data-store="Rami Levy (Ayalon Bnei Brak)"><td>רמי לוי איילון</td><td>שמן חמניות 1ליטר 15</td><td>₪9.90</td><td>₪9.90 (ליטר)</td></tr><tr class="" data-store="Osher Ad (Kremenetski TLV)"><td>אושר עד</td><td>שמן חמניות וילי פוד</td><td>₪9.90</td><td>₪9.90 (ליטר)</td></tr><tr class="" data-store="Rami Levy (Ayalon Bnei Brak)"><td>רמי לוי איילון</td><td>שמן חמניות 3 ליטר X</td><td>₪30.30</td><td>₪10.10 (ליטר)</td></tr><tr class="" data-store="Shufersal Sheli (Ben Yehuda 79)"><td>שופרסל שלי</td><td>שמן קנולה 1 ליטר</td><td>₪10.90</td><td>₪10.90 (ליטר)</td></tr><tr class="" data-store="Shufersal Sheli (Ben Yehuda 79)"><td>שופרסל שלי</td><td>שמן קנולה מזוכך ויליפוד</td><td>₪10.90</td><td>₪10.90 (ליטר)</td></tr><tr class="" data-store="Shufersal Sheli (Ben Yehuda 79)"><td>שופרסל שלי</td><td>שמן קנולה מזוכך 1 ליטר</td><td>₪10.90</td><td>₪10.90 (ליטר)</td></tr></table></div><div class="card"><h2>White / Bread Flour (קמח לבן / לחם)</h2><table><tr><th>חנות</th><th>מוצר</th><th>מחיר</th><th>ליחידה</th></tr><tr class="best" data-store="Shufersal Sheli (Ben Yehuda 79)"><td>שופרסל שלי</td><td>קמח חיטה לבן בהיר 1 ק"ג</td><td>₪5.00</td><td>₪5.00 (ק"ג)</td></tr><tr class="" data-store="Rami Levy (Ayalon Bnei Brak)"><td>רמי לוי איילון</td><td>נפלאות קמח לחם לבן מ</td><td>₪6.90</td><td>₪6.90 (ק"ג)</td></tr><tr class="" data-store="Rami Levy (Ayalon Bnei Brak)"><td>רמי לוי איילון</td><td>קמח חיטה לבן בהיר מנ</td><td>₪6.90</td><td>₪6.90 (ק"ג)</td></tr><tr class="" data-store="Osher Ad (Kremenetski TLV)"><td>אושר עד</td><td>קמח לחם נפלאות 1 ק"ג</td><td>₪6.90</td><td>₪6.90 (ק"ג)</td></tr><tr class="" data-store="AM:PM (Ben Yehuda 61)"><td>AM:PM בן יהודה</td><td>קמח חיטה לבן 1 ק"ג ט</td><td>₪6.90</td><td>₪6.90 (ק"ג)</td></tr><tr class="" data-store="Rami Levy (Ayalon Bnei Brak)"><td>רמי לוי איילון</td><td>קמח חיטה לבן מנופה 1</td><td>₪7.50</td><td>₪7.50 (ק"ג)</td></tr><tr class="" data-store="Rami Levy BaShchuna (Ben Yehuda 23)"><td>רמי לוי בן יהודה</td><td>קמח חיטה לבן בהיר מנ</td><td>₪7.90</td><td>₪7.90 (ק"ג)</td></tr><tr class="" data-store="Rami Levy (Ayalon Bnei Brak)"><td>רמי לוי איילון</td><td>קמח לחם סוגת 1 ק"ג</td><td>₪7.90</td><td>₪7.90 (ק"ג)</td></tr><tr class="" data-store="Shufersal Sheli (Ben Yehuda 79)"><td>שופרסל שלי</td><td>קמח חיטה לבן מנופה 1 ק"ג</td><td>₪8.40</td><td>₪8.40 (ק"ג)</td></tr><tr class="" data-store="Rami Levy BaShchuna (Ben Yehuda 23)"><td>רמי לוי בן יהודה</td><td>קמח לחם סוגת 1 ק"ג</td><td>₪9.10</td><td>₪9.10 (ק"ג)</td></tr><tr class="" data-store="Shufersal Sheli (Ben Yehuda 79)"><td>שופרסל שלי</td><td>קמח לחם 1 ק"ג סוגת</td><td>₪10.90</td><td>₪10.90 (ק"ג)</td></tr><tr class="" data-store="Shufersal Sheli (Ben Yehuda 79)"><td>שופרסל שלי</td><td>קמח חיטה לבן מנופה 1 ק"ג</td><td>₪12.90</td><td>₪12.90 (ק"ג)</td></tr></table></div><div class="card"><h2>Rice (אורז)</h2><table><tr><th>חנות</th><th>מוצר</th><th>מחיר</th><th>ליחידה</th></tr><tr class="best" data-store="Rami Levy (Ayalon Bnei Brak)"><td>רמי לוי איילון</td><td>אורז לבן ארוך אוצרות</td><td>₪5.90</td><td>₪5.90 (ק"ג)</td></tr><tr class="" data-store="Rami Levy (Ayalon Bnei Brak)"><td>רמי לוי איילון</td><td>טריז'רז אורז בסמטי 5</td><td>₪29.90</td><td>₪5.98 (יחידות)</td></tr><tr class="" data-store="Osher Ad (Kremenetski TLV)"><td>אושר עד</td><td>אורז יסמין שקדיה 5 ק</td><td>₪34.90</td><td>₪6.98 (ק"ג)</td></tr><tr class="" data-store="Osher Ad (Kremenetski TLV)"><td>אושר עד</td><td>אורז פרסי אינדירה 1.</td><td>₪9.90</td><td>₪7.07 (ק"ג)</td></tr><tr class="" data-store="Osher Ad (Kremenetski TLV)"><td>אושר עד</td><td>אורז יסמין שקדיה 2 ק</td><td>₪14.90</td><td>₪7.45 (ק"ג)</td></tr><tr class="" data-store="Osher Ad (Kremenetski TLV)"><td>אושר עד</td><td>אורז פרסי הנמל 1 ק"ג</td><td>₪7.90</td><td>₪7.90 (ק"ג)</td></tr><tr class="" data-store="Rami Levy (Ayalon Bnei Brak)"><td>רמי לוי איילון</td><td>אורז יסמין ששון הקול</td><td>₪39.90</td><td>₪7.98 (ק"ג)</td></tr><tr class="" data-store="Osher Ad (Kremenetski TLV)"><td>אושר עד</td><td>אורז בסמטי הודי שקדי</td><td>₪39.90</td><td>₪7.98 (ק"ג)</td></tr><tr class="" data-store="Osher Ad (Kremenetski TLV)"><td>אושר עד</td><td>אורז בסמטי  הולידרופ</td><td>₪39.90</td><td>₪7.98 (ק"ג)</td></tr><tr class="" data-store="Osher Ad (Kremenetski TLV)"><td>אושר עד</td><td>אורז בסמטי אינדירה 1</td><td>₪11.90</td><td>₪8.50 (ק"ג)</td></tr><tr class="" data-store="Osher Ad (Kremenetski TLV)"><td>אושר עד</td><td>אורז בסמטי לבן גולדן</td><td>₪11.90</td><td>₪8.50 (ק"ג)</td></tr><tr class="" data-store="Rami Levy (Ayalon Bnei Brak)"><td>רמי לוי איילון</td><td>אורז יסמין 5 ק"ג מדל</td><td>₪43.90</td><td>₪8.78 (ק"ג)</td></tr><tr class="" data-store="Rami Levy (Ayalon Bnei Brak)"><td>רמי לוי איילון</td><td>אורז בסמטי גולד 5 ק"</td><td>₪43.90</td><td>₪8.78 (ק"ג)</td></tr><tr class="" data-store="Rami Levy (Ayalon Bnei Brak)"><td>רמי לוי איילון</td><td>אורז יסמין 1קג רמילו</td><td>₪8.90</td><td>₪8.90 (ק"ג)</td></tr><tr class="" data-store="Rami Levy (Ayalon Bnei Brak)"><td>רמי לוי איילון</td><td>אורז פרסי 1קג רמילוי</td><td>₪8.90</td><td>₪8.90 (ק"ג)</td></tr></table></div><div class="card"><h2>Chickpeas (גרגירי חומוס)</h2><table><tr><th>חנות</th><th>מוצר</th><th>מחיר</th><th>ליחידה</th></tr><tr class="best" data-store="Rami Levy (Ayalon Bnei Brak)"><td>רמי לוי איילון</td><td>גרגירי חומוס 800 גרם</td><td>₪9.90</td><td>₪12.38 (ק"ג)</td></tr><tr class="" data-store="Rami Levy BaShchuna (Ben Yehuda 23)"><td>רמי לוי בן יהודה</td><td>גרגירי חומוס 800 גרם</td><td>₪11.40</td><td>₪14.25 (ק"ג)</td></tr><tr class="" data-store="Osher Ad (Kremenetski TLV)"><td>אושר עד</td><td>גרגירי חומוס קבוצת י</td><td>₪7.90</td><td>₪14.36 (ק"ג)</td></tr><tr class="" data-store="Osher Ad (Kremenetski TLV)"><td>אושר עד</td><td>גרגירי חומוס להכנת ח</td><td>₪8.90</td><td>₪15.89 (ק"ג)</td></tr><tr class="" data-store="Rami Levy (Ayalon Bnei Brak)"><td>רמי לוי איילון</td><td>גרגירי חומוס קפואים</td><td>₪9.90</td><td>₪16.50 (ק"ג)</td></tr><tr class="" data-store="Shufersal Sheli (Ben Yehuda 79)"><td>שופרסל שלי</td><td>גרגירי חומוס במי מלח800ג</td><td>₪13.90</td><td>₪17.38 (ק"ג)</td></tr><tr class="" data-store="Osher Ad (Kremenetski TLV)"><td>אושר עד</td><td>גרגירי חומוס שטראוס</td><td>₪6.90</td><td>₪18.16 (ק"ג)</td></tr><tr class="" data-store="Rami Levy (Ayalon Bnei Brak)"><td>רמי לוי איילון</td><td>גרגירי חומוס במי מלח</td><td>₪6.00</td><td>₪18.18 (ק"ג)</td></tr><tr class="" data-store="Osher Ad (Kremenetski TLV)"><td>אושר עד</td><td>גרגירי חומוס מוקפאים</td><td>₪14.90</td><td>₪18.62 (ק"ג)</td></tr><tr class="" data-store="Shufersal Sheli (Ben Yehuda 79)"><td>שופרסל שלי</td><td>גרגירי חומוס שלמים 550 ג</td><td>₪10.90</td><td>₪19.82 (ק"ג)</td></tr><tr class="" data-store="Shufersal Sheli (Ben Yehuda 79)"><td>שופרסל שלי</td><td>גרגרי חומוס550 בית יהודה</td><td>₪10.90</td><td>₪19.82 (ק"ג)</td></tr><tr class="" data-store="Shufersal Sheli (Ben Yehuda 79)"><td>שופרסל שלי</td><td>גרגירי חומוס שלם מלח550ג</td><td>₪11.00</td><td>₪20.00 (ק"ג)</td></tr><tr class="" data-store="Shufersal Sheli (Ben Yehuda 79)"><td>שופרסל שלי</td><td>גרגירי חומוס טטרה פק380ג</td><td>₪7.90</td><td>₪20.79 (ק"ג)</td></tr><tr class="" data-store="AM:PM (Ben Yehuda 61)"><td>AM:PM בן יהודה</td><td>גרגרי חומוס מסעדות י</td><td>₪11.90</td><td>₪21.25 (ק"ג)</td></tr><tr class="" data-store="AM:PM (Ben Yehuda 61)"><td>AM:PM בן יהודה</td><td>גרגרי חומוס 380 טעם</td><td>₪8.90</td><td>₪23.42 (ק"ג)</td></tr></table></div><div class="card"><h2>Tomatoes (עגבניות)</h2><table><tr><th>חנות</th><th>מוצר</th><th>מחיר</th><th>ליחידה</th></tr><tr class="best" data-store="Osher Ad (Kremenetski TLV)"><td>אושר עד</td><td>נקטר ספרינג עגבניות</td><td>₪5.90</td><td>₪5.90 (ליטר)</td></tr><tr class="" data-store="Rami Levy BaShchuna (Ben Yehuda 23)"><td>רמי לוי בן יהודה</td><td>עגבניות לתוכות דק פו</td><td>₪6.80</td><td>₪6.80 (יחידות)</td></tr><tr class="" data-store="Rami Levy (Ayalon Bnei Brak)"><td>רמי לוי איילון</td><td>עגבניה</td><td>₪6.90</td><td>₪6.90 (ק"ג)</td></tr><tr class="" data-store="Shufersal Sheli (Ben Yehuda 79)"><td>שופרסל שלי</td><td>ספרינג קרטוניות עגבניות</td><td>₪7.90</td><td>₪7.90 (ליטר)</td></tr><tr class="" data-store="AM:PM (Ben Yehuda 61)"><td>AM:PM בן יהודה</td><td>נקטר ספרינג עגבניות</td><td>₪8.70</td><td>₪8.70 (ליטר)</td></tr><tr class="" data-store="Rami Levy BaShchuna (Ben Yehuda 23)"><td>רמי לוי בן יהודה</td><td>עגבניה</td><td>₪8.90</td><td>₪8.90 (ק"ג)</td></tr><tr class="" data-store="Osher Ad (Kremenetski TLV)"><td>אושר עד</td><td>עגבניה</td><td>₪8.90</td><td>₪8.90 (ק"ג)</td></tr><tr class="" data-store="Shufersal Sheli (Ben Yehuda 79)"><td>שופרסל שלי</td><td>עגבניה</td><td>₪8.90</td><td>₪8.90 (ק"ג)</td></tr><tr class="" data-store="Rami Levy (Ayalon Bnei Brak)"><td>רמי לוי איילון</td><td>עגבניות שרי ליקופן ר</td><td>₪9.90</td><td>₪9.90 (יחידות)</td></tr><tr class="" data-store="Rami Levy (Ayalon Bnei Brak)"><td>רמי לוי איילון</td><td>עגבניות שרי כתום רמי</td><td>₪9.90</td><td>₪9.90 (יחידות)</td></tr><tr class="" data-store="Rami Levy (Ayalon Bnei Brak)"><td>רמי לוי איילון</td><td>עגבניות שרי תמר רמי</td><td>₪9.90</td><td>₪9.90 (יחידות)</td></tr><tr class="" data-store="Rami Levy BaShchuna (Ben Yehuda 23)"><td>רמי לוי בן יהודה</td><td>עגבניות שרי ליקופן ר</td><td>₪10.90</td><td>₪10.90 (יחידות)</td></tr><tr class="" data-store="Rami Levy BaShchuna (Ben Yehuda 23)"><td>רמי לוי בן יהודה</td><td>עגבניות שרי ארוז</td><td>₪10.90</td><td>₪10.90 (יחידות)</td></tr><tr class="" data-store="Rami Levy (Ayalon Bnei Brak)"><td>רמי לוי איילון</td><td>עגבניות שרי ארוז</td><td>₪10.90</td><td>₪10.90 (יחידות)</td></tr><tr class="" data-store="Shufersal Sheli (Ben Yehuda 79)"><td>שופרסל שלי</td><td>עגבניה תמר אורגנית במשקל</td><td>₪10.90</td><td>₪10.90 (ק"ג)</td></tr></table></div><div class="card"><h2>Cucumbers (מלפפונים)</h2><table><tr><th>חנות</th><th>מוצר</th><th>מחיר</th><th>ליחידה</th></tr><tr class="best" data-store="Rami Levy (Ayalon Bnei Brak)"><td>רמי לוי איילון</td><td>מלפפון</td><td>₪6.90</td><td>₪6.90 (ק"ג)</td></tr><tr class="" data-store="Osher Ad (Kremenetski TLV)"><td>אושר עד</td><td>מלפפון</td><td>₪6.90</td><td>₪6.90 (ק"ג)</td></tr><tr class="" data-store="Osher Ad (Kremenetski TLV)"><td>אושר עד</td><td>מלפפון פרמיום ארוז כ</td><td>₪13.90</td><td>₪6.95 (ק"ג)</td></tr><tr class="" data-store="Rami Levy BaShchuna (Ben Yehuda 23)"><td>רמי לוי בן יהודה</td><td>מלפפון</td><td>₪7.90</td><td>₪7.90 (ק"ג)</td></tr><tr class="" data-store="Shufersal Sheli (Ben Yehuda 79)"><td>שופרסל שלי</td><td>מלפפון</td><td>₪7.90</td><td>₪7.90 (ק"ג)</td></tr><tr class="" data-store="Rami Levy BaShchuna (Ben Yehuda 23)"><td>רמי לוי בן יהודה</td><td>מלפפון בייבי יח</td><td>₪9.90</td><td>₪9.90 (יחידות)</td></tr><tr class="" data-store="AM:PM (Ben Yehuda 61)"><td>AM:PM בן יהודה</td><td>מלפפון</td><td>₪10.90</td><td>₪10.90 (ק"ג)</td></tr><tr class="" data-store="Osher Ad (Kremenetski TLV)"><td>אושר עד</td><td>מלפפון בייבי ארץ נגב</td><td>₪13.90</td><td>₪13.90 (יחידה)</td></tr><tr class="" data-store="Shufersal Sheli (Ben Yehuda 79)"><td>שופרסל שלי</td><td>מלפפון אורגני</td><td>₪17.90</td><td>₪17.90 (ק"ג)</td></tr><tr class="" data-store="Osher Ad (Kremenetski TLV)"><td>אושר עד</td><td>מלפפון בייבי ערוגות</td><td>₪19.90</td><td>₪19.90 (יחידה)</td></tr><tr class="" data-store="Shufersal Sheli (Ben Yehuda 79)"><td>שופרסל שלי</td><td>מלפפונים קורנישונים670גר</td><td>₪14.50</td><td>₪21.64 (ק"ג)</td></tr><tr class="" data-store="Shufersal Sheli (Ben Yehuda 79)"><td>שופרסל שלי</td><td>ת.רחצה מלפפון750מ לה מון</td><td>₪18.90</td><td>₪25.20 (ליטר)</td></tr><tr class="" data-store="Rami Levy (Ayalon Bnei Brak)"><td>רמי לוי איילון</td><td>מלפפון בייבי אריזה מ</td><td>₪13.90</td><td>₪25.27 (ק"ג)</td></tr><tr class="" data-store="Rami Levy BaShchuna (Ben Yehuda 23)"><td>רמי לוי בן יהודה</td><td>מלפפון בייבי אריזה מ</td><td>₪14.90</td><td>₪27.09 (ק"ג)</td></tr><tr class="" data-store="Osher Ad (Kremenetski TLV)"><td>אושר עד</td><td>מלפפון בייבי מארז מש</td><td>₪13.90</td><td>₪27.80 (ק"ג)</td></tr></table></div><div class="card"><h2>Onions (בצלים)</h2><table><tr><th>חנות</th><th>מוצר</th><th>מחיר</th><th>ליחידה</th></tr><tr class="best" data-store="Rami Levy (Ayalon Bnei Brak)"><td>רמי לוי איילון</td><td>בצל יבש</td><td>₪4.90</td><td>₪4.90 (ק"ג)</td></tr><tr class="" data-store="Rami Levy BaShchuna (Ben Yehuda 23)"><td>רמי לוי בן יהודה</td><td>בצל יבש</td><td>₪5.90</td><td>₪5.90 (ק"ג)</td></tr><tr class="" data-store="Rami Levy BaShchuna (Ben Yehuda 23)"><td>רמי לוי בן יהודה</td><td>בצל אדום</td><td>₪5.90</td><td>₪5.90 (ק"ג)</td></tr><tr class="" data-store="Rami Levy (Ayalon Bnei Brak)"><td>רמי לוי איילון</td><td>בצל אדום</td><td>₪5.90</td><td>₪5.90 (ק"ג)</td></tr><tr class="" data-store="Osher Ad (Kremenetski TLV)"><td>אושר עד</td><td>בצל אדום</td><td>₪5.90</td><td>₪5.90 (ק"ג)</td></tr><tr class="" data-store="Shufersal Sheli (Ben Yehuda 79)"><td>שופרסל שלי</td><td>בצל יבש</td><td>₪5.90</td><td>₪5.90 (ק"ג)</td></tr><tr class="" data-store="Shufersal Sheli (Ben Yehuda 79)"><td>שופרסל שלי</td><td>בצל יבש אדום</td><td>₪7.90</td><td>₪7.90 (ק"ג)</td></tr><tr class="" data-store="AM:PM (Ben Yehuda 61)"><td>AM:PM בן יהודה</td><td>בצל סגול</td><td>₪8.90</td><td>₪8.90 (ק"ג)</td></tr><tr class="" data-store="AM:PM (Ben Yehuda 61)"><td>AM:PM בן יהודה</td><td>בצל יבש</td><td>₪8.90</td><td>₪8.90 (ק"ג)</td></tr><tr class="" data-store="Shufersal Sheli (Ben Yehuda 79)"><td>שופרסל שלי</td><td>בצל יבש אורגני במשקל</td><td>₪13.90</td><td>₪13.90 (ק"ג)</td></tr><tr class="" data-store="Shufersal Sheli (Ben Yehuda 79)"><td>שופרסל שלי</td><td>בצל אדום יבש אורגני משקל</td><td>₪18.90</td><td>₪18.90 (ק"ג)</td></tr></table></div><div class="card"><h2>Garlic (שום)</h2><table><tr><th>חנות</th><th>מוצר</th><th>מחיר</th><th>ליחידה</th></tr><tr class="best" data-store="Osher Ad (Kremenetski TLV)"><td>אושר עד</td><td>שום 4 ראשים</td><td>₪4.90</td><td>₪1.23 (יחידה)</td></tr><tr class="" data-store="Osher Ad (Kremenetski TLV)"><td>אושר עד</td><td>שום 4 ראשים</td><td>₪5.90</td><td>₪1.48 (יחידה)</td></tr><tr class="" data-store="Rami Levy BaShchuna (Ben Yehuda 23)"><td>רמי לוי בן יהודה</td><td>שום יבש יבוא רמי לוי</td><td>₪4.60</td><td>₪4.60 (יחידות)</td></tr><tr class="" data-store="Rami Levy BaShchuna (Ben Yehuda 23)"><td>רמי לוי בן יהודה</td><td>שום יבש</td><td>₪4.90</td><td>₪4.90 (יחידות)</td></tr><tr class="" data-store="Rami Levy (Ayalon Bnei Brak)"><td>רמי לוי איילון</td><td>שום יבש יבוא רמי לוי</td><td>₪4.90</td><td>₪4.90 (יחידות)</td></tr><tr class="" data-store="Rami Levy (Ayalon Bnei Brak)"><td>רמי לוי איילון</td><td>שום יבש</td><td>₪4.90</td><td>₪4.90 (יחידות)</td></tr><tr class="" data-store="Rami Levy (Ayalon Bnei Brak)"><td>רמי לוי איילון</td><td>דורות שום צילי חריף</td><td>₪9.90</td><td>₪9.90 (יחידות)</td></tr><tr class="" data-store="Rami Levy (Ayalon Bnei Brak)"><td>רמי לוי איילון</td><td>קישוט לתלייה - שום פ</td><td>₪9.90</td><td>₪9.90 (יחידות)</td></tr><tr class="" data-store="AM:PM (Ben Yehuda 61)"><td>AM:PM בן יהודה</td><td>שום ארוז</td><td>₪9.90</td><td>₪9.90 (יחידות)</td></tr><tr class="" data-store="Osher Ad (Kremenetski TLV)"><td>אושר עד</td><td>שיני שום קלוף 1 קילו</td><td>₪10.90</td><td>₪10.90 (ק"ג)</td></tr><tr class="" data-store="Rami Levy (Ayalon Bnei Brak)"><td>רמי לוי איילון</td><td>שום פנינה טרי</td><td>₪11.90</td><td>₪11.90 (יחידות)</td></tr><tr class="" data-store="AM:PM (Ben Yehuda 61)"><td>AM:PM בן יהודה</td><td>שיני שום קלופות</td><td>₪12.90</td><td>₪12.90 (יחידות)</td></tr><tr class="" data-store="Rami Levy (Ayalon Bnei Brak)"><td>רמי לוי איילון</td><td>עגבניות מרוסקות שום</td><td>₪9.90</td><td>₪16.50 (ק"ג)</td></tr><tr class="" data-store="Rami Levy (Ayalon Bnei Brak)"><td>רמי לוי איילון</td><td>פרנה שום</td><td>₪19.90</td><td>₪19.90 (יחידות)</td></tr><tr class="" data-store="Rami Levy (Ayalon Bnei Brak)"><td>רמי לוי איילון</td><td>כותש שום</td><td>₪19.90</td><td>₪19.90 (יחידות)</td></tr></table></div><div class="card"><h2>Potatoes (תפוחי אדמה)</h2><table><tr><th>חנות</th><th>מוצר</th><th>מחיר</th><th>ליחידה</th></tr><tr class="best" data-store="Rami Levy BaShchuna (Ben Yehuda 23)"><td>רמי לוי בן יהודה</td><td>תפוח אדמה לבן ארוז</td><td>₪4.90</td><td>₪4.90 (ק"ג)</td></tr><tr class="" data-store="Rami Levy (Ayalon Bnei Brak)"><td>רמי לוי איילון</td><td>תפוח אדמה לאפיה</td><td>₪4.90</td><td>₪4.90 (ק"ג)</td></tr><tr class="" data-store="Osher Ad (Kremenetski TLV)"><td>אושר עד</td><td>תפוח אדמה לבן גידולי</td><td>₪24.90</td><td>₪4.98 (ק"ג)</td></tr><tr class="" data-store="Rami Levy (Ayalon Bnei Brak)"><td>רמי לוי איילון</td><td>תפוח אדמה אדום ארוז</td><td>₪5.00</td><td>₪5.00 (ק"ג)</td></tr><tr class="" data-store="Rami Levy (Ayalon Bnei Brak)"><td>רמי לוי איילון</td><td>תפוח אדמה לבן ארוז</td><td>₪5.60</td><td>₪5.60 (ק"ג)</td></tr><tr class="" data-store="Rami Levy BaShchuna (Ben Yehuda 23)"><td>רמי לוי בן יהודה</td><td>תפו"א לבן פרימיום אר</td><td>₪5.90</td><td>₪5.90 (ק"ג)</td></tr><tr class="" data-store="Rami Levy BaShchuna (Ben Yehuda 23)"><td>רמי לוי בן יהודה</td><td>תפו"א אדום פרמיום אר</td><td>₪5.90</td><td>₪5.90 (ק"ג)</td></tr><tr class="" data-store="Rami Levy BaShchuna (Ben Yehuda 23)"><td>רמי לוי בן יהודה</td><td>תפוח אדמה אדום במשקל</td><td>₪5.90</td><td>₪5.90 (ק"ג)</td></tr><tr class="" data-store="Rami Levy (Ayalon Bnei Brak)"><td>רמי לוי איילון</td><td>תפוח אדמה אדום במשקל</td><td>₪5.90</td><td>₪5.90 (ק"ג)</td></tr><tr class="" data-store="Rami Levy (Ayalon Bnei Brak)"><td>רמי לוי איילון</td><td>תפוח אדמה לבן במשקל</td><td>₪5.90</td><td>₪5.90 (ק"ג)</td></tr><tr class="" data-store="Osher Ad (Kremenetski TLV)"><td>אושר עד</td><td>תפוח אדמה לבן</td><td>₪29.90</td><td>₪5.98 (ק"ג)</td></tr><tr class="" data-store="Osher Ad (Kremenetski TLV)"><td>אושר עד</td><td>תפוח אדמה לבן גלי מש</td><td>₪29.90</td><td>₪5.98 (ק"ג)</td></tr><tr class="" data-store="Rami Levy (Ayalon Bnei Brak)"><td>רמי לוי איילון</td><td>תפוח אדמה אדום ארוז</td><td>₪6.70</td><td>₪6.70 (ק"ג)</td></tr><tr class="" data-store="Osher Ad (Kremenetski TLV)"><td>אושר עד</td><td>תפוח אדמה אדום</td><td>₪33.90</td><td>₪6.78 (ק"ג)</td></tr><tr class="" data-store="Osher Ad (Kremenetski TLV)"><td>אושר עד</td><td>תפוח אדמה אדום גלי מ</td><td>₪33.90</td><td>₪6.78 (ק"ג)</td></tr></table></div><div class="card"><h2>Carrots (גזר)</h2><table><tr><th>חנות</th><th>מוצר</th><th>מחיר</th><th>ליחידה</th></tr><tr class="best" data-store="Rami Levy (Ayalon Bnei Brak)"><td>רמי לוי איילון</td><td>גזר ארוז</td><td>₪4.40</td><td>₪4.40 (ק"ג)</td></tr><tr class="" data-store="Rami Levy BaShchuna (Ben Yehuda 23)"><td>רמי לוי בן יהודה</td><td>גזר ארוז</td><td>₪4.90</td><td>₪4.90 (ק"ג)</td></tr><tr class="" data-store="Rami Levy (Ayalon Bnei Brak)"><td>רמי לוי איילון</td><td>גזר בתפזורת</td><td>₪4.90</td><td>₪4.90 (ק"ג)</td></tr><tr class="" data-store="Osher Ad (Kremenetski TLV)"><td>אושר עד</td><td>גזר</td><td>₪4.90</td><td>₪4.90 (ק"ג)</td></tr><tr class="" data-store="Rami Levy (Ayalon Bnei Brak)"><td>רמי לוי איילון</td><td>גזר</td><td>₪5.00</td><td>₪5.00 (ק"ג)</td></tr><tr class="" data-store="Rami Levy BaShchuna (Ben Yehuda 23)"><td>רמי לוי בן יהודה</td><td>גזר צבעוני מובחר</td><td>₪5.70</td><td>₪5.70 (יחידות)</td></tr><tr class="" data-store="Rami Levy BaShchuna (Ben Yehuda 23)"><td>רמי לוי בן יהודה</td><td>גזר בתפזורת</td><td>₪5.90</td><td>₪5.90 (ק"ג)</td></tr><tr class="" data-store="Shufersal Sheli (Ben Yehuda 79)"><td>שופרסל שלי</td><td>גזר ארוז</td><td>₪5.90</td><td>₪5.90 (ק"ג)</td></tr><tr class="" data-store="AM:PM (Ben Yehuda 61)"><td>AM:PM בן יהודה</td><td>גזר ארוז</td><td>₪6.90</td><td>₪6.90 (ק"ג)</td></tr><tr class="" data-store="Shufersal Sheli (Ben Yehuda 79)"><td>שופרסל שלי</td><td>גזר תפזורת</td><td>₪6.90</td><td>₪6.90 (ק"ג)</td></tr><tr class="" data-store="Rami Levy (Ayalon Bnei Brak)"><td>רמי לוי איילון</td><td>גזר צבעוני חוות תקוע</td><td>₪8.90</td><td>₪8.90 (יחידות)</td></tr><tr class="" data-store="AM:PM (Ben Yehuda 61)"><td>AM:PM בן יהודה</td><td>גזר ארוז 1 ק"ג</td><td>₪8.90</td><td>₪8.90 (יחידות)</td></tr><tr class="" data-store="Shufersal Sheli (Ben Yehuda 79)"><td>שופרסל שלי</td><td>מארז גזר  אורגני</td><td>₪12.90</td><td>₪12.90 (ק"ג)</td></tr><tr class="" data-store="AM:PM (Ben Yehuda 61)"><td>AM:PM בן יהודה</td><td>חטיפי גזר</td><td>₪14.90</td><td>₪14.90 (יחידות)</td></tr><tr class="" data-store="Rami Levy (Ayalon Bnei Brak)"><td>רמי לוי איילון</td><td>בובת סקוויז גזר</td><td>₪19.90</td><td>₪19.90 (יחידות)</td></tr></table></div>
+
+<main class="container" id="cardsGrid">
+  <div class="skeleton"></div>
+  <div class="skeleton"></div>
+  <div class="skeleton"></div>
+</main>
+
+<!-- Sticky Smart Basket Summary Bar -->
+<div class="basket-bar" id="basketBar" onclick="openDrawer()">
+  <div>
+    <div class="basket-bar-title" id="basketBarTitle">הסל שלי</div>
+    <div class="basket-bar-sub" id="basketBarSub"></div>
+  </div>
+  <div class="basket-bar-cta">השוואת סל ↑</div>
+</div>
+
+<!-- Smart Basket Comparison Drawer -->
+<div class="drawer-backdrop" id="drawerBackdrop" onclick="if(event.target===this) closeDrawer()">
+  <div class="drawer">
+    <div class="drawer-head">
+      <h2>🛒 השוואת הסל שלי</h2>
+      <div class="drawer-actions">
+        <button class="ghost-btn" onclick="clearBasket()">נקה סל</button>
+        <button class="ghost-btn" onclick="closeDrawer()">סגור</button>
+      </div>
+    </div>
+    <div id="drawerTotals"></div>
+    <div class="basket-items-list" id="drawerItems"></div>
+  </div>
+</div>
+
 <script>
-const hiddenStores = new Set();
-function toggleStore(btn, store) {
-  btn.classList.toggle('active');
-  if (hiddenStores.has(store)) hiddenStores.delete(store);
-  else hiddenStores.add(store);
-  document.querySelectorAll('tr[data-store]').forEach(row => {
-    row.style.display = hiddenStores.has(row.dataset.store) ? 'none' : '';
+  const STORE_COLORS = {
+    RAMI_LEVY: '#2563EB',
+    OSHER_AD: '#D97706',
+    DOR_ALON: '#475569',
+    SHUFERSAL: '#DC2626',
+  };
+
+  let appData = null;
+  let activeStores = new Set();
+  let activeCategory = 'הכל';
+  let searchQuery = '';
+  let expandedCards = new Set();
+  let basket = new Set(JSON.parse(localStorage.getItem('sabipricez_basket') || '[]'));
+
+  function saveBasket() {
+    localStorage.setItem('sabipricez_basket', JSON.stringify([...basket]));
+  }
+
+  function splitTitle(fullName) {
+    const match = fullName.match(/^(.+?)\s*\((.+)\)$/);
+    if (match) return { he: match[2], en: match[1] };
+    return { he: fullName, en: '' };
+  }
+
+  function getStoreColor(storeLabel) {
+    const storeObj = appData?.stores?.find(s => s.label === storeLabel);
+    return STORE_COLORS[storeObj?.chain] || '#6B7280';
+  }
+
+  function formatUpdated(ts) {
+    if (!ts) return 'לא ידוע';
+    const [datePart, timePart] = ts.split(' ');
+    const today = new Date().toISOString().slice(0, 10);
+    return datePart === today ? `עודכן היום ב-${timePart}` : `עודכן ${datePart} · ${timePart}`;
+  }
+
+  function renderStoreFilters() {
+    const el = document.getElementById('storeFilters');
+    el.innerHTML = appData.stores.map(s => {
+      const isOn = activeStores.has(s.label);
+      const color = STORE_COLORS[s.chain] || '#6B7280';
+      return `
+        <button class="store-chip ${isOn ? 'active' : ''}" onclick="toggleStore('${s.label.replace(/'/g, "\\'")}')">
+          <span class="store-dot" style="background:${color}"></span>
+          ${s.short_name || s.label}
+        </button>`;
+    }).join('');
+  }
+
+  function renderCategoryTabs() {
+    const cats = ['הכל', ...new Set(appData.items.map(i => i.category || 'כללי'))];
+    const el = document.getElementById('categoryTabs');
+    el.innerHTML = cats.map(c => `
+      <button class="cat-chip ${activeCategory === c ? 'active' : ''}" onclick="setCategory('${c.replace(/'/g, "\\'")}')">
+        ${c}
+      </button>
+    `).join('');
+  }
+
+  function getFilteredMatches(item) {
+    const q = searchQuery.trim().toLowerCase();
+    return item.matches.filter(m => {
+      if (!activeStores.has(m.store)) return false;
+      if (!q) return true;
+      return (
+        item.name.toLowerCase().includes(q) ||
+        m.product.toLowerCase().includes(q) ||
+        (m.short_store || '').toLowerCase().includes(q)
+      );
+    });
+  }
+
+  function renderCards() {
+    const grid = document.getElementById('cardsGrid');
+    const q = searchQuery.trim().toLowerCase();
+
+    const visibleItems = appData.items.filter(item => {
+      if (activeCategory !== 'הכל' && (item.category || 'כללי') !== activeCategory) return false;
+      if (!q) return true;
+      return item.name.toLowerCase().includes(q) || getFilteredMatches(item).length > 0;
+    });
+
+    if (!visibleItems.length) {
+      grid.innerHTML = '<div class="card"><div class="empty-state">לא נמצאו מוצרים התואמים לחיפוש.</div></div>';
+      return;
+    }
+
+    grid.innerHTML = visibleItems.map(item => {
+      const { he, en } = splitTitle(item.name);
+      const matches = getFilteredMatches(item);
+      const isExpanded = expandedCards.has(item.name);
+      const shown = isExpanded ? matches : matches.slice(0, 3);
+      const inBasket = basket.has(item.name);
+
+      // Savings vs next different store
+      let savePct = 0;
+      if (matches.length >= 2) {
+        const best = matches[0];
+        const nextStore = matches.find(m => m.store !== best.store) || matches[1];
+        if (nextStore && nextStore.unit_price > best.unit_price) {
+          savePct = Math.round(((nextStore.unit_price - best.unit_price) / nextStore.unit_price) * 100);
+        }
+      }
+
+      const offersHtml = shown.length
+        ? shown.map((m, idx) => {
+            const isBest = idx === 0;
+            const color = getStoreColor(m.store);
+            const showShelf = Math.abs(m.price - m.unit_price) > 0.05;
+            return `
+              <div class="offer ${isBest ? 'best' : ''}">
+                <div class="offer-info">
+                  <div class="offer-meta">
+                    <span class="store-pill">
+                      <span class="store-dot" style="background:${color}"></span>
+                      ${m.short_store || m.store}
+                    </span>
+                    ${isBest && savePct >= 3 ? `<span class="save-badge">זול ב-${savePct}%</span>` : ''}
+                  </div>
+                  <div class="product-name" title="${m.product}">${m.product}</div>
+                </div>
+                <div class="offer-price num">
+                  <div class="unit-price">₪${m.unit_price.toFixed(2)} <span class="unit-label">/ ${m.unit}</span></div>
+                  ${showShelf ? `<div class="shelf-price">₪${m.price.toFixed(2)} ליח'</div>` : ''}
+                </div>
+              </div>`;
+          }).join('')
+        : '<div class="empty-state">אין תוצאות בסניפים הנבחרים</div>';
+
+      const moreCount = matches.length - 3;
+      const expandHtml = moreCount > 0
+        ? `<button class="expand-btn" onclick="toggleExpand('${item.name.replace(/'/g, "\\'")}')">
+             ${isExpanded ? 'הצג פחות ▲' : `הצג עוד ${moreCount} אפשרויות ▼`}
+           </button>`
+        : '';
+
+      return `
+        <article class="card">
+          <div class="card-head">
+            <div class="card-title-wrap">
+              <h2 class="card-title">${he}</h2>
+              ${en ? `<div class="card-sub">${en}</div>` : ''}
+            </div>
+            <button class="basket-btn ${inBasket ? 'in-basket' : ''}" onclick="toggleBasket('${item.name.replace(/'/g, "\\'")}')">
+              ${inBasket ? '✓ בסל' : '+ לסל'}
+            </button>
+          </div>
+          <div class="offers">${offersHtml}</div>
+          ${expandHtml}
+        </article>`;
+    }).join('');
+  }
+
+  function computeBasketTotals() {
+    const selectedItems = appData.items.filter(i => basket.has(i.name));
+    const perStore = appData.stores
+      .filter(s => activeStores.has(s.label))
+      .map(store => {
+        let total = 0;
+        let found = 0;
+        for (const item of selectedItems) {
+          const match = item.matches.find(m => m.store === store.label);
+          if (match) {
+            total += match.unit_price;
+            found += 1;
+          }
+        }
+        return { store, total, found, missing: selectedItems.length - found };
+      })
+      .filter(s => s.found > 0)
+      .sort((a, b) => (b.found - a.found) || (a.total - b.total));
+
+    let splitTotal = 0;
+    let splitFound = 0;
+    for (const item of selectedItems) {
+      const best = item.matches.find(m => activeStores.has(m.store));
+      if (best) {
+        splitTotal += best.unit_price;
+        splitFound += 1;
+      }
+    }
+
+    return { count: selectedItems.length, perStore, splitTotal, splitFound };
+  }
+
+  function renderBasketUI() {
+    const bar = document.getElementById('basketBar');
+    if (basket.size === 0) {
+      bar.classList.remove('visible');
+      closeDrawer();
+      return;
+    }
+
+    const { count, perStore, splitTotal } = computeBasketTotals();
+    bar.classList.add('visible');
+
+    const winner = perStore[0];
+    document.getElementById('basketBarTitle').textContent = `הסל שלי · ${count} מוצרים`;
+    document.getElementById('basketBarSub').textContent = winner
+      ? `הכי זול בסניף אחד: ${winner.store.short_name} (₪${winner.total.toFixed(2)} · ${winner.found}/${count})`
+      : 'אין התאמות בסניפים הנבחרים';
+
+    const totalsEl = document.getElementById('drawerTotals');
+    let html = perStore.map((entry, idx) => `
+      <div class="store-total-row ${idx === 0 ? 'winner' : ''}">
+        <div>
+          <strong>${entry.store.short_name}</strong>
+          <div style="font-size:0.78rem;color:var(--muted)">
+            ${entry.found}/${count} מוצרים נמצאו${entry.missing > 0 ? ` (חסרים ${entry.missing})` : ''}
+          </div>
+        </div>
+        <div class="num" style="font-size:1.1rem;font-weight:800;">₪${entry.total.toFixed(2)}</div>
+      </div>
+    `).join('');
+
+    if (splitTotal > 0 && perStore.length > 1) {
+      html += `
+        <div class="store-total-row" style="border-style:dashed;">
+          <div>
+            <strong>⚡ קנייה מפוצלת (הכי זול לכל מוצר)</strong>
+            <div style="font-size:0.78rem;color:var(--muted)">שילוב הסניפים הזולים ביותר</div>
+          </div>
+          <div class="num" style="font-size:1.05rem;font-weight:800;color:var(--accent)">₪${splitTotal.toFixed(2)}</div>
+        </div>`;
+    }
+    totalsEl.innerHTML = html || '<div class="empty-state">אין נתונים להשוואה</div>';
+
+    document.getElementById('drawerItems').innerHTML = [...basket].map(name => {
+      const { he } = splitTitle(name);
+      return `<span class="basket-pill">${he} <button onclick="toggleBasket('${name.replace(/'/g, "\\'")}')">✕</button></span>`;
+    }).join('');
+  }
+
+  function toggleStore(label) {
+    if (activeStores.has(label)) {
+      if (activeStores.size === 1) return; // keep at least 1 store active
+      activeStores.delete(label);
+    } else {
+      activeStores.add(label);
+    }
+    renderStoreFilters();
+    renderCards();
+    renderBasketUI();
+  }
+
+  function setCategory(cat) {
+    activeCategory = cat;
+    renderCategoryTabs();
+    renderCards();
+  }
+
+  function toggleExpand(itemName) {
+    if (expandedCards.has(itemName)) expandedCards.delete(itemName);
+    else expandedCards.add(itemName);
+    renderCards();
+  }
+
+  function toggleBasket(itemName) {
+    if (basket.has(itemName)) basket.delete(itemName);
+    else basket.add(itemName);
+    saveBasket();
+    renderCards();
+    renderBasketUI();
+  }
+
+  function clearBasket() {
+    basket.clear();
+    saveBasket();
+    renderCards();
+    renderBasketUI();
+  }
+
+  function openDrawer() { document.getElementById('drawerBackdrop').classList.add('open'); }
+  function closeDrawer() { document.getElementById('drawerBackdrop').classList.remove('open'); }
+
+  document.getElementById('searchInput').addEventListener('input', e => {
+    searchQuery = e.target.value;
+    renderCards();
   });
-}
+
+  async function init() {
+    try {
+      const res = await fetch(`data.json?t=${Date.now()}`);
+      if (!res.ok) throw new Error('missing data.json');
+      appData = await res.json();
+      activeStores = new Set(appData.stores.map(s => s.label));
+      document.getElementById('updatedAt').textContent = formatUpdated(appData.updated_at);
+      renderStoreFilters();
+      renderCategoryTabs();
+      renderCards();
+      renderBasketUI();
+    } catch (err) {
+      document.getElementById('updatedAt').textContent = 'ממתין לעדכון ראשון';
+      document.getElementById('cardsGrid').innerHTML =
+        '<div class="card"><div class="empty-state">קובץ <code>data.json</code> עדיין לא נמצא. הריצו את ה-Workflow ב-GitHub Actions כדי למשוך מחירים.</div></div>';
+    }
+  }
+
+  init();
 </script>
-</body></html>
+</body>
+</html>
