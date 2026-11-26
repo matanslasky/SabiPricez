@@ -653,3 +653,252 @@
   function renderCategoryTabs() {
     const cats = ['הכל', ...new Set(appData.items.map(i => i.category || 'כללי'))];
     const el = document.getElementById('categoryTabs');
+    el.innerHTML = cats.map(c => `
+      <button class="cat-chip ${activeCategory === c ? 'active' : ''}" onclick="setCategory('${c.replace(/'/g, "\\'")}')">
+        ${c}
+      </button>
+    `).join('');
+  }
+
+  function getFilteredMatches(item) {
+    const q = searchQuery.trim().toLowerCase();
+    return item.matches.filter(m => {
+      if (!activeStores.has(m.store)) return false;
+      if (!q) return true;
+      return (
+        item.name.toLowerCase().includes(q) ||
+        m.product.toLowerCase().includes(q) ||
+        (m.short_store || '').toLowerCase().includes(q)
+      );
+    });
+  }
+
+  function renderCards() {
+    const grid = document.getElementById('cardsGrid');
+    const q = searchQuery.trim().toLowerCase();
+
+    const visibleItems = appData.items.filter(item => {
+      if (activeCategory !== 'הכל' && (item.category || 'כללי') !== activeCategory) return false;
+      if (!q) return true;
+      return item.name.toLowerCase().includes(q) || getFilteredMatches(item).length > 0;
+    });
+
+    if (!visibleItems.length) {
+      grid.innerHTML = '<div class="card"><div class="empty-state">לא נמצאו מוצרים התואמים לחיפוש.</div></div>';
+      return;
+    }
+
+    grid.innerHTML = visibleItems.map(item => {
+      const { he, en } = splitTitle(item.name);
+      const matches = getFilteredMatches(item);
+      const isExpanded = expandedCards.has(item.name);
+      const shown = isExpanded ? matches : matches.slice(0, 3);
+      const inBasket = basket.has(item.name);
+
+      let savePct = 0;
+      if (matches.length >= 2) {
+        const best = matches[0];
+        const nextStore = matches.find(m => m.store !== best.store) || matches[1];
+        if (nextStore && nextStore.unit_price > best.unit_price) {
+          savePct = Math.round(((nextStore.unit_price - best.unit_price) / nextStore.unit_price) * 100);
+        }
+      }
+
+      const offersHtml = shown.length
+        ? shown.map((m, idx) => {
+            const isBest = idx === 0;
+            const color = getStoreColor(m.store);
+            const showShelf = Math.abs(m.price - m.unit_price) > 0.05;
+            return `
+              <div class="offer ${isBest ? 'best' : ''}">
+                <div class="offer-info">
+                  <div class="offer-meta">
+                    <span class="store-pill">
+                      <span class="store-dot" style="background:${color}"></span>
+                      ${m.short_store || m.store}
+                    </span>
+                    ${isBest && savePct >= 3 ? `<span class="save-badge">זול ב-${savePct}%</span>` : ''}
+                  </div>
+                  <div class="product-name" title="${m.product}">${m.product}</div>
+                </div>
+                <div class="offer-price num">
+                  <div class="unit-price">₪${m.unit_price.toFixed(2)} <span class="unit-label">/ ${m.unit}</span></div>
+                  ${showShelf ? `<div class="shelf-price">₪${m.price.toFixed(2)} ליח'</div>` : ''}
+                </div>
+              </div>`;
+          }).join('')
+        : '<div class="empty-state">אין תוצאות בסניפים הנבחרים</div>';
+
+      const moreCount = matches.length - 3;
+      const expandHtml = moreCount > 0
+        ? `<button class="expand-btn" onclick="toggleExpand('${item.name.replace(/'/g, "\\'")}')">
+             ${isExpanded ? 'הצג פחות ▲' : `הצג עוד ${moreCount} אפשרויות ▼`}
+           </button>`
+        : '';
+
+      return `
+        <article class="card">
+          <div class="card-head">
+            <div class="card-title-wrap">
+              <h2 class="card-title">${he}</h2>
+              ${en ? `<div class="card-sub">${en}</div>` : ''}
+            </div>
+            <button class="basket-btn ${inBasket ? 'in-basket' : ''}" onclick="toggleBasket('${item.name.replace(/'/g, "\\'")}')">
+              ${inBasket ? '✓ בסל' : '+ לסל'}
+            </button>
+          </div>
+          <div class="offers">${offersHtml}</div>
+          ${expandHtml}
+        </article>`;
+    }).join('');
+  }
+
+  function computeBasketTotals() {
+    const selectedItems = appData.items.filter(i => basket.has(i.name));
+    const perStore = appData.stores
+      .filter(s => activeStores.has(s.label))
+      .map(store => {
+        let total = 0;
+        let found = 0;
+        for (const item of selectedItems) {
+          const match = item.matches.find(m => m.store === store.label);
+          if (match) {
+            total += match.unit_price;
+            found += 1;
+          }
+        }
+        return { store, total, found, missing: selectedItems.length - found };
+      })
+      .filter(s => s.found > 0)
+      .sort((a, b) => (b.found - a.found) || (a.total - b.total));
+
+    let splitTotal = 0;
+    let splitFound = 0;
+    for (const item of selectedItems) {
+      const best = item.matches.find(m => activeStores.has(m.store));
+      if (best) {
+        splitTotal += best.unit_price;
+        splitFound += 1;
+      }
+    }
+
+    return { count: selectedItems.length, perStore, splitTotal, splitFound };
+  }
+
+  function renderBasketUI() {
+    const bar = document.getElementById('basketBar');
+    if (basket.size === 0) {
+      bar.classList.remove('visible');
+      closeDrawer();
+      return;
+    }
+
+    const { count, perStore, splitTotal } = computeBasketTotals();
+    bar.classList.add('visible');
+
+    const winner = perStore[0];
+    document.getElementById('basketBarTitle').textContent = `הסל שלי · ${count} מוצרים`;
+    document.getElementById('basketBarSub').textContent = winner
+      ? `הכי זול בסניף אחד: ${winner.store.short_name} (₪${winner.total.toFixed(2)} · ${winner.found}/${count})`
+      : 'אין התאמות בסניפים הנבחרים';
+
+    const totalsEl = document.getElementById('drawerTotals');
+    let html = perStore.map((entry, idx) => `
+      <div class="store-total-row ${idx === 0 ? 'winner' : ''}">
+        <div>
+          <strong>${entry.store.short_name}</strong>
+          <div style="font-size:0.78rem;color:var(--muted)">
+            ${entry.found}/${count} מוצרים נמצאו${entry.missing > 0 ? ` (חסרים ${entry.missing})` : ''}
+          </div>
+        </div>
+        <div class="num" style="font-size:1.1rem;font-weight:800;">₪${entry.total.toFixed(2)}</div>
+      </div>
+    `).join('');
+
+    if (splitTotal > 0 && perStore.length > 1) {
+      html += `
+        <div class="store-total-row" style="border-style:dashed;">
+          <div>
+            <strong>⚡ קנייה מפוצלת (הכי זול לכל מוצר)</strong>
+            <div style="font-size:0.78rem;color:var(--muted)">שילוב הסניפים הזולים ביותר</div>
+          </div>
+          <div class="num" style="font-size:1.05rem;font-weight:800;color:var(--accent)">₪${splitTotal.toFixed(2)}</div>
+        </div>`;
+    }
+    totalsEl.innerHTML = html || '<div class="empty-state">אין נתונים להשוואה</div>';
+
+    document.getElementById('drawerItems').innerHTML = [...basket].map(name => {
+      const { he } = splitTitle(name);
+      return `<span class="basket-pill">${he} <button onclick="toggleBasket('${name.replace(/'/g, "\\'")}')">✕</button></span>`;
+    }).join('');
+  }
+
+  function toggleStore(label) {
+    if (activeStores.has(label)) {
+      if (activeStores.size === 1) return;
+      activeStores.delete(label);
+    } else {
+      activeStores.add(label);
+    }
+    renderStoreFilters();
+    renderCards();
+    renderBasketUI();
+  }
+
+  function setCategory(cat) {
+    activeCategory = cat;
+    renderCategoryTabs();
+    renderCards();
+  }
+
+  function toggleExpand(itemName) {
+    if (expandedCards.has(itemName)) expandedCards.delete(itemName);
+    else expandedCards.add(itemName);
+    renderCards();
+  }
+
+  function toggleBasket(itemName) {
+    if (basket.has(itemName)) basket.delete(itemName);
+    else basket.add(itemName);
+    saveBasket();
+    renderCards();
+    renderBasketUI();
+  }
+
+  function clearBasket() {
+    basket.clear();
+    saveBasket();
+    renderCards();
+    renderBasketUI();
+  }
+
+  function openDrawer() { document.getElementById('drawerBackdrop').classList.add('open'); }
+  function closeDrawer() { document.getElementById('drawerBackdrop').classList.remove('open'); }
+
+  document.getElementById('searchInput').addEventListener('input', e => {
+    searchQuery = e.target.value;
+    renderCards();
+  });
+
+  async function init() {
+    try {
+      const res = await fetch(`data.json?t=${Date.now()}`);
+      if (!res.ok) throw new Error('missing data.json');
+      appData = await res.json();
+      activeStores = new Set(appData.stores.map(s => s.label));
+      document.getElementById('updatedAt').textContent = formatUpdated(appData.updated_at);
+      renderStoreFilters();
+      renderCategoryTabs();
+      renderCards();
+      renderBasketUI();
+    } catch (err) {
+      document.getElementById('updatedAt').textContent = 'ממתין לעדכון ראשון';
+      document.getElementById('cardsGrid').innerHTML =
+        '<div class="card"><div class="empty-state">קובץ <code>data.json</code> עדיין לא נמצא. הריצו את ה-Workflow ב-GitHub Actions כדי למשוך מחירים.</div></div>';
+    }
+  }
+
+  init();
+</script>
+</body>
+</html>
