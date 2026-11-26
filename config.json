@@ -2,100 +2,113 @@
   "stores": [
     {
       "label": "Rami Levy BaShchuna (Ben Yehuda 23)",
-      "chain": "RamiLevy",
-      "city_match": "תל אביב",
-      "address_match": "בן יהודה 23"
+      "short_name": "רמי לוי בן יהודה",
+      "chain": "RAMI_LEVY",
+      "store_id": "733"
     },
     {
       "label": "Rami Levy (Ramat Gan)",
-      "chain": "RamiLevy",
-      "city_match": "רמת גן",
-      "address_match": "אבא הלל"
+      "short_name": "רמי לוי רמת גן",
+      "chain": "RAMI_LEVY",
+      "store_id": "TBD"
     },
     {
       "label": "Osher Ad (Kremenetski TLV)",
-      "chain": "OsherAd",
-      "city_match": "תל אביב",
-      "address_match": "קרמינצקי"
+      "short_name": "אושר עד",
+      "chain": "OSHER_AD",
+      "store_id": "024"
     },
     {
-      "label": "AM:PM (Ben Yehuda / Shalom Aleichem)",
-      "chain": "DorAlon",
-      "city_match": "תל אביב",
-      "address_match": "בן יהודה 58"
+      "label": "AM:PM (Ben Yehuda 61)",
+      "short_name": "AM:PM בן יהודה",
+      "chain": "DOR_ALON",
+      "store_id": "524"
     },
     {
       "label": "Shufersal Sheli (Ben Yehuda 79)",
-      "chain": "Shufersal",
-      "city_match": "תל אביב",
-      "address_match": "בן יהודה 79"
+      "short_name": "שופרסל שלי",
+      "chain": "SHUFERSAL",
+      "store_id": "001"
     }
   ],
   "items": [
     {
       "name": "Chicken Breast (חזה עוף)",
+      "category": "בשר ועוף",
       "keywords": ["חזה עוף"],
       "exclude": ["מעובד", "קפוא", "נקניק"]
     },
     {
       "name": "Ground Beef (בשר טחון)",
+      "category": "בשר ועוף",
       "keywords": ["בקר טחון", "בשר טחון"],
       "exclude": ["קפוא", "המבורגר"]
     },
     {
       "name": "Extra Virgin Olive Oil (שמן זית)",
+      "category": "מזווה ושמנים",
       "keywords": ["שמן זית כתית"],
       "exclude": ["טונה", "סרדינים", "זיתים"]
     },
     {
       "name": "Neutral Oil (שמן קנולה / חמניות)",
+      "category": "מזווה ושמנים",
       "keywords": ["שמן קנולה", "שמן חמניות"],
       "exclude": ["טונה"]
     },
     {
       "name": "White / Bread Flour (קמח לבן / לחם)",
+      "category": "מזווה ושמנים",
       "keywords": ["קמח חיטה לבן", "קמח לחם"],
       "exclude": ["תופח", "מלא"]
     },
     {
       "name": "Rice (אורז)",
+      "category": "מזווה ושמנים",
       "keywords": ["אורז בסמטי", "אורז יסמין", "אורז לבן", "אורז עגול"],
       "exclude": ["מוכן", "מבושל", "קפוא"]
     },
     {
       "name": "Canned Chickpeas (חומוס משומר)",
-      "keywords": ["גרגירי חומוס מקופסה", "גרגירי חומוס בשימורים", "חומוס בשימורים"],
-      "exclude": ["יבש", "סלט", "ממרח"]
+      "category": "מזווה ושמנים",
+      "keywords": ["גרגירי חומוס מקופסה", "גרגירי חומוס בשימורים", "חומוס בשימורים", "גרגירי חומוס"],
+      "exclude": ["יבש", "סלט", "ממרח", "קפוא"]
     },
     {
       "name": "Tomatoes (עגבניות)",
+      "category": "ירקות",
       "keywords": ["עגבניות"],
-      "exclude": ["רסק", "מחית", "מרוסקות"]
+      "exclude": ["רסק", "מחית", "מרוסקות", "מיובשות"]
     },
     {
       "name": "Cucumbers (מלפפונים)",
+      "category": "ירקות",
       "keywords": ["מלפפונים"],
       "exclude": ["חמוצים", "במלח", "בחומץ"]
     },
     {
       "name": "Onions (בצלים)",
+      "category": "ירקות",
       "keywords": ["בצל יבש", "בצל לבן", "בצל סגול"],
       "exclude": ["מטוגן", "ירוק", "אבקה"]
     },
     {
       "name": "Garlic (שום)",
+      "category": "ירקות",
       "keywords": ["שום"],
-      "exclude": ["כתוש", "קפוא", "אבקה", "גבישי"]
+      "exclude": ["כתוש", "קפוא", "אבקה", "גבישי", "גבינה", "לחם", "רוטב", "ממרח"]
     },
     {
       "name": "Potatoes (תפוחי אדמה)",
+      "category": "ירקות",
       "keywords": ["תפוחי אדמה"],
-      "exclude": ["קפוא", "צ'יפס", "פירה"]
+      "exclude": ["קפוא", "צ'יפס", "פירה", "חטיף"]
     },
     {
       "name": "Carrots (גזר)",
+      "category": "ירקות",
       "keywords": ["גזר"],
-      "exclude": ["מיץ", "קפוא"]
+      "exclude": ["מיץ", "קפוא", "עוגת"]
     }
   ]
 }
