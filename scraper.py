@@ -3,6 +3,7 @@ import gzip
 import inspect
 import json
 import os
+import re
 import xml.etree.ElementTree as ET
 from datetime import datetime
 from il_supermarket_scarper import ScarpingTask, FileTypesFilters
@@ -20,10 +21,24 @@ CHAIN_MAP = {
 def normalize_chain(name):
     return CHAIN_MAP.get(name, name.upper())
 
-# 1. Download Stores & PriceFull XMLs using only parameters supported by the installed version
+def norm_text(s):
+    if not s:
+        return ""
+    return re.sub(r"[\-\s\"׳״']+", " ", s).strip()
+
+def local_tag(tag):
+    return tag.split("}")[-1].lower()
+
+def get_child_text(el, tag_name):
+    target = tag_name.lower()
+    for c in el:
+        if local_tag(c.tag) == target and c.text:
+            return c.text.strip()
+    return ""
+
+# 1. Download Stores & PriceFull XMLs
 chains = list({normalize_chain(s["chain"]) for s in config["stores"]})
 sig_params = inspect.signature(ScarpingTask.__init__).parameters
-print("ScarpingTask parameters:", list(sig_params.keys()))
 
 kwargs = {}
 if "enabled_scrapers" in sig_params:
@@ -33,9 +48,6 @@ if "files_types" in sig_params:
         FileTypesFilters.STORE_FILE.name,
         FileTypesFilters.PRICE_FULL_FILE.name,
     ]
-if "dump_folder_name" in sig_params:
-    os.makedirs("dumps", exist_ok=True)
-    kwargs["dump_folder_name"] = "dumps"
 
 scraper = ScarpingTask(**kwargs)
 scraper.start()
@@ -45,9 +57,22 @@ def read_xml(path):
     try:
         if path.endswith(".gz"):
             with gzip.open(path, "rb") as f:
-                return ET.fromstring(f.read())
-        return ET.parse(path).getroot()
-    except Exception:
+                raw = f.read()
+        else:
+            with open(path, "rb") as f:
+                raw = f.read()
+        try:
+            return ET.fromstring(raw)
+        except ET.ParseError:
+            for enc in ("utf-8-sig", "utf-16", "windows-1255", "iso-8859-8"):
+                try:
+                    return ET.fromstring(raw.decode(enc))
+                except Exception:
+                    continue
+        print(f"Failed to parse XML: {path}")
+        return None
+    except Exception as e:
+        print(f"Error reading {path}: {e}")
         return None
 
 def find_chain_dir(chain_norm):
@@ -61,51 +86,80 @@ def find_chain_dir(chain_norm):
 
 # 2. Resolve Store IDs from Stores XML files
 target_stores = {}  # (chain_dir, store_id_normalized) -> label
+
 for store_cfg in config["stores"]:
     chain_norm = normalize_chain(store_cfg["chain"])
     chain_dir = find_chain_dir(chain_norm)
-    print(f"Chain {chain_norm} -> dir: {chain_dir}")
+    print(f"\n--- Looking for: {store_cfg['label']} in {chain_dir} ---")
     if not chain_dir:
         continue
-    store_files = glob.glob(os.path.join(chain_dir, "**", "*[Ss]tores*"), recursive=True)
+
+    store_files = [
+        p for p in glob.glob(os.path.join(chain_dir, "**", "*"), recursive=True)
+        if os.path.isfile(p) and "store" in os.path.basename(p).lower()
+    ]
+    print(f"Found {len(store_files)} store file(s)")
+
+    city_want = norm_text(store_cfg["city_match"])
+    addr_want = norm_text(store_cfg["address_match"])
+    matched = False
+    city_candidates = []
+
     for sf in store_files:
-        if os.path.isdir(sf):
-            continue
         root = read_xml(sf)
         if root is None:
             continue
         for store_el in root.iter():
-            if store_el.tag.endswith("Store"):
-                sid = next((c.text.strip() for c in store_el if c.tag.endswith("StoreId") and c.text), "")
-                city = next((c.text or "" for c in store_el if c.tag.endswith("City")), "")
-                addr = next((c.text or "" for c in store_el if c.tag.endswith("Address")), "")
-                if sid and store_cfg["city_match"] in city and store_cfg["address_match"] in addr:
-                    print(f"Matched store: {store_cfg['label']} -> ID {sid} ({city}, {addr})")
-                    target_stores[(chain_dir, sid.zfill(3))] = store_cfg["label"]
-                    target_stores[(chain_dir, sid.lstrip("0") or "0")] = store_cfg["label"]
+            if local_tag(store_el.tag) == "store":
+                sid = get_child_text(store_el, "StoreId")
+                city = get_child_text(store_el, "City")
+                addr = get_child_text(store_el, "Address")
+                name = get_child_text(store_el, "StoreName")
+                if not sid:
+                    continue
+                city_n = norm_text(city)
+                full_n = norm_text(f"{addr} {name}")
+                if city_want in city_n:
+                    city_candidates.append(f"ID={sid} | {name} | {addr} ({city})")
+                    if addr_want in full_n:
+                        print(f"MATCHED: {store_cfg['label']} -> ID {sid} ({name} | {addr}, {city})")
+                        target_stores[(chain_dir, sid.zfill(3))] = store_cfg["label"]
+                        target_stores[(chain_dir, sid.lstrip("0") or "0")] = store_cfg["label"]
+                        matched = True
+
+    if not matched:
+        print(f"NO MATCH for {store_cfg['label']}. Branches in '{store_cfg['city_match']}':")
+        for c in city_candidates[:25]:
+            print("  ", c)
 
 # 3. Parse PriceFull files for matched stores
 results = {item["name"]: [] for item in config["items"]}
 seen_files = set()
 
 for (chain_dir, sid), label in target_stores.items():
-    candidates = glob.glob(os.path.join(chain_dir, "**", f"*[Pp]rice[Ff]ull*-{sid}-*"), recursive=True)
+    candidates = [
+        p for p in glob.glob(os.path.join(chain_dir, "**", "*"), recursive=True)
+        if os.path.isfile(p)
+        and "pricefull" in os.path.basename(p).lower()
+        and f"-{sid}-" in os.path.basename(p)
+    ]
     for pf in candidates[:1]:
-        if pf in seen_files or os.path.isdir(pf):
+        if pf in seen_files:
             continue
         seen_files.add(pf)
+        print(f"Parsing {os.path.basename(pf)} for {label}")
         root = read_xml(pf)
         if root is None:
             continue
         for item_el in root.iter():
-            if item_el.tag.endswith("Item"):
-                name = next((c.text or "" for c in item_el if c.tag.endswith("ItemName")), "")
+            if local_tag(item_el.tag) == "item":
+                name = get_child_text(item_el, "ItemName")
                 try:
-                    price = float(next((c.text or 0 for c in item_el if c.tag.endswith("ItemPrice")), 0))
-                    unit_price = float(next((c.text or 0 for c in item_el if c.tag.endswith("UnitOfMeasurePrice")), 0))
+                    price = float(get_child_text(item_el, "ItemPrice") or 0)
+                    unit_price = float(get_child_text(item_el, "UnitOfMeasurePrice") or 0)
                 except ValueError:
                     continue
-                unit = next((c.text or "" for c in item_el if c.tag.endswith("UnitOfMeasure")), "")
+                unit = get_child_text(item_el, "UnitOfMeasure")
                 if price <= 0:
                     continue
                 for cfg_item in config["items"]:
