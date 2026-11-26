@@ -15,8 +15,13 @@ TZ = ZoneInfo("Asia/Jerusalem")
 TODAY = datetime.now(TZ).date()
 TODAY_STR = TODAY.strftime("%Y-%m-%d")
 STALE_CUTOFF = (TODAY - timedelta(days=365)).strftime("%Y-%m-%d")
+HISTORY_CUTOFF = (TODAY - timedelta(days=30)).strftime("%Y-%m-%d")
+HISTORY_FILE = "history.json"
 
-CONDITIONAL_TERMS = ("מועדון", "אשראי", "בקנייה מעל", "בקניה מעל", "מעל 50", "מעל 75", "מעל 100", "מעל 150", "מעל 200")
+CONDITIONAL_TERMS = (
+    "מועדון", "אשראי", "בקנייה מעל", "בקניה מעל",
+    "מעל 50", "מעל 75", "מעל 100", "מעל 150", "מעל 200",
+)
 
 
 def local_tag(tag):
@@ -70,11 +75,9 @@ def matches_keyword(name, kw):
 
 
 def calc_normalized_unit_price(price, unit_price, unit, qty, unit_qty, is_weighted):
-    # 1. Weighted items (produce / butcher) are always priced per kg
     if is_weighted:
         return round(price, 2), 'ק"ג'
 
-    # 2. Best source: calculate directly from Quantity + UnitQty
     uq = (unit_qty or "").replace(" ", "").lower()
     if qty > 0 and uq:
         if "קילו" in uq or 'ק"ג' in uq or "קג" in uq:
@@ -86,7 +89,6 @@ def calc_normalized_unit_price(price, unit_price, unit, qty, unit_qty, is_weight
         if "ליטר" in uq:
             return round(price / qty, 2), "ליטר"
 
-    # 3. Fallback to UnitOfMeasurePrice + UnitOfMeasure (with Osher Ad 1ml/1g bug guard)
     up = unit_price if unit_price > 0 else price
     u = (unit or "").replace(" ", "").lower()
     if "100" in u and ("גר" in u or "ג'" in u):
@@ -106,7 +108,6 @@ def calc_normalized_unit_price(price, unit_price, unit, qty, unit_qty, is_weight
 
 
 def parse_promos(xml_root):
-    """Parse active promotions indexed by ItemCode. Never raises on malformed XML."""
     promos_by_code = {}
     if xml_root is None:
         return promos_by_code
@@ -135,7 +136,6 @@ def parse_promos(xml_root):
             reward_type = get_child_text(el, "RewardType")
             min_purchase = safe_float(get_child_text(el, "MinPurchaseAmnt"), 0.0)
 
-            # Detect loyalty club restrictions
             club_ids = [
                 c.text.strip()
                 for c in el.iter()
@@ -167,7 +167,6 @@ def parse_promos(xml_root):
 
 
 def resolve_best_promo(promos, price, norm_up, is_weighted):
-    """Pick best open promo for ranking; fall back to informational club/conditional badge."""
     if not promos:
         return norm_up, None
 
@@ -192,7 +191,6 @@ def resolve_best_promo(promos, price, norm_up, is_weighted):
             candidate_up = p["disc_per_mida"]
         elif p["disc_price"] > 0 and price > 0:
             mq = p["min_qty"]
-            # Handle Israeli "2 ב-20" bundle totals vs single-unit drops
             promo_shelf = (p["disc_price"] / mq) if (mq > 1 and p["disc_price"] >= price * 0.99) else p["disc_price"]
             candidate_up = norm_up * (promo_shelf / price)
         elif p["disc_rate"] > 0 and p["reward_type"] == "1":
@@ -200,7 +198,6 @@ def resolve_best_promo(promos, price, norm_up, is_weighted):
             if 1.0 <= rate <= 70.0:
                 candidate_up = norm_up * (1.0 - rate / 100.0)
 
-        # Sanity guard: reject obviously broken math (>65% off or not actually cheaper)
         if candidate_up is not None and (0.35 * norm_up <= candidate_up < norm_up * 0.99):
             candidate_up = round(candidate_up, 2)
             if candidate_up < best_open_up:
@@ -224,6 +221,52 @@ def resolve_best_promo(promos, price, norm_up, is_weighted):
     if best_open_promo:
         return best_open_up, best_open_promo
     return norm_up, fallback_info_promo
+
+
+def load_history():
+    if os.path.exists(HISTORY_FILE):
+        try:
+            with open(HISTORY_FILE, "r", encoding="utf-8") as f:
+                data = json.load(f)
+                if isinstance(data, dict):
+                    return data
+        except Exception as e:
+            print(f"Warning: could not read {HISTORY_FILE}: {e}")
+    return {}
+
+
+def update_history_and_trend(history, item_name, sorted_matches):
+    item_hist = history.get(item_name, {})
+    if not isinstance(item_hist, dict):
+        item_hist = {}
+
+    # Prune entries older than 30 days
+    item_hist = {d: v for d, v in item_hist.items() if d >= HISTORY_CUTOFF and isinstance(v, (int, float)) and v > 0}
+
+    if sorted_matches:
+        current_min = round(sorted_matches[0]["effective_unit_price"], 2)
+        item_hist[TODAY_STR] = current_min
+    else:
+        current_min = None
+
+    history[item_name] = dict(sorted(item_hist.items()))
+
+    values = list(history[item_name].values())
+    if current_min is None or len(values) < 3:
+        return {"days": len(values)}
+
+    min_30d = round(min(values), 2)
+    avg_30d = round(sum(values) / len(values), 2)
+    pct_below_avg = round(((avg_30d - current_min) / avg_30d) * 100) if avg_30d > 0 else 0
+    is_low = (current_min <= min_30d + 0.01) and (pct_below_avg >= 2)
+
+    return {
+        "days": len(values),
+        "min_30d": min_30d,
+        "avg_30d": avg_30d,
+        "pct_below_avg": pct_below_avg,
+        "is_low": is_low,
+    }
 
 
 # 1. Fast targeted download of PriceFull + PromoFull for our 5 Store IDs
@@ -266,7 +309,6 @@ for store_cfg in config["stores"]:
         print(f"No PriceFull file found for {store_cfg['label']} (ID {sid_pad})")
         continue
 
-    # Load promos first (optional — never blocks PriceFull)
     promos_by_code = {}
     if promo_files:
         print(f"Parsing promos {os.path.basename(promo_files[0])} for {store_cfg['label']}")
@@ -287,7 +329,6 @@ for store_cfg in config["stores"]:
             item_code = get_child_text(item_el, "ItemCode")
             price_updated = get_child_text(item_el, "PriceUpdateDate")[:10]
 
-            # Filter out dead/ghost POS items untouched for >1 year
             if price_updated and price_updated < STALE_CUTOFF:
                 continue
 
@@ -334,19 +375,28 @@ for store_cfg in config["stores"]:
                     matched_count += 1
     print(f"  -> {matched_count} product matches ({promo_hits} with active promos)")
 
-# 3. Save data.json (capped at top 15 matches per item)
+# 3. Update 30-day history and save history.json + data.json
+history = load_history()
+items_payload = []
+
+for item in config["items"]:
+    sorted_matches = sorted(results[item["name"]], key=lambda x: x["effective_unit_price"])[:15]
+    trend = update_history_and_trend(history, item["name"], sorted_matches)
+    items_payload.append({
+        "name": item["name"],
+        "category": item.get("category", "כללי"),
+        "trend": trend,
+        "matches": sorted_matches,
+    })
+
+with open(HISTORY_FILE, "w", encoding="utf-8") as f:
+    json.dump(history, f, ensure_ascii=False, indent=2)
+
 now = datetime.now(TZ).strftime("%Y-%m-%d %H:%M")
 payload = {
     "updated_at": now,
     "stores": config["stores"],
-    "items": [
-        {
-            "name": item["name"],
-            "category": item.get("category", "כללי"),
-            "matches": sorted(results[item["name"]], key=lambda x: x["effective_unit_price"])[:15],
-        }
-        for item in config["items"]
-    ],
+    "items": items_payload,
 }
 with open("data.json", "w", encoding="utf-8") as f:
     json.dump(payload, f, ensure_ascii=False, indent=2)
