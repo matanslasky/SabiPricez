@@ -30,6 +30,9 @@
       --promo-soft: #FFF7ED;
       --promo-border: #FED7AA;
       --promo-ink: #C2410C;
+      --trend-soft: #EFF6FF;
+      --trend-border: #BFDBFE;
+      --trend-ink: #1D4ED8;
       --radius-lg: 16px;
       --radius-md: 12px;
       --shadow-sm: 0 1px 2px rgba(17, 24, 39, 0.05);
@@ -57,6 +60,18 @@
 
     .num { font-variant-numeric: tabular-nums; }
 
+    /* Offline Banner */
+    .offline-banner {
+      display: none;
+      background: #1F2937;
+      color: #F9FAFB;
+      text-align: center;
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 6px 12px;
+    }
+    .offline-banner.visible { display: block; }
+
     /* Sticky Top App Bar */
     .topbar {
       position: sticky;
@@ -78,7 +93,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 10px;
+      gap: 8px;
       margin-bottom: 10px;
     }
 
@@ -92,25 +107,49 @@
     .brand-logo {
       height: 32px;
       width: auto;
-      max-width: 170px;
+      max-width: 160px;
       display: block;
       object-fit: contain;
       mix-blend-mode: multiply;
     }
 
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      min-width: 0;
+    }
+
+    .presets-trigger {
+      display: none;
+      align-items: center;
+      gap: 4px;
+      font-family: inherit;
+      font-size: 0.76rem;
+      font-weight: 600;
+      color: var(--ink);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 4px 9px;
+      border-radius: 999px;
+      cursor: pointer;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .presets-trigger.visible { display: inline-flex; }
+
     .freshness {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      font-size: 0.75rem;
+      font-size: 0.74rem;
       color: var(--muted);
       background: var(--bg);
-      padding: 4px 10px;
+      padding: 4px 9px;
       border-radius: 999px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      max-width: 55%;
     }
 
     .freshness-dot {
@@ -264,11 +303,29 @@
 
     .card-title-wrap { min-width: 0; }
 
+    .card-title-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
     .card-title {
       margin: 0;
       font-size: 1.05rem;
       font-weight: 700;
       color: var(--ink);
+    }
+
+    .trend-badge {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--trend-ink);
+      background: var(--trend-soft);
+      border: 1px solid var(--trend-border);
+      padding: 1px 7px;
+      border-radius: 999px;
+      white-space: nowrap;
     }
 
     .card-sub {
@@ -527,7 +584,7 @@
       background: var(--surface);
       width: 100%;
       max-width: 560px;
-      max-height: 85vh;
+      max-height: 86vh;
       overflow-y: auto;
       border-radius: 20px 20px 0 0;
       padding: 18px 18px max(22px, env(safe-area-inset-bottom));
@@ -538,12 +595,13 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 8px;
       margin-bottom: 12px;
     }
 
     .drawer-head h2 { margin: 0; font-size: 1.15rem; }
 
-    .drawer-actions { display: flex; gap: 8px; }
+    .drawer-actions { display: flex; gap: 6px; flex-wrap: wrap; }
 
     .ghost-btn {
       border: 1px solid var(--border);
@@ -553,6 +611,82 @@
       border-radius: 8px;
       font-family: inherit;
       font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .wa-btn {
+      width: 100%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 12px;
+      padding: 10px 14px;
+      border: none;
+      border-radius: 12px;
+      background: #25D366;
+      color: #FFFFFF;
+      font-family: inherit;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: var(--shadow-sm);
+    }
+    .wa-btn:hover { background: #1EBE5D; }
+
+    /* Presets Bar inside Drawer */
+    .presets-bar {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+      padding: 8px 10px;
+      background: var(--bg);
+      border-radius: 12px;
+    }
+
+    .preset-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .preset-chip-load {
+      border: none;
+      background: none;
+      color: inherit;
+      font: inherit;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    .preset-chip-del {
+      border: none;
+      background: none;
+      color: var(--muted);
+      font-size: 0.8rem;
+      cursor: pointer;
+      padding: 0 2px;
+    }
+
+    .preset-save-btn {
+      border: 1px dashed var(--accent);
+      background: var(--accent-soft);
+      color: #15803D;
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-family: inherit;
+      font-size: 0.78rem;
+      font-weight: 700;
       cursor: pointer;
     }
 
@@ -695,15 +829,20 @@
 </head>
 <body>
 
+<div class="offline-banner" id="offlineBanner">📡 מצב אופליין — מציג את המחירים האחרונים שנשמרו במכשיר</div>
+
 <header class="topbar">
   <div class="topbar-inner">
     <div class="brand-row">
       <div class="brand">
         <img src="logo.jpg" alt="SabiPricez" class="brand-logo" />
       </div>
-      <div class="freshness" id="freshnessBadge">
-        <span class="freshness-dot"></span>
-        <span id="updatedAt">טוען מחירים...</span>
+      <div class="topbar-right">
+        <button class="presets-trigger" id="presetsTrigger" onclick="openDrawer()">📋 סלים</button>
+        <div class="freshness" id="freshnessBadge">
+          <span class="freshness-dot"></span>
+          <span id="updatedAt">טוען מחירים...</span>
+        </div>
       </div>
     </div>
 
@@ -745,9 +884,11 @@
         <button class="ghost-btn" onclick="closeDrawer()">סגור</button>
       </div>
     </div>
+    <div class="presets-bar" id="presetsBar"></div>
+    <button class="wa-btn" id="waExportBtn" onclick="exportToWhatsApp()" style="display:none;">💬 שלח רשימת קניות לוואטסאפ</button>
     <div id="decisionBanner"></div>
     <div id="drawerTotals"></div>
-    <div class="basket-section-title">כמויות בסל (מבצעי כמות מחושבים אוטומטית כשהכמות מתאימה)</div>
+    <div class="basket-section-title" id="drawerItemsTitle">כמויות בסל (מבצעי כמות מחושבים אוטומטית כשהכמות מתאימה)</div>
     <div id="drawerItems"></div>
   </div>
 </div>
@@ -767,6 +908,7 @@
   let searchQuery = '';
   let expandedCards = new Set();
   let basket = loadBasket();
+  let presets = loadPresets();
 
   function loadBasket() {
     try {
@@ -794,6 +936,19 @@
     localStorage.setItem('sabipricez_basket', JSON.stringify(basket));
   }
 
+  function loadPresets() {
+    try {
+      const raw = JSON.parse(localStorage.getItem('sabipricez_presets') || '{}');
+      return (raw && typeof raw === 'object' && !Array.isArray(raw)) ? raw : {};
+    } catch {
+      return {};
+    }
+  }
+
+  function savePresets() {
+    localStorage.setItem('sabipricez_presets', JSON.stringify(presets));
+  }
+
   function splitTitle(fullName) {
     const match = fullName.match(/^(.+?)\s*\((.+)\)$/);
     if (match) return { he: match[2], en: match[1] };
@@ -809,7 +964,6 @@
     return (typeof m.effective_unit_price === 'number') ? m.effective_unit_price : m.unit_price;
   }
 
-  // Quantity-aware promo price for Smart Basket
   function getBasketUnitPrice(m, qty) {
     const p = m.promo;
     if (p && !p.is_club && !p.is_conditional && typeof p.promo_unit_price === 'number') {
@@ -839,7 +993,7 @@
     if (!ts) return 'לא ידוע';
     const [datePart, timePart] = ts.split(' ');
     const today = new Date().toISOString().slice(0, 10);
-    return datePart === today ? `עודכן היום ב-${timePart}` : `עודכן ${datePart} · ${timePart}`;
+    return datePart === today ? `עודכן היום ${timePart}` : `עודכן ${datePart}`;
   }
 
   function formatQty(qty) {
@@ -849,6 +1003,17 @@
   function buildVerifyUrl(m) {
     const q = m.item_code ? `${m.item_code} ${m.product}` : `${m.short_store || ''} ${m.product}`;
     return `https://www.google.com/search?q=${encodeURIComponent(q.trim())}`;
+  }
+
+  function renderTrendBadge(trend) {
+    if (!trend || !trend.days || trend.days < 3) return '';
+    if (trend.is_low) {
+      return `<span class="trend-badge" title="ממוצע 30 יום: ₪${trend.avg_30d.toFixed(2)}">↓ שפל ${trend.days} יום</span>`;
+    }
+    if (trend.pct_below_avg >= 5) {
+      return `<span class="trend-badge" title="ממוצע ${trend.days} יום: ₪${trend.avg_30d.toFixed(2)}">↓ ${trend.pct_below_avg}% מהממוצע</span>`;
+    }
+    return '';
   }
 
   function renderStoreFilters() {
@@ -914,6 +1079,7 @@
       const shown = isExpanded ? matches : matches.slice(0, 3);
       const basketEntry = basket[item.name];
       const inBasket = Boolean(basketEntry);
+      const trendHtml = renderTrendBadge(item.trend);
 
       let savePct = 0;
       if (matches.length >= 2) {
@@ -979,7 +1145,10 @@
         <article class="card">
           <div class="card-head">
             <div class="card-title-wrap">
-              <h2 class="card-title">${he}</h2>
+              <div class="card-title-row">
+                <h2 class="card-title">${he}</h2>
+                ${trendHtml}
+              </div>
               ${en ? `<div class="card-sub">${en}</div>` : ''}
             </div>
             <button class="basket-btn ${inBasket ? 'in-basket' : ''}" onclick="toggleBasket(${itemIdx})">
@@ -1066,17 +1235,51 @@
     return { count: selectedItems.length, perStore, splitTotal, splitFound, decision };
   }
 
+  function renderPresetsBar(hasBasketItems) {
+    const presetNames = Object.keys(presets);
+    const trigger = document.getElementById('presetsTrigger');
+    trigger.classList.toggle('visible', presetNames.length > 0 && !hasBasketItems);
+
+    const bar = document.getElementById('presetsBar');
+    let html = presetNames.map((name, idx) => `
+      <span class="preset-chip">
+        <button class="preset-chip-load" onclick="loadPreset(${idx})">📋 ${name}</button>
+        <button class="preset-chip-del" onclick="deletePreset(${idx})" title="מחק סל שמור">✕</button>
+      </span>
+    `).join('');
+
+    if (hasBasketItems) {
+      html += `<button class="preset-save-btn" onclick="saveCurrentPreset()">+ שמור סל קבוע</button>`;
+    } else if (!presetNames.length) {
+      html = `<span style="font-size:0.78rem;color:var(--muted)">אין סלים שמורים עדיין. הוסיפו מוצרים ולחצו "שמור סל קבוע".</span>`;
+    }
+
+    bar.innerHTML = html;
+  }
+
   function renderBasketUI() {
     const basketKeys = Object.keys(basket).filter(k => appData.items.some(i => i.name === k));
+    const hasItems = basketKeys.length > 0;
     const bar = document.getElementById('basketBar');
-    if (basketKeys.length === 0) {
+    const waBtn = document.getElementById('waExportBtn');
+    const itemsTitle = document.getElementById('drawerItemsTitle');
+
+    renderPresetsBar(hasItems);
+
+    if (!hasItems) {
       bar.classList.remove('visible');
-      closeDrawer();
+      waBtn.style.display = 'none';
+      itemsTitle.style.display = 'none';
+      document.getElementById('decisionBanner').innerHTML = '';
+      document.getElementById('drawerTotals').innerHTML = '<div class="empty-state">הסל ריק. בחרו סל שמור למעלה או הוסיפו מוצרים מהרשימה.</div>';
+      document.getElementById('drawerItems').innerHTML = '';
       return;
     }
 
     const { count, perStore, splitTotal, decision } = computeBasketTotals();
     bar.classList.add('visible');
+    waBtn.style.display = 'inline-flex';
+    itemsTitle.style.display = 'block';
 
     const winner = perStore[0];
     document.getElementById('basketBarTitle').textContent = `הסל שלי · ${count} מוצרים`;
@@ -1165,6 +1368,63 @@
     }).join('');
   }
 
+  function saveCurrentPreset() {
+    const name = prompt('שם לסל השמור (למשל: קנייה שבועית, אירוח):');
+    if (!name || !name.trim()) return;
+    presets[name.trim()] = JSON.parse(JSON.stringify(basket));
+    savePresets();
+    renderBasketUI();
+  }
+
+  function loadPreset(idx) {
+    const name = Object.keys(presets)[idx];
+    if (!name || !presets[name]) return;
+    basket = JSON.parse(JSON.stringify(presets[name]));
+    saveBasket();
+    renderCards();
+    renderBasketUI();
+  }
+
+  function deletePreset(idx) {
+    const name = Object.keys(presets)[idx];
+    if (!name) return;
+    delete presets[name];
+    savePresets();
+    renderBasketUI();
+  }
+
+  function exportToWhatsApp() {
+    const selectedItems = appData.items.filter(i => Boolean(basket[i.name]));
+    if (!selectedItems.length) return;
+
+    const { perStore } = computeBasketTotals();
+    const winner = perStore[0];
+    const lines = ['🛒 *רשימת קניות · SabiPricez*'];
+
+    if (winner) {
+      lines.push(`📍 סניף מומלץ: *${winner.store.short_name}* (סה"כ משוער: ₪${winner.total.toFixed(2)})`);
+    }
+    lines.push('');
+
+    for (const item of selectedItems) {
+      const { he } = splitTitle(item.name);
+      const { unit } = getItemUnitInfo(item);
+      const qty = basket[item.name].qty;
+      const match = winner ? getStoreMatchForItem(item, winner.store.label) : null;
+      if (match) {
+        const unitCost = getBasketUnitPrice(match, qty);
+        const est = (unitCost * qty).toFixed(2);
+        const pinTag = basket[item.name]?.pins?.[winner.store.label] ? ` (${match.product})` : '';
+        lines.push(`• ${he}${pinTag} — ${formatQty(qty)} ${unit} (~₪${est})`);
+      } else {
+        lines.push(`• ${he} — ${formatQty(qty)} ${unit} (לא נמצא בסניף)`);
+      }
+    }
+
+    const url = `https://wa.me/?text=${encodeURIComponent(lines.join('\n'))}`;
+    window.open(url, '_blank', 'noopener');
+  }
+
   function toggleStore(storeIdx) {
     const label = appData.stores[storeIdx].label;
     if (activeStores.has(label)) {
@@ -1244,12 +1504,25 @@
   function openDrawer() { document.getElementById('drawerBackdrop').classList.add('open'); }
   function closeDrawer() { document.getElementById('drawerBackdrop').classList.remove('open'); }
 
+  function updateOfflineBanner() {
+    document.getElementById('offlineBanner').classList.toggle('visible', !navigator.onLine);
+  }
+  window.addEventListener('online', updateOfflineBanner);
+  window.addEventListener('offline', updateOfflineBanner);
+
   document.getElementById('searchInput').addEventListener('input', e => {
     searchQuery = e.target.value;
     renderCards();
   });
 
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./sw.js').catch(() => {});
+    });
+  }
+
   async function init() {
+    updateOfflineBanner();
     try {
       const res = await fetch(`data.json?t=${Date.now()}`);
       if (!res.ok) throw new Error('missing data.json');
