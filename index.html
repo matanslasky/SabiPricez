@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SabiPricez - השוואת מחירים</title>
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; margin: 12px; background: #f7f7f8; color: #111; }
+  h1 { font-size: 1.3rem; margin-bottom: 4px; }
+  .meta { color: #666; font-size: 0.85rem; margin-bottom: 12px; }
+  .filters { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+  .chip { padding: 6px 10px; border-radius: 16px; border: 1px solid #ccc; background: #fff; font-size: 0.8rem; cursor: pointer; }
+  .chip.active { background: #111; color: #fff; border-color: #111; }
+  .card { background: #fff; border-radius: 10px; padding: 12px; margin-bottom: 14px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+  .card h2 { font-size: 1.05rem; margin: 0 0 8px 0; border-bottom: 1px solid #eee; padding-bottom: 6px; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+  th, td { text-align: right; padding: 6px 4px; border-bottom: 1px solid #f0f0f0; }
+  .best { background: #e8f8ee; font-weight: 600; }
+</style>
+</head>
+<body>
+<h1>SabiPricez - השוואת מחירים</h1>
+<div class="meta">עודכן לאחרונה: 2026-11-26 20:08</div>
+<div class="filters" id="storeFilters">
+  <button class="chip active" onclick="toggleStore(this, `Rami Levy BaShchuna (Ben Yehuda 23)`)">Rami Levy BaShchuna (Ben Yehuda 23)</button><button class="chip active" onclick="toggleStore(this, `Rami Levy (Ramat Gan)`)">Rami Levy (Ramat Gan)</button><button class="chip active" onclick="toggleStore(this, `Osher Ad (Kremenetski TLV)`)">Osher Ad (Kremenetski TLV)</button><button class="chip active" onclick="toggleStore(this, `AM:PM (Ben Yehuda / Shalom Aleichem)`)">AM:PM (Ben Yehuda / Shalom Aleichem)</button><button class="chip active" onclick="toggleStore(this, `Shufersal Sheli (Ben Yehuda 79)`)">Shufersal Sheli (Ben Yehuda 79)</button>
+</div>
+<div class="card"><h2>Chicken Breast (חזה עוף)</h2><table><tr><th>חנות</th><th>מוצר</th><th>מחיר</th><th>ליחידה</th></tr><tr><td colspan="4" style="color:#888;">לא נמצאו תוצאות</td></tr></table></div><div class="card"><h2>Ground Beef (בשר טחון)</h2><table><tr><th>חנות</th><th>מוצר</th><th>מחיר</th><th>ליחידה</th></tr><tr><td colspan="4" style="color:#888;">לא נמצאו תוצאות</td></tr></table></div><div class="card"><h2>Extra Virgin Olive Oil (שמן זית)</h2><table><tr><th>חנות</th><th>מוצר</th><th>מחיר</th><th>ליחידה</th></tr><tr><td colspan="4" style="color:#888;">לא נמצאו תוצאות</td></tr></table></div><div class="card"><h2>Neutral Oil (שמן קנולה / חמניות)</h2><table><tr><th>חנות</th><th>מוצר</th><th>מחיר</th><th>ליחידה</th></tr><tr><td colspan="4" style="color:#888;">לא נמצאו תוצאות</td></tr></table></div><div class="card"><h2>White / Bread Flour (קמח לבן / לחם)</h2><table><tr><th>חנות</th><th>מוצר</th><th>מחיר</th><th>ליחידה</th></tr><tr><td colspan="4" style="color:#888;">לא נמצאו תוצאות</td></tr></table></div><div class="card"><h2>Rice (אורז)</h2><table><tr><th>חנות</th><th>מוצר</th><th>מחיר</th><th>ליחידה</th></tr><tr><td colspan="4" style="color:#888;">לא נמצאו תוצאות</td></tr></table></div><div class="card"><h2>Canned Chickpeas (חומוס משומר)</h2><table><tr><th>חנות</th><th>מוצר</th><th>מחיר</th><th>ליחידה</th></tr><tr><td colspan="4" style="color:#888;">לא נמצאו תוצאות</td></tr></table></div><div class="card"><h2>Tomatoes (עגבניות)</h2><table><tr><th>חנות</th><th>מוצר</th><th>מחיר</th><th>ליחידה</th></tr><tr><td colspan="4" style="color:#888;">לא נמצאו תוצאות</td></tr></table></div><div class="card"><h2>Cucumbers (מלפפונים)</h2><table><tr><th>חנות</th><th>מוצר</th><th>מחיר</th><th>ליחידה</th></tr><tr><td colspan="4" style="color:#888;">לא נמצאו תוצאות</td></tr></table></div><div class="card"><h2>Onions (בצלים)</h2><table><tr><th>חנות</th><th>מוצר</th><th>מחיר</th><th>ליחידה</th></tr><tr><td colspan="4" style="color:#888;">לא נמצאו תוצאות</td></tr></table></div><div class="card"><h2>Garlic (שום)</h2><table><tr><th>חנות</th><th>מוצר</th><th>מחיר</th><th>ליחידה</th></tr><tr><td colspan="4" style="color:#888;">לא נמצאו תוצאות</td></tr></table></div><div class="card"><h2>Potatoes (תפוחי אדמה)</h2><table><tr><th>חנות</th><th>מוצר</th><th>מחיר</th><th>ליחידה</th></tr><tr><td colspan="4" style="color:#888;">לא נמצאו תוצאות</td></tr></table></div><div class="card"><h2>Carrots (גזר)</h2><table><tr><th>חנות</th><th>מוצר</th><th>מחיר</th><th>ליחידה</th></tr><tr><td colspan="4" style="color:#888;">לא נמצאו תוצאות</td></tr></table></div>
+<script>
+const hiddenStores = new Set();
+function toggleStore(btn, store) {
+  btn.classList.toggle('active');
+  if (hiddenStores.has(store)) hiddenStores.delete(store);
+  else hiddenStores.add(store);
+  document.querySelectorAll('tr[data-store]').forEach(row => {
+    row.style.display = hiddenStores.has(row.dataset.store) ? 'none' : '';
+  });
+}
+</script>
+</body></html>
