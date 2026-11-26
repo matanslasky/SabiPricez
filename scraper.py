@@ -84,11 +84,11 @@ def calc_normalized_unit_price(price, unit_price, unit, qty, unit_qty, is_weight
 
     return round(up, 2), unit or "יח'"
 
-# 1. Fast targeted download using exact Store IDs
+# 1. Fast targeted download using exact Store IDs (anchored before YYYYMMDD date)
 chains = list({s["chain"] for s in config["stores"]})
 known_ids = [s["store_id"].zfill(3) for s in config["stores"] if s.get("store_id")]
 id_pattern = "|".join(known_ids)
-file_regex = rf"(?i).*PriceFull.*-({id_pattern})-"
+file_regex = rf"(?i).*PriceFull.*-({id_pattern})-\d{{8}}"
 
 print("Downloading with regex:", file_regex)
 scraper = ScarpingTask(
@@ -115,7 +115,7 @@ for store_cfg in config["stores"]:
             p for p in glob.glob(os.path.join(chain_dir, "**", "*"), recursive=True)
             if os.path.isfile(p)
             and "pricefull" in os.path.basename(p).lower()
-            and f"-{sid_pad}-" in os.path.basename(p)
+            and re.search(rf"-{sid_pad}-\d{{8}}", os.path.basename(p))
         ],
         reverse=True,
     )
