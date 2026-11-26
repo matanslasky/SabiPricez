@@ -39,6 +39,7 @@ if "dump_folder_name" in sig_params:
 
 scraper = ScarpingTask(**kwargs)
 scraper.start()
+scraper.join()
 
 def read_xml(path):
     try:
