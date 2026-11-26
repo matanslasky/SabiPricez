@@ -1,4 +1,37 @@
-"items": [
+{
+  "stores": [
+    {
+      "label": "Rami Levy BaShchuna (Ben Yehuda 23)",
+      "chain": "RamiLevy",
+      "city_match": "תל אביב",
+      "address_match": "בן יהודה 23"
+    },
+    {
+      "label": "Rami Levy (Ramat Gan)",
+      "chain": "RamiLevy",
+      "city_match": "רמת גן",
+      "address_match": "אבא הלל"
+    },
+    {
+      "label": "Osher Ad (Kremenetski TLV)",
+      "chain": "OsherAd",
+      "city_match": "תל אביב",
+      "address_match": "קרמינצקי"
+    },
+    {
+      "label": "AM:PM (Ben Yehuda / Shalom Aleichem)",
+      "chain": "DorAlon",
+      "city_match": "תל אביב",
+      "address_match": "בן יהודה 58"
+    },
+    {
+      "label": "Shufersal Sheli (Ben Yehuda 79)",
+      "chain": "Shufersal",
+      "city_match": "תל אביב",
+      "address_match": "בן יהודה 79"
+    }
+  ],
+  "items": [
     {
       "name": "Chicken Breast (חזה עוף)",
       "keywords": ["חזה עוף"],
@@ -65,3 +98,4 @@
       "exclude": ["מיץ", "קפוא"]
     }
   ]
+}
