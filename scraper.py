@@ -18,9 +18,12 @@ STALE_CUTOFF = (TODAY - timedelta(days=365)).strftime("%Y-%m-%d")
 HISTORY_CUTOFF = (TODAY - timedelta(days=30)).strftime("%Y-%m-%d")
 HISTORY_FILE = "history.json"
 
+IGNORE_PROMO_TERMS = (
+    "קופון", "פיצוי", "הנחת עובד", "תו זהב", "מצטרפים", "במתנה", 'ח"ע', "הטבת",
+)
+CLUB_TERMS = ("מועדון", "אשראי", "פלטינה", "חברי", "שופרסל כארד")
 CONDITIONAL_TERMS = (
-    "מועדון", "אשראי", "בקנייה מעל", "בקניה מעל",
-    "מעל 50", "מעל 75", "מעל 100", "מעל 150", "מעל 200",
+    "בקנייה מעל", "בקניה מעל", "מעל 50", "מעל 75", "מעל 100", "מעל 150", "מעל 200",
 )
 
 
@@ -74,7 +77,22 @@ def matches_keyword(name, kw):
     return re.search(rf"(?<![א-ת]){re.escape(kw)}(?![א-ת])", name) is not None
 
 
-def calc_normalized_unit_price(price, unit_price, unit, qty, unit_qty, is_weighted):
+def parse_weight_from_name(name, price):
+    """Fallback when XML mislabels a weighted package (e.g. 800g lentils) as 'יחידות'."""
+    m_kg = re.search(r"(\d+(?:\.\d+)?)\s*(?:ק\"ג|קג|קילו)", name)
+    if m_kg:
+        val = safe_float(m_kg.group(1), 0.0)
+        if 0.1 <= val <= 25:
+            return round(price / val, 2), 'ק"ג'
+    m_g = re.search(r"(\d+(?:\.\d+)?)\s*(?:גרם|גר|ג')", name)
+    if m_g:
+        val = safe_float(m_g.group(1), 0.0)
+        if 50 <= val <= 5000:
+            return round(price / (val / 1000.0), 2), 'ק"ג'
+    return None, None
+
+
+def calc_normalized_unit_price(name, price, unit_price, unit, qty, unit_qty, is_weighted):
     if is_weighted:
         return round(price, 2), 'ק"ג'
 
@@ -104,6 +122,12 @@ def calc_normalized_unit_price(price, unit_price, unit, qty, unit_qty, is_weight
     if "ליטר" in u:
         return round(up, 2), "ליטר"
 
+    # Guard against POS mislabeling weighted bags as "יחידות" (e.g. 800g lentils -> ₪0.80)
+    if "יח" in u or not u:
+        parsed_up, parsed_u = parse_weight_from_name(name, price)
+        if parsed_up is not None:
+            return parsed_up, parsed_u
+
     return round(up, 2), unit or "יח'"
 
 
@@ -124,7 +148,7 @@ def parse_promos(xml_root):
                 continue
 
             desc = get_child_text(el, "PromotionDescription")
-            if not desc:
+            if not desc or any(t in desc for t in IGNORE_PROMO_TERMS):
                 continue
 
             min_qty = safe_float(get_child_text(el, "MinQty"), 1.0)
@@ -136,13 +160,9 @@ def parse_promos(xml_root):
             reward_type = get_child_text(el, "RewardType")
             min_purchase = safe_float(get_child_text(el, "MinPurchaseAmnt"), 0.0)
 
-            club_ids = [
-                c.text.strip()
-                for c in el.iter()
-                if local_tag(c.tag) == "clubid" and c.text and c.text.strip() not in ("", "0")
-            ]
-            is_club = bool(club_ids) or ("מועדון" in desc) or ("אשראי" in desc)
-            is_conditional = (min_purchase > 0) or any(t in desc for t in CONDITIONAL_TERMS[2:])
+            # Rely on description text for club/conditional restrictions (chains often set ClubId=1 on open promos)
+            is_club = any(t in desc for t in CLUB_TERMS)
+            is_conditional = (min_purchase > 0) or any(t in desc for t in CONDITIONAL_TERMS)
 
             promo_info = {
                 "desc": desc,
@@ -193,7 +213,7 @@ def resolve_best_promo(promos, price, norm_up, is_weighted):
             mq = p["min_qty"]
             promo_shelf = (p["disc_price"] / mq) if (mq > 1 and p["disc_price"] >= price * 0.99) else p["disc_price"]
             candidate_up = norm_up * (promo_shelf / price)
-        elif p["disc_rate"] > 0 and p["reward_type"] == "1":
+        elif p["disc_rate"] > 0 and p["reward_type"] in ("1", "2"):
             rate = (p["disc_rate"] / 100.0) if p["disc_rate"] > 100 else p["disc_rate"]
             if 1.0 <= rate <= 70.0:
                 candidate_up = norm_up * (1.0 - rate / 100.0)
@@ -240,7 +260,6 @@ def update_history_and_trend(history, item_name, sorted_matches):
     if not isinstance(item_hist, dict):
         item_hist = {}
 
-    # Prune entries older than 30 days
     item_hist = {d: v for d, v in item_hist.items() if d >= HISTORY_CUTOFF and isinstance(v, (int, float)) and v > 0}
 
     if sorted_matches:
@@ -306,7 +325,7 @@ for store_cfg in config["stores"]:
     promo_files = sorted([p for p in all_files if "promofull" in os.path.basename(p).lower()], reverse=True)
 
     if not price_files:
-        print(f"No PriceFull file found for {store_cfg['label']} (ID {sid_pad})")
+        print(f"No PriceFull file found for {store_cfg['label']} (ID {sid_pad}) — files in dir: {os.listdir(chain_dir)[:5]}")
         continue
 
     promos_by_code = {}
@@ -323,6 +342,7 @@ for store_cfg in config["stores"]:
 
     matched_count = 0
     promo_hits = 0
+    discounted_hits = 0
     for item_el in root.iter():
         if local_tag(item_el.tag) == "item":
             name = get_child_text(item_el, "ItemName")
@@ -341,13 +361,17 @@ for store_cfg in config["stores"]:
             if price <= 0:
                 continue
 
+            item_promos = promos_by_code.get(item_code, [])
+            promo_text_blob = " ".join(p["desc"] for p in item_promos)
+
             for cfg_item in config["items"]:
                 if (
                     any(matches_keyword(name, kw) for kw in cfg_item["keywords"])
                     and not any(ex in name for ex in cfg_item["exclude"])
+                    and not ("קפוא" in cfg_item["exclude"] and "קפוא" in promo_text_blob)
                 ):
                     norm_up, norm_unit = calc_normalized_unit_price(
-                        price, unit_price, unit, qty, unit_qty, is_weighted
+                        name, price, unit_price, unit, qty, unit_qty, is_weighted
                     )
                     dedup_key = (store_cfg["label"], name, round(price, 2))
                     if dedup_key in seen_entries[cfg_item["name"]]:
@@ -355,10 +379,12 @@ for store_cfg in config["stores"]:
                     seen_entries[cfg_item["name"]].add(dedup_key)
 
                     eff_up, promo_obj = resolve_best_promo(
-                        promos_by_code.get(item_code, []), price, norm_up, is_weighted
+                        item_promos, price, norm_up, is_weighted
                     )
                     if promo_obj:
                         promo_hits += 1
+                    if eff_up < norm_up - 0.01:
+                        discounted_hits += 1
 
                     results[cfg_item["name"]].append({
                         "store": store_cfg["label"],
@@ -373,7 +399,7 @@ for store_cfg in config["stores"]:
                         "promo": promo_obj,
                     })
                     matched_count += 1
-    print(f"  -> {matched_count} product matches ({promo_hits} with active promos)")
+    print(f"  -> {matched_count} matches ({promo_hits} promos, {discounted_hits} lowered price)")
 
 # 3. Update 30-day history and save history.json + data.json
 history = load_history()
