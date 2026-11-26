@@ -88,4 +88,4 @@ results = {item["name"]: [] for item in config["items"]}
 seen_files = set()
 
 for (chain_dir, sid), label in target_stores.items():
-    candidates = glob.glob(os.path.join(chain_dir, "**", f"*
+candidates = glob.glob(os.path.join(chain_dir, "**", f"*[Pp]rice[Ff]ull*-{sid}-*"), recursive=True)
