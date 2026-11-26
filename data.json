@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-27 01:06",
+  "updated_at": "2026-11-27 01:18",
   "stores": [
     {
       "label": "Rami Levy BaShchuna (Ben Yehuda 23)",
@@ -55,13 +55,7 @@
           "effective_unit_price": 39.9,
           "unit": "ק\"ג",
           "price_updated": "",
-          "promo": {
-            "desc": "תו זהב 5% הנחה מותג שופרסל",
-            "min_qty": 1.0,
-            "is_club": true,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
+          "promo": null
         },
         {
           "store": "Shufersal Sheli (Ben Yehuda 79)",
@@ -73,13 +67,7 @@
           "effective_unit_price": 39.9,
           "unit": "ק\"ג",
           "price_updated": "",
-          "promo": {
-            "desc": "תו זהב 5% הנחה מותג שופרסל",
-            "min_qty": 1.0,
-            "is_club": true,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
+          "promo": null
         },
         {
           "store": "Shufersal Sheli (Ben Yehuda 79)",
@@ -185,9 +173,9 @@
           "unit": "ק\"ג",
           "price_updated": "",
           "promo": {
-            "desc": "תו זהב 5% הנחה מותג שופרסל",
+            "desc": "ב2- ב 55 שחכרעיים/קוקטייל/ירכיים עוף טרי",
             "min_qty": 1.0,
-            "is_club": true,
+            "is_club": false,
             "is_conditional": false,
             "promo_unit_price": null
           }
@@ -205,7 +193,7 @@
           "promo": {
             "desc": "ב2- ב 55 שחכרעיים/קוקטייל/ירכיים עוף טרי",
             "min_qty": 1.0,
-            "is_club": true,
+            "is_club": false,
             "is_conditional": false,
             "promo_unit_price": null
           }
@@ -233,9 +221,9 @@
           "unit": "ק\"ג",
           "price_updated": "",
           "promo": {
-            "desc": "תו זהב 5% הנחה מותג שופרסל",
+            "desc": "ב2- ב 60 שח שוקיים עוף טרי",
             "min_qty": 1.0,
-            "is_club": true,
+            "is_club": false,
             "is_conditional": false,
             "promo_unit_price": null
           }
@@ -253,7 +241,7 @@
           "promo": {
             "desc": "ב2- ב 60 שח שוקיים עוף טרי",
             "min_qty": 1.0,
-            "is_club": true,
+            "is_club": false,
             "is_conditional": false,
             "promo_unit_price": null
           }
@@ -267,18 +255,6 @@
         "days": 1
       },
       "matches": [
-        {
-          "store": "Rami Levy (Ayalon Bnei Brak)",
-          "short_store": "רמי לוי איילון",
-          "item_code": "7290002478157",
-          "product": "רבעי פרגיות ממולאות",
-          "price": 56.4,
-          "unit_price": 56.4,
-          "effective_unit_price": 56.4,
-          "unit": "ק\"ג",
-          "price_updated": "",
-          "promo": null
-        },
         {
           "store": "Rami Levy (Ayalon Bnei Brak)",
           "short_store": "רמי לוי איילון",
@@ -328,30 +304,6 @@
           }
         },
         {
-          "store": "Shufersal Sheli (Ben Yehuda 79)",
-          "short_store": "שופרסל שלי",
-          "item_code": "7290001770016",
-          "product": "פרגית ממולא אורז פטריות",
-          "price": 63.9,
-          "unit_price": 63.9,
-          "effective_unit_price": 63.9,
-          "unit": "ק\"ג",
-          "price_updated": "",
-          "promo": null
-        },
-        {
-          "store": "Shufersal Sheli (Ben Yehuda 79)",
-          "short_store": "שופרסל שלי",
-          "item_code": "7290001770023",
-          "product": "פרגית ממולאת אורז מזרחי",
-          "price": 63.9,
-          "unit_price": 63.9,
-          "effective_unit_price": 63.9,
-          "unit": "ק\"ג",
-          "price_updated": "",
-          "promo": null
-        },
-        {
           "store": "Rami Levy (Ayalon Bnei Brak)",
           "short_store": "רמי לוי איילון",
           "item_code": "7290002681120",
@@ -379,13 +331,7 @@
           "effective_unit_price": 69.9,
           "unit": "ק\"ג",
           "price_updated": "",
-          "promo": {
-            "desc": "תו זהב 5% הנחה מותג שופרסל",
-            "min_qty": 1.0,
-            "is_club": true,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
+          "promo": null
         },
         {
           "store": "Shufersal Sheli (Ben Yehuda 79)",
@@ -482,6 +428,54 @@
           "unit": "ק\"ג",
           "price_updated": "",
           "promo": null
+        },
+        {
+          "store": "Rami Levy (Ayalon Bnei Brak)",
+          "short_store": "רמי לוי איילון",
+          "item_code": "7290109581538",
+          "product": "פסטרמה פרגית 120 גרם",
+          "price": 13.9,
+          "unit_price": 115.83,
+          "effective_unit_price": 115.83,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": {
+            "desc": "פסטרמה דק דק זוגלובק 120גרם  2ב26",
+            "min_qty": 1.0,
+            "is_club": false,
+            "is_conditional": false,
+            "promo_unit_price": null
+          }
+        },
+        {
+          "store": "Rami Levy (Ayalon Bnei Brak)",
+          "short_store": "רמי לוי איילון",
+          "item_code": "7290013906502",
+          "product": "פסטרמה פרגיות לבגט 1",
+          "price": 15.9,
+          "unit_price": 132.5,
+          "effective_unit_price": 132.5,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": {
+            "desc": "סלסולי פסטרמה טירת צבי 2ב20",
+            "min_qty": 1.0,
+            "is_club": false,
+            "is_conditional": false,
+            "promo_unit_price": null
+          }
+        },
+        {
+          "store": "Shufersal Sheli (Ben Yehuda 79)",
+          "short_store": "שופרסל שלי",
+          "item_code": "7296073754114",
+          "product": "שווארמה פרגית להקפצה 300",
+          "price": 39.9,
+          "unit_price": 133.0,
+          "effective_unit_price": 133.0,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
         }
       ]
     },
@@ -492,48 +486,6 @@
         "days": 1
       },
       "matches": [
-        {
-          "store": "Rami Levy (Ayalon Bnei Brak)",
-          "short_store": "רמי לוי איילון",
-          "item_code": "7290002927198",
-          "product": "בקר טחון 500 גרם ארו",
-          "price": 19.5,
-          "unit_price": 39.0,
-          "effective_unit_price": 39.0,
-          "unit": "ק\"ג",
-          "price_updated": "",
-          "promo": null
-        },
-        {
-          "store": "Rami Levy BaShchuna (Ben Yehuda 23)",
-          "short_store": "רמי לוי בן יהודה",
-          "item_code": "7290002105749",
-          "product": "בשר טחון נקי 1 ק\"ג מ",
-          "price": 55.9,
-          "unit_price": 55.9,
-          "effective_unit_price": 55.9,
-          "unit": "ק\"ג",
-          "price_updated": "",
-          "promo": null
-        },
-        {
-          "store": "Rami Levy (Ayalon Bnei Brak)",
-          "short_store": "רמי לוי איילון",
-          "item_code": "7290002105749",
-          "product": "בשר טחון נקי 1 ק\"ג מ",
-          "price": 57.9,
-          "unit_price": 57.9,
-          "effective_unit_price": 57.9,
-          "unit": "ק\"ג",
-          "price_updated": "",
-          "promo": {
-            "desc": "בשר טחון קפוא 1 ק ג מחפוד ב54.90",
-            "min_qty": 1.0,
-            "is_club": false,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
-        },
         {
           "store": "Rami Levy (Ayalon Bnei Brak)",
           "short_store": "רמי לוי איילון",
@@ -575,9 +527,9 @@
           "unit": "ק\"ג",
           "price_updated": "",
           "promo": {
-            "desc": "תו זהב 5% הנחה מותג שופרסל",
+            "desc": "ב2-ב 120 שח טחון בקר טרי",
             "min_qty": 1.0,
-            "is_club": true,
+            "is_club": false,
             "is_conditional": false,
             "promo_unit_price": null
           }
@@ -595,7 +547,7 @@
           "promo": {
             "desc": "29.90 רצועות סויה 300 גרם",
             "min_qty": 1.0,
-            "is_club": true,
+            "is_club": false,
             "is_conditional": false,
             "promo_unit_price": null
           }
@@ -610,13 +562,7 @@
           "effective_unit_price": 123.6,
           "unit": "ק\"ג",
           "price_updated": "",
-          "promo": {
-            "desc": "קופון ביונד מיט טחון 250גר במתנה",
-            "min_qty": 1.0,
-            "is_club": false,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
+          "promo": null
         }
       ]
     },
@@ -627,30 +573,6 @@
         "days": 1
       },
       "matches": [
-        {
-          "store": "Rami Levy (Ayalon Bnei Brak)",
-          "short_store": "רמי לוי איילון",
-          "item_code": "7290002927044",
-          "product": "צלי כתף מס' 5",
-          "price": 54.9,
-          "unit_price": 54.9,
-          "effective_unit_price": 54.9,
-          "unit": "ק\"ג",
-          "price_updated": "",
-          "promo": null
-        },
-        {
-          "store": "Rami Levy (Ayalon Bnei Brak)",
-          "short_store": "רמי לוי איילון",
-          "item_code": "7290004846237",
-          "product": "צלי כתף מס' 5 חלק אר",
-          "price": 59.8,
-          "unit_price": 59.8,
-          "effective_unit_price": 59.8,
-          "unit": "ק\"ג",
-          "price_updated": "",
-          "promo": null
-        },
         {
           "store": "Rami Levy (Ayalon Bnei Brak)",
           "short_store": "רמי לוי איילון",
@@ -679,13 +601,7 @@
           "effective_unit_price": 115.0,
           "unit": "ק\"ג",
           "price_updated": "",
-          "promo": {
-            "desc": "תו זהב 5% הנחה מותג שופרסל",
-            "min_qty": 1.0,
-            "is_club": true,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
+          "promo": null
         }
       ]
     },
@@ -697,18 +613,6 @@
       },
       "matches": [
         {
-          "store": "Rami Levy BaShchuna (Ben Yehuda 23)",
-          "short_store": "רמי לוי בן יהודה",
-          "item_code": "7290119382309",
-          "product": "עגבניות לתוכות דק פו",
-          "price": 6.8,
-          "unit_price": 6.8,
-          "effective_unit_price": 6.8,
-          "unit": "יחידות",
-          "price_updated": "",
-          "promo": null
-        },
-        {
           "store": "Rami Levy (Ayalon Bnei Brak)",
           "short_store": "רמי לוי איילון",
           "item_code": "7290000000100",
@@ -717,30 +621,6 @@
           "unit_price": 6.9,
           "effective_unit_price": 6.9,
           "unit": "ק\"ג",
-          "price_updated": "",
-          "promo": null
-        },
-        {
-          "store": "Shufersal Sheli (Ben Yehuda 79)",
-          "short_store": "שופרסל שלי",
-          "item_code": "7290001247082",
-          "product": "ספרינג קרטוניות עגבניות",
-          "price": 7.9,
-          "unit_price": 7.9,
-          "effective_unit_price": 7.9,
-          "unit": "ליטר",
-          "price_updated": "",
-          "promo": null
-        },
-        {
-          "store": "AM:PM (Ben Yehuda 61)",
-          "short_store": "AM:PM בן יהודה",
-          "item_code": "7290001247082",
-          "product": "נקטר ספרינג עגבניות",
-          "price": 8.7,
-          "unit_price": 8.7,
-          "effective_unit_price": 8.7,
-          "unit": "ליטר",
           "price_updated": "",
           "promo": null
         },
@@ -850,13 +730,7 @@
           "effective_unit_price": 10.9,
           "unit": "ק\"ג",
           "price_updated": "",
-          "promo": {
-            "desc": "תו זהב 5% הנחה מותג שופרסל",
-            "min_qty": 1.0,
-            "is_club": true,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
+          "promo": null
         },
         {
           "store": "Rami Levy (Ayalon Bnei Brak)",
@@ -879,6 +753,42 @@
           "unit_price": 11.9,
           "effective_unit_price": 11.9,
           "unit": "יחידות",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Rami Levy BaShchuna (Ben Yehuda 23)",
+          "short_store": "רמי לוי בן יהודה",
+          "item_code": "7290122182477",
+          "product": "עגבניות שרי מיקס רמי",
+          "price": 12.9,
+          "unit_price": 12.9,
+          "effective_unit_price": 12.9,
+          "unit": "יחידות",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Rami Levy BaShchuna (Ben Yehuda 23)",
+          "short_store": "רמי לוי בן יהודה",
+          "item_code": "7290122182491",
+          "product": "עגבניות שרי לובלו רמ",
+          "price": 12.9,
+          "unit_price": 12.9,
+          "effective_unit_price": 12.9,
+          "unit": "יחידות",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Rami Levy (Ayalon Bnei Brak)",
+          "short_store": "רמי לוי איילון",
+          "item_code": "7290000000641",
+          "product": "עגבניות מגי",
+          "price": 13.9,
+          "unit_price": 13.9,
+          "effective_unit_price": 13.9,
+          "unit": "ק\"ג",
           "price_updated": "",
           "promo": null
         }
@@ -967,13 +877,7 @@
           "effective_unit_price": 17.9,
           "unit": "ק\"ג",
           "price_updated": "",
-          "promo": {
-            "desc": "תו זהב 5% הנחה מותג שופרסל",
-            "min_qty": 1.0,
-            "is_club": true,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
+          "promo": null
         },
         {
           "store": "Shufersal Sheli (Ben Yehuda 79)",
@@ -985,13 +889,7 @@
           "effective_unit_price": 17.9,
           "unit": "ק\"ג",
           "price_updated": "",
-          "promo": {
-            "desc": "תו זהב 5% הנחה מותג שופרסל",
-            "min_qty": 1.0,
-            "is_club": true,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
+          "promo": null
         },
         {
           "store": "Shufersal Sheli (Ben Yehuda 79)",
@@ -1006,7 +904,7 @@
           "promo": {
             "desc": "2ב23 קורנישונים בחומץ 670 גרם",
             "min_qty": 1.0,
-            "is_club": true,
+            "is_club": false,
             "is_conditional": false,
             "promo_unit_price": null
           }
@@ -1024,7 +922,7 @@
           "promo": {
             "desc": "2ב24 תחליב רחצה 750 מ\"ל LaMoon",
             "min_qty": 1.0,
-            "is_club": true,
+            "is_club": false,
             "is_conditional": false,
             "promo_unit_price": null
           }
@@ -1096,7 +994,7 @@
           "promo": {
             "desc": "19.90 שמפו 1 ליטר/מרכך 907 מ\"ל",
             "min_qty": 1.0,
-            "is_club": true,
+            "is_club": false,
             "is_conditional": false,
             "promo_unit_price": null
           }
@@ -1258,13 +1156,7 @@
           "effective_unit_price": 13.9,
           "unit": "ק\"ג",
           "price_updated": "",
-          "promo": {
-            "desc": "תו זהב 5% הנחה מותג שופרסל",
-            "min_qty": 1.0,
-            "is_club": true,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
+          "promo": null
         },
         {
           "store": "Shufersal Sheli (Ben Yehuda 79)",
@@ -1276,13 +1168,7 @@
           "effective_unit_price": 13.9,
           "unit": "ק\"ג",
           "price_updated": "",
-          "promo": {
-            "desc": "תו זהב 5% הנחה מותג שופרסל",
-            "min_qty": 1.0,
-            "is_club": true,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
+          "promo": null
         },
         {
           "store": "Shufersal Sheli (Ben Yehuda 79)",
@@ -1294,13 +1180,7 @@
           "effective_unit_price": 18.9,
           "unit": "ק\"ג",
           "price_updated": "",
-          "promo": {
-            "desc": "תו זהב 5% הנחה מותג שופרסל",
-            "min_qty": 1.0,
-            "is_club": true,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
+          "promo": null
         },
         {
           "store": "Shufersal Sheli (Ben Yehuda 79)",
@@ -1312,13 +1192,7 @@
           "effective_unit_price": 18.9,
           "unit": "ק\"ג",
           "price_updated": "",
-          "promo": {
-            "desc": "תו זהב 5% הנחה מותג שופרסל",
-            "min_qty": 1.0,
-            "is_club": true,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
+          "promo": null
         }
       ]
     },
@@ -1388,18 +1262,6 @@
             "is_conditional": false,
             "promo_unit_price": null
           }
-        },
-        {
-          "store": "Rami Levy (Ayalon Bnei Brak)",
-          "short_store": "רמי לוי איילון",
-          "item_code": "7290120122970",
-          "product": "קישוט לתלייה - שום פ",
-          "price": 9.9,
-          "unit_price": 9.9,
-          "effective_unit_price": 9.9,
-          "unit": "יחידות",
-          "price_updated": "",
-          "promo": null
         },
         {
           "store": "Rami Levy (Ayalon Bnei Brak)",
@@ -1480,7 +1342,7 @@
           "promo": {
             "desc": "קטיף 2ב 24.90 שום יבש ברשת אורגני",
             "min_qty": 1.0,
-            "is_club": true,
+            "is_club": false,
             "is_conditional": false,
             "promo_unit_price": null
           }
@@ -1535,6 +1397,18 @@
           "price": 19.9,
           "unit_price": 19.9,
           "effective_unit_price": 19.9,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Rami Levy (Ayalon Bnei Brak)",
+          "short_store": "רמי לוי איילון",
+          "item_code": "6902412100733",
+          "product": "שיני שום קלוף 1 ק\"ג",
+          "price": 24.9,
+          "unit_price": 24.9,
+          "effective_unit_price": 24.9,
           "unit": "ק\"ג",
           "price_updated": "",
           "promo": null
@@ -1855,13 +1729,7 @@
           "effective_unit_price": 6.9,
           "unit": "ק\"ג",
           "price_updated": "",
-          "promo": {
-            "desc": "תו זהב 5% הנחה מותג שופרסל",
-            "min_qty": 1.0,
-            "is_club": true,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
+          "promo": null
         },
         {
           "store": "Rami Levy (Ayalon Bnei Brak)",
@@ -1883,7 +1751,7 @@
           "price": 8.9,
           "unit_price": 8.9,
           "effective_unit_price": 8.9,
-          "unit": "יחידות",
+          "unit": "ק\"ג",
           "price_updated": "",
           "promo": {
             "desc": "הנחה 10% על ירקות ארוז מועדון 55 פלטינה",
@@ -1906,7 +1774,7 @@
           "promo": {
             "desc": "קטיף 9.90 מארז גזר אורגני",
             "min_qty": 1.0,
-            "is_club": true,
+            "is_club": false,
             "is_conditional": false,
             "promo_unit_price": null
           }
@@ -2011,7 +1879,7 @@
           "promo": {
             "desc": "קטיף 4.90 פלפל אדום",
             "min_qty": 1.0,
-            "is_club": true,
+            "is_club": false,
             "is_conditional": false,
             "promo_unit_price": null
           }
@@ -2044,13 +1912,7 @@
           "effective_unit_price": 20.9,
           "unit": "ק\"ג",
           "price_updated": "",
-          "promo": {
-            "desc": "תו זהב 5% הנחה מותג שופרסל",
-            "min_qty": 1.0,
-            "is_club": true,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
+          "promo": null
         },
         {
           "store": "Shufersal Sheli (Ben Yehuda 79)",
@@ -2062,13 +1924,7 @@
           "effective_unit_price": 20.9,
           "unit": "ק\"ג",
           "price_updated": "",
-          "promo": {
-            "desc": "תו זהב 5% הנחה מותג שופרסל",
-            "min_qty": 1.0,
-            "is_club": true,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
+          "promo": null
         }
       ]
     },
@@ -2164,7 +2020,7 @@
           "promo": {
             "desc": "קטיף 4.90 קישוא /קישוא זוקיני",
             "min_qty": 1.0,
-            "is_club": true,
+            "is_club": false,
             "is_conditional": false,
             "promo_unit_price": null
           }
@@ -2182,7 +2038,7 @@
           "promo": {
             "desc": "קטיף 4.90 קישוא /קישוא זוקיני",
             "min_qty": 1.0,
-            "is_club": true,
+            "is_club": false,
             "is_conditional": false,
             "promo_unit_price": null
           }
@@ -2197,13 +2053,7 @@
           "effective_unit_price": 12.9,
           "unit": "ק\"ג",
           "price_updated": "",
-          "promo": {
-            "desc": "תו זהב 5% הנחה מותג שופרסל",
-            "min_qty": 1.0,
-            "is_club": true,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
+          "promo": null
         },
         {
           "store": "AM:PM (Ben Yehuda 61)",
@@ -2263,13 +2113,7 @@
           "effective_unit_price": 22.9,
           "unit": "ק\"ג",
           "price_updated": "",
-          "promo": {
-            "desc": "תו זהב 5% הנחה מותג שופרסל",
-            "min_qty": 1.0,
-            "is_club": true,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
+          "promo": null
         },
         {
           "store": "Shufersal Sheli (Ben Yehuda 79)",
@@ -2281,13 +2125,7 @@
           "effective_unit_price": 22.9,
           "unit": "ק\"ג",
           "price_updated": "",
-          "promo": {
-            "desc": "תו זהב 5% הנחה מותג שופרסל",
-            "min_qty": 1.0,
-            "is_club": true,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
+          "promo": null
         },
         {
           "store": "Shufersal Sheli (Ben Yehuda 79)",
@@ -2395,7 +2233,7 @@
           "promo": {
             "desc": "קטיף 4.90 בטטות",
             "min_qty": 1.0,
-            "is_club": true,
+            "is_club": false,
             "is_conditional": false,
             "promo_unit_price": null
           }
@@ -2422,13 +2260,7 @@
           "effective_unit_price": 19.9,
           "unit": "ק\"ג",
           "price_updated": "",
-          "promo": {
-            "desc": "תו זהב 5% הנחה מותג שופרסל",
-            "min_qty": 1.0,
-            "is_club": true,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
+          "promo": null
         },
         {
           "store": "Shufersal Sheli (Ben Yehuda 79)",
@@ -2441,9 +2273,9 @@
           "unit": "ק\"ג",
           "price_updated": "",
           "promo": {
-            "desc": "תו זהב 5% הנחה מותג שופרסל",
+            "desc": "קטיף 16.90 בטטה אורגנית",
             "min_qty": 1.0,
-            "is_club": true,
+            "is_club": false,
             "is_conditional": false,
             "promo_unit_price": null
           }
@@ -2537,9 +2369,9 @@
           "unit": "ק\"ג",
           "price_updated": "",
           "promo": {
-            "desc": "תו זהב 5% הנחה מותג שופרסל",
+            "desc": "5ב18 פריפלצת מחית פירות אורגני 120",
             "min_qty": 1.0,
-            "is_club": true,
+            "is_club": false,
             "is_conditional": false,
             "promo_unit_price": null
           }
@@ -2553,60 +2385,6 @@
         "days": 1
       },
       "matches": [
-        {
-          "store": "Rami Levy (Ayalon Bnei Brak)",
-          "short_store": "רמי לוי איילון",
-          "item_code": "5063270103920",
-          "product": "ליפטון חליטת לימון ו",
-          "price": 18.9,
-          "unit_price": 0.38,
-          "effective_unit_price": 0.38,
-          "unit": "יחידות",
-          "price_updated": "",
-          "promo": {
-            "desc": "ליפטון תה 20 שקיקים פירמידות ב11.90",
-            "min_qty": 1.0,
-            "is_club": false,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
-        },
-        {
-          "store": "Rami Levy (Ayalon Bnei Brak)",
-          "short_store": "רמי לוי איילון",
-          "item_code": "7290000287430",
-          "product": "סנובון לאסלה לימון ס",
-          "price": 10.7,
-          "unit_price": 3.57,
-          "effective_unit_price": 3.57,
-          "unit": "יחידות",
-          "price_updated": "",
-          "promo": null
-        },
-        {
-          "store": "Shufersal Sheli (Ben Yehuda 79)",
-          "short_store": "שופרסל שלי",
-          "item_code": "7290000288024",
-          "product": "סנו גאוול לימון 4 ליטר",
-          "price": 17.9,
-          "unit_price": 4.47,
-          "effective_unit_price": 4.47,
-          "unit": "ליטר",
-          "price_updated": "",
-          "promo": null
-        },
-        {
-          "store": "Rami Levy (Ayalon Bnei Brak)",
-          "short_store": "רמי לוי איילון",
-          "item_code": "7290016733761",
-          "product": "רוטב לימון משומר לתי",
-          "price": 4.9,
-          "unit_price": 4.9,
-          "effective_unit_price": 4.9,
-          "unit": "ליטר",
-          "price_updated": "",
-          "promo": null
-        },
         {
           "store": "Rami Levy (Ayalon Bnei Brak)",
           "short_store": "רמי לוי איילון",
@@ -2650,18 +2428,6 @@
           "promo": null
         },
         {
-          "store": "Rami Levy BaShchuna (Ben Yehuda 23)",
-          "short_store": "רמי לוי בן יהודה",
-          "item_code": "7290016733761",
-          "product": "רוטב לימון משומר לתי",
-          "price": 5.6,
-          "unit_price": 5.6,
-          "effective_unit_price": 5.6,
-          "unit": "ליטר",
-          "price_updated": "",
-          "promo": null
-        },
-        {
           "store": "Rami Levy (Ayalon Bnei Brak)",
           "short_store": "רמי לוי איילון",
           "item_code": "7290110115425",
@@ -2671,13 +2437,7 @@
           "effective_unit_price": 5.73,
           "unit": "ליטר",
           "price_updated": "",
-          "promo": {
-            "desc": "קופון פיוז טי גרין/זירו 1.5לי 3יח מתנה",
-            "min_qty": 1.0,
-            "is_club": false,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
+          "promo": null
         },
         {
           "store": "Rami Levy BaShchuna (Ben Yehuda 23)",
@@ -2748,17 +2508,95 @@
         {
           "store": "Shufersal Sheli (Ben Yehuda 79)",
           "short_store": "שופרסל שלי",
-          "item_code": "7290000209043",
-          "product": "רוטב לימון 1 ליטר יכין",
-          "price": 6.9,
-          "unit_price": 6.9,
-          "effective_unit_price": 6.9,
+          "item_code": "7290110115425",
+          "product": "פיוז-טי לימון נענע 1.5",
+          "price": 10.5,
+          "unit_price": 7.0,
+          "effective_unit_price": 7.0,
+          "unit": "ליטר",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Rami Levy (Ayalon Bnei Brak)",
+          "short_store": "רמי לוי איילון",
+          "item_code": "7290010237579",
+          "product": "גזוז בטעם לימון ליים",
+          "price": 3.8,
+          "unit_price": 7.6,
+          "effective_unit_price": 7.6,
           "unit": "ליטר",
           "price_updated": "",
           "promo": {
-            "desc": "2ב12 רוטב לימון/חומץ 1 ליטר",
+            "desc": "פפסי /זירו/מירנדה/סבן אפ 500 מל 3ב10 כו",
             "min_qty": 1.0,
-            "is_club": true,
+            "is_club": false,
+            "is_conditional": false,
+            "promo_unit_price": null
+          }
+        },
+        {
+          "store": "Rami Levy (Ayalon Bnei Brak)",
+          "short_store": "רמי לוי איילון",
+          "item_code": "7290000000117",
+          "product": "לימון",
+          "price": 7.7,
+          "unit_price": 7.7,
+          "effective_unit_price": 7.7,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": {
+            "desc": "לימון ב6.9 מוגבל ל3",
+            "min_qty": 1.0,
+            "is_club": false,
+            "is_conditional": false,
+            "promo_unit_price": null
+          }
+        },
+        {
+          "store": "Rami Levy (Ayalon Bnei Brak)",
+          "short_store": "רמי לוי איילון",
+          "item_code": "7290012823589",
+          "product": "ריצפז פרש לימון 2 לי",
+          "price": 16.9,
+          "unit_price": 8.45,
+          "effective_unit_price": 8.45,
+          "unit": "ליטר",
+          "price_updated": "",
+          "promo": {
+            "desc": "נוזל רצפות ריצפז פרש 2 ליטר 2ב30",
+            "min_qty": 1.0,
+            "is_club": false,
+            "is_conditional": false,
+            "promo_unit_price": null
+          }
+        },
+        {
+          "store": "AM:PM (Ben Yehuda 61)",
+          "short_store": "AM:PM בן יהודה",
+          "item_code": "7290019056300",
+          "product": "שוופס ביטר לימון בקב",
+          "price": 12.9,
+          "unit_price": 8.6,
+          "effective_unit_price": 8.6,
+          "unit": "ליטר",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Rami Levy BaShchuna (Ben Yehuda 23)",
+          "short_store": "רמי לוי בן יהודה",
+          "item_code": "7290010237579",
+          "product": "גזוז בטעם לימון ליים",
+          "price": 4.9,
+          "unit_price": 9.8,
+          "effective_unit_price": 9.8,
+          "unit": "ליטר",
+          "price_updated": "",
+          "promo": {
+            "desc": "פפסי /זירו/מירנדה/סבן אפ 500 מל 3ב12 כול",
+            "min_qty": 1.0,
+            "is_club": false,
             "is_conditional": false,
             "promo_unit_price": null
           }
@@ -2772,84 +2610,6 @@
         "days": 1
       },
       "matches": [
-        {
-          "store": "Rami Levy (Ayalon Bnei Brak)",
-          "short_store": "רמי לוי איילון",
-          "item_code": "7290101115045",
-          "product": "מנבו תות בננה 6יח פל",
-          "price": 13.9,
-          "unit_price": 2.32,
-          "effective_unit_price": 2.32,
-          "unit": "יחידות",
-          "price_updated": "",
-          "promo": null
-        },
-        {
-          "store": "Rami Levy BaShchuna (Ben Yehuda 23)",
-          "short_store": "רמי לוי בן יהודה",
-          "item_code": "7290101115045",
-          "product": "מנבו תות בננה 6יח פל",
-          "price": 14.9,
-          "unit_price": 2.48,
-          "effective_unit_price": 2.48,
-          "unit": "יחידות",
-          "price_updated": "",
-          "promo": null
-        },
-        {
-          "store": "Rami Levy (Ayalon Bnei Brak)",
-          "short_store": "רמי לוי איילון",
-          "item_code": "7290000136561",
-          "product": "ג'אמפ בטעם תות בננה",
-          "price": 6.7,
-          "unit_price": 4.47,
-          "effective_unit_price": 4.47,
-          "unit": "ליטר",
-          "price_updated": "",
-          "promo": {
-            "desc": "גאמפ 1.5 לי 3ב12כולל",
-            "min_qty": 1.0,
-            "is_club": false,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
-        },
-        {
-          "store": "Rami Levy (Ayalon Bnei Brak)",
-          "short_store": "רמי לוי איילון",
-          "item_code": "7290119771387",
-          "product": "ספרינג מנגו בננה פסי",
-          "price": 7.2,
-          "unit_price": 4.8,
-          "effective_unit_price": 4.8,
-          "unit": "ליטר",
-          "price_updated": "",
-          "promo": {
-            "desc": "ספרינג 1.5לי 3ב20 כולל",
-            "min_qty": 1.0,
-            "is_club": false,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
-        },
-        {
-          "store": "Shufersal Sheli (Ben Yehuda 79)",
-          "short_store": "שופרסל שלי",
-          "item_code": "7290000136561",
-          "product": "גאמפ תות בננה 1.5 ליטר",
-          "price": 7.9,
-          "unit_price": 5.27,
-          "effective_unit_price": 5.27,
-          "unit": "ליטר",
-          "price_updated": "",
-          "promo": {
-            "desc": "3ב11.10 פקדון משקה גאמפ 1.5 ליטר",
-            "min_qty": 1.0,
-            "is_club": true,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
-        },
         {
           "store": "Rami Levy BaShchuna (Ben Yehuda 23)",
           "short_store": "רמי לוי בן יהודה",
@@ -2871,102 +2631,6 @@
         {
           "store": "Rami Levy (Ayalon Bnei Brak)",
           "short_store": "רמי לוי איילון",
-          "item_code": "7290001247068",
-          "product": "נקטר תות בננה ספרינג",
-          "price": 5.9,
-          "unit_price": 5.9,
-          "effective_unit_price": 5.9,
-          "unit": "ליטר",
-          "price_updated": "",
-          "promo": {
-            "desc": "קרטונית ספרינג 1לי2ב11",
-            "min_qty": 1.0,
-            "is_club": false,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
-        },
-        {
-          "store": "Shufersal Sheli (Ben Yehuda 79)",
-          "short_store": "שופרסל שלי",
-          "item_code": "7290019056393",
-          "product": "תפוזינה תות בננה 1.5ליטר",
-          "price": 8.9,
-          "unit_price": 5.93,
-          "effective_unit_price": 5.93,
-          "unit": "ליטר",
-          "price_updated": "",
-          "promo": {
-            "desc": "2ב13.40 פקדון תפוזינה/לייט 1.5 ליטר",
-            "min_qty": 1.0,
-            "is_club": true,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
-        },
-        {
-          "store": "Shufersal Sheli (Ben Yehuda 79)",
-          "short_store": "שופרסל שלי",
-          "item_code": "7290019056638",
-          "product": "ספרינג תות-בננה 1.5 ליטר",
-          "price": 8.9,
-          "unit_price": 5.93,
-          "effective_unit_price": 5.93,
-          "unit": "ליטר",
-          "price_updated": "",
-          "promo": {
-            "desc": "2ב13.40 פקדון ספרינג/לייט 1.5 ליטר",
-            "min_qty": 1.0,
-            "is_club": true,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
-        },
-        {
-          "store": "Shufersal Sheli (Ben Yehuda 79)",
-          "short_store": "שופרסל שלי",
-          "item_code": "7290019056652",
-          "product": "ספרינג אננס בננה1.5 ליטר",
-          "price": 8.9,
-          "unit_price": 5.93,
-          "effective_unit_price": 5.93,
-          "unit": "ליטר",
-          "price_updated": "",
-          "promo": {
-            "desc": "2ב13.40 פקדון ספרינג/לייט 1.5 ליטר",
-            "min_qty": 1.0,
-            "is_club": true,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
-        },
-        {
-          "store": "Shufersal Sheli (Ben Yehuda 79)",
-          "short_store": "שופרסל שלי",
-          "item_code": "7290110115050",
-          "product": "פריגת מיקס תות-בננה1.5ל",
-          "price": 9.5,
-          "unit_price": 6.33,
-          "effective_unit_price": 6.33,
-          "unit": "ליטר",
-          "price_updated": "",
-          "promo": null
-        },
-        {
-          "store": "AM:PM (Ben Yehuda 61)",
-          "short_store": "AM:PM בן יהודה",
-          "item_code": "7290019056638",
-          "product": "ספרינג תות בננה 1.5",
-          "price": 10.9,
-          "unit_price": 7.27,
-          "effective_unit_price": 7.27,
-          "unit": "ליטר",
-          "price_updated": "",
-          "promo": null
-        },
-        {
-          "store": "Rami Levy (Ayalon Bnei Brak)",
-          "short_store": "רמי לוי איילון",
           "item_code": "7290000000134",
           "product": "בננה",
           "price": 7.8,
@@ -2983,18 +2647,6 @@
           }
         },
         {
-          "store": "AM:PM (Ben Yehuda 61)",
-          "short_store": "AM:PM בן יהודה",
-          "item_code": "7290001247068",
-          "product": "נקטר ספרינג תות בננה",
-          "price": 8.7,
-          "unit_price": 8.7,
-          "effective_unit_price": 8.7,
-          "unit": "ליטר",
-          "price_updated": "",
-          "promo": null
-        },
-        {
           "store": "Rami Levy BaShchuna (Ben Yehuda 23)",
           "short_store": "רמי לוי בן יהודה",
           "item_code": "7290000000134",
@@ -3005,6 +2657,186 @@
           "unit": "ק\"ג",
           "price_updated": "",
           "promo": null
+        },
+        {
+          "store": "Rami Levy (Ayalon Bnei Brak)",
+          "short_store": "רמי לוי איילון",
+          "item_code": "7290119771233",
+          "product": "פרוט אנד ווג' בננה כ",
+          "price": 10.9,
+          "unit_price": 10.9,
+          "effective_unit_price": 10.9,
+          "unit": "ליטר",
+          "price_updated": "",
+          "promo": {
+            "desc": "פרוט אנג ווג קרטונית 2ב20 כולל",
+            "min_qty": 1.0,
+            "is_club": false,
+            "is_conditional": false,
+            "promo_unit_price": null
+          }
+        },
+        {
+          "store": "Rami Levy (Ayalon Bnei Brak)",
+          "short_store": "רמי לוי איילון",
+          "item_code": "7290018471401",
+          "product": "פרוט&ווג אננס בננה כ",
+          "price": 10.9,
+          "unit_price": 10.9,
+          "effective_unit_price": 10.9,
+          "unit": "ליטר",
+          "price_updated": "",
+          "promo": {
+            "desc": "פרוט אנד ווג 1לי9.90 כולל",
+            "min_qty": 1.0,
+            "is_club": false,
+            "is_conditional": false,
+            "promo_unit_price": null
+          }
+        },
+        {
+          "store": "Rami Levy (Ayalon Bnei Brak)",
+          "short_store": "רמי לוי איילון",
+          "item_code": "7290101111269",
+          "product": "פונטש בננה וניל שוקו",
+          "price": 21.9,
+          "unit_price": 12.17,
+          "effective_unit_price": 12.17,
+          "unit": "ליטר",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Shufersal Sheli (Ben Yehuda 79)",
+          "short_store": "שופרסל שלי",
+          "item_code": "7290000964775",
+          "product": "בננה",
+          "price": 12.9,
+          "unit_price": 12.9,
+          "effective_unit_price": 12.9,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "AM:PM (Ben Yehuda 61)",
+          "short_store": "AM:PM בן יהודה",
+          "item_code": "7290000041148",
+          "product": "בננה",
+          "price": 14.9,
+          "unit_price": 14.9,
+          "effective_unit_price": 14.9,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": {
+            "desc": "הנחה 10% על ירקות בשקילה מועדון 55פלטינה",
+            "min_qty": 1.0,
+            "is_club": true,
+            "is_conditional": false,
+            "promo_unit_price": null
+          }
+        },
+        {
+          "store": "AM:PM (Ben Yehuda 61)",
+          "short_store": "AM:PM בן יהודה",
+          "item_code": "7290018471401",
+          "product": "פרוט & ווג אננס בננה",
+          "price": 14.9,
+          "unit_price": 14.9,
+          "effective_unit_price": 14.9,
+          "unit": "ליטר",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Rami Levy (Ayalon Bnei Brak)",
+          "short_store": "רמי לוי איילון",
+          "item_code": "7290105368959",
+          "product": "פונץ' בננה 250 מ\"ל",
+          "price": 4.9,
+          "unit_price": 19.6,
+          "effective_unit_price": 19.6,
+          "unit": "ליטר",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Shufersal Sheli (Ben Yehuda 79)",
+          "short_store": "שופרסל שלי",
+          "item_code": "7290000965772",
+          "product": "בננה אורגנית במשקל",
+          "price": 20.9,
+          "unit_price": 20.9,
+          "effective_unit_price": 20.9,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Shufersal Sheli (Ben Yehuda 79)",
+          "short_store": "שופרסל שלי",
+          "item_code": "7290009130157",
+          "product": "מארז בננה אורגנית",
+          "price": 20.9,
+          "unit_price": 20.9,
+          "effective_unit_price": 20.9,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": {
+            "desc": "קטיף 17.90 מארז בננה אורגנית",
+            "min_qty": 1.0,
+            "is_club": false,
+            "is_conditional": false,
+            "promo_unit_price": null
+          }
+        },
+        {
+          "store": "Rami Levy (Ayalon Bnei Brak)",
+          "short_store": "רמי לוי איילון",
+          "item_code": "7290018516362",
+          "product": "גוניור תפו\"ע בננה שי",
+          "price": 5.9,
+          "unit_price": 31.05,
+          "effective_unit_price": 31.05,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": {
+            "desc": "פרינוק מחית בטעמים 190גרם 3ב15",
+            "min_qty": 1.0,
+            "is_club": false,
+            "is_conditional": false,
+            "promo_unit_price": null
+          }
+        },
+        {
+          "store": "Rami Levy (Ayalon Bnei Brak)",
+          "short_store": "רמי לוי איילון",
+          "item_code": "7290119670451",
+          "product": "בננה ציפס 200 גר בקו",
+          "price": 7.0,
+          "unit_price": 35.0,
+          "effective_unit_price": 35.0,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Shufersal Sheli (Ben Yehuda 79)",
+          "short_store": "שופרסל שלי",
+          "item_code": "7290110328627",
+          "product": "יוג.GO קרמי בננה קרמל200",
+          "price": 7.2,
+          "unit_price": 36.0,
+          "effective_unit_price": 36.0,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": {
+            "desc": "3בGO 18 יוגורט 20-25גרם חלבון 200 ג",
+            "min_qty": 1.0,
+            "is_club": false,
+            "is_conditional": false,
+            "promo_unit_price": null
+          }
         }
       ]
     },
@@ -3238,13 +3070,7 @@
           "effective_unit_price": 1.12,
           "unit": "יחידות",
           "price_updated": "",
-          "promo": {
-            "desc": "הנחת עובד 20% AMPM",
-            "min_qty": 1.0,
-            "is_club": true,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
+          "promo": null
         },
         {
           "store": "AM:PM (Ben Yehuda 61)",
@@ -3256,13 +3082,7 @@
           "effective_unit_price": 1.21,
           "unit": "יחידות",
           "price_updated": "",
-          "promo": {
-            "desc": "הנחת עובד 20% AMPM",
-            "min_qty": 1.0,
-            "is_club": true,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
+          "promo": null
         },
         {
           "store": "Rami Levy (Ayalon Bnei Brak)",
@@ -3286,13 +3106,7 @@
           "effective_unit_price": 1.32,
           "unit": "יחידות",
           "price_updated": "",
-          "promo": {
-            "desc": "הנחת עובד 20% AMPM",
-            "min_qty": 1.0,
-            "is_club": true,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
+          "promo": null
         },
         {
           "store": "Rami Levy BaShchuna (Ben Yehuda 23)",
@@ -3493,13 +3307,7 @@
           "effective_unit_price": 7.2,
           "unit": "ליטר",
           "price_updated": "",
-          "promo": {
-            "desc": "קופון חלב תנובה קרטון 1לי ב1שח",
-            "min_qty": 1.0,
-            "is_club": false,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
+          "promo": null
         },
         {
           "store": "Rami Levy (Ayalon Bnei Brak)",
@@ -3511,13 +3319,7 @@
           "effective_unit_price": 7.2,
           "unit": "ליטר",
           "price_updated": "",
-          "promo": {
-            "desc": "קופון חלב קרטון2לי טרה 2יח מתנה",
-            "min_qty": 1.0,
-            "is_club": false,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
+          "promo": null
         },
         {
           "store": "Rami Levy BaShchuna (Ben Yehuda 23)",
@@ -3577,13 +3379,7 @@
           "effective_unit_price": 7.35,
           "unit": "ליטר",
           "price_updated": "",
-          "promo": {
-            "desc": "הנחת עובד 20% AMPM",
-            "min_qty": 1.0,
-            "is_club": true,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
+          "promo": null
         },
         {
           "store": "AM:PM (Ben Yehuda 61)",
@@ -3757,13 +3553,7 @@
           "effective_unit_price": 23.48,
           "unit": "ק\"ג",
           "price_updated": "",
-          "promo": {
-            "desc": "הנחת עובד 20% AMPM",
-            "min_qty": 1.0,
-            "is_club": true,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
+          "promo": null
         },
         {
           "store": "Shufersal Sheli (Ben Yehuda 79)",
@@ -3823,13 +3613,7 @@
           "effective_unit_price": 23.6,
           "unit": "ק\"ג",
           "price_updated": "",
-          "promo": {
-            "desc": "קופון טרה גבינה לבנה   35%יח מתנה",
-            "min_qty": 1.0,
-            "is_club": false,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
+          "promo": null
         },
         {
           "store": "Shufersal Sheli (Ben Yehuda 79)",
@@ -3841,13 +3625,7 @@
           "effective_unit_price": 99.6,
           "unit": "ק\"ג",
           "price_updated": "",
-          "promo": {
-            "desc": "30ש-קופון פיצוי מחלבות גד ארוז סדרת91336",
-            "min_qty": 1.0,
-            "is_club": true,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
+          "promo": null
         }
       ]
     },
@@ -4000,13 +3778,7 @@
           "effective_unit_price": 21.9,
           "unit": "ליטר",
           "price_updated": "",
-          "promo": {
-            "desc": "קופון חלב הארץ יוגורט 1לי מתנה",
-            "min_qty": 1.0,
-            "is_club": false,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
+          "promo": null
         },
         {
           "store": "Shufersal Sheli (Ben Yehuda 79)",
@@ -4054,144 +3826,6 @@
       },
       "matches": [
         {
-          "store": "Rami Levy (Ayalon Bnei Brak)",
-          "short_store": "רמי לוי איילון",
-          "item_code": "7290119382279",
-          "product": "סוכריות בטעם חמאה לל",
-          "price": 7.9,
-          "unit_price": 7.9,
-          "effective_unit_price": 7.9,
-          "unit": "יחידות",
-          "price_updated": "",
-          "promo": {
-            "desc": "סוכריות מאסט 80 גרם עלית 2ב15",
-            "min_qty": 1.0,
-            "is_club": false,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
-        },
-        {
-          "store": "Rami Levy BaShchuna (Ben Yehuda 23)",
-          "short_store": "רמי לוי בן יהודה",
-          "item_code": "7290119382279",
-          "product": "סוכריות בטעם חמאה לל",
-          "price": 9.7,
-          "unit_price": 9.7,
-          "effective_unit_price": 9.7,
-          "unit": "יחידות",
-          "price_updated": "",
-          "promo": null
-        },
-        {
-          "store": "Rami Levy (Ayalon Bnei Brak)",
-          "short_store": "רמי לוי איילון",
-          "item_code": "7290000453897",
-          "product": "מרגרינה בטעם חמאה 20",
-          "price": 4.6,
-          "unit_price": 23.0,
-          "effective_unit_price": 23.0,
-          "unit": "ק\"ג",
-          "price_updated": "",
-          "promo": null
-        },
-        {
-          "store": "Rami Levy (Ayalon Bnei Brak)",
-          "short_store": "רמי לוי איילון",
-          "item_code": "7290107875004",
-          "product": "פופקו חמאה ודבש מארז",
-          "price": 23.9,
-          "unit_price": 23.9,
-          "effective_unit_price": 23.9,
-          "unit": "יחידות",
-          "price_updated": "",
-          "promo": null
-        },
-        {
-          "store": "Rami Levy (Ayalon Bnei Brak)",
-          "short_store": "רמי לוי איילון",
-          "item_code": "5701932026971",
-          "product": "הוט חמאה 600 ג') ב(1",
-          "price": 15.9,
-          "unit_price": 26.5,
-          "effective_unit_price": 26.5,
-          "unit": "ק\"ג",
-          "price_updated": "",
-          "promo": {
-            "desc": "קופון הוטפופ 600גר במתנה",
-            "min_qty": 1.0,
-            "is_club": false,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
-        },
-        {
-          "store": "Rami Levy BaShchuna (Ben Yehuda 23)",
-          "short_store": "רמי לוי בן יהודה",
-          "item_code": "5701932026971",
-          "product": "הוט חמאה 600 ג') ב(1",
-          "price": 16.9,
-          "unit_price": 28.17,
-          "effective_unit_price": 28.17,
-          "unit": "ק\"ג",
-          "price_updated": "",
-          "promo": {
-            "desc": "קופון הוטפופ 600גר במתנה",
-            "min_qty": 1.0,
-            "is_club": false,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
-        },
-        {
-          "store": "Shufersal Sheli (Ben Yehuda 79)",
-          "short_store": "שופרסל שלי",
-          "item_code": "7290000453897",
-          "product": "מרגרינה בטעם חמאה 200 גר",
-          "price": 5.9,
-          "unit_price": 29.5,
-          "effective_unit_price": 29.5,
-          "unit": "ק\"ג",
-          "price_updated": "",
-          "promo": {
-            "desc": "קופון ח\"ע מרגרינה שמרית מתנה",
-            "min_qty": 1.0,
-            "is_club": true,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
-        },
-        {
-          "store": "Shufersal Sheli (Ben Yehuda 79)",
-          "short_store": "שופרסל שלי",
-          "item_code": "5701932026971",
-          "product": "הוטפופ טעם חמאה6*100גר",
-          "price": 18.9,
-          "unit_price": 31.5,
-          "effective_unit_price": 31.5,
-          "unit": "ק\"ג",
-          "price_updated": "",
-          "promo": {
-            "desc": "2ב36 פופקורן בטעמים למיקרוגל 5-6 ש",
-            "min_qty": 1.0,
-            "is_club": true,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
-        },
-        {
-          "store": "Shufersal Sheli (Ben Yehuda 79)",
-          "short_store": "שופרסל שלי",
-          "item_code": "8719200998018",
-          "product": "מרגרינה בטעם חמאה200גרם",
-          "price": 6.9,
-          "unit_price": 34.5,
-          "effective_unit_price": 34.5,
-          "unit": "ק\"ג",
-          "price_updated": "",
-          "promo": null
-        },
-        {
           "store": "Shufersal Sheli (Ben Yehuda 79)",
           "short_store": "שופרסל שלי",
           "item_code": "4823077614699",
@@ -4204,7 +3838,7 @@
           "promo": {
             "desc": "3ב14 ביסקוויט לקפה בטעם חלב/חמאה 18",
             "min_qty": 1.0,
-            "is_club": true,
+            "is_club": false,
             "is_conditional": false,
             "promo_unit_price": null
           }
@@ -4220,24 +3854,6 @@
           "unit": "ק\"ג",
           "price_updated": "",
           "promo": null
-        },
-        {
-          "store": "Shufersal Sheli (Ben Yehuda 79)",
-          "short_store": "שופרסל שלי",
-          "item_code": "8719200998032",
-          "product": "מזולה בטעם חמאה 250 גרם",
-          "price": 10.9,
-          "unit_price": 43.6,
-          "effective_unit_price": 43.6,
-          "unit": "ק\"ג",
-          "price_updated": "",
-          "promo": {
-            "desc": "8.90 מזולה בטעם חמאה 250 גרם",
-            "min_qty": 1.0,
-            "is_club": true,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
         },
         {
           "store": "Rami Levy (Ayalon Bnei Brak)",
@@ -4271,6 +3887,138 @@
           "price": 9.9,
           "unit_price": 49.5,
           "effective_unit_price": 49.5,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Rami Levy (Ayalon Bnei Brak)",
+          "short_store": "רמי לוי איילון",
+          "item_code": "8715300259486",
+          "product": "חמאה הולנדית 200 גרם",
+          "price": 9.9,
+          "unit_price": 49.5,
+          "effective_unit_price": 49.5,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Rami Levy (Ayalon Bnei Brak)",
+          "short_store": "רמי לוי איילון",
+          "item_code": "7290004652173",
+          "product": "חמאה עלמה 200 גר",
+          "price": 9.9,
+          "unit_price": 49.5,
+          "effective_unit_price": 49.5,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": {
+            "desc": "חמאה עלמה 200 גרם ב7.90",
+            "min_qty": 1.0,
+            "is_club": false,
+            "is_conditional": false,
+            "promo_unit_price": null
+          }
+        },
+        {
+          "store": "Rami Levy (Ayalon Bnei Brak)",
+          "short_store": "רמי לוי איילון",
+          "item_code": "7290018091548",
+          "product": "בצק עלים חמאה מעדנות",
+          "price": 29.9,
+          "unit_price": 49.83,
+          "effective_unit_price": 49.83,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Shufersal Sheli (Ben Yehuda 79)",
+          "short_store": "שופרסל שלי",
+          "item_code": "7290116932033",
+          "product": "חמאה מהדרין 200ג תנובה",
+          "price": 10.7,
+          "unit_price": 53.5,
+          "effective_unit_price": 53.5,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Rami Levy (Ayalon Bnei Brak)",
+          "short_store": "רמי לוי איילון",
+          "item_code": "7290015039130",
+          "product": "חמאה לל\"ת מלח 200 גר",
+          "price": 10.9,
+          "unit_price": 54.5,
+          "effective_unit_price": 54.5,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": {
+            "desc": "חמאה 200 גרם 2ב20",
+            "min_qty": 1.0,
+            "is_club": false,
+            "is_conditional": false,
+            "promo_unit_price": null
+          }
+        },
+        {
+          "store": "Rami Levy (Ayalon Bnei Brak)",
+          "short_store": "רמי לוי איילון",
+          "item_code": "7290000139234",
+          "product": "אשבול דגן חמאה 150 ג",
+          "price": 8.7,
+          "unit_price": 58.0,
+          "effective_unit_price": 58.0,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "AM:PM (Ben Yehuda 61)",
+          "short_store": "AM:PM בן יהודה",
+          "item_code": "7290116932033",
+          "product": "חמאה תנובה 200גרם מה",
+          "price": 11.9,
+          "unit_price": 59.5,
+          "effective_unit_price": 59.5,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Shufersal Sheli (Ben Yehuda 79)",
+          "short_store": "שופרסל שלי",
+          "item_code": "7290018091548",
+          "product": "בצק עלים חמאה מעדנות600ג",
+          "price": 35.9,
+          "unit_price": 59.83,
+          "effective_unit_price": 59.83,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "AM:PM (Ben Yehuda 61)",
+          "short_store": "AM:PM בן יהודה",
+          "item_code": "7290004652173",
+          "product": "חמאה עלמה 200ג",
+          "price": 14.9,
+          "unit_price": 74.5,
+          "effective_unit_price": 74.5,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Shufersal Sheli (Ben Yehuda 79)",
+          "short_store": "שופרסל שלי",
+          "item_code": "4820217240114",
+          "product": "חמאה FERMA 82.5%גרם 200",
+          "price": 14.9,
+          "unit_price": 74.5,
+          "effective_unit_price": 74.5,
           "unit": "ק\"ג",
           "price_updated": "",
           "promo": null
@@ -4327,7 +4075,7 @@
           "promo": {
             "desc": "99.90 שמן זית כתית 3ל נריה",
             "min_qty": 1.0,
-            "is_club": true,
+            "is_club": false,
             "is_conditional": false,
             "promo_unit_price": null
           }
@@ -4409,7 +4157,7 @@
           "unit": "ליטר",
           "price_updated": "",
           "promo": {
-            "desc": "קופון שמן זית כתית מעולה 750מל מתנה",
+            "desc": "שמן זית זיתא 750 מ ל ב29.90",
             "min_qty": 1.0,
             "is_club": false,
             "is_conditional": false,
@@ -4445,7 +4193,7 @@
           "unit": "ליטר",
           "price_updated": "",
           "promo": {
-            "desc": "קופון שמן זית כתית מעולה 750מל מתנה",
+            "desc": "שמן זית זיתא 750 מ ל ב36.90",
             "min_qty": 1.0,
             "is_club": false,
             "is_conditional": false,
@@ -4501,7 +4249,7 @@
           "promo": {
             "desc": "2ב55 שמן זית כתית MATTEO 750",
             "min_qty": 1.0,
-            "is_club": true,
+            "is_club": false,
             "is_conditional": false,
             "promo_unit_price": null
           }
@@ -4519,7 +4267,7 @@
           "promo": {
             "desc": "2ב55 שמן זית כתית נריה 750מ\"ל",
             "min_qty": 1.0,
-            "is_club": true,
+            "is_club": false,
             "is_conditional": false,
             "promo_unit_price": null
           }
@@ -4537,7 +4285,7 @@
           "promo": {
             "desc": "2ב70 שמן זית בורחס/פיקאול/אוחיבלאנק",
             "min_qty": 1.0,
-            "is_club": true,
+            "is_club": false,
             "is_conditional": false,
             "promo_unit_price": null
           }
@@ -4684,7 +4432,7 @@
           "promo": {
             "desc": "2ב18 שמן קנולה מזוכך 1 ליטר",
             "min_qty": 1.0,
-            "is_club": true,
+            "is_club": false,
             "is_conditional": false,
             "promo_unit_price": null
           }
@@ -4702,7 +4450,7 @@
           "promo": {
             "desc": "2ב18 שמן קנולה מזוכך 1 ליטר",
             "min_qty": 1.0,
-            "is_club": true,
+            "is_club": false,
             "is_conditional": false,
             "promo_unit_price": null
           }
@@ -4793,9 +4541,9 @@
           "unit": "ק\"ג",
           "price_updated": "",
           "promo": {
-            "desc": "תו זהב 5% הנחה מותג שופרסל",
+            "desc": "2ב8.90 קמח חיטה לבן בהיר 1 ק\"ג",
             "min_qty": 1.0,
-            "is_club": true,
+            "is_club": false,
             "is_conditional": false,
             "promo_unit_price": null
           }
@@ -4907,9 +4655,9 @@
           "unit": "ק\"ג",
           "price_updated": "",
           "promo": {
-            "desc": "תו זהב 5% הנחה מותג שופרסל",
+            "desc": "2ב14 קמח חיטה לבן מנופה 1 ק\"ג",
             "min_qty": 1.0,
-            "is_club": true,
+            "is_club": false,
             "is_conditional": false,
             "promo_unit_price": null
           }
@@ -4945,7 +4693,7 @@
           "promo": {
             "desc": "18.90 קמח/תערובת לעוגה ללא גלוטן 450",
             "min_qty": 1.0,
-            "is_club": true,
+            "is_club": false,
             "is_conditional": false,
             "promo_unit_price": null
           }
@@ -5099,7 +4847,7 @@
           "price": 47.9,
           "unit_price": 9.58,
           "effective_unit_price": 9.58,
-          "unit": "יחידות",
+          "unit": "ק\"ג",
           "price_updated": "",
           "promo": null
         },
@@ -5560,7 +5308,7 @@
           "promo": {
             "desc": "2ב18 טחינה גולמית 500 גרם",
             "min_qty": 1.0,
-            "is_club": true,
+            "is_club": false,
             "is_conditional": false,
             "promo_unit_price": null
           }
@@ -5578,7 +5326,7 @@
           "promo": {
             "desc": "2ב22 טחינה גולמית 500ג המערה",
             "min_qty": 1.0,
-            "is_club": true,
+            "is_club": false,
             "is_conditional": false,
             "promo_unit_price": null
           }
@@ -5596,7 +5344,7 @@
           "promo": {
             "desc": "2ב25 טחינה גולמית 500ג נריה",
             "min_qty": 1.0,
-            "is_club": true,
+            "is_club": false,
             "is_conditional": false,
             "promo_unit_price": null
           }
@@ -5680,7 +5428,7 @@
           "promo": {
             "desc": "15.90 טחינה גולמית אל ארז 500ג",
             "min_qty": 1.0,
-            "is_club": true,
+            "is_club": false,
             "is_conditional": false,
             "promo_unit_price": null
           }
@@ -5695,13 +5443,7 @@
           "effective_unit_price": 50.0,
           "unit": "ק\"ג",
           "price_updated": "",
-          "promo": {
-            "desc": "20ש - קופון ח\"ע אסם סדרת 91115",
-            "min_qty": 1.0,
-            "is_club": true,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
+          "promo": null
         },
         {
           "store": "Shufersal Sheli (Ben Yehuda 79)",
@@ -5734,13 +5476,7 @@
           "effective_unit_price": 9.88,
           "unit": "ק\"ג",
           "price_updated": "",
-          "promo": {
-            "desc": "קופון 35שח הנחה מוצרי פריניר",
-            "min_qty": 1.0,
-            "is_club": false,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
+          "promo": null
         },
         {
           "store": "Rami Levy (Ayalon Bnei Brak)",
@@ -5771,7 +5507,7 @@
           "unit": "יחידות",
           "price_updated": "",
           "promo": {
-            "desc": "עגבניות מרוסקות  יכין ב-20%הנחה מצטרפים",
+            "desc": "שלישיית עגבניות מרוסקות/חתוכות יכין 13.9",
             "min_qty": 1.0,
             "is_club": false,
             "is_conditional": false,
@@ -5789,7 +5525,7 @@
           "unit": "ק\"ג",
           "price_updated": "",
           "promo": {
-            "desc": "עגבניות מרוסקות  יכין ב-20%הנחה מצטרפים",
+            "desc": "שלישיית עגבניות מרוסקות/חתוכות יכין 13.9",
             "min_qty": 1.0,
             "is_club": false,
             "is_conditional": false,
@@ -5807,9 +5543,9 @@
           "unit": "ק\"ג",
           "price_updated": "",
           "promo": {
-            "desc": "35ש\"ח-קופון פיצוי פריניר סדרת:91343",
+            "desc": "2ב18 עגבניות מרוסקות/מקולפות בית יה",
             "min_qty": 1.0,
-            "is_club": true,
+            "is_club": false,
             "is_conditional": false,
             "promo_unit_price": null
           }
@@ -5824,13 +5560,7 @@
           "effective_unit_price": 14.08,
           "unit": "יחידות",
           "price_updated": "",
-          "promo": {
-            "desc": "עגבניות מרוסקות  יכין ב-20%הנחה מצטרפים",
-            "min_qty": 1.0,
-            "is_club": false,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
+          "promo": null
         },
         {
           "store": "Rami Levy BaShchuna (Ben Yehuda 23)",
@@ -5860,13 +5590,7 @@
           "effective_unit_price": 14.75,
           "unit": "ק\"ג",
           "price_updated": "",
-          "promo": {
-            "desc": "קופון 35שח הנחה מוצרי פריניר",
-            "min_qty": 1.0,
-            "is_club": false,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
+          "promo": null
         },
         {
           "store": "Rami Levy (Ayalon Bnei Brak)",
@@ -5878,13 +5602,7 @@
           "effective_unit_price": 14.75,
           "unit": "ק\"ג",
           "price_updated": "",
-          "promo": {
-            "desc": "קופון 35שח הנחה מוצרי פריניר",
-            "min_qty": 1.0,
-            "is_club": false,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
+          "promo": null
         },
         {
           "store": "Shufersal Sheli (Ben Yehuda 79)",
@@ -6038,9 +5756,9 @@
           "unit": "ק\"ג",
           "price_updated": "",
           "promo": {
-            "desc": "35ש\"ח-קופון פיצוי פריניר סדרת:91343",
+            "desc": "2ב18 גרגירי חומוס שלמים 550 ג",
             "min_qty": 1.0,
-            "is_club": true,
+            "is_club": false,
             "is_conditional": false,
             "promo_unit_price": null
           }
@@ -6058,7 +5776,7 @@
           "promo": {
             "desc": "2ב15 שעועית/פול/אפונה/חומוס 550-580",
             "min_qty": 1.0,
-            "is_club": true,
+            "is_club": false,
             "is_conditional": false,
             "promo_unit_price": null
           }
@@ -6074,9 +5792,9 @@
           "unit": "ק\"ג",
           "price_updated": "",
           "promo": {
-            "desc": "תו זהב 5% הנחה מותג שופרסל",
+            "desc": "2ב10 שעועית אדומה/ שחורה/ לבנה/ חומ",
             "min_qty": 1.0,
-            "is_club": true,
+            "is_club": false,
             "is_conditional": false,
             "promo_unit_price": null
           }
@@ -6121,13 +5839,7 @@
           "effective_unit_price": 23.62,
           "unit": "ק\"ג",
           "price_updated": "",
-          "promo": {
-            "desc": "35ש\"ח-קופון פיצוי פריניר סדרת:91343",
-            "min_qty": 1.0,
-            "is_club": true,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
+          "promo": null
         },
         {
           "store": "Rami Levy BaShchuna (Ben Yehuda 23)",
@@ -6164,9 +5876,9 @@
           "unit": "ק\"ג",
           "price_updated": "",
           "promo": {
-            "desc": "35ש\"ח-קופון פיצוי פריניר סדרת:91343",
+            "desc": "3ב15 גרעיני חומוס/תירס 400 גרם",
             "min_qty": 1.0,
-            "is_club": true,
+            "is_club": false,
             "is_conditional": false,
             "promo_unit_price": null
           }
@@ -6261,24 +5973,6 @@
         {
           "store": "Rami Levy (Ayalon Bnei Brak)",
           "short_store": "רמי לוי איילון",
-          "item_code": "8006040380258",
-          "product": "בריסטה שיבולת שועל1",
-          "price": 12.9,
-          "unit_price": 12.9,
-          "effective_unit_price": 12.9,
-          "unit": "ליטר",
-          "price_updated": "",
-          "promo": {
-            "desc": "קופון תחליפי חלב וולסויה  2יח מתנה",
-            "min_qty": 1.0,
-            "is_club": false,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
-        },
-        {
-          "store": "Rami Levy (Ayalon Bnei Brak)",
-          "short_store": "רמי לוי איילון",
           "item_code": "7290108354010",
           "product": "מרכך שיבולת שועל 750",
           "price": 9.9,
@@ -6328,13 +6022,7 @@
           "effective_unit_price": 14.9,
           "unit": "ליטר",
           "price_updated": "",
-          "promo": {
-            "desc": "קופון פיצוי לקוח 20שח מוצרי שסטוביץ",
-            "min_qty": 1.0,
-            "is_club": false,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
+          "promo": null
         },
         {
           "store": "Shufersal Sheli (Ben Yehuda 79)",
@@ -6407,12 +6095,24 @@
           "unit": "ליטר",
           "price_updated": "",
           "promo": {
-            "desc": "20ש -קופון ח\"ע שסטוביץ סדרת 91533",
+            "desc": "25% הנחה משקה שיבולת שועל בריסטה/וניל 1",
             "min_qty": 1.0,
-            "is_club": true,
+            "is_club": false,
             "is_conditional": false,
             "promo_unit_price": null
           }
+        },
+        {
+          "store": "Rami Levy (Ayalon Bnei Brak)",
+          "short_store": "רמי לוי איילון",
+          "item_code": "7290002842002",
+          "product": "פתיתי שיבולת שועל קו",
+          "price": 10.9,
+          "unit_price": 21.8,
+          "effective_unit_price": 21.8,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
         }
       ]
     },
@@ -6423,30 +6123,6 @@
         "days": 1
       },
       "matches": [
-        {
-          "store": "Rami Levy (Ayalon Bnei Brak)",
-          "short_store": "רמי לוי איילון",
-          "item_code": "7290119671298",
-          "product": "עדשים אדומות 800 גר",
-          "price": 10.0,
-          "unit_price": 0.8,
-          "effective_unit_price": 0.8,
-          "unit": "יחידות",
-          "price_updated": "",
-          "promo": null
-        },
-        {
-          "store": "Rami Levy (Ayalon Bnei Brak)",
-          "short_store": "רמי לוי איילון",
-          "item_code": "7290119671496",
-          "product": "עדשים ירוקות 800 ג'",
-          "price": 10.0,
-          "unit_price": 1.0,
-          "effective_unit_price": 1.0,
-          "unit": "יחידות",
-          "price_updated": "",
-          "promo": null
-        },
         {
           "store": "Rami Levy (Ayalon Bnei Brak)",
           "short_store": "רמי לוי איילון",
@@ -6572,6 +6248,30 @@
             "is_conditional": false,
             "promo_unit_price": null
           }
+        },
+        {
+          "store": "Rami Levy (Ayalon Bnei Brak)",
+          "short_store": "רמי לוי איילון",
+          "item_code": "7290119671298",
+          "product": "עדשים אדומות 800 גר",
+          "price": 10.0,
+          "unit_price": 12.5,
+          "effective_unit_price": 12.5,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Rami Levy (Ayalon Bnei Brak)",
+          "short_store": "רמי לוי איילון",
+          "item_code": "7290119671496",
+          "product": "עדשים ירוקות 800 ג'",
+          "price": 10.0,
+          "unit_price": 12.5,
+          "effective_unit_price": 12.5,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
         },
         {
           "store": "Rami Levy (Ayalon Bnei Brak)",
@@ -6727,7 +6427,7 @@
           "promo": {
             "desc": "3ב10 סוכר לבן 1 ק\"ג",
             "min_qty": 1.0,
-            "is_club": true,
+            "is_club": false,
             "is_conditional": false,
             "promo_unit_price": null
           }
@@ -6812,7 +6512,7 @@
           "unit": "ק\"ג",
           "price_updated": "",
           "promo": {
-            "desc": "קופון פיצוי לקוח 20שח מוצרי שסטוביץ",
+            "desc": "קנה ב-59.90 ש ח שסטוביץ - קבל כוסות מתנה",
             "min_qty": 1.0,
             "is_club": false,
             "is_conditional": false,
@@ -6830,7 +6530,7 @@
           "unit": "ק\"ג",
           "price_updated": "",
           "promo": {
-            "desc": "קופון פיצוי לקוח 20שח מוצרי שסטוביץ",
+            "desc": "קנה ב-59.90 ש ח שסטוביץ - קבל כוסות מתנה",
             "min_qty": 1.0,
             "is_club": false,
             "is_conditional": false,
@@ -6850,36 +6550,6 @@
           "promo": null
         },
         {
-          "store": "Shufersal Sheli (Ben Yehuda 79)",
-          "short_store": "שופרסל שלי",
-          "item_code": "7290013433091",
-          "product": "גרנולה 8% שוקולד מריר300",
-          "price": 20.9,
-          "unit_price": 69.67,
-          "effective_unit_price": 69.67,
-          "unit": "ק\"ג",
-          "price_updated": "",
-          "promo": null
-        },
-        {
-          "store": "Shufersal Sheli (Ben Yehuda 79)",
-          "short_store": "שופרסל שלי",
-          "item_code": "7613033548192",
-          "product": "פיטנס שוקולד מריר 375גרם",
-          "price": 26.9,
-          "unit_price": 71.73,
-          "effective_unit_price": 71.73,
-          "unit": "ק\"ג",
-          "price_updated": "",
-          "promo": {
-            "desc": "20ש - קופון ח\"ע אסם סדרת 91115",
-            "min_qty": 1.0,
-            "is_club": true,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
-        },
-        {
           "store": "Rami Levy (Ayalon Bnei Brak)",
           "short_store": "רמי לוי איילון",
           "item_code": "7290019870067",
@@ -6890,7 +6560,7 @@
           "unit": "ק\"ג",
           "price_updated": "",
           "promo": {
-            "desc": "קופון פיצוי לקוח 20שח מוצרי שסטוביץ",
+            "desc": "קנה ב-59.90 ש ח שסטוביץ - קבל כוסות מתנה",
             "min_qty": 1.0,
             "is_club": false,
             "is_conditional": false,
@@ -6938,7 +6608,7 @@
           "unit": "ק\"ג",
           "price_updated": "",
           "promo": {
-            "desc": "קופון פיצוי לקוח 20שח מוצרי שסטוביץ",
+            "desc": "קנה ב-59.90 ש ח שסטוביץ - קבל כוסות מתנה",
             "min_qty": 1.0,
             "is_club": false,
             "is_conditional": false,
@@ -6974,7 +6644,7 @@
           "unit": "ק\"ג",
           "price_updated": "",
           "promo": {
-            "desc": "קופון פיצוי לקוח 20שח מוצרי שסטוביץ",
+            "desc": "קנה ב-59.90 ש ח שסטוביץ - קבל כוסות מתנה",
             "min_qty": 1.0,
             "is_club": false,
             "is_conditional": false,
@@ -6994,7 +6664,7 @@
           "promo": {
             "desc": "3ב20 שוקולד מריר/לבן/חלב 100 גרם",
             "min_qty": 1.0,
-            "is_club": true,
+            "is_club": false,
             "is_conditional": false,
             "promo_unit_price": null
           }
@@ -7010,7 +6680,7 @@
           "unit": "ק\"ג",
           "price_updated": "",
           "promo": {
-            "desc": "קופון פיצוי לקוח 20שח מוצרי שסטוביץ",
+            "desc": "קנה ב-59.90 ש ח שסטוביץ - קבל כוסות מתנה",
             "min_qty": 1.0,
             "is_club": false,
             "is_conditional": false,
@@ -7027,13 +6697,7 @@
           "effective_unit_price": 96.33,
           "unit": "ק\"ג",
           "price_updated": "",
-          "promo": {
-            "desc": "קופון 100 שח פיצוי לקוחות",
-            "min_qty": 1.0,
-            "is_club": false,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
+          "promo": null
         },
         {
           "store": "Rami Levy BaShchuna (Ben Yehuda 23)",
@@ -7052,6 +6716,30 @@
             "is_conditional": false,
             "promo_unit_price": null
           }
+        },
+        {
+          "store": "Rami Levy (Ayalon Bnei Brak)",
+          "short_store": "רמי לוי איילון",
+          "item_code": "7290122633160",
+          "product": "שוקולד מריר 70% 100ג",
+          "price": 9.9,
+          "unit_price": 99.0,
+          "effective_unit_price": 99.0,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Rami Levy (Ayalon Bnei Brak)",
+          "short_store": "רמי לוי איילון",
+          "item_code": "7290122634150",
+          "product": "שוקולד מריר מעולה 70",
+          "price": 9.9,
+          "unit_price": 99.0,
+          "effective_unit_price": 99.0,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
         }
       ]
     },
