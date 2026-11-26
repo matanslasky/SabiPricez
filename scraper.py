@@ -169,7 +169,7 @@ for store_cfg in config["stores"]:
                     matched_count += 1
     print(f"  -> {matched_count} product matches")
 
-# 3. Save data.json (for our upcoming custom UI)
+# 3. Save data.json
 now = datetime.now(ZoneInfo("Asia/Jerusalem")).strftime("%Y-%m-%d %H:%M")
 payload = {
     "updated_at": now,
@@ -185,5 +185,3 @@ payload = {
 }
 with open("data.json", "w", encoding="utf-8") as f:
     json.dump(payload, f, ensure_ascii=False, indent=2)
-
-json.dump(payload, f, ensure_ascii=False, indent=2)
