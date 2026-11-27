@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-27 16:11",
+  "updated_at": "2026-11-27 18:10",
   "stores": [
     {
       "label": "Rami Levy BaShchuna (Ben Yehuda 23)",
@@ -1440,24 +1440,6 @@
         {
           "store": "Rami Levy (Ayalon Bnei Brak)",
           "short_store": "רמי לוי איילון",
-          "item_code": "7290000000411",
-          "product": "שום יבש יבוא רמי לוי",
-          "price": 4.9,
-          "unit_price": 4.9,
-          "effective_unit_price": 2.9,
-          "unit": "יחידות",
-          "price_updated": "",
-          "promo": {
-            "desc": "שום יבש יבוא רמי לוי ב2.9 מוגבל ל3",
-            "min_qty": 1.0,
-            "is_club": false,
-            "is_conditional": false,
-            "promo_unit_price": 2.9
-          }
-        },
-        {
-          "store": "Rami Levy (Ayalon Bnei Brak)",
-          "short_store": "רמי לוי איילון",
           "item_code": "7290000000133",
           "product": "שום יבש",
           "price": 4.9,
@@ -1467,6 +1449,24 @@
           "price_updated": "",
           "promo": {
             "desc": "שום יבש ב2.9 מוגבל ל3",
+            "min_qty": 1.0,
+            "is_club": false,
+            "is_conditional": false,
+            "promo_unit_price": 2.9
+          }
+        },
+        {
+          "store": "Rami Levy (Ayalon Bnei Brak)",
+          "short_store": "רמי לוי איילון",
+          "item_code": "7290000000411",
+          "product": "שום יבש יבוא רמי לוי",
+          "price": 4.9,
+          "unit_price": 4.9,
+          "effective_unit_price": 2.9,
+          "unit": "יחידות",
+          "price_updated": "",
+          "promo": {
+            "desc": "שום יבש יבוא רמי לוי ב2.9 מוגבל ל3",
             "min_qty": 1.0,
             "is_club": false,
             "is_conditional": false,
@@ -6540,18 +6540,6 @@
         {
           "store": "Rami Levy (Ayalon Bnei Brak)",
           "short_store": "רמי לוי איילון",
-          "item_code": "7290119671793",
-          "product": "בורגול דק 1קג רמי לו",
-          "price": 10.0,
-          "unit_price": 10.0,
-          "effective_unit_price": 10.0,
-          "unit": "ק\"ג",
-          "price_updated": "",
-          "promo": null
-        },
-        {
-          "store": "Rami Levy (Ayalon Bnei Brak)",
-          "short_store": "רמי לוי איילון",
           "item_code": "7290119671083",
           "product": "בורגול עבה 1קג רמי ל",
           "price": 10.0,
@@ -6603,6 +6591,18 @@
           "item_code": "7290010153510",
           "product": "בורגול מיה 500 גרם",
           "price": 5.0,
+          "unit_price": 10.0,
+          "effective_unit_price": 10.0,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Rami Levy (Ayalon Bnei Brak)",
+          "short_store": "רמי לוי איילון",
+          "item_code": "7290119671793",
+          "product": "בורגול דק 1קג רמי לו",
+          "price": 10.0,
           "unit_price": 10.0,
           "effective_unit_price": 10.0,
           "unit": "ק\"ג",
