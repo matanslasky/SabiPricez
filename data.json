@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-27 01:20",
+  "updated_at": "2026-11-27 13:18",
   "stores": [
     {
       "label": "Rami Levy BaShchuna (Ben Yehuda 23)",
@@ -46,6 +46,48 @@
       },
       "matches": [
         {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290002069041",
+          "product": "חזה עוף טרי פרימה",
+          "price": 34.9,
+          "unit_price": 34.9,
+          "effective_unit_price": 34.9,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290004093020",
+          "product": "חזה עוף טרי עוף הכפר",
+          "price": 38.9,
+          "unit_price": 38.9,
+          "effective_unit_price": 38.9,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": {
+            "desc": "חזה עוף טרי  עוף הכפר 2 ב 70",
+            "min_qty": 1.0,
+            "is_club": false,
+            "is_conditional": false,
+            "promo_unit_price": null
+          }
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290002939108",
+          "product": "חזה עוף טרי עטרה הרב",
+          "price": 39.9,
+          "unit_price": 39.9,
+          "effective_unit_price": 39.9,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
+        {
           "store": "Shufersal Sheli (Ben Yehuda 79)",
           "short_store": "שופרסל שלי",
           "item_code": "7290000616827",
@@ -77,6 +119,18 @@
           "price": 39.9,
           "unit_price": 39.9,
           "effective_unit_price": 39.9,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290002505471",
+          "product": "חזה עוף טרי קהילות",
+          "price": 47.9,
+          "unit_price": 47.9,
+          "effective_unit_price": 47.9,
           "unit": "ק\"ג",
           "price_updated": "",
           "promo": null
@@ -143,6 +197,96 @@
             "is_conditional": false,
             "promo_unit_price": null
           }
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290002069010",
+          "product": "כרעיים עוף טרי פרימה",
+          "price": 24.9,
+          "unit_price": 24.9,
+          "effective_unit_price": 24.9,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": {
+            "desc": "כרעיים/ירכיים עוף טרי  פרימה  2 ב 45",
+            "min_qty": 1.0,
+            "is_club": false,
+            "is_conditional": false,
+            "promo_unit_price": null
+          }
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290001209356",
+          "product": "כרעיים עוף טרי עטרה",
+          "price": 26.9,
+          "unit_price": 26.9,
+          "effective_unit_price": 26.9,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290002069034",
+          "product": "שוקיים עוף טרי פרימה",
+          "price": 26.9,
+          "unit_price": 26.9,
+          "effective_unit_price": 26.9,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290004093013",
+          "product": "כרעיים עוף טרי עוף ה",
+          "price": 26.9,
+          "unit_price": 26.9,
+          "effective_unit_price": 26.9,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": {
+            "desc": "כרעיים/ירכיים עוף טרי  הכפר  2 ב 40",
+            "min_qty": 1.0,
+            "is_club": false,
+            "is_conditional": false,
+            "promo_unit_price": null
+          }
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290004093044",
+          "product": "שוקיים עוף טרי עוף ה",
+          "price": 28.9,
+          "unit_price": 28.9,
+          "effective_unit_price": 28.9,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": {
+            "desc": "שוקיים עוף טרי  הכפר  2 ב 50",
+            "min_qty": 1.0,
+            "is_club": false,
+            "is_conditional": false,
+            "promo_unit_price": null
+          }
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290004681128",
+          "product": "שוקיים עוף טרי \"בוטי",
+          "price": 28.9,
+          "unit_price": 28.9,
+          "effective_unit_price": 28.9,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
         },
         {
           "store": "Rami Levy (Ayalon Bnei Brak)",
@@ -245,6 +389,24 @@
             "is_conditional": false,
             "promo_unit_price": null
           }
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290001209387",
+          "product": "שוקיים עוף טרי עטרה",
+          "price": 36.9,
+          "unit_price": 36.9,
+          "effective_unit_price": 36.9,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": {
+            "desc": "שוקיים עוף טרי  עטרה  29.90 מוג 3",
+            "min_qty": 1.0,
+            "is_club": false,
+            "is_conditional": false,
+            "promo_unit_price": null
+          }
         }
       ]
     },
@@ -255,6 +417,54 @@
         "days": 1
       },
       "matches": [
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290004681739",
+          "product": "פרגית לתנור עם עצם \"",
+          "price": 32.9,
+          "unit_price": 32.9,
+          "effective_unit_price": 32.9,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290002731832",
+          "product": "פרגית לתנור עם עצם \"",
+          "price": 49.9,
+          "unit_price": 49.9,
+          "effective_unit_price": 49.9,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290002131540",
+          "product": "פרגית לתנור טרי עם ע",
+          "price": 49.9,
+          "unit_price": 49.9,
+          "effective_unit_price": 49.9,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290002069072",
+          "product": "פרגית עוף טרי פרימה",
+          "price": 54.9,
+          "unit_price": 54.9,
+          "effective_unit_price": 54.9,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
         {
           "store": "Rami Levy (Ayalon Bnei Brak)",
           "short_store": "רמי לוי איילון",
@@ -304,6 +514,18 @@
           }
         },
         {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290002804666",
+          "product": "סטייק פרגית עוף טרי",
+          "price": 59.9,
+          "unit_price": 59.9,
+          "effective_unit_price": 59.9,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
+        {
           "store": "Rami Levy (Ayalon Bnei Brak)",
           "short_store": "רמי לוי איילון",
           "item_code": "7290002681120",
@@ -320,6 +542,18 @@
             "is_conditional": false,
             "promo_unit_price": null
           }
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290002739678",
+          "product": "סטייק פרגית עוף טרי",
+          "price": 69.9,
+          "unit_price": 69.9,
+          "effective_unit_price": 69.9,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
         },
         {
           "store": "Shufersal Sheli (Ben Yehuda 79)",
@@ -358,6 +592,18 @@
           "promo": null
         },
         {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290109581699",
+          "product": "פסטרמה פרגית זוגלובק",
+          "price": 26.9,
+          "unit_price": 81.52,
+          "effective_unit_price": 81.52,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
+        {
           "store": "Rami Levy (Ayalon Bnei Brak)",
           "short_store": "רמי לוי איילון",
           "item_code": "7290004194581",
@@ -374,108 +620,6 @@
             "is_conditional": false,
             "promo_unit_price": null
           }
-        },
-        {
-          "store": "Rami Levy BaShchuna (Ben Yehuda 23)",
-          "short_store": "רמי לוי בן יהודה",
-          "item_code": "7290109581699",
-          "product": "פסטרמה פרגית 330 גרם",
-          "price": 30.9,
-          "unit_price": 93.64,
-          "effective_unit_price": 93.64,
-          "unit": "ק\"ג",
-          "price_updated": "",
-          "promo": null
-        },
-        {
-          "store": "Rami Levy (Ayalon Bnei Brak)",
-          "short_store": "רמי לוי איילון",
-          "item_code": "7290119951376",
-          "product": "שווארמה פרגית להקפצה",
-          "price": 39.9,
-          "unit_price": 99.75,
-          "effective_unit_price": 99.75,
-          "unit": "ק\"ג",
-          "price_updated": "",
-          "promo": null
-        },
-        {
-          "store": "Rami Levy (Ayalon Bnei Brak)",
-          "short_store": "רמי לוי איילון",
-          "item_code": "7290005996306",
-          "product": "פסטרמה פרגיות דק דק",
-          "price": 12.9,
-          "unit_price": 107.5,
-          "effective_unit_price": 107.5,
-          "unit": "ק\"ג",
-          "price_updated": "",
-          "promo": {
-            "desc": "פסטרמה דק דק יחיעם 2ב25",
-            "min_qty": 1.0,
-            "is_club": false,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
-        },
-        {
-          "store": "AM:PM (Ben Yehuda 61)",
-          "short_store": "AM:PM בן יהודה",
-          "item_code": "7290109581699",
-          "product": "פסטרמה פרגית זוגלובק",
-          "price": 36.9,
-          "unit_price": 111.82,
-          "effective_unit_price": 111.82,
-          "unit": "ק\"ג",
-          "price_updated": "",
-          "promo": null
-        },
-        {
-          "store": "Rami Levy (Ayalon Bnei Brak)",
-          "short_store": "רמי לוי איילון",
-          "item_code": "7290109581538",
-          "product": "פסטרמה פרגית 120 גרם",
-          "price": 13.9,
-          "unit_price": 115.83,
-          "effective_unit_price": 115.83,
-          "unit": "ק\"ג",
-          "price_updated": "",
-          "promo": {
-            "desc": "פסטרמה דק דק זוגלובק 120גרם  2ב26",
-            "min_qty": 1.0,
-            "is_club": false,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
-        },
-        {
-          "store": "Rami Levy (Ayalon Bnei Brak)",
-          "short_store": "רמי לוי איילון",
-          "item_code": "7290013906502",
-          "product": "פסטרמה פרגיות לבגט 1",
-          "price": 15.9,
-          "unit_price": 132.5,
-          "effective_unit_price": 132.5,
-          "unit": "ק\"ג",
-          "price_updated": "",
-          "promo": {
-            "desc": "סלסולי פסטרמה טירת צבי 2ב20",
-            "min_qty": 1.0,
-            "is_club": false,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
-        },
-        {
-          "store": "Shufersal Sheli (Ben Yehuda 79)",
-          "short_store": "שופרסל שלי",
-          "item_code": "7296073754114",
-          "product": "שווארמה פרגית להקפצה 300",
-          "price": 39.9,
-          "unit_price": 133.0,
-          "effective_unit_price": 133.0,
-          "unit": "ק\"ג",
-          "price_updated": "",
-          "promo": null
         }
       ]
     },
@@ -486,6 +630,30 @@
         "days": 1
       },
       "matches": [
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290008761925",
+          "product": "בקר טחון עטרה 1.2 ק\"",
+          "price": 44.9,
+          "unit_price": 37.42,
+          "effective_unit_price": 37.42,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290004257491",
+          "product": "בקר טחון 100% עטרה 1",
+          "price": 54.9,
+          "unit_price": 54.9,
+          "effective_unit_price": 54.9,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
         {
           "store": "Rami Levy (Ayalon Bnei Brak)",
           "short_store": "רמי לוי איילון",
@@ -517,22 +685,40 @@
           "promo": null
         },
         {
-          "store": "Shufersal Sheli (Ben Yehuda 79)",
-          "short_store": "שופרסל שלי",
-          "item_code": "7290000933740",
-          "product": "בשר טחון טרי",
-          "price": 79.9,
-          "unit_price": 79.9,
-          "effective_unit_price": 79.9,
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290004257446",
+          "product": "בקר טחון 100% קהילות",
+          "price": 74.9,
+          "unit_price": 74.9,
+          "effective_unit_price": 74.9,
           "unit": "ק\"ג",
           "price_updated": "",
-          "promo": {
-            "desc": "ב2-ב 120 שח טחון בקר טרי",
-            "min_qty": 1.0,
-            "is_club": false,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
+          "promo": null
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290002292487",
+          "product": "בקר טחון 500 גרם אחד",
+          "price": 44.9,
+          "unit_price": 89.8,
+          "effective_unit_price": 89.8,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290006550606",
+          "product": "בקר טחון 100% גלאט א",
+          "price": 44.9,
+          "unit_price": 89.8,
+          "effective_unit_price": 89.8,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
         },
         {
           "store": "Shufersal Sheli (Ben Yehuda 79)",
@@ -592,13 +778,13 @@
           }
         },
         {
-          "store": "Shufersal Sheli (Ben Yehuda 79)",
-          "short_store": "שופרסל שלי",
-          "item_code": "7290009393255",
-          "product": "צלי כתף טרי מוכשר",
-          "price": 115.0,
-          "unit_price": 115.0,
-          "effective_unit_price": 115.0,
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290002069751",
+          "product": "צלי כתף טרי ישראלי ע",
+          "price": 139.9,
+          "unit_price": 139.9,
+          "effective_unit_price": 139.9,
           "unit": "ק\"ג",
           "price_updated": "",
           "promo": null
@@ -635,6 +821,24 @@
           "unit": "ק\"ג",
           "price_updated": "",
           "promo": null
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290009000122",
+          "product": "עגבניה",
+          "price": 8.9,
+          "unit_price": 8.9,
+          "effective_unit_price": 8.9,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": {
+            "desc": "עגבניה 7.9 מוגבל 3 ק ג",
+            "min_qty": 1.0,
+            "is_club": false,
+            "is_conditional": false,
+            "promo_unit_price": null
+          }
         },
         {
           "store": "Shufersal Sheli (Ben Yehuda 79)",
@@ -687,8 +891,8 @@
         {
           "store": "Rami Levy BaShchuna (Ben Yehuda 23)",
           "short_store": "רמי לוי בן יהודה",
-          "item_code": "7290016270723",
-          "product": "עגבניות שרי ארוז",
+          "item_code": "7290122182408",
+          "product": "עגבניות שרי ליקופן ר",
           "price": 10.9,
           "unit_price": 10.9,
           "effective_unit_price": 10.9,
@@ -699,8 +903,8 @@
         {
           "store": "Rami Levy BaShchuna (Ben Yehuda 23)",
           "short_store": "רמי לוי בן יהודה",
-          "item_code": "7290122182408",
-          "product": "עגבניות שרי ליקופן ר",
+          "item_code": "7290016270723",
+          "product": "עגבניות שרי ארוז",
           "price": 10.9,
           "unit_price": 10.9,
           "effective_unit_price": 10.9,
@@ -779,18 +983,6 @@
           "unit": "יחידות",
           "price_updated": "",
           "promo": null
-        },
-        {
-          "store": "Rami Levy (Ayalon Bnei Brak)",
-          "short_store": "רמי לוי איילון",
-          "item_code": "7290000000641",
-          "product": "עגבניות מגי",
-          "price": 13.9,
-          "unit_price": 13.9,
-          "effective_unit_price": 13.9,
-          "unit": "ק\"ג",
-          "price_updated": "",
-          "promo": null
         }
       ]
     },
@@ -809,6 +1001,30 @@
           "price": 6.9,
           "unit_price": 6.9,
           "effective_unit_price": 6.9,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290009000207",
+          "product": "מלפפון",
+          "price": 6.9,
+          "unit_price": 6.9,
+          "effective_unit_price": 6.9,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290009011500",
+          "product": "מלפפון פרמיום ארוז כ",
+          "price": 13.9,
+          "unit_price": 6.95,
+          "effective_unit_price": 6.95,
           "unit": "ק\"ג",
           "price_updated": "",
           "promo": null
@@ -868,6 +1084,18 @@
           }
         },
         {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "710497091527",
+          "product": "מלפפון בייבי ארץ נגב",
+          "price": 13.9,
+          "unit_price": 13.9,
+          "effective_unit_price": 13.9,
+          "unit": "יחידה",
+          "price_updated": "",
+          "promo": null
+        },
+        {
           "store": "Shufersal Sheli (Ben Yehuda 79)",
           "short_store": "שופרסל שלי",
           "item_code": "7290000960548",
@@ -888,6 +1116,18 @@
           "unit_price": 17.9,
           "effective_unit_price": 17.9,
           "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290020174888",
+          "product": "מלפפון בייבי ערוגות",
+          "price": 19.9,
+          "unit_price": 19.9,
+          "effective_unit_price": 19.9,
+          "unit": "יחידה",
           "price_updated": "",
           "promo": null
         },
@@ -956,66 +1196,6 @@
             "is_conditional": false,
             "promo_unit_price": null
           }
-        },
-        {
-          "store": "Rami Levy (Ayalon Bnei Brak)",
-          "short_store": "רמי לוי איילון",
-          "item_code": "7290113196339",
-          "product": "מלפפונים קורנישונים",
-          "price": 10.9,
-          "unit_price": 29.46,
-          "effective_unit_price": 29.46,
-          "unit": "ק\"ג",
-          "price_updated": "",
-          "promo": null
-        },
-        {
-          "store": "Shufersal Sheli (Ben Yehuda 79)",
-          "short_store": "שופרסל שלי",
-          "item_code": "608614340606",
-          "product": "מלפפון בייבי 500 גרם",
-          "price": 14.9,
-          "unit_price": 29.8,
-          "effective_unit_price": 29.8,
-          "unit": "ק\"ג",
-          "price_updated": "",
-          "promo": null
-        },
-        {
-          "store": "Shufersal Sheli (Ben Yehuda 79)",
-          "short_store": "שופרסל שלי",
-          "item_code": "7296073732976",
-          "product": "מרכך מלפפון תה907מ להמון",
-          "price": 29.9,
-          "unit_price": 32.97,
-          "effective_unit_price": 32.97,
-          "unit": "ליטר",
-          "price_updated": "",
-          "promo": {
-            "desc": "19.90 שמפו 1 ליטר/מרכך 907 מ\"ל",
-            "min_qty": 1.0,
-            "is_club": false,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
-        },
-        {
-          "store": "AM:PM (Ben Yehuda 61)",
-          "short_store": "AM:PM בן יהודה",
-          "item_code": "40370",
-          "product": "מלפפון בייבי",
-          "price": 10.9,
-          "unit_price": 33.03,
-          "effective_unit_price": 33.03,
-          "unit": "ק\"ג",
-          "price_updated": "",
-          "promo": {
-            "desc": "הנחה 10% על ירקות ארוז מועדון 55 פלטינה",
-            "min_qty": 1.0,
-            "is_club": true,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
         }
       ]
     },
@@ -1037,7 +1217,7 @@
           "unit": "ק\"ג",
           "price_updated": "",
           "promo": {
-            "desc": "בצל יבש ב3.9 מוגבל ל3",
+            "desc": "בצל יבש ב4.5 מוגבל ל3",
             "min_qty": 1.0,
             "is_club": false,
             "is_conditional": false,
@@ -1085,6 +1265,18 @@
             "is_conditional": false,
             "promo_unit_price": null
           }
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290009000931",
+          "product": "בצל אדום",
+          "price": 5.9,
+          "unit_price": 5.9,
+          "effective_unit_price": 5.9,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
         },
         {
           "store": "Shufersal Sheli (Ben Yehuda 79)",
@@ -1204,6 +1396,42 @@
       },
       "matches": [
         {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "6985752009836",
+          "product": "שום 4 ראשים",
+          "price": 4.9,
+          "unit_price": 1.23,
+          "effective_unit_price": 1.23,
+          "unit": "יחידה",
+          "price_updated": "",
+          "promo": {
+            "desc": "שום 4 ראשים 4 ב 10-",
+            "min_qty": 1.0,
+            "is_club": false,
+            "is_conditional": false,
+            "promo_unit_price": null
+          }
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "6936613888667",
+          "product": "שום 4 ראשים",
+          "price": 5.9,
+          "unit_price": 1.48,
+          "effective_unit_price": 1.48,
+          "unit": "יחידה",
+          "price_updated": "",
+          "promo": {
+            "desc": "שום 4 ראשים 4 ב 10-",
+            "min_qty": 1.0,
+            "is_club": false,
+            "is_conditional": false,
+            "promo_unit_price": null
+          }
+        },
+        {
           "store": "Rami Levy BaShchuna (Ben Yehuda 23)",
           "short_store": "רמי לוי בן יהודה",
           "item_code": "7290000000411",
@@ -1230,24 +1458,6 @@
         {
           "store": "Rami Levy (Ayalon Bnei Brak)",
           "short_store": "רמי לוי איילון",
-          "item_code": "7290000000133",
-          "product": "שום יבש",
-          "price": 4.9,
-          "unit_price": 4.9,
-          "effective_unit_price": 4.9,
-          "unit": "יחידות",
-          "price_updated": "",
-          "promo": {
-            "desc": "שום יבש ב2.9 מוגבל ל3",
-            "min_qty": 1.0,
-            "is_club": false,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
-        },
-        {
-          "store": "Rami Levy (Ayalon Bnei Brak)",
-          "short_store": "רמי לוי איילון",
           "item_code": "7290000000411",
           "product": "שום יבש יבוא רמי לוי",
           "price": 4.9,
@@ -1257,6 +1467,24 @@
           "price_updated": "",
           "promo": {
             "desc": "שום יבש יבוא רמי לוי ב2.9 מוגבל ל3",
+            "min_qty": 1.0,
+            "is_club": false,
+            "is_conditional": false,
+            "promo_unit_price": null
+          }
+        },
+        {
+          "store": "Rami Levy (Ayalon Bnei Brak)",
+          "short_store": "רמי לוי איילון",
+          "item_code": "7290000000133",
+          "product": "שום יבש",
+          "price": 4.9,
+          "unit_price": 4.9,
+          "effective_unit_price": 4.9,
+          "unit": "יחידות",
+          "price_updated": "",
+          "promo": {
+            "desc": "שום יבש ב2.9 מוגבל ל3",
             "min_qty": 1.0,
             "is_club": false,
             "is_conditional": false,
@@ -1284,6 +1512,18 @@
           "unit_price": 9.9,
           "effective_unit_price": 9.9,
           "unit": "יחידות",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290104230011",
+          "product": "שיני שום קלוף 1 קילו",
+          "price": 10.9,
+          "unit_price": 10.9,
+          "effective_unit_price": 10.9,
+          "unit": "ק\"ג",
           "price_updated": "",
           "promo": null
         },
@@ -1376,42 +1616,6 @@
             "is_conditional": false,
             "promo_unit_price": null
           }
-        },
-        {
-          "store": "Rami Levy (Ayalon Bnei Brak)",
-          "short_store": "רמי לוי איילון",
-          "item_code": "7777886602026",
-          "product": "כותש שום",
-          "price": 19.9,
-          "unit_price": 19.9,
-          "effective_unit_price": 19.9,
-          "unit": "יחידות",
-          "price_updated": "",
-          "promo": null
-        },
-        {
-          "store": "Rami Levy (Ayalon Bnei Brak)",
-          "short_store": "רמי לוי איילון",
-          "item_code": "7290000000984",
-          "product": "שום טרי עם עלים",
-          "price": 19.9,
-          "unit_price": 19.9,
-          "effective_unit_price": 19.9,
-          "unit": "ק\"ג",
-          "price_updated": "",
-          "promo": null
-        },
-        {
-          "store": "Rami Levy (Ayalon Bnei Brak)",
-          "short_store": "רמי לוי איילון",
-          "item_code": "6902412100733",
-          "product": "שיני שום קלוף 1 ק\"ג",
-          "price": 24.9,
-          "unit_price": 24.9,
-          "effective_unit_price": 24.9,
-          "unit": "ק\"ג",
-          "price_updated": "",
-          "promo": null
         }
       ]
     },
@@ -1447,6 +1651,18 @@
           "promo": null
         },
         {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290010868292",
+          "product": "תפוח אדמה לבן גידולי",
+          "price": 24.9,
+          "unit_price": 4.98,
+          "effective_unit_price": 4.98,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
+        {
           "store": "Rami Levy (Ayalon Bnei Brak)",
           "short_store": "רמי לוי איילון",
           "item_code": "7290000002300",
@@ -1468,13 +1684,19 @@
           "effective_unit_price": 5.6,
           "unit": "ק\"ג",
           "price_updated": "",
-          "promo": null
+          "promo": {
+            "desc": "תפוח אדמה לבן ארוז ב4.9 מוגבל ל5",
+            "min_qty": 1.0,
+            "is_club": false,
+            "is_conditional": false,
+            "promo_unit_price": null
+          }
         },
         {
           "store": "Rami Levy BaShchuna (Ben Yehuda 23)",
           "short_store": "רמי לוי בן יהודה",
-          "item_code": "7290000000306",
-          "product": "תפוח אדמה אדום במשקל",
+          "item_code": "7290019064022",
+          "product": "תפו\"א לבן פרימיום אר",
           "price": 5.9,
           "unit_price": 5.9,
           "effective_unit_price": 5.9,
@@ -1485,8 +1707,8 @@
         {
           "store": "Rami Levy BaShchuna (Ben Yehuda 23)",
           "short_store": "רמי לוי בן יהודה",
-          "item_code": "7290019064022",
-          "product": "תפו\"א לבן פרימיום אר",
+          "item_code": "7290000000306",
+          "product": "תפוח אדמה אדום במשקל",
           "price": 5.9,
           "unit_price": 5.9,
           "effective_unit_price": 5.9,
@@ -1543,70 +1765,52 @@
           "promo": null
         },
         {
-          "store": "Rami Levy BaShchuna (Ben Yehuda 23)",
-          "short_store": "רמי לוי בן יהודה",
-          "item_code": "7290000000422",
-          "product": "תפוח אדמה לבן במשקל",
-          "price": 6.9,
-          "unit_price": 6.9,
-          "effective_unit_price": 6.9,
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290009002935",
+          "product": "תפוח אדמה לבן",
+          "price": 29.9,
+          "unit_price": 5.98,
+          "effective_unit_price": 5.98,
           "unit": "ק\"ג",
           "price_updated": "",
           "promo": null
         },
         {
-          "store": "Rami Levy BaShchuna (Ben Yehuda 23)",
-          "short_store": "רמי לוי בן יהודה",
-          "item_code": "7290000000541",
-          "product": "תפו\"א",
-          "price": 6.9,
-          "unit_price": 6.9,
-          "effective_unit_price": 6.9,
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290001867051",
+          "product": "תפוח אדמה לבן גלי מש",
+          "price": 29.9,
+          "unit_price": 5.98,
+          "effective_unit_price": 5.98,
           "unit": "ק\"ג",
           "price_updated": "",
           "promo": null
         },
         {
-          "store": "Rami Levy (Ayalon Bnei Brak)",
-          "short_store": "רמי לוי איילון",
-          "item_code": "7290000000541",
-          "product": "תפו\"א",
-          "price": 6.9,
-          "unit_price": 6.9,
-          "effective_unit_price": 6.9,
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290009002980",
+          "product": "תפוח אדמה אדום",
+          "price": 33.9,
+          "unit_price": 6.78,
+          "effective_unit_price": 6.78,
           "unit": "ק\"ג",
           "price_updated": "",
           "promo": null
         },
         {
-          "store": "Rami Levy (Ayalon Bnei Brak)",
-          "short_store": "רמי לוי איילון",
-          "item_code": "693493158657",
-          "product": "תפו\"א פרימיום פלוס",
-          "price": 6.9,
-          "unit_price": 6.9,
-          "effective_unit_price": 6.9,
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290001867006",
+          "product": "תפוח אדמה אדום גלי מ",
+          "price": 33.9,
+          "unit_price": 6.78,
+          "effective_unit_price": 6.78,
           "unit": "ק\"ג",
           "price_updated": "",
           "promo": null
-        },
-        {
-          "store": "Rami Levy (Ayalon Bnei Brak)",
-          "short_store": "רמי לוי איילון",
-          "item_code": "7290122182323",
-          "product": "תפוח אדמה למיקרו רמי",
-          "price": 6.9,
-          "unit_price": 6.9,
-          "effective_unit_price": 6.9,
-          "unit": "יחידות",
-          "price_updated": "",
-          "promo": {
-            "desc": "תפו א אדמה 700 גרם רמי לוי 2ב12",
-            "min_qty": 1.0,
-            "is_club": false,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
         }
       ]
     },
@@ -1646,6 +1850,18 @@
           "short_store": "רמי לוי איילון",
           "item_code": "7290000000249",
           "product": "גזר בתפזורת",
+          "price": 4.9,
+          "unit_price": 4.9,
+          "effective_unit_price": 4.9,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290009000313",
+          "product": "גזר",
           "price": 4.9,
           "unit_price": 4.9,
           "effective_unit_price": 4.9,
@@ -1808,24 +2024,6 @@
           "unit": "יחידות",
           "price_updated": "",
           "promo": null
-        },
-        {
-          "store": "Rami Levy (Ayalon Bnei Brak)",
-          "short_store": "רמי לוי איילון",
-          "item_code": "7290015603225",
-          "product": "איטריות עם גזר 454 ג",
-          "price": 9.9,
-          "unit_price": 21.81,
-          "effective_unit_price": 21.81,
-          "unit": "ק\"ג",
-          "price_updated": "",
-          "promo": {
-            "desc": "אטריות ביצים/בטעמים 454גר ב8.90",
-            "min_qty": 1.0,
-            "is_club": false,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
         }
       ]
     },
@@ -1836,6 +2034,18 @@
         "days": 1
       },
       "matches": [
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290009001501",
+          "product": "פלפל אדום",
+          "price": 6.9,
+          "unit_price": 6.9,
+          "effective_unit_price": 6.9,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
         {
           "store": "Rami Levy BaShchuna (Ben Yehuda 23)",
           "short_store": "רמי לוי בן יהודה",
@@ -1972,6 +2182,30 @@
           }
         },
         {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290009001808",
+          "product": "קישוא",
+          "price": 8.9,
+          "unit_price": 8.9,
+          "effective_unit_price": 8.9,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290009001853",
+          "product": "קישוא זוקיני ירוק",
+          "price": 8.9,
+          "unit_price": 8.9,
+          "effective_unit_price": 8.9,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
+        {
           "store": "Rami Levy BaShchuna (Ben Yehuda 23)",
           "short_store": "רמי לוי בן יהודה",
           "item_code": "7290000000420",
@@ -2074,6 +2308,18 @@
           }
         },
         {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290017800004",
+          "product": "קישוא זוקיני",
+          "price": 14.9,
+          "unit_price": 14.9,
+          "effective_unit_price": 14.9,
+          "unit": "יחידה",
+          "price_updated": "",
+          "promo": null
+        },
+        {
           "store": "AM:PM (Ben Yehuda 61)",
           "short_store": "AM:PM בן יהודה",
           "item_code": "7290000040783",
@@ -2114,48 +2360,6 @@
           "unit": "ק\"ג",
           "price_updated": "",
           "promo": null
-        },
-        {
-          "store": "Shufersal Sheli (Ben Yehuda 79)",
-          "short_store": "שופרסל שלי",
-          "item_code": "7290009137132",
-          "product": "מארז קישוא בהיר אורגני",
-          "price": 22.9,
-          "unit_price": 22.9,
-          "effective_unit_price": 22.9,
-          "unit": "ק\"ג",
-          "price_updated": "",
-          "promo": null
-        },
-        {
-          "store": "Shufersal Sheli (Ben Yehuda 79)",
-          "short_store": "שופרסל שלי",
-          "item_code": "7290009137149",
-          "product": "מארז קישוא כהה אורגני",
-          "price": 22.9,
-          "unit_price": 22.9,
-          "effective_unit_price": 22.9,
-          "unit": "ק\"ג",
-          "price_updated": "",
-          "promo": null
-        },
-        {
-          "store": "Rami Levy (Ayalon Bnei Brak)",
-          "short_store": "רמי לוי איילון",
-          "item_code": "7290015282680",
-          "product": "קישוא בטעם כבד 200גר",
-          "price": 10.9,
-          "unit_price": 54.5,
-          "effective_unit_price": 54.5,
-          "unit": "ק\"ג",
-          "price_updated": "",
-          "promo": {
-            "desc": "סלטי גורמי שמיר 200-400 גרם 2ב20",
-            "min_qty": 1.0,
-            "is_club": false,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
         }
       ]
     },
@@ -2176,12 +2380,30 @@
           "effective_unit_price": 6.4,
           "unit": "ק\"ג",
           "price_updated": "",
-          "promo": null
+          "promo": {
+            "desc": "בטטה ב5.9 מוגבל ל3",
+            "min_qty": 1.0,
+            "is_club": false,
+            "is_conditional": false,
+            "promo_unit_price": null
+          }
         },
         {
           "store": "Rami Levy BaShchuna (Ben Yehuda 23)",
           "short_store": "רמי לוי בן יהודה",
           "item_code": "7290000000138",
+          "product": "בטטה",
+          "price": 7.9,
+          "unit_price": 7.9,
+          "effective_unit_price": 7.9,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290009001105",
           "product": "בטטה",
           "price": 7.9,
           "unit_price": 7.9,
@@ -2199,6 +2421,18 @@
           "unit_price": 7.9,
           "effective_unit_price": 7.9,
           "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290010868759",
+          "product": "בטטה ארוזה",
+          "price": 9.9,
+          "unit_price": 9.9,
+          "effective_unit_price": 9.9,
+          "unit": "יחידה",
           "price_updated": "",
           "promo": null
         },
@@ -2246,6 +2480,42 @@
           "price": 9.9,
           "unit_price": 9.9,
           "effective_unit_price": 9.9,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290120343153",
+          "product": "ציפס בטטה פילד גוד 1",
+          "price": 19.9,
+          "unit_price": 13.27,
+          "effective_unit_price": 13.27,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290120349902",
+          "product": "ציפס בטטה פילד גוד 5",
+          "price": 9.9,
+          "unit_price": 19.8,
+          "effective_unit_price": 19.8,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290020244062",
+          "product": "ציפס בטטה תומר 1 ק\"ג",
+          "price": 19.9,
+          "unit_price": 19.9,
+          "effective_unit_price": 19.9,
           "unit": "ק\"ג",
           "price_updated": "",
           "promo": null
@@ -2309,72 +2579,6 @@
           "unit": "ק\"ג",
           "price_updated": "",
           "promo": null
-        },
-        {
-          "store": "Rami Levy (Ayalon Bnei Brak)",
-          "short_store": "רמי לוי איילון",
-          "item_code": "7290002026341",
-          "product": "ציפס בטטה פלאנק 500",
-          "price": 16.9,
-          "unit_price": 33.8,
-          "effective_unit_price": 33.8,
-          "unit": "ק\"ג",
-          "price_updated": "",
-          "promo": null
-        },
-        {
-          "store": "Rami Levy (Ayalon Bnei Brak)",
-          "short_store": "רמי לוי איילון",
-          "item_code": "7290002026358",
-          "product": "בטטה ציפס זיג זג 500",
-          "price": 16.9,
-          "unit_price": 33.8,
-          "effective_unit_price": 33.8,
-          "unit": "ק\"ג",
-          "price_updated": "",
-          "promo": null
-        },
-        {
-          "store": "AM:PM (Ben Yehuda 61)",
-          "short_store": "AM:PM בן יהודה",
-          "item_code": "7290012245275",
-          "product": "CHIPS ציפס בטטה קריס",
-          "price": 34.9,
-          "unit_price": 34.9,
-          "effective_unit_price": 34.9,
-          "unit": "ק\"ג",
-          "price_updated": "",
-          "promo": null
-        },
-        {
-          "store": "Rami Levy (Ayalon Bnei Brak)",
-          "short_store": "רמי לוי איילון",
-          "item_code": "7290018198629",
-          "product": "תפוגן קריספי בטטה לת",
-          "price": 19.9,
-          "unit_price": 39.8,
-          "effective_unit_price": 39.8,
-          "unit": "ק\"ג",
-          "price_updated": "",
-          "promo": null
-        },
-        {
-          "store": "Shufersal Sheli (Ben Yehuda 79)",
-          "short_store": "שופרסל שלי",
-          "item_code": "7296073629795",
-          "product": "פריפלצת דלעת בטטה 120 גר",
-          "price": 5.0,
-          "unit_price": 41.67,
-          "effective_unit_price": 41.67,
-          "unit": "ק\"ג",
-          "price_updated": "",
-          "promo": {
-            "desc": "5ב18 פריפלצת מחית פירות אורגני 120",
-            "min_qty": 1.0,
-            "is_club": false,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
         }
       ]
     },
@@ -2385,6 +2589,30 @@
         "days": 1
       },
       "matches": [
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290012881817",
+          "product": "מטהר מגיק לימון 300",
+          "price": 4.9,
+          "unit_price": 0.2,
+          "effective_unit_price": 0.2,
+          "unit": "ליטר",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290009005325",
+          "product": "לימון ברשת",
+          "price": 4.9,
+          "unit_price": 4.9,
+          "effective_unit_price": 4.9,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
         {
           "store": "Rami Levy (Ayalon Bnei Brak)",
           "short_store": "רמי לוי איילון",
@@ -2421,6 +2649,30 @@
           "item_code": "7290110117689",
           "product": "ספרייט זירו לימון נע",
           "price": 8.2,
+          "unit_price": 5.47,
+          "effective_unit_price": 5.47,
+          "unit": "ליטר",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290110115241",
+          "product": "קוקה קולה זירו לימון",
+          "price": 8.2,
+          "unit_price": 5.47,
+          "effective_unit_price": 5.47,
+          "unit": "ליטר",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290116533575",
+          "product": "פנטסטיק סיף לימון 4",
+          "price": 21.9,
           "unit_price": 5.47,
           "effective_unit_price": 5.47,
           "unit": "ליטר",
@@ -2470,6 +2722,24 @@
           }
         },
         {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290001247112",
+          "product": "נקטר ספרינג לימון 1",
+          "price": 5.9,
+          "unit_price": 5.9,
+          "effective_unit_price": 5.9,
+          "unit": "ליטר",
+          "price_updated": "",
+          "promo": {
+            "desc": "נקטר קרטונית  ספרינג  4 ב 22",
+            "min_qty": 1.0,
+            "is_club": false,
+            "is_conditional": false,
+            "promo_unit_price": null
+          }
+        },
+        {
           "store": "Rami Levy BaShchuna (Ben Yehuda 23)",
           "short_store": "רמי לוי בן יהודה",
           "item_code": "7290110117689",
@@ -2506,100 +2776,16 @@
           "promo": null
         },
         {
-          "store": "Shufersal Sheli (Ben Yehuda 79)",
-          "short_store": "שופרסל שלי",
-          "item_code": "7290110115425",
-          "product": "פיוז-טי לימון נענע 1.5",
-          "price": 10.5,
-          "unit_price": 7.0,
-          "effective_unit_price": 7.0,
-          "unit": "ליטר",
-          "price_updated": "",
-          "promo": null
-        },
-        {
-          "store": "Rami Levy (Ayalon Bnei Brak)",
-          "short_store": "רמי לוי איילון",
-          "item_code": "7290010237579",
-          "product": "גזוז בטעם לימון ליים",
-          "price": 3.8,
-          "unit_price": 7.6,
-          "effective_unit_price": 7.6,
-          "unit": "ליטר",
-          "price_updated": "",
-          "promo": {
-            "desc": "פפסי /זירו/מירנדה/סבן אפ 500 מל 3ב10 כו",
-            "min_qty": 1.0,
-            "is_club": false,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
-        },
-        {
-          "store": "Rami Levy (Ayalon Bnei Brak)",
-          "short_store": "רמי לוי איילון",
-          "item_code": "7290000000117",
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290009005301",
           "product": "לימון",
-          "price": 7.7,
-          "unit_price": 7.7,
-          "effective_unit_price": 7.7,
+          "price": 6.9,
+          "unit_price": 6.9,
+          "effective_unit_price": 6.9,
           "unit": "ק\"ג",
           "price_updated": "",
-          "promo": {
-            "desc": "לימון ב6.9 מוגבל ל3",
-            "min_qty": 1.0,
-            "is_club": false,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
-        },
-        {
-          "store": "Rami Levy (Ayalon Bnei Brak)",
-          "short_store": "רמי לוי איילון",
-          "item_code": "7290012823589",
-          "product": "ריצפז פרש לימון 2 לי",
-          "price": 16.9,
-          "unit_price": 8.45,
-          "effective_unit_price": 8.45,
-          "unit": "ליטר",
-          "price_updated": "",
-          "promo": {
-            "desc": "נוזל רצפות ריצפז פרש 2 ליטר 2ב30",
-            "min_qty": 1.0,
-            "is_club": false,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
-        },
-        {
-          "store": "AM:PM (Ben Yehuda 61)",
-          "short_store": "AM:PM בן יהודה",
-          "item_code": "7290019056300",
-          "product": "שוופס ביטר לימון בקב",
-          "price": 12.9,
-          "unit_price": 8.6,
-          "effective_unit_price": 8.6,
-          "unit": "ליטר",
-          "price_updated": "",
           "promo": null
-        },
-        {
-          "store": "Rami Levy BaShchuna (Ben Yehuda 23)",
-          "short_store": "רמי לוי בן יהודה",
-          "item_code": "7290010237579",
-          "product": "גזוז בטעם לימון ליים",
-          "price": 4.9,
-          "unit_price": 9.8,
-          "effective_unit_price": 9.8,
-          "unit": "ליטר",
-          "price_updated": "",
-          "promo": {
-            "desc": "פפסי /זירו/מירנדה/סבן אפ 500 מל 3ב12 כול",
-            "min_qty": 1.0,
-            "is_club": false,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
         }
       ]
     },
@@ -2627,6 +2813,18 @@
             "is_conditional": false,
             "promo_unit_price": null
           }
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290009005417",
+          "product": "בננות",
+          "price": 6.9,
+          "unit_price": 6.9,
+          "effective_unit_price": 6.9,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
         },
         {
           "store": "Rami Levy (Ayalon Bnei Brak)",
@@ -2819,24 +3017,6 @@
           "unit": "ק\"ג",
           "price_updated": "",
           "promo": null
-        },
-        {
-          "store": "Shufersal Sheli (Ben Yehuda 79)",
-          "short_store": "שופרסל שלי",
-          "item_code": "7290110328627",
-          "product": "יוג.GO קרמי בננה קרמל200",
-          "price": 7.2,
-          "unit_price": 36.0,
-          "effective_unit_price": 36.0,
-          "unit": "ק\"ג",
-          "price_updated": "",
-          "promo": {
-            "desc": "3בGO 18 יוגורט 20-25גרם חלבון 200 ג",
-            "min_qty": 1.0,
-            "is_club": false,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
         }
       ]
     },
@@ -2872,6 +3052,54 @@
           "promo": null
         },
         {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290009001624",
+          "product": "תפוח עץ סמיט ברשת",
+          "price": 8.9,
+          "unit_price": 8.9,
+          "effective_unit_price": 8.9,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290009001631",
+          "product": "תפוח עץ חרמון ברשת",
+          "price": 8.9,
+          "unit_price": 8.9,
+          "effective_unit_price": 8.9,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290009001679",
+          "product": "תפוח עץ מוזהב ברשת",
+          "price": 8.9,
+          "unit_price": 8.9,
+          "effective_unit_price": 8.9,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290009001884",
+          "product": "תפוח עץ גאלה ברשת",
+          "price": 8.9,
+          "unit_price": 8.9,
+          "effective_unit_price": 8.9,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
+        {
           "store": "Rami Levy (Ayalon Bnei Brak)",
           "short_store": "רמי לוי איילון",
           "item_code": "7290000000512",
@@ -2900,6 +3128,18 @@
           "short_store": "רמי לוי איילון",
           "item_code": "7290000000186",
           "product": "תפוח עץ יונתן",
+          "price": 9.9,
+          "unit_price": 9.9,
+          "effective_unit_price": 9.9,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "8034108740546",
+          "product": "תפוח עץ גולד רוז",
           "price": 9.9,
           "unit_price": 9.9,
           "effective_unit_price": 9.9,
@@ -2978,66 +3218,6 @@
           "unit": "ק\"ג",
           "price_updated": "",
           "promo": null
-        },
-        {
-          "store": "Rami Levy BaShchuna (Ben Yehuda 23)",
-          "short_store": "רמי לוי בן יהודה",
-          "item_code": "7290000000115",
-          "product": "תפוח עץ מוזהב",
-          "price": 11.9,
-          "unit_price": 11.9,
-          "effective_unit_price": 11.9,
-          "unit": "ק\"ג",
-          "price_updated": "",
-          "promo": null
-        },
-        {
-          "store": "Rami Levy BaShchuna (Ben Yehuda 23)",
-          "short_store": "רמי לוי בן יהודה",
-          "item_code": "7290000000149",
-          "product": "תפוח עץ חרמון",
-          "price": 11.9,
-          "unit_price": 11.9,
-          "effective_unit_price": 11.9,
-          "unit": "ק\"ג",
-          "price_updated": "",
-          "promo": null
-        },
-        {
-          "store": "Rami Levy BaShchuna (Ben Yehuda 23)",
-          "short_store": "רמי לוי בן יהודה",
-          "item_code": "7290000000116",
-          "product": "תפוח עץ ירוק גרנד סמ",
-          "price": 12.9,
-          "unit_price": 12.9,
-          "effective_unit_price": 12.9,
-          "unit": "ק\"ג",
-          "price_updated": "",
-          "promo": null
-        },
-        {
-          "store": "Rami Levy BaShchuna (Ben Yehuda 23)",
-          "short_store": "רמי לוי בן יהודה",
-          "item_code": "7290000000219",
-          "product": "תפוח עץ גאלה",
-          "price": 13.9,
-          "unit_price": 13.9,
-          "effective_unit_price": 13.9,
-          "unit": "ק\"ג",
-          "price_updated": "",
-          "promo": null
-        },
-        {
-          "store": "Shufersal Sheli (Ben Yehuda 79)",
-          "short_store": "שופרסל שלי",
-          "item_code": "7290000209555",
-          "product": "סירופ תפוחי עץ דיאט 1 ל",
-          "price": 13.9,
-          "unit_price": 13.9,
-          "effective_unit_price": 13.9,
-          "unit": "ליטר",
-          "price_updated": "",
-          "promo": null
         }
       ]
     },
@@ -3048,6 +3228,30 @@
         "days": 1
       },
       "matches": [
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290001201619",
+          "product": "ביצים 18 יח בינוני ל",
+          "price": 19.9,
+          "unit_price": 1.11,
+          "effective_unit_price": 1.11,
+          "unit": "יחידה",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290001201510",
+          "product": "ביצים 30 יח בינוני ל",
+          "price": 33.4,
+          "unit_price": 1.11,
+          "effective_unit_price": 1.11,
+          "unit": "יחידה",
+          "price_updated": "",
+          "promo": null
+        },
         {
           "store": "AM:PM (Ben Yehuda 61)",
           "short_store": "AM:PM בן יהודה",
@@ -3069,6 +3273,30 @@
           "unit_price": 1.12,
           "effective_unit_price": 1.12,
           "unit": "יחידות",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290001201527",
+          "product": "ביצים 30 יח גדול  לס",
+          "price": 35.9,
+          "unit_price": 1.2,
+          "effective_unit_price": 1.2,
+          "unit": "יחידה",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290001201602",
+          "product": "ביצים 18 יח גדול לסר",
+          "price": 21.7,
+          "unit_price": 1.21,
+          "effective_unit_price": 1.21,
+          "unit": "יחידה",
           "price_updated": "",
           "promo": null
         },
@@ -3133,98 +3361,50 @@
           "promo": null
         },
         {
-          "store": "AM:PM (Ben Yehuda 61)",
-          "short_store": "AM:PM בן יהודה",
-          "item_code": "7290001201848",
-          "product": "ביצים אורגני 12 מדיו",
-          "price": 25.9,
-          "unit_price": 2.16,
-          "effective_unit_price": 2.16,
-          "unit": "יחידות",
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290001201657",
+          "product": "ביצים אומגה 30 יח בי",
+          "price": 45.8,
+          "unit_price": 1.53,
+          "effective_unit_price": 1.53,
+          "unit": "יחידה",
           "price_updated": "",
           "promo": null
         },
         {
-          "store": "Rami Levy (Ayalon Bnei Brak)",
-          "short_store": "רמי לוי איילון",
-          "item_code": "723098308352",
-          "product": "ביצים 12 יח בינוני M",
-          "price": 13.1,
-          "unit_price": 13.1,
-          "effective_unit_price": 13.1,
-          "unit": "יחידות",
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290011778019",
+          "product": "ביצי חופש 30 יח' גדו",
+          "price": 46.9,
+          "unit_price": 1.56,
+          "effective_unit_price": 1.56,
+          "unit": "יחידה",
           "price_updated": "",
           "promo": null
         },
         {
-          "store": "Rami Levy BaShchuna (Ben Yehuda 23)",
-          "short_store": "רמי לוי בן יהודה",
-          "item_code": "723098308352",
-          "product": "ביצים 12 יח בינוני M",
-          "price": 13.4,
-          "unit_price": 13.4,
-          "effective_unit_price": 13.4,
-          "unit": "יחידות",
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290001201640",
+          "product": "ביצים אומגה 30 יח גד",
+          "price": 48.8,
+          "unit_price": 1.63,
+          "effective_unit_price": 1.63,
+          "unit": "יחידה",
           "price_updated": "",
           "promo": null
         },
         {
-          "store": "Rami Levy (Ayalon Bnei Brak)",
-          "short_store": "רמי לוי איילון",
-          "item_code": "742259241895",
-          "product": "ביצים 12 יח בינוני M",
-          "price": 13.4,
-          "unit_price": 13.4,
-          "effective_unit_price": 13.4,
-          "unit": "יחידות",
-          "price_updated": "",
-          "promo": null
-        },
-        {
-          "store": "Rami Levy (Ayalon Bnei Brak)",
-          "short_store": "רמי לוי איילון",
-          "item_code": "723098308338",
-          "product": "ביצים 12 יח גדול L",
-          "price": 14.2,
-          "unit_price": 14.2,
-          "effective_unit_price": 14.2,
-          "unit": "יחידות",
-          "price_updated": "",
-          "promo": null
-        },
-        {
-          "store": "Rami Levy (Ayalon Bnei Brak)",
-          "short_store": "רמי לוי איילון",
-          "item_code": "742259241901",
-          "product": "ביצים 12 יח גדול L",
-          "price": 14.5,
-          "unit_price": 14.5,
-          "effective_unit_price": 14.5,
-          "unit": "יחידות",
-          "price_updated": "",
-          "promo": null
-        },
-        {
-          "store": "Rami Levy BaShchuna (Ben Yehuda 23)",
-          "short_store": "רמי לוי בן יהודה",
-          "item_code": "723098308338",
-          "product": "ביצים 12 יח גדול L",
-          "price": 14.54,
-          "unit_price": 14.54,
-          "effective_unit_price": 14.54,
-          "unit": "יחידות",
-          "price_updated": "",
-          "promo": null
-        },
-        {
-          "store": "Rami Levy BaShchuna (Ben Yehuda 23)",
-          "short_store": "רמי לוי בן יהודה",
-          "item_code": "723098308291",
-          "product": "ביצי חופש 12יח M",
-          "price": 17.1,
-          "unit_price": 17.1,
-          "effective_unit_price": 17.1,
-          "unit": "יחידות",
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290001201855",
+          "product": "ביצים אומגה 12 יח גד",
+          "price": 19.8,
+          "unit_price": 1.65,
+          "effective_unit_price": 1.65,
+          "unit": "יחידה",
           "price_updated": "",
           "promo": null
         }
@@ -3322,6 +3502,78 @@
           "promo": null
         },
         {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290004131074",
+          "product": "חלב 3% תנובה 1 ליטר",
+          "price": 7.2,
+          "unit_price": 7.2,
+          "effective_unit_price": 7.2,
+          "unit": "ליטר",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290010945306",
+          "product": "חלב 3% טרה 2 ליטר",
+          "price": 14.4,
+          "unit_price": 7.2,
+          "effective_unit_price": 7.2,
+          "unit": "ליטר",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290000057477",
+          "product": "חלב 3% תנובה 1.5 ליט",
+          "price": 10.8,
+          "unit_price": 7.2,
+          "effective_unit_price": 7.2,
+          "unit": "ליטר",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290102398065",
+          "product": "חלב 3% טרה 2 ליטר וס",
+          "price": 14.4,
+          "unit_price": 7.2,
+          "effective_unit_price": 7.2,
+          "unit": "ליטר",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290000522319",
+          "product": "חלב 3% רמת הגולן 1 ל",
+          "price": 7.2,
+          "unit_price": 7.2,
+          "effective_unit_price": 7.2,
+          "unit": "ליטר",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290116936291",
+          "product": "חלב 3% תנובה 2 ליטר",
+          "price": 14.4,
+          "unit_price": 7.2,
+          "effective_unit_price": 7.2,
+          "unit": "ליטר",
+          "price_updated": "",
+          "promo": null
+        },
+        {
           "store": "Rami Levy BaShchuna (Ben Yehuda 23)",
           "short_store": "רמי לוי בן יהודה",
           "item_code": "7290102398065",
@@ -3344,78 +3596,6 @@
           "unit": "ליטר",
           "price_updated": "",
           "promo": null
-        },
-        {
-          "store": "Rami Levy BaShchuna (Ben Yehuda 23)",
-          "short_store": "רמי לוי בן יהודה",
-          "item_code": "7290004131074",
-          "product": "חלב תנובה 3% שומן 1",
-          "price": 7.35,
-          "unit_price": 7.35,
-          "effective_unit_price": 7.35,
-          "unit": "ליטר",
-          "price_updated": "",
-          "promo": null
-        },
-        {
-          "store": "Rami Levy BaShchuna (Ben Yehuda 23)",
-          "short_store": "רמי לוי בן יהודה",
-          "item_code": "7290116936291",
-          "product": "חלב תנובה 3% שומן 2",
-          "price": 14.7,
-          "unit_price": 7.35,
-          "effective_unit_price": 7.35,
-          "unit": "ליטר",
-          "price_updated": "",
-          "promo": null
-        },
-        {
-          "store": "AM:PM (Ben Yehuda 61)",
-          "short_store": "AM:PM בן יהודה",
-          "item_code": "7290004131074",
-          "product": "חלב 3% קרטון מהדרין",
-          "price": 7.35,
-          "unit_price": 7.35,
-          "effective_unit_price": 7.35,
-          "unit": "ליטר",
-          "price_updated": "",
-          "promo": null
-        },
-        {
-          "store": "AM:PM (Ben Yehuda 61)",
-          "short_store": "AM:PM בן יהודה",
-          "item_code": "7290116936307",
-          "product": "חלב תנובה 3% שומן 2",
-          "price": 14.7,
-          "unit_price": 7.35,
-          "effective_unit_price": 7.35,
-          "unit": "ליטר",
-          "price_updated": "",
-          "promo": null
-        },
-        {
-          "store": "Shufersal Sheli (Ben Yehuda 79)",
-          "short_store": "שופרסל שלי",
-          "item_code": "7290102398065",
-          "product": "חלב 3% בקרטון מהדרין 2ל",
-          "price": 14.7,
-          "unit_price": 7.35,
-          "effective_unit_price": 7.35,
-          "unit": "ליטר",
-          "price_updated": "",
-          "promo": null
-        },
-        {
-          "store": "Shufersal Sheli (Ben Yehuda 79)",
-          "short_store": "שופרסל שלי",
-          "item_code": "7290116936307",
-          "product": "חלב 3% מהדרין 2ל תנובה",
-          "price": 14.7,
-          "unit_price": 7.35,
-          "effective_unit_price": 7.35,
-          "unit": "ליטר",
-          "price_updated": "",
-          "promo": null
         }
       ]
     },
@@ -3426,6 +3606,30 @@
         "days": 1
       },
       "matches": [
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290004127329",
+          "product": "קוטג 5% תנובה 250 גר",
+          "price": 5.9,
+          "unit_price": 23.6,
+          "effective_unit_price": 23.6,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290002868996",
+          "product": "קוטג 5% טרה 250 גרם",
+          "price": 6.2,
+          "unit_price": 24.8,
+          "effective_unit_price": 24.8,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
         {
           "store": "Shufersal Sheli (Ben Yehuda 79)",
           "short_store": "שופרסל שלי",
@@ -3446,6 +3650,18 @@
           "price": 6.6,
           "unit_price": 26.4,
           "effective_unit_price": 26.4,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290011194246",
+          "product": "קוטג 5% שטראוס 250 ג",
+          "price": 6.7,
+          "unit_price": 26.8,
+          "effective_unit_price": 26.8,
           "unit": "ק\"ג",
           "price_updated": "",
           "promo": null
@@ -3649,6 +3865,18 @@
           "promo": null
         },
         {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290014758117",
+          "product": "מארז יוגורט ביו תנוב",
+          "price": 15.9,
+          "unit_price": 13.25,
+          "effective_unit_price": 13.25,
+          "unit": "ליטר",
+          "price_updated": "",
+          "promo": null
+        },
+        {
           "store": "Rami Levy BaShchuna (Ben Yehuda 23)",
           "short_store": "רמי לוי בן יהודה",
           "item_code": "7290014758117",
@@ -3681,6 +3909,42 @@
           "unit_price": 15.8,
           "effective_unit_price": 15.8,
           "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290116936512",
+          "product": "יוגורט ביו תנובה 1.5",
+          "price": 7.9,
+          "unit_price": 15.8,
+          "effective_unit_price": 15.8,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290116936529",
+          "product": "יוגורט ביו תנובה 3%",
+          "price": 7.9,
+          "unit_price": 15.8,
+          "effective_unit_price": 15.8,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290102395224",
+          "product": "מארז יוגורט ביו  מול",
+          "price": 19.9,
+          "unit_price": 16.58,
+          "effective_unit_price": 16.58,
+          "unit": "ליטר",
           "price_updated": "",
           "promo": null
         },
@@ -3721,6 +3985,42 @@
           "promo": null
         },
         {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290002824466",
+          "product": "יוגורט ביו דנונה 0%",
+          "price": 3.6,
+          "unit_price": 18.0,
+          "effective_unit_price": 18.0,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290000057149",
+          "product": "יוגורט ביו תנובה 3%",
+          "price": 3.6,
+          "unit_price": 18.0,
+          "effective_unit_price": 18.0,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290000057132",
+          "product": "יוגורט ביו תנובה 1.5",
+          "price": 3.6,
+          "unit_price": 18.0,
+          "effective_unit_price": 18.0,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
+        {
           "store": "Rami Levy BaShchuna (Ben Yehuda 23)",
           "short_store": "רמי לוי בן יהודה",
           "item_code": "7290116936512",
@@ -3728,90 +4028,6 @@
           "price": 9.1,
           "unit_price": 18.2,
           "effective_unit_price": 18.2,
-          "unit": "ק\"ג",
-          "price_updated": "",
-          "promo": null
-        },
-        {
-          "store": "Rami Levy BaShchuna (Ben Yehuda 23)",
-          "short_store": "רמי לוי בן יהודה",
-          "item_code": "7290116936529",
-          "product": "יוגורט ביו טבעי 3% 5",
-          "price": 9.1,
-          "unit_price": 18.2,
-          "effective_unit_price": 18.2,
-          "unit": "ק\"ג",
-          "price_updated": "",
-          "promo": null
-        },
-        {
-          "store": "AM:PM (Ben Yehuda 61)",
-          "short_store": "AM:PM בן יהודה",
-          "item_code": "7290000057132",
-          "product": "יוגורט ביו 1.5% תנוב",
-          "price": 4.2,
-          "unit_price": 21.0,
-          "effective_unit_price": 21.0,
-          "unit": "ק\"ג",
-          "price_updated": "",
-          "promo": null
-        },
-        {
-          "store": "AM:PM (Ben Yehuda 61)",
-          "short_store": "AM:PM בן יהודה",
-          "item_code": "7290000057149",
-          "product": "יוגורט ביו  3% תנובה",
-          "price": 4.2,
-          "unit_price": 21.0,
-          "effective_unit_price": 21.0,
-          "unit": "ק\"ג",
-          "price_updated": "",
-          "promo": null
-        },
-        {
-          "store": "Rami Levy (Ayalon Bnei Brak)",
-          "short_store": "רמי לוי איילון",
-          "item_code": "7290012645389",
-          "product": "יוגורט ביו עיזים טבע",
-          "price": 21.9,
-          "unit_price": 21.9,
-          "effective_unit_price": 21.9,
-          "unit": "ליטר",
-          "price_updated": "",
-          "promo": null
-        },
-        {
-          "store": "Shufersal Sheli (Ben Yehuda 79)",
-          "short_store": "שופרסל שלי",
-          "item_code": "7290000057149",
-          "product": "יוגורט ביו 3% 200ג תנובה",
-          "price": 4.4,
-          "unit_price": 22.0,
-          "effective_unit_price": 22.0,
-          "unit": "ק\"ג",
-          "price_updated": "",
-          "promo": null
-        },
-        {
-          "store": "Shufersal Sheli (Ben Yehuda 79)",
-          "short_store": "שופרסל שלי",
-          "item_code": "7290000408316",
-          "product": "יוגורט ביו 3% דנונה 200ג",
-          "price": 4.9,
-          "unit_price": 24.5,
-          "effective_unit_price": 24.5,
-          "unit": "ק\"ג",
-          "price_updated": "",
-          "promo": null
-        },
-        {
-          "store": "Shufersal Sheli (Ben Yehuda 79)",
-          "short_store": "שופרסל שלי",
-          "item_code": "7290002824466",
-          "product": "יוגורט ביו 0% דנונה 200ג",
-          "price": 4.9,
-          "unit_price": 24.5,
-          "effective_unit_price": 24.5,
           "unit": "ק\"ג",
           "price_updated": "",
           "promo": null
@@ -3868,8 +4084,32 @@
           "promo": null
         },
         {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290116932033",
+          "product": "חמאה תנובה 200 גרם מ",
+          "price": 8.9,
+          "unit_price": 44.5,
+          "effective_unit_price": 44.5,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
+        {
           "store": "Rami Levy (Ayalon Bnei Brak)",
           "short_store": "רמי לוי איילון",
+          "item_code": "7290102394814",
+          "product": "חמאה טרה 200 גרם",
+          "price": 9.5,
+          "unit_price": 47.5,
+          "effective_unit_price": 47.5,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
           "item_code": "7290102394814",
           "product": "חמאה טרה 200 גרם",
           "price": 9.5,
@@ -3998,30 +4238,6 @@
           "unit": "ק\"ג",
           "price_updated": "",
           "promo": null
-        },
-        {
-          "store": "AM:PM (Ben Yehuda 61)",
-          "short_store": "AM:PM בן יהודה",
-          "item_code": "7290004652173",
-          "product": "חמאה עלמה 200ג",
-          "price": 14.9,
-          "unit_price": 74.5,
-          "effective_unit_price": 74.5,
-          "unit": "ק\"ג",
-          "price_updated": "",
-          "promo": null
-        },
-        {
-          "store": "Shufersal Sheli (Ben Yehuda 79)",
-          "short_store": "שופרסל שלי",
-          "item_code": "4820217240114",
-          "product": "חמאה FERMA 82.5%גרם 200",
-          "price": 14.9,
-          "unit_price": 74.5,
-          "effective_unit_price": 74.5,
-          "unit": "ק\"ג",
-          "price_updated": "",
-          "promo": null
         }
       ]
     },
@@ -4032,6 +4248,90 @@
         "days": 1
       },
       "matches": [
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290117909799",
+          "product": "שמן זית כתית  מעולה",
+          "price": 14.9,
+          "unit_price": 14.9,
+          "effective_unit_price": 14.9,
+          "unit": "ליטר",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290020396297",
+          "product": "שמן זית כתית מעולה ק",
+          "price": 19.9,
+          "unit_price": 30.0,
+          "effective_unit_price": 30.0,
+          "unit": "ליטר",
+          "price_updated": "",
+          "promo": {
+            "desc": "שמן זית כתית מעולה 17.9 מוג 3",
+            "min_qty": 1.0,
+            "is_club": false,
+            "is_conditional": false,
+            "promo_unit_price": null
+          }
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290020396839",
+          "product": "שמן זית כתית מעולה א",
+          "price": 19.9,
+          "unit_price": 30.0,
+          "effective_unit_price": 30.0,
+          "unit": "ליטר",
+          "price_updated": "",
+          "promo": {
+            "desc": "שמן זית כתית מעולה 17.9 מוג 3",
+            "min_qty": 1.0,
+            "is_club": false,
+            "is_conditional": false,
+            "promo_unit_price": null
+          }
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290005437212",
+          "product": "שמן זית כתית ספרדי ט",
+          "price": 24.9,
+          "unit_price": 30.0,
+          "effective_unit_price": 30.0,
+          "unit": "ליטר",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290000267425",
+          "product": "שמן זית כתית שקדיה 7",
+          "price": 19.9,
+          "unit_price": 30.0,
+          "effective_unit_price": 30.0,
+          "unit": "ליטר",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290020396501",
+          "product": "שמן זית כתית מעולה פ",
+          "price": 19.9,
+          "unit_price": 30.0,
+          "effective_unit_price": 30.0,
+          "unit": "ליטר",
+          "price_updated": "",
+          "promo": null
+        },
         {
           "store": "Rami Levy (Ayalon Bnei Brak)",
           "short_store": "רמי לוי איילון",
@@ -4058,6 +4358,18 @@
           "price": 29.8,
           "unit_price": 39.73,
           "effective_unit_price": 39.73,
+          "unit": "ליטר",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290010429554",
+          "product": "שמן זית כתית קלאסי י",
+          "price": 29.9,
+          "unit_price": 40.0,
+          "effective_unit_price": 40.0,
           "unit": "ליטר",
           "price_updated": "",
           "promo": null
@@ -4117,6 +4429,18 @@
           }
         },
         {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "6191509905058",
+          "product": "שמן זית כתית מעולה 1",
+          "price": 44.9,
+          "unit_price": 44.9,
+          "effective_unit_price": 44.9,
+          "unit": "ליטר",
+          "price_updated": "",
+          "promo": null
+        },
+        {
           "store": "Rami Levy BaShchuna (Ben Yehuda 23)",
           "short_store": "רמי לוי בן יהודה",
           "item_code": "7290010429554",
@@ -4140,150 +4464,6 @@
           "price_updated": "",
           "promo": {
             "desc": "שמן זית כתית מעולה 750 מ ל ב29.90",
-            "min_qty": 1.0,
-            "is_club": false,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
-        },
-        {
-          "store": "Rami Levy (Ayalon Bnei Brak)",
-          "short_store": "רמי לוי איילון",
-          "item_code": "7290003427154",
-          "product": "שמן זית כתית מעולה ט",
-          "price": 34.9,
-          "unit_price": 46.53,
-          "effective_unit_price": 46.53,
-          "unit": "ליטר",
-          "price_updated": "",
-          "promo": {
-            "desc": "שמן זית זיתא 750 מ ל ב29.90",
-            "min_qty": 1.0,
-            "is_club": false,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
-        },
-        {
-          "store": "Rami Levy (Ayalon Bnei Brak)",
-          "short_store": "רמי לוי איילון",
-          "item_code": "7290019233428",
-          "product": "שמן זית כתית מעולה ל",
-          "price": 24.9,
-          "unit_price": 49.8,
-          "effective_unit_price": 49.8,
-          "unit": "ליטר",
-          "price_updated": "",
-          "promo": {
-            "desc": "שמן זית לחיץ 500 מ ל זיתא ב19.90",
-            "min_qty": 1.0,
-            "is_club": false,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
-        },
-        {
-          "store": "Rami Levy BaShchuna (Ben Yehuda 23)",
-          "short_store": "רמי לוי בן יהודה",
-          "item_code": "7290003427154",
-          "product": "שמן זית כתית מעולה ט",
-          "price": 39.9,
-          "unit_price": 53.2,
-          "effective_unit_price": 53.2,
-          "unit": "ליטר",
-          "price_updated": "",
-          "promo": {
-            "desc": "שמן זית זיתא 750 מ ל ב36.90",
-            "min_qty": 1.0,
-            "is_club": false,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
-        },
-        {
-          "store": "AM:PM (Ben Yehuda 61)",
-          "short_store": "AM:PM בן יהודה",
-          "item_code": "7290014692749",
-          "product": "שמן זית כתית מעולה ו",
-          "price": 39.9,
-          "unit_price": 53.2,
-          "effective_unit_price": 53.2,
-          "unit": "ליטר",
-          "price_updated": "",
-          "promo": {
-            "desc": "מבצע שמן זית כתית ויליפוד ב 32.90 שח",
-            "min_qty": 1.0,
-            "is_club": false,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
-        },
-        {
-          "store": "AM:PM (Ben Yehuda 61)",
-          "short_store": "AM:PM בן יהודה",
-          "item_code": "7290019926054",
-          "product": "האופה שמן זית כתית מ",
-          "price": 39.9,
-          "unit_price": 53.2,
-          "effective_unit_price": 53.2,
-          "unit": "ליטר",
-          "price_updated": "",
-          "promo": {
-            "desc": "מבצע  שמן זית כתית האופה ב 32.90 שח",
-            "min_qty": 1.0,
-            "is_club": false,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
-        },
-        {
-          "store": "Shufersal Sheli (Ben Yehuda 79)",
-          "short_store": "שופרסל שלי",
-          "item_code": "7296073693284",
-          "product": "שמן זית כתית 750 MATTEO",
-          "price": 39.9,
-          "unit_price": 53.2,
-          "effective_unit_price": 53.2,
-          "unit": "ליטר",
-          "price_updated": "",
-          "promo": {
-            "desc": "2ב55 שמן זית כתית MATTEO 750",
-            "min_qty": 1.0,
-            "is_club": false,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
-        },
-        {
-          "store": "Shufersal Sheli (Ben Yehuda 79)",
-          "short_store": "שופרסל שלי",
-          "item_code": "7296073703785",
-          "product": "שמן זית כתית נריה 750מ\"ל",
-          "price": 39.9,
-          "unit_price": 53.2,
-          "effective_unit_price": 53.2,
-          "unit": "ליטר",
-          "price_updated": "",
-          "promo": {
-            "desc": "2ב55 שמן זית כתית נריה 750מ\"ל",
-            "min_qty": 1.0,
-            "is_club": false,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
-        },
-        {
-          "store": "Shufersal Sheli (Ben Yehuda 79)",
-          "short_store": "שופרסל שלי",
-          "item_code": "8410179100043",
-          "product": "שמן זית כתית750מ BORGES",
-          "price": 39.9,
-          "unit_price": 53.2,
-          "effective_unit_price": 53.2,
-          "unit": "ליטר",
-          "price_updated": "",
-          "promo": {
-            "desc": "2ב70 שמן זית בורחס/פיקאול/אוחיבלאנק",
             "min_qty": 1.0,
             "is_club": false,
             "is_conditional": false,
@@ -4329,6 +4509,60 @@
           "price_updated": "",
           "promo": {
             "desc": "שמן קנולה 1 ליטר 3ב20",
+            "min_qty": 1.0,
+            "is_club": false,
+            "is_conditional": false,
+            "promo_unit_price": null
+          }
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290019035237",
+          "product": "שמן קנולה פילד גוד 1",
+          "price": 8.9,
+          "unit_price": 8.9,
+          "effective_unit_price": 8.9,
+          "unit": "ליטר",
+          "price_updated": "",
+          "promo": {
+            "desc": "שמן קנולה 1 ל  3 ב 20 מוג2",
+            "min_qty": 1.0,
+            "is_club": false,
+            "is_conditional": false,
+            "promo_unit_price": null
+          }
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290019245506",
+          "product": "שמן קנולה אלומות 1 ל",
+          "price": 8.9,
+          "unit_price": 8.9,
+          "effective_unit_price": 8.9,
+          "unit": "ליטר",
+          "price_updated": "",
+          "promo": {
+            "desc": "שמן קנולה 1 ל  3 ב 20 מוג2",
+            "min_qty": 1.0,
+            "is_club": false,
+            "is_conditional": false,
+            "promo_unit_price": null
+          }
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290112128362",
+          "product": "שמן קנולה אינדירה 1",
+          "price": 8.9,
+          "unit_price": 8.9,
+          "effective_unit_price": 8.9,
+          "unit": "ליטר",
+          "price_updated": "",
+          "promo": {
+            "desc": "שמן קנולה 1 ל  3 ב 20 מוג2",
             "min_qty": 1.0,
             "is_club": false,
             "is_conditional": false,
@@ -4408,6 +4642,18 @@
           "promo": null
         },
         {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290003578672",
+          "product": "שמן חמניות וילי פוד",
+          "price": 9.9,
+          "unit_price": 9.9,
+          "effective_unit_price": 9.9,
+          "unit": "ליטר",
+          "price_updated": "",
+          "promo": null
+        },
+        {
           "store": "Rami Levy (Ayalon Bnei Brak)",
           "short_store": "רמי לוי איילון",
           "item_code": "7290015888301",
@@ -4456,70 +4702,22 @@
           }
         },
         {
-          "store": "Rami Levy BaShchuna (Ben Yehuda 23)",
-          "short_store": "רמי לוי בן יהודה",
-          "item_code": "7290002374268",
-          "product": "שמן חמניות מילומור 1",
-          "price": 11.9,
-          "unit_price": 11.9,
-          "effective_unit_price": 11.9,
-          "unit": "ליטר",
-          "price_updated": "",
-          "promo": null
-        },
-        {
-          "store": "AM:PM (Ben Yehuda 61)",
-          "short_store": "AM:PM בן יהודה",
-          "item_code": "7290003578672",
-          "product": "שמן חמניות מזוכך 1 ל",
-          "price": 11.9,
-          "unit_price": 11.9,
-          "effective_unit_price": 11.9,
-          "unit": "ליטר",
-          "price_updated": "",
-          "promo": null
-        },
-        {
-          "store": "AM:PM (Ben Yehuda 61)",
-          "short_store": "AM:PM בן יהודה",
-          "item_code": "7290010259977",
-          "product": "שמן קנולה 1 ליטר ויל",
-          "price": 11.9,
-          "unit_price": 11.9,
-          "effective_unit_price": 11.9,
+          "store": "Shufersal Sheli (Ben Yehuda 79)",
+          "short_store": "שופרסל שלי",
+          "item_code": "7296073756361",
+          "product": "שמן קנולה מזוכך 1 ליטר",
+          "price": 10.9,
+          "unit_price": 10.9,
+          "effective_unit_price": 10.9,
           "unit": "ליטר",
           "price_updated": "",
           "promo": {
-            "desc": "מבצע שמן קנולה ויליפוד 2 ב 22 שח",
+            "desc": "2ב18 שמן קנולה מזוכך 1 ליטר",
             "min_qty": 1.0,
             "is_club": false,
             "is_conditional": false,
             "promo_unit_price": null
           }
-        },
-        {
-          "store": "Rami Levy (Ayalon Bnei Brak)",
-          "short_store": "רמי לוי איילון",
-          "item_code": "7290020080004",
-          "product": "שמן קנולה נוגדי חמצו",
-          "price": 12.0,
-          "unit_price": 12.0,
-          "effective_unit_price": 12.0,
-          "unit": "ליטר",
-          "price_updated": "",
-          "promo": null
-        },
-        {
-          "store": "Rami Levy (Ayalon Bnei Brak)",
-          "short_store": "רמי לוי איילון",
-          "item_code": "7290020080059",
-          "product": "שמן קנולה וויטמין אי",
-          "price": 12.0,
-          "unit_price": 12.0,
-          "effective_unit_price": 12.0,
-          "unit": "ליטר",
-          "price_updated": "",
-          "promo": null
         }
       ]
     },
@@ -4577,6 +4775,18 @@
             "is_conditional": true,
             "promo_unit_price": null
           }
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290016144093",
+          "product": "קמח לחם נפלאות 1 ק\"ג",
+          "price": 6.9,
+          "unit_price": 6.9,
+          "effective_unit_price": 6.9,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
         },
         {
           "store": "AM:PM (Ben Yehuda 61)",
@@ -4732,6 +4942,54 @@
           "promo": null
         },
         {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290008597906",
+          "product": "אורז יסמין שקדיה 5 ק",
+          "price": 34.9,
+          "unit_price": 6.98,
+          "effective_unit_price": 6.98,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290014325258",
+          "product": "אורז פרסי אינדירה 1.",
+          "price": 9.9,
+          "unit_price": 7.07,
+          "effective_unit_price": 7.07,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290117909645",
+          "product": "אורז יסמין שקדיה 2 ק",
+          "price": 14.9,
+          "unit_price": 7.45,
+          "effective_unit_price": 7.45,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "835811004714",
+          "product": "אורז פרסי הנמל 1 ק\"ג",
+          "price": 7.9,
+          "unit_price": 7.9,
+          "effective_unit_price": 7.9,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
+        {
           "store": "Rami Levy (Ayalon Bnei Brak)",
           "short_store": "רמי לוי איילון",
           "item_code": "7290008597906",
@@ -4748,6 +5006,60 @@
             "is_conditional": false,
             "promo_unit_price": null
           }
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290012309366",
+          "product": "אורז בסמטי הודי שקדי",
+          "price": 39.9,
+          "unit_price": 7.98,
+          "effective_unit_price": 7.98,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290117765883",
+          "product": "אורז בסמטי  הולידרופ",
+          "price": 39.9,
+          "unit_price": 7.98,
+          "effective_unit_price": 7.98,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290900010282",
+          "product": "אורז בסמטי אינדירה 1",
+          "price": 11.9,
+          "unit_price": 8.5,
+          "effective_unit_price": 8.5,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": {
+            "desc": "אורז בסמטי  אינדירה   1.4 ק ג 2 ב 20",
+            "min_qty": 1.0,
+            "is_club": false,
+            "is_conditional": false,
+            "promo_unit_price": null
+          }
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290120871502",
+          "product": "אורז בסמטי לבן גולדן",
+          "price": 11.9,
+          "unit_price": 8.5,
+          "effective_unit_price": 8.5,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
         },
         {
           "store": "Rami Levy (Ayalon Bnei Brak)",
@@ -4788,48 +5100,6 @@
         {
           "store": "Rami Levy (Ayalon Bnei Brak)",
           "short_store": "רמי לוי איילון",
-          "item_code": "7290020505521",
-          "product": "אורז יסמין 1קג רמילו",
-          "price": 8.9,
-          "unit_price": 8.9,
-          "effective_unit_price": 8.9,
-          "unit": "ק\"ג",
-          "price_updated": "",
-          "promo": null
-        },
-        {
-          "store": "Rami Levy (Ayalon Bnei Brak)",
-          "short_store": "רמי לוי איילון",
-          "item_code": "7290020505538",
-          "product": "אורז פרסי 1קג רמילוי",
-          "price": 8.9,
-          "unit_price": 8.9,
-          "effective_unit_price": 8.9,
-          "unit": "ק\"ג",
-          "price_updated": "",
-          "promo": null
-        },
-        {
-          "store": "Rami Levy (Ayalon Bnei Brak)",
-          "short_store": "רמי לוי איילון",
-          "item_code": "7290117907733",
-          "product": "אורז פרסי 1קג שקדיה",
-          "price": 8.9,
-          "unit_price": 8.9,
-          "effective_unit_price": 8.9,
-          "unit": "ק\"ג",
-          "price_updated": "",
-          "promo": {
-            "desc": "אורז פרסי 1קג 2ב12",
-            "min_qty": 1.0,
-            "is_club": false,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
-        },
-        {
-          "store": "Rami Levy (Ayalon Bnei Brak)",
-          "short_store": "רמי לוי איילון",
           "item_code": "7290017406367",
           "product": "אורז פרסי 1קג זיפר ר",
           "price": 8.9,
@@ -4842,92 +5112,14 @@
         {
           "store": "Rami Levy (Ayalon Bnei Brak)",
           "short_store": "רמי לוי איילון",
-          "item_code": "7290100704738",
-          "product": "אורז יסמין 5 ק\"ג",
-          "price": 47.9,
-          "unit_price": 9.58,
-          "effective_unit_price": 9.58,
+          "item_code": "7290020505521",
+          "product": "אורז יסמין 1קג רמילו",
+          "price": 8.9,
+          "unit_price": 8.9,
+          "effective_unit_price": 8.9,
           "unit": "ק\"ג",
           "price_updated": "",
           "promo": null
-        },
-        {
-          "store": "Rami Levy (Ayalon Bnei Brak)",
-          "short_store": "רמי לוי איילון",
-          "item_code": "7290016379877",
-          "product": "אורז בסמטי רמי לוי 1",
-          "price": 9.9,
-          "unit_price": 9.9,
-          "effective_unit_price": 9.9,
-          "unit": "יחידות",
-          "price_updated": "",
-          "promo": null
-        },
-        {
-          "store": "Rami Levy (Ayalon Bnei Brak)",
-          "short_store": "רמי לוי איילון",
-          "item_code": "7290016379655",
-          "product": "אורז בסמטי טאג מאהל",
-          "price": 9.9,
-          "unit_price": 9.9,
-          "effective_unit_price": 9.9,
-          "unit": "יחידות",
-          "price_updated": "",
-          "promo": null
-        },
-        {
-          "store": "Rami Levy (Ayalon Bnei Brak)",
-          "short_store": "רמי לוי איילון",
-          "item_code": "7290108509700",
-          "product": "אורז פרסי 1 לי DAAWA",
-          "price": 9.9,
-          "unit_price": 9.9,
-          "effective_unit_price": 9.9,
-          "unit": "ק\"ג",
-          "price_updated": "",
-          "promo": {
-            "desc": "אורז פרסי דאוואט 1 ק ג 2ב15",
-            "min_qty": 1.0,
-            "is_club": false,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
-        },
-        {
-          "store": "Rami Levy (Ayalon Bnei Brak)",
-          "short_store": "רמי לוי איילון",
-          "item_code": "7290017406374",
-          "product": "אורז יסמין 1קג זיפר",
-          "price": 9.9,
-          "unit_price": 9.9,
-          "effective_unit_price": 9.9,
-          "unit": "ק\"ג",
-          "price_updated": "",
-          "promo": {
-            "desc": "אורז יסמין 1 ק ג רמי לוי ב6.90",
-            "min_qty": 1.0,
-            "is_club": false,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
-        },
-        {
-          "store": "Rami Levy (Ayalon Bnei Brak)",
-          "short_store": "רמי לוי איילון",
-          "item_code": "7290012309366",
-          "product": "אורז בסמטי שקדיה 5 ק",
-          "price": 49.9,
-          "unit_price": 9.98,
-          "effective_unit_price": 9.98,
-          "unit": "יחידות",
-          "price_updated": "",
-          "promo": {
-            "desc": "אורז בסמטי שקדיה 5 ק ג ב39.90",
-            "min_qty": 1.0,
-            "is_club": false,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
         }
       ]
     },
@@ -4938,6 +5130,54 @@
         "days": 1
       },
       "matches": [
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290121220606",
+          "product": "פסטה ספגטי דורומי 90",
+          "price": 4.9,
+          "unit_price": 5.44,
+          "effective_unit_price": 5.44,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290121220651",
+          "product": "פסטה פנה ריגטה דורומ",
+          "price": 4.9,
+          "unit_price": 5.44,
+          "effective_unit_price": 5.44,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290121220705",
+          "product": "פסטה פוסילי דורומי 9",
+          "price": 4.9,
+          "unit_price": 5.44,
+          "effective_unit_price": 5.44,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290117768761",
+          "product": "פסטה פנה ריגטה מונו",
+          "price": 2.9,
+          "unit_price": 5.8,
+          "effective_unit_price": 5.8,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
         {
           "store": "Rami Levy (Ayalon Bnei Brak)",
           "short_store": "רמי לוי איילון",
@@ -5135,72 +5375,6 @@
             "is_conditional": false,
             "promo_unit_price": null
           }
-        },
-        {
-          "store": "Rami Levy (Ayalon Bnei Brak)",
-          "short_store": "רמי לוי איילון",
-          "item_code": "7290000060880",
-          "product": "ספגטי מספר 8 אסם 500",
-          "price": 4.9,
-          "unit_price": 9.8,
-          "effective_unit_price": 9.8,
-          "unit": "ק\"ג",
-          "price_updated": "",
-          "promo": {
-            "desc": "פסטה 500גרם אסם 4ב18",
-            "min_qty": 1.0,
-            "is_club": false,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
-        },
-        {
-          "store": "Rami Levy (Ayalon Bnei Brak)",
-          "short_store": "רמי לוי איילון",
-          "item_code": "7290019246114",
-          "product": "פסטה איטלקית ספגטי 5",
-          "price": 6.0,
-          "unit_price": 12.0,
-          "effective_unit_price": 12.0,
-          "unit": "ק\"ג",
-          "price_updated": "",
-          "promo": {
-            "desc": "פסטה איטלקית 500 גרם 4ב16",
-            "min_qty": 1.0,
-            "is_club": false,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
-        },
-        {
-          "store": "Rami Levy BaShchuna (Ben Yehuda 23)",
-          "short_store": "רמי לוי בן יהודה",
-          "item_code": "7290000060880",
-          "product": "ספגטי מספר 8 אסם 500",
-          "price": 6.9,
-          "unit_price": 13.8,
-          "effective_unit_price": 13.8,
-          "unit": "ק\"ג",
-          "price_updated": "",
-          "promo": {
-            "desc": "פסטה אסם 500גרם 3ב18",
-            "min_qty": 1.0,
-            "is_club": false,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
-        },
-        {
-          "store": "Rami Levy (Ayalon Bnei Brak)",
-          "short_store": "רמי לוי איילון",
-          "item_code": "7290000060316",
-          "product": "ספגטי פרפקטו 500 גרם",
-          "price": 6.9,
-          "unit_price": 13.8,
-          "effective_unit_price": 13.8,
-          "unit": "ק\"ג",
-          "price_updated": "",
-          "promo": null
         }
       ]
     },
@@ -5467,6 +5641,18 @@
       },
       "matches": [
         {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290117767887",
+          "product": "עגבניות קוביות אלטו",
+          "price": 4.9,
+          "unit_price": 0.01,
+          "effective_unit_price": 0.01,
+          "unit": "240 גרם",
+          "price_updated": "",
+          "promo": null
+        },
+        {
           "store": "Rami Levy (Ayalon Bnei Brak)",
           "short_store": "רמי לוי איילון",
           "item_code": "7290020498021",
@@ -5474,6 +5660,66 @@
           "price": 7.9,
           "unit_price": 9.88,
           "effective_unit_price": 9.88,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290117767894",
+          "product": "מארז עגבניות קוביות",
+          "price": 11.9,
+          "unit_price": 9.92,
+          "effective_unit_price": 9.92,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290117767870",
+          "product": "מארז  עגבניות פולפה",
+          "price": 11.9,
+          "unit_price": 9.92,
+          "effective_unit_price": 9.92,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290000208022",
+          "product": "עגבניות מרוסקות יכין",
+          "price": 9.9,
+          "unit_price": 12.38,
+          "effective_unit_price": 12.38,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290000208343",
+          "product": "עגבניות מרוסקות עם ש",
+          "price": 9.9,
+          "unit_price": 12.38,
+          "effective_unit_price": 12.38,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290000207438",
+          "product": "עגבניות קוביות יכין",
+          "price": 9.9,
+          "unit_price": 12.38,
+          "effective_unit_price": 12.38,
           "unit": "ק\"ג",
           "price_updated": "",
           "promo": null
@@ -5526,6 +5772,24 @@
           "price_updated": "",
           "promo": {
             "desc": "שלישיית עגבניות מרוסקות/חתוכות יכין 13.9",
+            "min_qty": 1.0,
+            "is_club": false,
+            "is_conditional": false,
+            "promo_unit_price": null
+          }
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290020244543",
+          "product": "עגבניות מרוסקות במיץ",
+          "price": 14.9,
+          "unit_price": 12.42,
+          "effective_unit_price": 12.42,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": {
+            "desc": "עגבניות מרוסקות / חתוכות שלישיה   2 ב 20",
             "min_qty": 1.0,
             "is_club": false,
             "is_conditional": false,
@@ -5591,102 +5855,6 @@
           "unit": "ק\"ג",
           "price_updated": "",
           "promo": null
-        },
-        {
-          "store": "Rami Levy (Ayalon Bnei Brak)",
-          "short_store": "רמי לוי איילון",
-          "item_code": "7290016087475",
-          "product": "עגבניות מרוסקות דק ר",
-          "price": 5.9,
-          "unit_price": 14.75,
-          "effective_unit_price": 14.75,
-          "unit": "ק\"ג",
-          "price_updated": "",
-          "promo": null
-        },
-        {
-          "store": "Shufersal Sheli (Ben Yehuda 79)",
-          "short_store": "שופרסל שלי",
-          "item_code": "7290000208022",
-          "product": "עגבניות מרוסקות800ג יכין",
-          "price": 11.9,
-          "unit_price": 14.88,
-          "effective_unit_price": 14.88,
-          "unit": "ק\"ג",
-          "price_updated": "",
-          "promo": null
-        },
-        {
-          "store": "Rami Levy (Ayalon Bnei Brak)",
-          "short_store": "רמי לוי איילון",
-          "item_code": "7290018359129",
-          "product": "עגבניות פולפה חתוכות",
-          "price": 10.9,
-          "unit_price": 15.8,
-          "effective_unit_price": 15.8,
-          "unit": "ק\"ג",
-          "price_updated": "",
-          "promo": {
-            "desc": "רוטב פסאטה/פולפה בצנצנת 690ג ב9.90",
-            "min_qty": 1.0,
-            "is_club": false,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
-        },
-        {
-          "store": "Rami Levy (Ayalon Bnei Brak)",
-          "short_store": "רמי לוי איילון",
-          "item_code": "7290000208022",
-          "product": "עגבניות מרוסקות 600",
-          "price": 9.9,
-          "unit_price": 16.5,
-          "effective_unit_price": 16.5,
-          "unit": "ק\"ג",
-          "price_updated": "",
-          "promo": null
-        },
-        {
-          "store": "Rami Levy (Ayalon Bnei Brak)",
-          "short_store": "רמי לוי איילון",
-          "item_code": "7290000208343",
-          "product": "עגבניות מרוסקות שום",
-          "price": 9.9,
-          "unit_price": 16.5,
-          "effective_unit_price": 16.5,
-          "unit": "ק\"ג",
-          "price_updated": "",
-          "promo": null
-        },
-        {
-          "store": "Rami Levy (Ayalon Bnei Brak)",
-          "short_store": "רמי לוי איילון",
-          "item_code": "7290000208367",
-          "product": "עגבניות מרוסקות בזיל",
-          "price": 9.9,
-          "unit_price": 16.5,
-          "effective_unit_price": 16.5,
-          "unit": "ק\"ג",
-          "price_updated": "",
-          "promo": null
-        },
-        {
-          "store": "Rami Levy (Ayalon Bnei Brak)",
-          "short_store": "רמי לוי איילון",
-          "item_code": "8005110170300",
-          "product": "פולפה מוטי עגבניות ש",
-          "price": 19.8,
-          "unit_price": 16.5,
-          "effective_unit_price": 16.5,
-          "unit": "ק\"ג",
-          "price_updated": "",
-          "promo": {
-            "desc": "עגבניות חתוכות 3*400 גרם  מוטי 2ב30",
-            "min_qty": 1.0,
-            "is_club": false,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
         }
       ]
     },
@@ -5722,6 +5890,36 @@
           "promo": null
         },
         {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290012313875",
+          "product": "גרגירי חומוס קבוצת י",
+          "price": 7.9,
+          "unit_price": 14.36,
+          "effective_unit_price": 14.36,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": {
+            "desc": "שימורי ירקות יבנה 3 ב 18",
+            "min_qty": 1.0,
+            "is_club": false,
+            "is_conditional": false,
+            "promo_unit_price": null
+          }
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290017105895",
+          "product": "גרגירי חומוס להכנת ח",
+          "price": 8.9,
+          "unit_price": 15.89,
+          "effective_unit_price": 15.89,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
+        {
           "store": "Rami Levy (Ayalon Bnei Brak)",
           "short_store": "רמי לוי איילון",
           "item_code": "7290018989609",
@@ -5734,6 +5932,24 @@
           "promo": null
         },
         {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290112357113",
+          "product": "גרגירי חומוס שטראוס",
+          "price": 6.9,
+          "unit_price": 18.16,
+          "effective_unit_price": 18.16,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": {
+            "desc": "קטניות  שטראוס  3 ב 18",
+            "min_qty": 1.0,
+            "is_club": false,
+            "is_conditional": false,
+            "promo_unit_price": null
+          }
+        },
+        {
           "store": "Rami Levy (Ayalon Bnei Brak)",
           "short_store": "רמי לוי איילון",
           "item_code": "7290119670857",
@@ -5741,6 +5957,18 @@
           "price": 6.0,
           "unit_price": 18.18,
           "effective_unit_price": 18.18,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290019981787",
+          "product": "גרגירי חומוס מוקפאים",
+          "price": 14.9,
+          "unit_price": 18.62,
+          "effective_unit_price": 18.62,
           "unit": "ק\"ג",
           "price_updated": "",
           "promo": null
@@ -5852,66 +6080,6 @@
           "unit": "ק\"ג",
           "price_updated": "",
           "promo": null
-        },
-        {
-          "store": "Rami Levy (Ayalon Bnei Brak)",
-          "short_store": "רמי לוי איילון",
-          "item_code": "7290117265062",
-          "product": "סרה גרגירי חומוס שלמ",
-          "price": 9.9,
-          "unit_price": 24.75,
-          "effective_unit_price": 24.75,
-          "unit": "ק\"ג",
-          "price_updated": "",
-          "promo": null
-        },
-        {
-          "store": "Shufersal Sheli (Ben Yehuda 79)",
-          "short_store": "שופרסל שלי",
-          "item_code": "7290016087901",
-          "product": "גרגירי חומוס שלמים 400 ג",
-          "price": 9.9,
-          "unit_price": 24.75,
-          "effective_unit_price": 24.75,
-          "unit": "ק\"ג",
-          "price_updated": "",
-          "promo": {
-            "desc": "3ב15 גרעיני חומוס/תירס 400 גרם",
-            "min_qty": 1.0,
-            "is_club": false,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
-        },
-        {
-          "store": "Rami Levy (Ayalon Bnei Brak)",
-          "short_store": "רמי לוי איילון",
-          "item_code": "7290000104805",
-          "product": "גרגירי חומוס מבושלים",
-          "price": 19.9,
-          "unit_price": 24.87,
-          "effective_unit_price": 24.87,
-          "unit": "ק\"ג",
-          "price_updated": "",
-          "promo": {
-            "desc": "גזר גמדי/גרגרי חומוס/עדשים/שעועית ב",
-            "min_qty": 1.0,
-            "is_club": false,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
-        },
-        {
-          "store": "Rami Levy (Ayalon Bnei Brak)",
-          "short_store": "רמי לוי איילון",
-          "item_code": "7290017105895",
-          "product": "גרגרי חומוס להכנת חו",
-          "price": 8.9,
-          "unit_price": 26.57,
-          "effective_unit_price": 26.57,
-          "unit": "ק\"ג",
-          "price_updated": "",
-          "promo": null
         }
       ]
     },
@@ -5940,6 +6108,30 @@
           "item_code": "7290119670826",
           "product": "שיבולת שועל דקה 500",
           "price": 4.6,
+          "unit_price": 9.2,
+          "effective_unit_price": 9.2,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290015347952",
+          "product": "שיבולת שועל עבה אינד",
+          "price": 6.9,
+          "unit_price": 9.2,
+          "effective_unit_price": 9.2,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290015347969",
+          "product": "שיבולת שועל דק אינדי",
+          "price": 6.9,
           "unit_price": 9.2,
           "effective_unit_price": 9.2,
           "unit": "ק\"ג",
@@ -6083,36 +6275,6 @@
           "unit": "ליטר",
           "price_updated": "",
           "promo": null
-        },
-        {
-          "store": "Shufersal Sheli (Ben Yehuda 79)",
-          "short_store": "שופרסל שלי",
-          "item_code": "7394376621703",
-          "product": "שיבולת שועל מופחת שומן1ל",
-          "price": 19.9,
-          "unit_price": 19.9,
-          "effective_unit_price": 19.9,
-          "unit": "ליטר",
-          "price_updated": "",
-          "promo": {
-            "desc": "25% הנחה משקה שיבולת שועל בריסטה/וניל 1",
-            "min_qty": 1.0,
-            "is_club": false,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
-        },
-        {
-          "store": "Rami Levy (Ayalon Bnei Brak)",
-          "short_store": "רמי לוי איילון",
-          "item_code": "7290002842002",
-          "product": "פתיתי שיבולת שועל קו",
-          "price": 10.9,
-          "unit_price": 21.8,
-          "effective_unit_price": 21.8,
-          "unit": "ק\"ג",
-          "price_updated": "",
-          "promo": null
         }
       ]
     },
@@ -6160,6 +6322,18 @@
           }
         },
         {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "835811000150",
+          "product": "בורגול הנמל 1.2 ק\"ג",
+          "price": 9.9,
+          "unit_price": 8.25,
+          "effective_unit_price": 8.25,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
+        {
           "store": "Rami Levy (Ayalon Bnei Brak)",
           "short_store": "רמי לוי איילון",
           "item_code": "7290100700419",
@@ -6179,6 +6353,18 @@
           "price": 4.6,
           "unit_price": 9.2,
           "effective_unit_price": 9.2,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Rami Levy (Ayalon Bnei Brak)",
+          "short_store": "רמי לוי איילון",
+          "item_code": "7290119671793",
+          "product": "בורגול דק 1קג רמי לו",
+          "price": 10.0,
+          "unit_price": 10.0,
+          "effective_unit_price": 10.0,
           "unit": "ק\"ג",
           "price_updated": "",
           "promo": null
@@ -6208,18 +6394,6 @@
           "promo": null
         },
         {
-          "store": "Rami Levy (Ayalon Bnei Brak)",
-          "short_store": "רמי לוי איילון",
-          "item_code": "7290119671793",
-          "product": "בורגול דק 1קג רמי לו",
-          "price": 10.0,
-          "unit_price": 10.0,
-          "effective_unit_price": 10.0,
-          "unit": "ק\"ג",
-          "price_updated": "",
-          "promo": null
-        },
-        {
           "store": "Shufersal Sheli (Ben Yehuda 79)",
           "short_store": "שופרסל שלי",
           "item_code": "7290100700419",
@@ -6227,6 +6401,18 @@
           "price": 10.9,
           "unit_price": 10.9,
           "effective_unit_price": 10.9,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290014325395",
+          "product": "עדשים אדומות אינדירה",
+          "price": 15.9,
+          "unit_price": 11.36,
+          "effective_unit_price": 11.36,
           "unit": "ק\"ג",
           "price_updated": "",
           "promo": null
@@ -6296,42 +6482,6 @@
           "short_store": "רמי לוי איילון",
           "item_code": "7290020238184",
           "product": "עדשים ירוקות 1 ק\"ג ר",
-          "price": 12.9,
-          "unit_price": 12.9,
-          "effective_unit_price": 12.9,
-          "unit": "ק\"ג",
-          "price_updated": "",
-          "promo": {
-            "desc": "עדשים ירוקות/כתומות 1 ק ג רמי לוי ב10.90",
-            "min_qty": 1.0,
-            "is_club": false,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
-        },
-        {
-          "store": "Rami Levy (Ayalon Bnei Brak)",
-          "short_store": "רמי לוי איילון",
-          "item_code": "7290015994132",
-          "product": "עדשים אדומות רמי לוי",
-          "price": 12.9,
-          "unit_price": 12.9,
-          "effective_unit_price": 12.9,
-          "unit": "ק\"ג",
-          "price_updated": "",
-          "promo": {
-            "desc": "עדשים ירוקות/כתומות 1 ק ג רמי לוי ב10.90",
-            "min_qty": 1.0,
-            "is_club": false,
-            "is_conditional": false,
-            "promo_unit_price": null
-          }
-        },
-        {
-          "store": "Rami Levy (Ayalon Bnei Brak)",
-          "short_store": "רמי לוי איילון",
-          "item_code": "7290015994781",
-          "product": "עדשים ירוקות רמי לוי",
           "price": 12.9,
           "unit_price": 12.9,
           "effective_unit_price": 12.9,
@@ -6538,6 +6688,18 @@
           }
         },
         {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290122634259",
+          "product": "שוקולד מריר 54% צו'ק",
+          "price": 24.9,
+          "unit_price": 62.25,
+          "effective_unit_price": 62.25,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
+        {
           "store": "Rami Levy (Ayalon Bnei Brak)",
           "short_store": "רמי לוי איילון",
           "item_code": "7290019545088",
@@ -6688,6 +6850,18 @@
           }
         },
         {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290019939429",
+          "product": "שוקולד מריר ללא סוכר",
+          "price": 17.9,
+          "unit_price": 89.5,
+          "effective_unit_price": 89.5,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
+        {
           "store": "AM:PM (Ben Yehuda 61)",
           "short_store": "AM:PM בן יהודה",
           "item_code": "7290018893807",
@@ -6716,30 +6890,6 @@
             "is_conditional": false,
             "promo_unit_price": null
           }
-        },
-        {
-          "store": "Rami Levy (Ayalon Bnei Brak)",
-          "short_store": "רמי לוי איילון",
-          "item_code": "7290122633160",
-          "product": "שוקולד מריר 70% 100ג",
-          "price": 9.9,
-          "unit_price": 99.0,
-          "effective_unit_price": 99.0,
-          "unit": "ק\"ג",
-          "price_updated": "",
-          "promo": null
-        },
-        {
-          "store": "Rami Levy (Ayalon Bnei Brak)",
-          "short_store": "רמי לוי איילון",
-          "item_code": "7290122634150",
-          "product": "שוקולד מריר מעולה 70",
-          "price": 9.9,
-          "unit_price": 99.0,
-          "effective_unit_price": 99.0,
-          "unit": "ק\"ג",
-          "price_updated": "",
-          "promo": null
         }
       ]
     },
@@ -6770,6 +6920,30 @@
           "price": 12.9,
           "unit_price": 25.8,
           "effective_unit_price": 25.8,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290017068374",
+          "product": "שמרים יבשים מיה 500",
+          "price": 12.9,
+          "unit_price": 25.8,
+          "effective_unit_price": 25.8,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
+        {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290000453385",
+          "product": "שמרים יבשים פאקא 500",
+          "price": 13.9,
+          "unit_price": 27.8,
+          "effective_unit_price": 27.8,
           "unit": "ק\"ג",
           "price_updated": "",
           "promo": null
@@ -6865,6 +7039,18 @@
           "promo": null
         },
         {
+          "store": "Osher Ad (Kremenetski TLV)",
+          "short_store": "אושר עד",
+          "item_code": "7290017907055",
+          "product": "שמרים יבשים ללא גלוט",
+          "price": 16.9,
+          "unit_price": 75.11,
+          "effective_unit_price": 75.11,
+          "unit": "ק\"ג",
+          "price_updated": "",
+          "promo": null
+        },
+        {
           "store": "Rami Levy (Ayalon Bnei Brak)",
           "short_store": "רמי לוי איילון",
           "item_code": "7290019603689",
@@ -6914,18 +7100,6 @@
           "price": 9.9,
           "unit_price": 180.0,
           "effective_unit_price": 180.0,
-          "unit": "ק\"ג",
-          "price_updated": "",
-          "promo": null
-        },
-        {
-          "store": "Rami Levy BaShchuna (Ben Yehuda 23)",
-          "short_store": "רמי לוי בן יהודה",
-          "item_code": "7290013145871",
-          "product": "שמרים יבשים מיימונס",
-          "price": 11.4,
-          "unit_price": 207.27,
-          "effective_unit_price": 207.27,
           "unit": "ק\"ג",
           "price_updated": "",
           "promo": null
