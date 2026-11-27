@@ -39,6 +39,16 @@ def get_child_text(el, tag_name):
     return ""
 
 
+def get_child_float(el, *tag_names):
+    for name in tag_names:
+        txt = get_child_text(el, name)
+        if txt:
+            val = safe_float(txt, 0.0)
+            if val > 0:
+                return val
+    return 0.0
+
+
 def safe_float(val, default=0.0):
     try:
         return float(val)
@@ -136,6 +146,7 @@ def parse_promos(xml_root):
     if xml_root is None:
         return promos_by_code
 
+    debug_printed = 0
     for el in xml_root.iter():
         if local_tag(el.tag) != "promotion":
             continue
@@ -147,22 +158,26 @@ def parse_promos(xml_root):
             if start_date and start_date > TODAY_STR:
                 continue
 
-            desc = get_child_text(el, "PromotionDescription")
+            desc = get_child_text(el, "PromotionDescription") or get_child_text(el, "Description")
             if not desc or any(t in desc for t in IGNORE_PROMO_TERMS):
                 continue
 
-            min_qty = safe_float(get_child_text(el, "MinQty"), 1.0)
-            if min_qty <= 0:
-                min_qty = 1.0
-            disc_price = safe_float(get_child_text(el, "DiscountedPrice"), 0.0)
-            disc_per_mida = safe_float(get_child_text(el, "DiscountedPricePerMida"), 0.0)
-            disc_rate = safe_float(get_child_text(el, "DiscountRate"), 0.0)
-            reward_type = get_child_text(el, "RewardType")
-            min_purchase = safe_float(get_child_text(el, "MinPurchaseAmnt"), 0.0)
+            min_qty = get_child_float(el, "MinQty", "minqty") or 1.0
+            disc_price = get_child_float(el, "DiscountedPrice", "DiscountPrice", "PromoPrice")
+            disc_per_mida = get_child_float(el, "DiscountedPricePerMida", "DiscountPricePerMida")
+            disc_rate = get_child_float(el, "DiscountRate", "DiscountPercent", "PriceReduction")
+            reward_type = get_child_text(el, "RewardType") or get_child_text(el, "DiscountType")
+            min_purchase = get_child_float(el, "MinPurchaseAmnt", "MinPurchaseAmount")
 
-            # Rely on description text for club/conditional restrictions (chains often set ClubId=1 on open promos)
             is_club = any(t in desc for t in CLUB_TERMS)
             is_conditional = (min_purchase > 0) or any(t in desc for t in CONDITIONAL_TERMS)
+
+            if debug_printed < 3 and not is_club and not is_conditional:
+                print("[PROMO DEBUG]", {
+                    local_tag(c.tag): c.text.strip()
+                    for c in el if c.text and c.text.strip()
+                })
+                debug_printed += 1
 
             promo_info = {
                 "desc": desc,
@@ -176,7 +191,7 @@ def parse_promos(xml_root):
             }
 
             for code_el in el.iter():
-                if local_tag(code_el.tag) == "itemcode" and code_el.text:
+                if local_tag(code_el.tag) in ("itemcode", "barcode", "item_code") and code_el.text:
                     code = code_el.text.strip()
                     if code:
                         promos_by_code.setdefault(code, []).append(promo_info)
@@ -211,14 +226,16 @@ def resolve_best_promo(promos, price, norm_up, is_weighted):
             candidate_up = p["disc_per_mida"]
         elif p["disc_price"] > 0 and price > 0:
             mq = p["min_qty"]
+            # If total bundle price is >= single-item shelf price and min_qty > 1, divide by min_qty
             promo_shelf = (p["disc_price"] / mq) if (mq > 1 and p["disc_price"] >= price * 0.99) else p["disc_price"]
             candidate_up = norm_up * (promo_shelf / price)
-        elif p["disc_rate"] > 0 and p["reward_type"] in ("1", "2"):
+        elif p["disc_rate"] > 0:
             rate = (p["disc_rate"] / 100.0) if p["disc_rate"] > 100 else p["disc_rate"]
-            if 1.0 <= rate <= 70.0:
+            if 1.0 <= rate <= 75.0:
                 candidate_up = norm_up * (1.0 - rate / 100.0)
 
-        if candidate_up is not None and (0.35 * norm_up <= candidate_up < norm_up * 0.99):
+        # Sanity guard: allow down to 20% of normal price, require at least 1% drop
+        if candidate_up is not None and (0.20 * norm_up <= candidate_up < norm_up * 0.99):
             candidate_up = round(candidate_up, 2)
             if candidate_up < best_open_up:
                 best_open_up = candidate_up
