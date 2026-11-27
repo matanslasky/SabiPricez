@@ -132,7 +132,6 @@ def calc_normalized_unit_price(name, price, unit_price, unit, qty, unit_qty, is_
     if "ליטר" in u:
         return round(up, 2), "ליטר"
 
-    # Guard against POS mislabeling weighted bags as "יחידות" (e.g. 800g lentils -> ₪0.80)
     if "יח" in u or not u:
         parsed_up, parsed_u = parse_weight_from_name(name, price)
         if parsed_up is not None:
@@ -141,12 +140,40 @@ def calc_normalized_unit_price(name, price, unit_price, unit, qty, unit_qty, is_
     return round(up, 2), unit or "יח'"
 
 
+def parse_promo_from_desc(desc):
+    """Extract (min_qty, per_item_price, pct_off) from Israeli Hebrew promo strings."""
+    # Pattern 1: Multi-buy bundle e.g. "2ב16", "3 ב 15", "2 יח ב 20"
+    m_bundle = re.search(r"(?<!\d)([2-9])\s*(?:יח['\"]?\s*)?ב[-\s]*(\d+(?:\.\d+)?)", desc)
+    if m_bundle:
+        mq = int(m_bundle.group(1))
+        total = safe_float(m_bundle.group(2), 0.0)
+        if mq >= 2 and total > 0:
+            return float(mq), round(total / mq, 2), 0.0
+
+    # Pattern 2: Percentage discount e.g. "ב-20% הנחה", "30% הנחה"
+    m_pct = re.search(r"(\d{1,2}(?:\.\d+)?)\s*%\s*הנחה", desc)
+    if m_pct:
+        pct = safe_float(m_pct.group(1), 0.0)
+        if 1.0 <= pct <= 75.0:
+            return 1.0, 0.0, pct
+
+    # Pattern 3: Single-item fixed price e.g. "ב5.9", "ב-17.90", "ב 14.90"
+    # Strip weight/volume prefixes first so "500 גרם" or "1.5 ליטר" isn't confused with price
+    cleaned = re.sub(r"\d+(?:\.\d+)?\s*(?:גרם|גר|ג'|ק\"ג|קג|קילו|ליטר|לי|מ\"ל|מל)", "", desc)
+    m_single = re.search(r"(?:^|\s)ב[-\s]*(\d+(?:\.\d+)?)(?!\s*%)", cleaned)
+    if m_single:
+        single_price = safe_float(m_single.group(1), 0.0)
+        if single_price > 0:
+            return 1.0, single_price, 0.0
+
+    return 1.0, 0.0, 0.0
+
+
 def parse_promos(xml_root):
     promos_by_code = {}
     if xml_root is None:
         return promos_by_code
 
-    debug_printed = 0
     for el in xml_root.iter():
         if local_tag(el.tag) != "promotion":
             continue
@@ -162,22 +189,28 @@ def parse_promos(xml_root):
             if not desc or any(t in desc for t in IGNORE_PROMO_TERMS):
                 continue
 
-            min_qty = get_child_float(el, "MinQty", "minqty") or 1.0
+            min_qty = get_child_float(el, "MinQty", "minqty")
+            if min_qty <= 0:
+                gift_qty = get_child_float(el, "IsGiftItem")
+                min_qty = gift_qty if 1 <= gift_qty <= 10 else 1.0
+
             disc_price = get_child_float(el, "DiscountedPrice", "DiscountPrice", "PromoPrice")
             disc_per_mida = get_child_float(el, "DiscountedPricePerMida", "DiscountPricePerMida")
             disc_rate = get_child_float(el, "DiscountRate", "DiscountPercent", "PriceReduction")
-            reward_type = get_child_text(el, "RewardType") or get_child_text(el, "DiscountType")
             min_purchase = get_child_float(el, "MinPurchaseAmnt", "MinPurchaseAmount")
+
+            # Fallback to parsing Hebrew PromotionDescription when XML omits numeric discount tags
+            if disc_price <= 0 and disc_per_mida <= 0 and disc_rate <= 0:
+                desc_mq, desc_per_item, desc_pct = parse_promo_from_desc(desc)
+                if desc_mq > 1:
+                    min_qty = desc_mq
+                if desc_per_item > 0:
+                    disc_price = desc_per_item * min_qty if min_qty > 1 else desc_per_item
+                if desc_pct > 0:
+                    disc_rate = desc_pct
 
             is_club = any(t in desc for t in CLUB_TERMS)
             is_conditional = (min_purchase > 0) or any(t in desc for t in CONDITIONAL_TERMS)
-
-            if debug_printed < 3 and not is_club and not is_conditional:
-                print("[PROMO DEBUG]", {
-                    local_tag(c.tag): c.text.strip()
-                    for c in el if c.text and c.text.strip()
-                })
-                debug_printed += 1
 
             promo_info = {
                 "desc": desc,
@@ -185,7 +218,6 @@ def parse_promos(xml_root):
                 "disc_price": disc_price,
                 "disc_per_mida": disc_per_mida,
                 "disc_rate": disc_rate,
-                "reward_type": reward_type,
                 "is_club": is_club,
                 "is_conditional": is_conditional,
             }
@@ -226,7 +258,6 @@ def resolve_best_promo(promos, price, norm_up, is_weighted):
             candidate_up = p["disc_per_mida"]
         elif p["disc_price"] > 0 and price > 0:
             mq = p["min_qty"]
-            # If total bundle price is >= single-item shelf price and min_qty > 1, divide by min_qty
             promo_shelf = (p["disc_price"] / mq) if (mq > 1 and p["disc_price"] >= price * 0.99) else p["disc_price"]
             candidate_up = norm_up * (promo_shelf / price)
         elif p["disc_rate"] > 0:
@@ -234,8 +265,7 @@ def resolve_best_promo(promos, price, norm_up, is_weighted):
             if 1.0 <= rate <= 75.0:
                 candidate_up = norm_up * (1.0 - rate / 100.0)
 
-        # Sanity guard: allow down to 20% of normal price, require at least 1% drop
-        if candidate_up is not None and (0.20 * norm_up <= candidate_up < norm_up * 0.99):
+        if candidate_up is not None and (0.25 * norm_up <= candidate_up < norm_up * 0.99):
             candidate_up = round(candidate_up, 2)
             if candidate_up < best_open_up:
                 best_open_up = candidate_up
@@ -342,7 +372,7 @@ for store_cfg in config["stores"]:
     promo_files = sorted([p for p in all_files if "promofull" in os.path.basename(p).lower()], reverse=True)
 
     if not price_files:
-        print(f"No PriceFull file found for {store_cfg['label']} (ID {sid_pad}) — files in dir: {os.listdir(chain_dir)[:5]}")
+        print(f"No PriceFull file found for {store_cfg['label']} (ID {sid_pad})")
         continue
 
     promos_by_code = {}
