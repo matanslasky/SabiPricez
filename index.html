@@ -1,1546 +1,1674 @@
 <!DOCTYPE html>
-<html lang="he" dir="rtl">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="theme-color" content="#FFFFFF" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-  <meta name="apple-mobile-web-app-title" content="SabiPricez" />
-  <link rel="icon" type="image/jpeg" href="icon.jpg" />
-  <link rel="apple-touch-icon" href="icon.jpg" />
+  <meta name="theme-color" content="#0F5132" />
+  <title>SabiPricez · Tel Aviv Grocery Intelligence</title>
   <link rel="manifest" href="manifest.json" />
-  <title>SabiPricez · השוואת מחירי סופר</title>
+  <link rel="apple-touch-icon" href="icon.jpg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg: #F5F6F8;
+      --bg: #F7F7F5;
       --surface: #FFFFFF;
-      --ink: #111827;
-      --muted: #6B7280;
-      --border: #E5E7EB;
-      --accent: #16A34A;
-      --accent-soft: #ECFDF5;
-      --accent-border: #BBF7D0;
-      --warn-soft: #FFFBEB;
-      --warn-border: #FDE68A;
-      --warn-ink: #92400E;
-      --promo-soft: #FFF7ED;
-      --promo-border: #FED7AA;
-      --promo-ink: #C2410C;
-      --trend-soft: #EFF6FF;
-      --trend-border: #BFDBFE;
-      --trend-ink: #1D4ED8;
-      --radius-lg: 16px;
-      --radius-md: 12px;
-      --shadow-sm: 0 1px 2px rgba(17, 24, 39, 0.05);
-      --shadow-md: 0 8px 24px rgba(17, 24, 39, 0.08);
+      --surface-subtle: #F2F2EE;
+      --border: #EAEAE6;
+      --border-strong: #DCDCD6;
+      --ink: #14171A;
+      --ink-secondary: #525866;
+      --ink-muted: #717784;
+      --brand: #0F5132;
+      --brand-hover: #0B3D26;
+      --emerald: #10B981;
+      --emerald-bg: #ECFDF5;
+      --emerald-border: #A7F3D0;
+      --emerald-ink: #065F46;
+      --amber-bg: #FEF3C7;
+      --amber-ink: #92400E;
+      --amber-border: #FDE68A;
+      --radius-card: 16px;
+      --radius-row: 12px;
+      --radius-pill: 999px;
+      --shadow-card: 0 2px 8px rgba(20, 23, 26, 0.04);
+      --shadow-dock: 0 -4px 20px rgba(20, 23, 26, 0.06);
+      --font-sans: 'Plus Jakarta Sans', 'Heebo', -apple-system, BlinkMacSystemFont, sans-serif;
     }
 
-    *, *::before, *::after {
+    * {
       box-sizing: border-box;
       -webkit-tap-highlight-color: transparent;
     }
 
-    html, body {
-      max-width: 100%;
-      overflow-x: clip;
-    }
-
     body {
       margin: 0;
-      font-family: 'Heebo', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: var(--font-sans);
       background: var(--bg);
       color: var(--ink);
       line-height: 1.4;
-      padding-bottom: 96px;
+      padding-bottom: calc(136px + env(safe-area-inset-bottom));
+      -webkit-font-smoothing: antialiased;
     }
 
-    .num { font-variant-numeric: tabular-nums; }
-
-    /* Offline Banner */
-    .offline-banner {
-      display: none;
-      background: #1F2937;
-      color: #F9FAFB;
-      text-align: center;
-      font-size: 0.78rem;
-      font-weight: 600;
-      padding: 6px 12px;
+    .num {
+      font-variant-numeric: tabular-nums;
     }
-    .offline-banner.visible { display: block; }
 
-    /* Sticky Top App Bar */
+    /* Frosted Top Header */
     .topbar {
       position: sticky;
       top: 0;
       z-index: 30;
-      background: rgba(255, 255, 255, 0.92);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      background: rgba(247, 247, 245, 0.86);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
       border-bottom: 1px solid var(--border);
+      padding: 12px 16px;
     }
 
     .topbar-inner {
-      max-width: 1120px;
+      max-width: 760px;
       margin: 0 auto;
-      padding: 12px 16px 10px;
-    }
-
-    .brand-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 8px;
-      margin-bottom: 10px;
+      gap: 12px;
     }
 
     .brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      flex-shrink: 0;
-    }
-
-    .brand-logo {
-      height: 32px;
-      width: auto;
-      max-width: 160px;
-      display: block;
-      object-fit: contain;
-      mix-blend-mode: multiply;
-    }
-
-    .topbar-right {
       display: flex;
       align-items: center;
-      gap: 6px;
-      min-width: 0;
+      gap: 10px;
     }
 
-    .presets-trigger {
-      display: none;
-      align-items: center;
-      gap: 4px;
-      font-family: inherit;
-      font-size: 0.76rem;
-      font-weight: 600;
-      color: var(--ink);
-      background: var(--surface);
-      border: 1px solid var(--border);
-      padding: 4px 9px;
-      border-radius: 999px;
-      cursor: pointer;
-      white-space: nowrap;
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      background: var(--brand);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      font-size: 16px;
+      letter-spacing: -0.03em;
+      overflow: hidden;
       flex-shrink: 0;
     }
-    .presets-trigger.visible { display: inline-flex; }
 
-    .freshness {
+    .brand-mark img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .brand-title {
+      font-weight: 800;
+      font-size: 17px;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+    }
+
+    .brand-sub {
+      font-size: 11px;
+      color: var(--ink-muted);
+      font-weight: 500;
+    }
+
+    .freshness-pill {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      font-size: 0.74rem;
-      color: var(--muted);
-      background: var(--bg);
-      padding: 4px 9px;
-      border-radius: 999px;
+      padding: 5px 10px;
+      border-radius: var(--radius-pill);
+      font-size: 11.5px;
+      font-weight: 600;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--ink-secondary);
       white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
     }
 
     .freshness-dot {
       width: 7px;
       height: 7px;
       border-radius: 50%;
-      background: var(--accent);
+      background: var(--emerald);
       flex-shrink: 0;
     }
 
-    /* Search */
-    .search-wrap {
-      position: relative;
-      margin-bottom: 10px;
-      width: 100%;
+    .freshness-pill.stale .freshness-dot {
+      background: #F59E0B;
     }
 
-    .search-input {
-      width: 100%;
-      min-width: 0;
-      padding: 10px 38px 10px 14px;
-      border-radius: var(--radius-md);
-      border: 1px solid var(--border);
-      background: var(--bg);
-      font-family: inherit;
-      font-size: 0.95rem;
-      color: var(--ink);
-      outline: none;
-      transition: border-color 0.15s, background 0.15s;
+    .freshness-pill.stale {
+      background: var(--amber-bg);
+      color: var(--amber-ink);
+      border-color: var(--amber-border);
     }
 
-    .search-input:focus {
-      background: var(--surface);
-      border-color: var(--accent);
+    /* Main Container */
+    .container {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 14px 16px 24px;
     }
 
-    .search-icon {
-      position: absolute;
-      inset-inline-start: 12px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--muted);
-      pointer-events: none;
-      font-size: 0.95rem;
-    }
-
-    /* Horizontal Scrollers */
-    .scroll-row {
+    /* Quick Filter Bar (Deals / Lows / Store Focus) */
+    .quick-toggles {
       display: flex;
       gap: 8px;
       overflow-x: auto;
       scrollbar-width: none;
+      margin-bottom: 14px;
       padding-bottom: 2px;
     }
-    .scroll-row::-webkit-scrollbar { display: none; }
+    .quick-toggles::-webkit-scrollbar { display: none; }
 
-    .store-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 12px;
-      border-radius: 999px;
+    .chip {
       border: 1px solid var(--border);
       background: var(--surface);
-      color: var(--muted);
+      color: var(--ink-secondary);
       font-family: inherit;
-      font-size: 0.82rem;
-      font-weight: 500;
-      white-space: nowrap;
-      cursor: pointer;
-      transition: all 0.15s;
-    }
-
-    .store-chip.active {
-      background: var(--ink);
-      color: #fff;
-      border-color: var(--ink);
-    }
-
-    .store-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
-
-    .cat-bar {
-      max-width: 1120px;
-      margin: 12px auto 0;
-      padding: 0 16px;
-    }
-
-    .cat-chip {
-      padding: 7px 14px;
-      border-radius: 999px;
-      border: 1px solid transparent;
-      background: var(--surface);
-      color: var(--muted);
-      font-family: inherit;
-      font-size: 0.86rem;
+      font-size: 12.5px;
       font-weight: 600;
-      white-space: nowrap;
+      padding: 7px 12px;
+      border-radius: var(--radius-pill);
       cursor: pointer;
-      box-shadow: var(--shadow-sm);
+      white-space: nowrap;
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
     }
 
-    .cat-chip.active {
-      background: var(--accent-soft);
-      color: var(--accent);
-      border-color: var(--accent-border);
+    .chip.active {
+      background: var(--brand);
+      color: #FFFFFF;
+      border-color: var(--brand);
     }
 
-    /* Main Grid */
-    .container {
-      max-width: 1120px;
-      margin: 14px auto 0;
-      padding: 0 16px;
-      display: grid;
-      grid-template-columns: minmax(0, 1fr);
+    /* Product Cards */
+    .cards-grid {
+      display: flex;
+      flex-direction: column;
       gap: 14px;
     }
 
-    @media (min-width: 768px) {
-      .container { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    }
-
-    @media (min-width: 1080px) {
-      .container { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-    }
-
-    /* Item Card */
     .card {
       background: var(--surface);
-      border-radius: var(--radius-lg);
       border: 1px solid var(--border);
-      box-shadow: var(--shadow-sm);
-      overflow: hidden;
+      border-radius: var(--radius-card);
+      box-shadow: var(--shadow-card);
+      padding: 16px;
+      transition: border-color 0.15s ease;
+    }
+
+    .card-header {
       display: flex;
-      flex-direction: column;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .card-title-group {
       min-width: 0;
     }
 
-    .card-head {
+    .card-cat {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--ink-muted);
+      margin-bottom: 2px;
+    }
+
+    .card-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+    }
+
+    .card-badges {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+
+    .low-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: var(--emerald-bg);
+      color: var(--emerald-ink);
+      border: 1px solid var(--emerald-border);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 9px;
+      border-radius: var(--radius-pill);
+      white-space: nowrap;
+    }
+
+    /* Stepper Control */
+    .stepper {
+      display: inline-flex;
+      align-items: center;
+      background: var(--surface-subtle);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-pill);
+      padding: 2px;
+    }
+
+    .stepper-btn {
+      width: 34px;
+      height: 34px;
+      border: none;
+      background: var(--surface);
+      color: var(--ink);
+      border-radius: 50%;
+      font-size: 18px;
+      font-weight: 700;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.06);
+      transition: transform 0.1s ease, background 0.15s ease;
+    }
+
+    .stepper-btn:active {
+      transform: scale(0.92);
+    }
+
+    .stepper-btn.add-primary {
+      background: var(--brand);
+      color: #fff;
+    }
+
+    .stepper-qty {
+      min-width: 28px;
+      text-align: center;
+      font-size: 13.5px;
+      font-weight: 800;
+      color: var(--ink);
+    }
+
+    /* RTL Match Rows */
+    .matches-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      direction: rtl;
+    }
+
+    .match-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 10px;
-      padding: 14px 14px 10px;
-      border-bottom: 1px solid #F3F4F6;
+      gap: 12px;
+      padding: 10px 12px;
+      border-radius: var(--radius-row);
+      background: var(--bg);
+      border: 1px solid transparent;
     }
 
-    .card-title-wrap { min-width: 0; }
+    .match-row.winner {
+      background: var(--emerald-bg);
+      border-color: var(--emerald-border);
+      border-right: 4px solid var(--emerald);
+    }
 
-    .card-title-row {
+    .match-info {
+      min-width: 0;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .match-top-line {
       display: flex;
       align-items: center;
       gap: 6px;
       flex-wrap: wrap;
     }
 
-    .card-title {
-      margin: 0;
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: var(--ink);
-    }
-
-    .trend-badge {
-      font-size: 0.7rem;
-      font-weight: 700;
-      color: var(--trend-ink);
-      background: var(--trend-soft);
-      border: 1px solid var(--trend-border);
-      padding: 1px 7px;
-      border-radius: 999px;
-      white-space: nowrap;
-    }
-
-    .card-sub {
-      font-size: 0.76rem;
-      color: var(--muted);
-    }
-
-    .basket-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      padding: 6px 11px;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background: var(--surface);
-      color: var(--ink);
-      font-family: inherit;
-      font-size: 0.8rem;
-      font-weight: 600;
-      cursor: pointer;
-      white-space: nowrap;
-      flex-shrink: 0;
-      transition: all 0.15s;
-    }
-
-    .basket-btn.in-basket {
-      background: var(--accent);
-      color: #fff;
-      border-color: var(--accent);
-    }
-
-    /* Offer Rows */
-    .offers { padding: 8px 10px 10px; display: flex; flex-direction: column; gap: 6px; }
-
-    .offer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      padding: 10px 11px;
-      border-radius: var(--radius-md);
-      background: #FAFAFB;
-      border: 1px solid transparent;
-      cursor: pointer;
-      transition: border-color 0.15s, background 0.15s;
-    }
-
-    .offer.best {
-      background: var(--accent-soft);
-      border-color: var(--accent-border);
-    }
-
-    .offer.pinned {
-      border-color: var(--ink);
-      box-shadow: inset 0 0 0 1px var(--ink);
-    }
-
-    .offer-info { min-width: 0; flex: 1; }
-
-    .offer-meta {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      flex-wrap: wrap;
-      margin-bottom: 3px;
-    }
-
+    /* Muted Brand-Tinted Store Pills */
     .store-pill {
       display: inline-flex;
       align-items: center;
-      gap: 5px;
-      font-size: 0.74rem;
-      font-weight: 600;
-      color: var(--ink);
-      background: var(--surface);
+      gap: 4px;
+      font-size: 11.5px;
+      font-weight: 700;
       padding: 2px 8px;
-      border-radius: 999px;
+      border-radius: 6px;
+      white-space: nowrap;
+    }
+
+    .store-rami { background: #EFF6FF; color: #1D4ED8; }
+    .store-osher { background: #FFF7ED; color: #C2410C; }
+    .store-shufersal { background: #FEF2F2; color: #B91C1C; }
+    .store-ampm { background: #F0FDF4; color: #15803D; }
+    .store-default { background: #F1F5F9; color: #334155; }
+
+    .winner-tag {
+      font-size: 10.5px;
+      font-weight: 800;
+      color: var(--emerald-ink);
+      background: rgba(16, 185, 129, 0.16);
+      padding: 2px 7px;
+      border-radius: 6px;
+    }
+
+    .walk-tag {
+      font-size: 10.5px;
+      font-weight: 700;
+      color: var(--ink-secondary);
+      background: var(--surface);
       border: 1px solid var(--border);
-    }
-
-    .save-badge {
-      font-size: 0.72rem;
-      font-weight: 700;
-      color: var(--accent);
-      background: #DCFCE7;
       padding: 2px 7px;
-      border-radius: 999px;
-    }
-
-    .pin-badge {
-      font-size: 0.7rem;
-      font-weight: 700;
-      color: #fff;
-      background: var(--ink);
-      padding: 2px 7px;
-      border-radius: 999px;
-    }
-
-    .product-row {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      min-width: 0;
+      border-radius: 6px;
     }
 
     .product-name {
-      font-size: 0.88rem;
-      font-weight: 500;
-      color: var(--ink);
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    .verify-link {
-      flex-shrink: 0;
-      text-decoration: none;
-      font-size: 0.76rem;
-      opacity: 0.55;
-      padding: 2px 3px;
-      border-radius: 6px;
-      transition: opacity 0.15s, background 0.15s;
-    }
-
-    .verify-link:hover {
-      opacity: 1;
-      background: rgba(17, 24, 39, 0.08);
-    }
-
-    .promo-line {
-      margin-top: 4px;
-      display: inline-block;
-      max-width: 100%;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      font-size: 0.72rem;
+      font-size: 13.5px;
       font-weight: 600;
-      color: var(--promo-ink);
-      background: var(--promo-soft);
-      border: 1px solid var(--promo-border);
-      padding: 1px 7px;
-      border-radius: 999px;
+      color: var(--ink);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
-    .promo-line.club {
-      color: var(--warn-ink);
-      background: var(--warn-soft);
-      border-color: var(--warn-border);
+    .promo-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 6px;
+      width: fit-content;
+      max-width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
-    .offer-price {
+    .promo-pill.active-deal {
+      background: var(--amber-bg);
+      color: var(--amber-ink);
+      border: 1px solid var(--amber-border);
+    }
+
+    .promo-pill.info-deal {
+      background: #F1F5F9;
+      color: var(--ink-secondary);
+    }
+
+    /* 3-Tier Price Hierarchy */
+    .price-col {
       text-align: left;
+      direction: ltr;
       flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
     }
 
-    .unit-price {
-      font-size: 1.02rem;
+    .price-hero {
+      font-size: 19px;
       font-weight: 800;
       color: var(--ink);
-      line-height: 1.15;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
     }
 
-    .offer.best .unit-price { color: #15803D; }
-
-    .unit-label {
-      font-size: 0.72rem;
-      font-weight: 500;
-      color: var(--muted);
+    .match-row.winner .price-hero {
+      color: var(--brand);
     }
 
-    .old-price {
-      font-size: 0.73rem;
-      color: var(--muted);
-      text-decoration: line-through;
-      margin-top: 1px;
+    .price-unit {
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--ink-muted);
     }
 
-    .shelf-price {
-      font-size: 0.74rem;
-      color: var(--muted);
+    .price-sub {
+      font-size: 11px;
+      color: var(--ink-muted);
       margin-top: 2px;
     }
 
+    .price-strike {
+      text-decoration: line-through;
+      color: #9CA3AF;
+      margin-right: 4px;
+    }
+
+    /* Progressive Disclosure Toggle */
     .expand-btn {
-      margin: 2px 10px 10px;
-      padding: 8px;
-      border: none;
-      border-radius: 10px;
-      background: var(--bg);
-      color: var(--muted);
+      margin-top: 10px;
+      width: 100%;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--ink-secondary);
       font-family: inherit;
-      font-size: 0.82rem;
+      font-size: 12.5px;
       font-weight: 600;
+      padding: 8px 12px;
+      border-radius: 10px;
       cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: background 0.15s ease;
     }
 
-    .expand-btn:hover { color: var(--ink); background: #EAECEF; }
-
-    .empty-state {
-      padding: 20px 14px;
-      text-align: center;
-      color: var(--muted);
-      font-size: 0.88rem;
+    .expand-btn:hover {
+      background: var(--surface-subtle);
     }
 
-    /* Sticky Bottom Smart Basket Bar */
-    .basket-bar {
+    /* Bottom Thumb-Zone Dock */
+    .bottom-dock {
       position: fixed;
-      inset-inline: 16px;
-      bottom: max(14px, env(safe-area-inset-bottom));
-      max-width: 540px;
-      margin: 0 auto;
+      bottom: 0;
+      left: 0;
+      right: 0;
       z-index: 40;
+      background: rgba(247, 247, 245, 0.9);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-top: 1px solid var(--border);
+      box-shadow: var(--shadow-dock);
+      padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
+    }
+
+    .dock-inner {
+      max-width: 760px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .cat-strip {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .cat-strip::-webkit-scrollbar { display: none; }
+
+    .cat-pill {
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--ink-secondary);
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 5px 11px;
+      border-radius: var(--radius-pill);
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .cat-pill.active {
       background: var(--ink);
       color: #fff;
-      border-radius: 16px;
-      padding: 12px 16px;
-      box-shadow: 0 12px 32px rgba(17, 24, 39, 0.25);
-      display: none;
+      border-color: var(--ink);
+    }
+
+    .dock-controls {
+      display: flex;
+      gap: 8px;
       align-items: center;
-      justify-content: space-between;
-      gap: 12px;
+    }
+
+    .search-box {
+      position: relative;
+      flex: 1;
+    }
+
+    .search-input {
+      width: 100%;
+      height: 44px;
+      border-radius: 12px;
+      border: 1px solid var(--border-strong);
+      background: var(--surface);
+      padding: 0 34px 0 14px;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--ink);
+      outline: none;
+    }
+
+    .search-input:focus {
+      border-color: var(--brand);
+    }
+
+    .search-clear {
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      border: none;
+      background: var(--surface-subtle);
+      color: var(--ink-secondary);
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      font-size: 12px;
       cursor: pointer;
+      display: none;
+      place-items: center;
     }
 
-    .basket-bar.visible { display: flex; }
-
-    .basket-bar-title { font-size: 0.92rem; font-weight: 700; }
-    .basket-bar-sub { font-size: 0.78rem; color: #D1D5DB; }
-
-    .basket-bar-cta {
-      background: var(--accent);
-      color: #fff;
-      padding: 7px 12px;
-      border-radius: 10px;
-      font-size: 0.82rem;
+    .basket-fab {
+      height: 44px;
+      padding: 0 16px;
+      border-radius: 12px;
+      border: none;
+      background: var(--brand);
+      color: #FFFFFF;
+      font-family: inherit;
+      font-size: 13.5px;
       font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
       white-space: nowrap;
-      flex-shrink: 0;
+      box-shadow: 0 2px 10px rgba(15, 81, 50, 0.25);
+      transition: transform 0.1s ease, background 0.15s ease;
     }
 
-    /* Basket Slide-Up Drawer */
+    .basket-fab:active {
+      transform: scale(0.97);
+    }
+
+    .basket-count {
+      background: rgba(255, 255, 255, 0.2);
+      padding: 2px 8px;
+      border-radius: var(--radius-pill);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    /* Smart Basket Drawer */
     .drawer-backdrop {
       position: fixed;
       inset: 0;
-      background: rgba(17, 24, 39, 0.45);
+      background: rgba(20, 23, 26, 0.45);
+      backdrop-filter: blur(3px);
       z-index: 50;
       display: none;
       align-items: flex-end;
       justify-content: center;
     }
-    .drawer-backdrop.open { display: flex; }
+
+    .drawer-backdrop.open {
+      display: flex;
+    }
 
     .drawer {
-      background: var(--surface);
       width: 100%;
-      max-width: 560px;
-      max-height: 86vh;
-      overflow-y: auto;
-      border-radius: 20px 20px 0 0;
-      padding: 18px 18px max(22px, env(safe-area-inset-bottom));
-      box-shadow: var(--shadow-md);
-    }
-
-    .drawer-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      margin-bottom: 12px;
-    }
-
-    .drawer-head h2 { margin: 0; font-size: 1.15rem; }
-
-    .drawer-actions { display: flex; gap: 6px; flex-wrap: wrap; }
-
-    .ghost-btn {
-      border: 1px solid var(--border);
-      background: var(--surface);
-      color: var(--muted);
-      padding: 5px 10px;
-      border-radius: 8px;
-      font-family: inherit;
-      font-size: 0.8rem;
-      font-weight: 600;
-      cursor: pointer;
-    }
-
-    .wa-btn {
-      width: 100%;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      margin-bottom: 12px;
-      padding: 10px 14px;
-      border: none;
-      border-radius: 12px;
-      background: #25D366;
-      color: #FFFFFF;
-      font-family: inherit;
-      font-size: 0.9rem;
-      font-weight: 700;
-      cursor: pointer;
-      box-shadow: var(--shadow-sm);
-    }
-    .wa-btn:hover { background: #1EBE5D; }
-
-    /* Presets Bar inside Drawer */
-    .presets-bar {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      flex-wrap: wrap;
-      margin-bottom: 12px;
-      padding: 8px 10px;
+      max-width: 760px;
+      max-height: 90vh;
       background: var(--bg);
-      border-radius: 12px;
+      border-radius: 22px 22px 0 0;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 -10px 30px rgba(0,0,0,0.18);
     }
 
-    .preset-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
+    .drawer-header {
       background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      padding: 4px 10px;
-      font-size: 0.78rem;
-      font-weight: 600;
-      color: var(--ink);
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
     }
 
-    .preset-chip-load {
-      border: none;
-      background: none;
-      color: inherit;
-      font: inherit;
-      cursor: pointer;
-      padding: 0;
-    }
-
-    .preset-chip-del {
-      border: none;
-      background: none;
-      color: var(--muted);
-      font-size: 0.8rem;
-      cursor: pointer;
-      padding: 0 2px;
-    }
-
-    .preset-save-btn {
-      border: 1px dashed var(--accent);
-      background: var(--accent-soft);
-      color: #15803D;
-      border-radius: 999px;
-      padding: 4px 10px;
-      font-family: inherit;
-      font-size: 0.78rem;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    /* Walk vs Drive Decision Banner */
-    .decision-banner {
-      padding: 11px 13px;
-      border-radius: 12px;
-      font-size: 0.86rem;
-      font-weight: 600;
-      margin-bottom: 12px;
-      border: 1px solid transparent;
-    }
-
-    .decision-banner.drive {
-      background: var(--accent-soft);
-      border-color: var(--accent-border);
-      color: #166534;
-    }
-
-    .decision-banner.walk {
-      background: var(--warn-soft);
-      border-color: var(--warn-border);
-      color: var(--warn-ink);
-    }
-
-    .decision-sub {
-      font-size: 0.74rem;
-      font-weight: 400;
-      opacity: 0.85;
-      margin-top: 2px;
-    }
-
-    .store-total-row {
+    .drawer-top-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 10px;
-      padding: 11px 12px;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      margin-bottom: 8px;
     }
 
-    .store-total-row.winner {
-      background: var(--accent-soft);
-      border-color: var(--accent-border);
+    .drawer-title {
+      font-size: 17px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
     }
 
-    .missing-pill {
-      display: inline-block;
-      margin-top: 3px;
-      font-size: 0.72rem;
-      font-weight: 600;
-      color: var(--warn-ink);
-      background: var(--warn-soft);
-      border: 1px solid var(--warn-border);
-      padding: 1px 7px;
-      border-radius: 999px;
-    }
-
-    /* Basket Item Quantity Rows */
-    .basket-section-title {
-      font-size: 0.82rem;
-      font-weight: 700;
-      color: var(--muted);
-      margin: 14px 0 8px;
-      padding-top: 12px;
-      border-top: 1px solid var(--border);
-    }
-
-    .basket-qty-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      padding: 8px 0;
-      border-bottom: 1px solid #F3F4F6;
-    }
-
-    .basket-qty-info { min-width: 0; flex: 1; }
-    .basket-qty-name { font-size: 0.9rem; font-weight: 600; }
-    .basket-qty-pin { font-size: 0.73rem; color: var(--muted); }
-
-    .stepper {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      padding: 3px 6px;
-      flex-shrink: 0;
-    }
-
-    .stepper button {
-      width: 26px;
-      height: 26px;
+    .icon-close {
+      width: 34px;
+      height: 34px;
       border-radius: 50%;
-      border: none;
-      background: var(--surface);
+      border: 1px solid var(--border);
+      background: var(--surface-subtle);
       color: var(--ink);
-      font-size: 1rem;
-      font-weight: 700;
-      line-height: 1;
+      font-size: 16px;
       cursor: pointer;
       display: grid;
       place-items: center;
-      box-shadow: var(--shadow-sm);
     }
 
-    .stepper-val {
-      min-width: 46px;
-      text-align: center;
-      font-size: 0.82rem;
+    /* Mode Segmented Control */
+    .mode-switch {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background: var(--surface-subtle);
+      padding: 3px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+
+    .mode-btn {
+      border: none;
+      background: transparent;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 8px 10px;
+      border-radius: 9px;
+      color: var(--ink-secondary);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .mode-btn.active {
+      background: var(--surface);
+      color: var(--brand);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    }
+
+    .drawer-body {
+      padding: 14px 16px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      flex: 1;
+    }
+
+    /* Store Selector & Callout */
+    .store-tabs {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .store-tabs::-webkit-scrollbar { display: none; }
+
+    .store-tab {
+      border: 1px solid var(--border);
+      background: var(--surface);
+      border-radius: 12px;
+      padding: 8px 12px;
+      font-family: inherit;
+      text-align: left;
+      cursor: pointer;
+      min-width: 126px;
+      flex-shrink: 0;
+    }
+
+    .store-tab.active {
+      border-color: var(--brand);
+      background: var(--emerald-bg);
+    }
+
+    .store-tab-name {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--ink);
+      white-space: nowrap;
+    }
+
+    .store-tab-total {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--brand);
+      margin-top: 2px;
+    }
+
+    .callout-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 12px 14px;
+      font-size: 13px;
+      color: var(--ink-secondary);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .callout-highlight {
+      color: var(--brand);
       font-weight: 700;
     }
 
-    .remove-item-btn {
-      border: none;
-      background: none;
-      color: var(--muted);
-      font-size: 0.95rem;
-      cursor: pointer;
-      padding: 4px 6px;
+    /* Custom Free-Text Item Adder */
+    .custom-add-form {
+      display: flex;
+      gap: 6px;
+      background: var(--surface);
+      padding: 8px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
     }
 
-    /* Skeleton Loader */
-    .skeleton {
-      height: 180px;
-      border-radius: var(--radius-lg);
-      background: linear-gradient(90deg, #ECEEF2 25%, #F5F6F8 50%, #ECEEF2 75%);
-      background-size: 200% 100%;
-      animation: shimmer 1.2s infinite;
+    .custom-name-input {
+      flex: 1;
+      min-width: 0;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 10px;
+      font-family: inherit;
+      font-size: 13px;
+      outline: none;
     }
-    @keyframes shimmer {
-      0% { background-position: 200% 0; }
-      100% { background-position: -200% 0; }
+
+    .custom-price-input {
+      width: 74px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 8px;
+      font-family: inherit;
+      font-size: 13px;
+      outline: none;
+    }
+
+    .custom-add-btn {
+      border: none;
+      background: var(--ink);
+      color: #fff;
+      font-family: inherit;
+      font-size: 12.5px;
+      font-weight: 700;
+      padding: 0 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    /* Basket Item Rows (Plan & In-Aisle) */
+    .basket-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .basket-row {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .basket-row-main {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .basket-item-meta {
+      min-width: 0;
+      flex: 1;
+    }
+
+    .basket-item-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .basket-item-he {
+      font-size: 12.5px;
+      color: var(--ink-secondary);
+      direction: rtl;
+      text-align: right;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-top: 2px;
+    }
+
+    .nudge-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      background: var(--amber-bg);
+      color: var(--amber-ink);
+      border: 1px solid var(--amber-border);
+      border-radius: 9px;
+      padding: 6px 10px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      width: 100%;
+      text-align: left;
+    }
+
+    /* In-Aisle Checklist Row */
+    .aisle-progress {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .aisle-progress-top {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .progress-track {
+      height: 8px;
+      background: var(--surface-subtle);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--emerald);
+      transition: width 0.2s ease;
+    }
+
+    .aisle-row {
+      min-height: 60px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      user-select: none;
+      transition: opacity 0.15s ease, background 0.15s ease;
+    }
+
+    .aisle-row.checked {
+      opacity: 0.52;
+      background: var(--surface-subtle);
+    }
+
+    .aisle-check {
+      width: 26px;
+      height: 26px;
+      border-radius: 8px;
+      border: 2px solid var(--border-strong);
+      display: grid;
+      place-items: center;
+      font-size: 15px;
+      font-weight: 800;
+      color: #fff;
+      flex-shrink: 0;
+      background: var(--surface);
+    }
+
+    .aisle-row.checked .aisle-check {
+      background: var(--emerald);
+      border-color: var(--emerald);
+    }
+
+    .aisle-row.checked .aisle-name {
+      text-decoration: line-through;
+    }
+
+    .drawer-footer {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn-secondary {
+      flex: 1;
+      height: 44px;
+      border-radius: 12px;
+      border: 1px solid var(--border-strong);
+      background: var(--surface);
+      color: var(--ink);
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .btn-whatsapp {
+      flex: 2;
+      height: 44px;
+      border-radius: 12px;
+      border: none;
+      background: #16A34A;
+      color: #fff;
+      font-family: inherit;
+      font-size: 13.5px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 36px 16px;
+      color: var(--ink-muted);
+      font-size: 14px;
     }
   </style>
 </head>
 <body>
 
-<div class="offline-banner" id="offlineBanner">📡 מצב אופליין — מציג את המחירים האחרונים שנשמרו במכשיר</div>
-
-<header class="topbar">
-  <div class="topbar-inner">
-    <div class="brand-row">
+  <header class="topbar">
+    <div class="topbar-inner">
       <div class="brand">
-        <img src="logo.jpg" alt="SabiPricez" class="brand-logo" />
-      </div>
-      <div class="topbar-right">
-        <button class="presets-trigger" id="presetsTrigger" onclick="openDrawer()">📋 סלים</button>
-        <div class="freshness" id="freshnessBadge">
-          <span class="freshness-dot"></span>
-          <span id="updatedAt">טוען מחירים...</span>
+        <div class="brand-mark">
+          <img src="logo.jpg" alt="SabiPricez" onerror="this.remove(); this.parentElement.textContent='S';" />
+        </div>
+        <div>
+          <div class="brand-title">SabiPricez</div>
+          <div class="brand-sub">Tel Aviv Grocery Price Intelligence</div>
         </div>
       </div>
-    </div>
-
-    <div class="search-wrap">
-      <span class="search-icon">🔍</span>
-      <input id="searchInput" class="search-input" type="search" placeholder="חיפוש מוצר או מותג (למשל: חזה עוף, בסמטי, חמאה)..." />
-    </div>
-
-    <div class="scroll-row" id="storeFilters"></div>
-  </div>
-</header>
-
-<div class="cat-bar">
-  <div class="scroll-row" id="categoryTabs"></div>
-</div>
-
-<main class="container" id="cardsGrid">
-  <div class="skeleton"></div>
-  <div class="skeleton"></div>
-  <div class="skeleton"></div>
-</main>
-
-<!-- Sticky Smart Basket Summary Bar -->
-<div class="basket-bar" id="basketBar" onclick="openDrawer()">
-  <div>
-    <div class="basket-bar-title" id="basketBarTitle">הסל שלי</div>
-    <div class="basket-bar-sub" id="basketBarSub"></div>
-  </div>
-  <div class="basket-bar-cta">השוואת סל ↑</div>
-</div>
-
-<!-- Smart Basket Comparison Drawer -->
-<div class="drawer-backdrop" id="drawerBackdrop" onclick="if(event.target===this) closeDrawer()">
-  <div class="drawer">
-    <div class="drawer-head">
-      <h2>🛒 השוואת הסל שלי</h2>
-      <div class="drawer-actions">
-        <button class="ghost-btn" onclick="clearBasket()">נקה סל</button>
-        <button class="ghost-btn" onclick="closeDrawer()">סגור</button>
+      <div id="freshnessPill" class="freshness-pill">
+        <span class="freshness-dot"></span>
+        <span id="freshnessText">Loading...</span>
       </div>
     </div>
-    <div class="presets-bar" id="presetsBar"></div>
-    <button class="wa-btn" id="waExportBtn" onclick="exportToWhatsApp()" style="display:none;">💬 שלח רשימת קניות לוואטסאפ</button>
-    <div id="decisionBanner"></div>
-    <div id="drawerTotals"></div>
-    <div class="basket-section-title" id="drawerItemsTitle">כמויות בסל (מבצעי כמות מחושבים אוטומטית כשהכמות מתאימה)</div>
-    <div id="drawerItems"></div>
+  </header>
+
+  <main class="container">
+    <div class="quick-toggles">
+      <button class="chip" id="toggleDeals" onclick="toggleFilter('deals')">🏷️ Active Promos</button>
+      <button class="chip" id="toggleLows" onclick="toggleFilter('lows')">📉 30-Day Lows</button>
+      <button class="chip" id="toggleWalkOnly" onclick="toggleFilter('walk')">🚶 Walkable Only</button>
+    </div>
+
+    <div id="cardsGrid" class="cards-grid">
+      <div class="empty-state">Loading live supermarket prices...</div>
+    </div>
+  </main>
+
+  <!-- Bottom Thumb-Zone Action Dock -->
+  <div class="bottom-dock">
+    <div class="dock-inner">
+      <div id="catStrip" class="cat-strip"></div>
+      <div class="dock-controls">
+        <div class="search-box">
+          <input id="searchInput" class="search-input" type="text" placeholder="Search English or עברית..." oninput="onSearchInput()" />
+          <button id="searchClear" class="search-clear" onclick="clearSearch()" aria-label="Clear search">✕</button>
+        </div>
+        <button class="basket-fab" onclick="openBasket()">
+          <span>Basket</span>
+          <span id="basketCountBadge" class="basket-count num">0</span>
+        </button>
+      </div>
+    </div>
   </div>
-</div>
 
-<script>
-  const STORE_COLORS = {
-    RAMI_LEVY: '#2563EB',
-    OSHER_AD: '#D97706',
-    DOR_ALON: '#475569',
-    SHUFERSAL: '#DC2626',
-  };
+  <!-- Smart Basket & In-Aisle Drawer -->
+  <div id="drawerBackdrop" class="drawer-backdrop" onclick="handleBackdropClick(event)">
+    <div class="drawer" role="dialog" aria-modal="true">
+      <div class="drawer-header">
+        <div class="drawer-top-row">
+          <div class="drawer-title">Smart Basket</div>
+          <button class="icon-close" onclick="closeBasket()" aria-label="Close">✕</button>
+        </div>
+        <div class="mode-switch">
+          <button id="modePlanBtn" class="mode-btn active" onclick="setBasketMode('plan')">🏠 Plan at Home</button>
+          <button id="modeAisleBtn" class="mode-btn" onclick="setBasketMode('aisle')">🛒 Shop in Aisle</button>
+        </div>
+      </div>
 
-  let appData = null;
-  let categories = ['הכל'];
-  let activeStores = new Set();
-  let activeCategory = 'הכל';
-  let searchQuery = '';
-  let expandedCards = new Set();
-  let basket = loadBasket();
-  let presets = loadPresets();
+      <div id="drawerBody" class="drawer-body"></div>
 
-  function loadBasket() {
-    try {
-      const raw = JSON.parse(localStorage.getItem('sabipricez_basket') || '{}');
-      if (Array.isArray(raw)) {
-        const migrated = {};
-        raw.forEach(name => { migrated[name] = { qty: 1, pins: {} }; });
-        localStorage.setItem('sabipricez_basket', JSON.stringify(migrated));
-        return migrated;
+      <div class="drawer-footer">
+        <button class="btn-secondary" onclick="clearBasket()">Clear</button>
+        <button class="btn-whatsapp" onclick="shareWhatsApp()">Share to WhatsApp</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let appData = { updated_at: "", stores: [], items: [] };
+    let state = {
+      category: "All",
+      search: "",
+      onlyDeals: false,
+      onlyLows: false,
+      walkOnly: false,
+      expanded: {},
+      basket: JSON.parse(localStorage.getItem("sabipricez_basket_v2") || "{}"),
+      customItems: JSON.parse(localStorage.getItem("sabipricez_custom_v1") || "[]"),
+      checkedIds: JSON.parse(localStorage.getItem("sabipricez_checked_v1") || "{}"),
+      selectedStore: null,
+      basketMode: "plan"
+    };
+
+    function saveState() {
+      localStorage.setItem("sabipricez_basket_v2", JSON.stringify(state.basket));
+      localStorage.setItem("sabipricez_custom_v1", JSON.stringify(state.customItems));
+      localStorage.setItem("sabipricez_checked_v1", JSON.stringify(state.checkedIds));
+    }
+
+    function escapeHtml(str) {
+      return String(str ?? "")
+        .replace(/&/g, "&")
+        .replace(/</g, "<")
+        .replace(/>/g, ">")
+        .replace(/"/g, """);
+    }
+
+    function getStoreMeta(shortStore, fullStore) {
+      const s = (shortStore || fullStore || "").toLowerCase();
+      const storeObj = appData.stores.find(st => st.label === fullStore || st.short_name === shortStore);
+      const isWalk = storeObj ? storeObj.tier === "neighborhood" : (s.includes("בן יהודה") || s.includes("שופרסל שלי") || s.includes("am:pm"));
+      let cls = "store-default";
+      if (s.includes("רמי לוי")) cls = "store-rami";
+      else if (s.includes("אושר עד")) cls = "store-osher";
+      else if (s.includes("שופרסל")) cls = "store-shufersal";
+      else if (s.includes("am:pm")) cls = "store-ampm";
+      return { cls, isWalk, icon: isWalk ? "🚶" : "🚗" };
+    }
+
+    function updateFreshness(updatedAt) {
+      const pill = document.getElementById("freshnessPill");
+      const text = document.getElementById("freshnessText");
+      if (!updatedAt) {
+        text.textContent = "Offline snapshot";
+        return;
       }
-      if (raw && typeof raw === 'object') {
-        Object.keys(raw).forEach(k => {
-          if (!raw[k] || typeof raw[k].qty !== 'number') raw[k] = { qty: 1, pins: {} };
-          if (!raw[k].pins) raw[k].pins = {};
-        });
-        return raw;
+      const parsed = new Date(updatedAt.replace(" ", "T") + "+02:00");
+      if (isNaN(parsed.getTime())) {
+        text.textContent = updatedAt;
+        return;
       }
-      return {};
-    } catch {
-      return {};
-    }
-  }
-
-  function saveBasket() {
-    localStorage.setItem('sabipricez_basket', JSON.stringify(basket));
-  }
-
-  function loadPresets() {
-    try {
-      const raw = JSON.parse(localStorage.getItem('sabipricez_presets') || '{}');
-      return (raw && typeof raw === 'object' && !Array.isArray(raw)) ? raw : {};
-    } catch {
-      return {};
-    }
-  }
-
-  function savePresets() {
-    localStorage.setItem('sabipricez_presets', JSON.stringify(presets));
-  }
-
-  function splitTitle(fullName) {
-    const match = fullName.match(/^(.+?)\s*\((.+)\)$/);
-    if (match) return { he: match[2], en: match[1] };
-    return { he: fullName, en: '' };
-  }
-
-  function getStoreColor(storeLabel) {
-    const storeObj = appData?.stores?.find(s => s.label === storeLabel);
-    return STORE_COLORS[storeObj?.chain] || '#6B7280';
-  }
-
-  function getEffectivePrice(m) {
-    return (typeof m.effective_unit_price === 'number') ? m.effective_unit_price : m.unit_price;
-  }
-
-  function getBasketUnitPrice(m, qty) {
-    const p = m.promo;
-    if (p && !p.is_club && !p.is_conditional && typeof p.promo_unit_price === 'number') {
-      const minQty = p.min_qty || 1;
-      if (qty >= minQty) return p.promo_unit_price;
-    }
-    return m.unit_price;
-  }
-
-  function getItemUnitInfo(item) {
-    const unit = item.matches?.[0]?.unit || "יח'";
-    const isKg = unit.includes('ק"ג') || unit.includes('קילו');
-    return { unit, step: isKg ? 0.5 : 1 };
-  }
-
-  function getStoreMatchForItem(item, storeLabel) {
-    const entry = basket[item.name];
-    const pinnedProduct = entry?.pins?.[storeLabel];
-    if (pinnedProduct) {
-      const pinned = item.matches.find(m => m.store === storeLabel && m.product === pinnedProduct);
-      if (pinned) return pinned;
-    }
-    return item.matches.find(m => m.store === storeLabel) || null;
-  }
-
-  function formatUpdated(ts) {
-    if (!ts) return 'לא ידוע';
-    const [datePart, timePart] = ts.split(' ');
-    const today = new Date().toISOString().slice(0, 10);
-    return datePart === today ? `עודכן היום ${timePart}` : `עודכן ${datePart}`;
-  }
-
-  function formatQty(qty) {
-    return Number.isInteger(qty) ? String(qty) : qty.toFixed(1);
-  }
-
-  function buildVerifyUrl(m) {
-    const q = m.item_code ? `${m.item_code} ${m.product}` : `${m.short_store || ''} ${m.product}`;
-    return `https://www.google.com/search?q=${encodeURIComponent(q.trim())}`;
-  }
-
-  function renderTrendBadge(trend) {
-    if (!trend || !trend.days || trend.days < 3) return '';
-    if (trend.is_low) {
-      return `<span class="trend-badge" title="ממוצע 30 יום: ₪${trend.avg_30d.toFixed(2)}">↓ שפל ${trend.days} יום</span>`;
-    }
-    if (trend.pct_below_avg >= 5) {
-      return `<span class="trend-badge" title="ממוצע ${trend.days} יום: ₪${trend.avg_30d.toFixed(2)}">↓ ${trend.pct_below_avg}% מהממוצע</span>`;
-    }
-    return '';
-  }
-
-  function renderStoreFilters() {
-    const el = document.getElementById('storeFilters');
-    el.innerHTML = appData.stores.map((s, idx) => {
-      const isOn = activeStores.has(s.label);
-      const color = STORE_COLORS[s.chain] || '#6B7280';
-      return `
-        <button class="store-chip ${isOn ? 'active' : ''}" onclick="toggleStore(${idx})">
-          <span class="store-dot" style="background:${color}"></span>
-          ${s.short_name || s.label}
-        </button>`;
-    }).join('');
-  }
-
-  function renderCategoryTabs() {
-    categories = ['הכל', ...new Set(appData.items.map(i => i.category || 'כללי'))];
-    const el = document.getElementById('categoryTabs');
-    el.innerHTML = categories.map((c, idx) => `
-      <button class="cat-chip ${activeCategory === c ? 'active' : ''}" onclick="setCategory(${idx})">
-        ${c}
-      </button>
-    `).join('');
-  }
-
-  function getFilteredMatches(item) {
-    const q = searchQuery.trim().toLowerCase();
-    return item.matches
-      .map((m, origIdx) => ({ m, origIdx }))
-      .filter(({ m }) => {
-        if (!activeStores.has(m.store)) return false;
-        if (!q) return true;
-        return (
-          item.name.toLowerCase().includes(q) ||
-          m.product.toLowerCase().includes(q) ||
-          (m.short_store || '').toLowerCase().includes(q) ||
-          (m.promo?.desc || '').toLowerCase().includes(q)
-        );
-      });
-  }
-
-  function renderCards() {
-    const grid = document.getElementById('cardsGrid');
-    const q = searchQuery.trim().toLowerCase();
-
-    const visibleItems = appData.items
-      .map((item, itemIdx) => ({ item, itemIdx }))
-      .filter(({ item }) => {
-        if (activeCategory !== 'הכל' && (item.category || 'כללי') !== activeCategory) return false;
-        if (!q) return true;
-        return item.name.toLowerCase().includes(q) || getFilteredMatches(item).length > 0;
-      });
-
-    if (!visibleItems.length) {
-      grid.innerHTML = '<div class="card"><div class="empty-state">לא נמצאו מוצרים התואמים לחיפוש.</div></div>';
-      return;
-    }
-
-    grid.innerHTML = visibleItems.map(({ item, itemIdx }) => {
-      const { he, en } = splitTitle(item.name);
-      const matches = getFilteredMatches(item);
-      const isExpanded = expandedCards.has(item.name);
-      const shown = isExpanded ? matches : matches.slice(0, 3);
-      const basketEntry = basket[item.name];
-      const inBasket = Boolean(basketEntry);
-      const trendHtml = renderTrendBadge(item.trend);
-
-      let savePct = 0;
-      if (matches.length >= 2) {
-        const best = matches[0].m;
-        const nextStore = (matches.find(x => x.m.store !== best.store) || matches[1]).m;
-        const bestEff = getEffectivePrice(best);
-        const nextEff = getEffectivePrice(nextStore);
-        if (nextStore && nextEff > bestEff) {
-          savePct = Math.round(((nextEff - bestEff) / nextEff) * 100);
-        }
+      const diffHrs = Math.max(0, Math.round((Date.now() - parsed.getTime()) / 3600000));
+      if (diffHrs < 1) {
+        text.textContent = "Updated just now · Live";
+        pill.classList.remove("stale");
+      } else if (diffHrs <= 24) {
+        text.textContent = `Updated ${diffHrs}h ago · Live`;
+        pill.classList.remove("stale");
+      } else {
+        const days = Math.floor(diffHrs / 24);
+        text.textContent = `Updated ${days}d ago`;
+        pill.classList.add("stale");
       }
+    }
 
-      const offersHtml = shown.length
-        ? shown.map(({ m, origIdx }, idx) => {
-            const isBest = idx === 0;
-            const isPinned = basketEntry?.pins?.[m.store] === m.product;
-            const color = getStoreColor(m.store);
-            const effPrice = getEffectivePrice(m);
-            const hasActiveDiscount = effPrice < m.unit_price - 0.01;
-            const showShelf = !hasActiveDiscount && Math.abs(m.price - m.unit_price) > 0.05;
+    function renderCategories() {
+      const cats = ["All", ...new Set(appData.items.map(i => i.category))];
+      const strip = document.getElementById("catStrip");
+      strip.innerHTML = cats.map(c => `
+        <button class="cat-pill ${state.category === c ? "active" : ""}" onclick="setCategory('${escapeHtml(c)}')">
+          ${escapeHtml(c)}
+        </button>
+      `).join("");
+    }
 
-            let promoHtml = '';
-            if (m.promo && m.promo.desc) {
-              const isRestricted = m.promo.is_club || m.promo.is_conditional;
-              const tagSuffix = m.promo.is_club ? ' · מועדון' : (m.promo.is_conditional ? ' · מותנה' : '');
-              promoHtml = `<div class="promo-line ${isRestricted ? 'club' : ''}" title="${m.promo.desc}">🏷️ ${m.promo.desc}${tagSuffix}</div>`;
-            }
+    function setCategory(cat) {
+      state.category = cat;
+      renderCategories();
+      renderCards();
+    }
 
-            return `
-              <div class="offer ${isBest ? 'best' : ''} ${isPinned ? 'pinned' : ''}" onclick="togglePin(${itemIdx}, ${origIdx})" title="לחץ כדי לנעוץ מוצר זה בסל">
-                <div class="offer-info">
-                  <div class="offer-meta">
-                    <span class="store-pill">
-                      <span class="store-dot" style="background:${color}"></span>
-                      ${m.short_store || m.store}
-                    </span>
-                    ${isBest && savePct >= 3 ? `<span class="save-badge">זול ב-${savePct}%</span>` : ''}
-                    ${isPinned ? `<span class="pin-badge">📌 נבחר לסל</span>` : ''}
-                  </div>
-                  <div class="product-row">
-                    <div class="product-name">${m.product}</div>
-                    <a class="verify-link" href="${buildVerifyUrl(m)}" target="_blank" rel="noopener" onclick="event.stopPropagation()" title="אימות מוצר וברקוד בגוגל">🔍</a>
-                  </div>
-                  ${promoHtml}
-                </div>
-                <div class="offer-price num">
-                  <div class="unit-price">₪${effPrice.toFixed(2)} <span class="unit-label">/ ${m.unit}</span></div>
-                  ${hasActiveDiscount ? `<div class="old-price">₪${m.unit_price.toFixed(2)} רגיל</div>` : ''}
-                  ${showShelf ? `<div class="shelf-price">₪${m.price.toFixed(2)} ליח'</div>` : ''}
-                </div>
-              </div>`;
-          }).join('')
-        : '<div class="empty-state">אין תוצאות בסניפים הנבחרים</div>';
+    function toggleFilter(type) {
+      if (type === "deals") state.onlyDeals = !state.onlyDeals;
+      if (type === "lows") state.onlyLows = !state.onlyLows;
+      if (type === "walk") state.walkOnly = !state.walkOnly;
+      document.getElementById("toggleDeals").classList.toggle("active", state.onlyDeals);
+      document.getElementById("toggleLows").classList.toggle("active", state.onlyLows);
+      document.getElementById("toggleWalkOnly").classList.toggle("active", state.walkOnly);
+      renderCards();
+    }
 
-      const moreCount = matches.length - 3;
-      const expandHtml = moreCount > 0
-        ? `<button class="expand-btn" onclick="toggleExpand(${itemIdx})">
-             ${isExpanded ? 'הצג פחות ▲' : `הצג עוד ${moreCount} אפשרויות ▼`}
-           </button>`
-        : '';
+    function onSearchInput() {
+      const input = document.getElementById("searchInput");
+      state.search = input.value.trim().toLowerCase();
+      document.getElementById("searchClear").style.display = state.search ? "grid" : "none";
+      renderCards();
+    }
+
+    function clearSearch() {
+      const input = document.getElementById("searchInput");
+      input.value = "";
+      onSearchInput();
+    }
+
+    function toggleExpand(itemName) {
+      state.expanded[itemName] = !state.expanded[itemName];
+      renderCards();
+    }
+
+    function changeQty(itemName, delta) {
+      const curr = state.basket[itemName] || 0;
+      const next = Math.max(0, curr + delta);
+      if (next === 0) {
+        delete state.basket[itemName];
+        delete state.checkedIds["staple:" + itemName];
+      } else {
+        state.basket[itemName] = next;
+      }
+      saveState();
+      updateBasketBadge();
+      renderCards();
+      if (document.getElementById("drawerBackdrop").classList.contains("open")) {
+        renderBasketDrawer();
+      }
+    }
+
+    function setExactQty(itemName, qty) {
+      state.basket[itemName] = qty;
+      saveState();
+      updateBasketBadge();
+      renderCards();
+      renderBasketDrawer();
+    }
+
+    function updateBasketBadge() {
+      const stapleCount = Object.values(state.basket).reduce((a, b) => a + b, 0);
+      const customCount = state.customItems.reduce((a, b) => a + (b.qty || 1), 0);
+      document.getElementById("basketCountBadge").textContent = stapleCount + customCount;
+    }
+
+    function renderMatchRow(m, idx, isWinner, isWalkHighlight) {
+      const meta = getStoreMeta(m.short_store, m.store);
+      const hasDiscount = m.effective_unit_price < m.unit_price - 0.01;
+      const promoHtml = m.promo
+        ? `<div class="promo-pill ${m.promo.promo_unit_price ? "active-deal" : "info-deal"}">
+             ${m.promo.promo_unit_price ? "🏷️" : "ℹ️"} ${escapeHtml(m.promo.desc)}
+           </div>`
+        : "";
 
       return `
-        <article class="card">
-          <div class="card-head">
-            <div class="card-title-wrap">
-              <div class="card-title-row">
-                <h2 class="card-title">${he}</h2>
-                ${trendHtml}
-              </div>
-              ${en ? `<div class="card-sub">${en}</div>` : ''}
+        <div class="match-row ${isWinner ? "winner" : ""}">
+          <div class="match-info">
+            <div class="match-top-line">
+              <span class="store-pill ${meta.cls}">${meta.icon} ${escapeHtml(m.short_store || m.store)}</span>
+              ${isWinner ? `<span class="winner-tag">#1 Best</span>` : ""}
+              ${!isWinner && isWalkHighlight ? `<span class="walk-tag">Best Walk</span>` : ""}
             </div>
-            <button class="basket-btn ${inBasket ? 'in-basket' : ''}" onclick="toggleBasket(${itemIdx})">
-              ${inBasket ? `✓ בסל (${formatQty(basketEntry.qty)})` : '+ לסל'}
-            </button>
+            <div class="product-name" title="${escapeHtml(m.product)}">${escapeHtml(m.product)}</div>
+            ${promoHtml}
           </div>
-          <div class="offers">${offersHtml}</div>
-          ${expandHtml}
-        </article>`;
-    }).join('');
-  }
+          <div class="price-col num">
+            <div>
+              <span class="price-hero">₪${m.effective_unit_price.toFixed(2)}</span>
+              <span class="price-unit">/ ${escapeHtml(m.unit)}</span>
+            </div>
+            <div class="price-sub">
+              ${hasDiscount ? `<span class="price-strike">₪${m.unit_price.toFixed(2)}</span>` : ""}
+              Shelf ₪${m.price.toFixed(2)}
+            </div>
+          </div>
+        </div>
+      `;
+    }
 
-  function computeBasketTotals() {
-    const selectedItems = appData.items.filter(i => Boolean(basket[i.name]));
-    const perStore = appData.stores
-      .filter(s => activeStores.has(s.label))
-      .map(store => {
-        let total = 0;
-        let found = 0;
-        let promosApplied = 0;
-        const itemPrices = {};
-        for (const item of selectedItems) {
-          const match = getStoreMatchForItem(item, store.label);
-          if (match) {
-            const qty = basket[item.name].qty;
-            const unitCost = getBasketUnitPrice(match, qty);
-            if (unitCost < match.unit_price - 0.01) promosApplied += 1;
-            const cost = unitCost * qty;
-            total += cost;
-            found += 1;
-            itemPrices[item.name] = cost;
+    function renderCards() {
+      const grid = document.getElementById("cardsGrid");
+      const filtered = appData.items.filter(item => {
+        if (state.category !== "All" && item.category !== state.category) return false;
+        let matches = item.matches || [];
+        if (state.walkOnly) {
+          matches = matches.filter(m => getStoreMeta(m.short_store, m.store).isWalk);
+        }
+        if (matches.length === 0) return false;
+        if (state.onlyDeals && !matches.some(m => m.promo && m.promo.promo_unit_price)) return false;
+        if (state.onlyLows && !(item.trend && item.trend.is_low)) return false;
+        if (state.search) {
+          const inTitle = item.name.toLowerCase().includes(state.search);
+          const inProducts = matches.some(m => m.product.toLowerCase().includes(state.search));
+          if (!inTitle && !inProducts) return false;
+        }
+        return true;
+      });
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `<div class="empty-state">No matching items found. Try clearing a filter or search term.</div>`;
+        return;
+      }
+
+      grid.innerHTML = filtered.map(item => {
+        let matches = item.matches || [];
+        if (state.walkOnly) {
+          matches = matches.filter(m => getStoreMeta(m.short_store, m.store).isWalk);
+        }
+        const qty = state.basket[item.name] || 0;
+        const isExpanded = !!state.expanded[item.name];
+        const isLow = item.trend && item.trend.is_low;
+
+        // Progressive disclosure: show #1 overall + cheapest walkable store (if different)
+        let visibleMatches = [];
+        let walkHighlightIdx = -1;
+        if (isExpanded || matches.length <= 2) {
+          visibleMatches = matches;
+        } else {
+          visibleMatches.push(matches[0]);
+          const firstWalkIdx = matches.findIndex((m, i) => i > 0 && getStoreMeta(m.short_store, m.store).isWalk);
+          if (firstWalkIdx !== -1 && matches[firstWalkIdx].short_store !== matches[0].short_store) {
+            visibleMatches.push(matches[firstWalkIdx]);
+            walkHighlightIdx = 1;
+          } else {
+            visibleMatches.push(matches[1]);
           }
         }
-        return { store, total, found, missing: selectedItems.length - found, promosApplied, itemPrices };
-      })
-      .filter(s => s.found > 0)
-      .sort((a, b) => (b.found - a.found) || (a.total - b.total));
 
-    let splitTotal = 0;
-    let splitFound = 0;
-    for (const item of selectedItems) {
-      const qty = basket[item.name].qty;
-      let bestPrice = Infinity;
-      for (const s of appData.stores) {
-        if (!activeStores.has(s.label)) continue;
-        const match = getStoreMatchForItem(item, s.label);
-        if (match) {
-          const unitCost = getBasketUnitPrice(match, qty);
-          if (unitCost < bestPrice) bestPrice = unitCost;
-        }
-      }
-      if (bestPrice < Infinity) {
-        splitTotal += bestPrice * qty;
-        splitFound += 1;
-      }
-    }
+        const uniqueStores = new Set(matches.map(m => m.short_store || m.store)).size;
 
-    const bestBigBox = perStore.find(e => e.store.tier === 'big_box');
-    const bestNeighborhood = perStore.find(e => e.store.tier === 'neighborhood');
-    let decision = null;
-
-    if (bestBigBox && bestNeighborhood) {
-      let overlapCount = 0;
-      let bigBoxSum = 0;
-      let neighSum = 0;
-      for (const item of selectedItems) {
-        if (bestBigBox.itemPrices[item.name] !== undefined && bestNeighborhood.itemPrices[item.name] !== undefined) {
-          overlapCount += 1;
-          bigBoxSum += bestBigBox.itemPrices[item.name];
-          neighSum += bestNeighborhood.itemPrices[item.name];
-        }
-      }
-      if (overlapCount > 0) {
-        decision = {
-          bigBoxName: bestBigBox.store.short_name,
-          neighName: bestNeighborhood.store.short_name,
-          diff: neighSum - bigBoxSum,
-          overlapCount,
-          totalCount: selectedItems.length,
-        };
-      }
-    }
-
-    return { count: selectedItems.length, perStore, splitTotal, splitFound, decision };
-  }
-
-  function renderPresetsBar(hasBasketItems) {
-    const presetNames = Object.keys(presets);
-    const trigger = document.getElementById('presetsTrigger');
-    trigger.classList.toggle('visible', presetNames.length > 0 && !hasBasketItems);
-
-    const bar = document.getElementById('presetsBar');
-    let html = presetNames.map((name, idx) => `
-      <span class="preset-chip">
-        <button class="preset-chip-load" onclick="loadPreset(${idx})">📋 ${name}</button>
-        <button class="preset-chip-del" onclick="deletePreset(${idx})" title="מחק סל שמור">✕</button>
-      </span>
-    `).join('');
-
-    if (hasBasketItems) {
-      html += `<button class="preset-save-btn" onclick="saveCurrentPreset()">+ שמור סל קבוע</button>`;
-    } else if (!presetNames.length) {
-      html = `<span style="font-size:0.78rem;color:var(--muted)">אין סלים שמורים עדיין. הוסיפו מוצרים ולחצו "שמור סל קבוע".</span>`;
-    }
-
-    bar.innerHTML = html;
-  }
-
-  function renderBasketUI() {
-    const basketKeys = Object.keys(basket).filter(k => appData.items.some(i => i.name === k));
-    const hasItems = basketKeys.length > 0;
-    const bar = document.getElementById('basketBar');
-    const waBtn = document.getElementById('waExportBtn');
-    const itemsTitle = document.getElementById('drawerItemsTitle');
-
-    renderPresetsBar(hasItems);
-
-    if (!hasItems) {
-      bar.classList.remove('visible');
-      waBtn.style.display = 'none';
-      itemsTitle.style.display = 'none';
-      document.getElementById('decisionBanner').innerHTML = '';
-      document.getElementById('drawerTotals').innerHTML = '<div class="empty-state">הסל ריק. בחרו סל שמור למעלה או הוסיפו מוצרים מהרשימה.</div>';
-      document.getElementById('drawerItems').innerHTML = '';
-      return;
-    }
-
-    const { count, perStore, splitTotal, decision } = computeBasketTotals();
-    bar.classList.add('visible');
-    waBtn.style.display = 'inline-flex';
-    itemsTitle.style.display = 'block';
-
-    const winner = perStore[0];
-    document.getElementById('basketBarTitle').textContent = `הסל שלי · ${count} מוצרים`;
-    document.getElementById('basketBarSub').textContent = winner
-      ? `הכי זול בסניף אחד: ${winner.store.short_name} (₪${winner.total.toFixed(2)} · ${winner.found}/${count})`
-      : 'אין התאמות בסניפים הנבחרים';
-
-    const bannerEl = document.getElementById('decisionBanner');
-    if (decision) {
-      const overlapNote = decision.overlapCount < decision.totalCount
-        ? `<div class="decision-sub">מחושב על ${decision.overlapCount} מתוך ${decision.totalCount} מוצרים שקיימים בשני הסניפים</div>`
-        : '';
-      if (decision.diff >= 25) {
-        bannerEl.innerHTML = `
-          <div class="decision-banner drive">
-            🚗 נסיעה ל${decision.bigBoxName} חוסכת ₪${decision.diff.toFixed(0)} לעומת ${decision.neighName}
-            ${overlapNote}
-          </div>`;
-      } else if (decision.diff > 0) {
-        bannerEl.innerHTML = `
-          <div class="decision-banner walk">
-            🚶 פער קטן של ₪${decision.diff.toFixed(0)} בלבד — שווה להישאר בבן יהודה (${decision.neighName})
-            ${overlapNote}
-          </div>`;
-      } else {
-        bannerEl.innerHTML = `
-          <div class="decision-banner walk">
-            🚶 ${decision.neighName} זול יותר או זהה ל${decision.bigBoxName} בסל הזה — אין סיבה לנסוע
-            ${overlapNote}
-          </div>`;
-      }
-    } else {
-      bannerEl.innerHTML = '';
-    }
-
-    const totalsEl = document.getElementById('drawerTotals');
-    let html = perStore.map((entry, idx) => {
-      const isWinner = idx === 0 && entry.missing === 0;
-      const fallbackWinner = idx === 0 && perStore.every(p => p.missing > 0);
-      const promoNote = entry.promosApplied > 0 ? ` · 🏷️ ${entry.promosApplied} מבצעים הופעלו` : '';
-      return `
-        <div class="store-total-row ${(isWinner || fallbackWinner) ? 'winner' : ''}">
-          <div>
-            <strong>${entry.store.short_name}</strong>
-            <div style="font-size:0.78rem;color:var(--muted)">
-              ${entry.found}/${count} מוצרים נמצאו${promoNote}
+        return `
+          <article class="card">
+            <div class="card-header">
+              <div class="card-title-group">
+                <div class="card-cat">${escapeHtml(item.category)}</div>
+                <div class="card-title">${escapeHtml(item.name)}</div>
+              </div>
+              <div class="card-badges">
+                ${isLow ? `<span class="low-badge num">↓ ${item.trend.pct_below_avg}% · 30d Low</span>` : ""}
+                <div class="stepper">
+                  ${qty > 0 ? `
+                    <button class="stepper-btn" onclick="changeQty('${escapeHtml(item.name).replace(/'/g, "\\'")}', -1)" aria-label="Decrease">−</button>
+                    <span class="stepper-qty num">${qty}</span>
+                    <button class="stepper-btn add-primary" onclick="changeQty('${escapeHtml(item.name).replace(/'/g, "\\'")}', 1)" aria-label="Increase">+</button>
+                  ` : `
+                    <button class="stepper-btn add-primary" onclick="changeQty('${escapeHtml(item.name).replace(/'/g, "\\'")}', 1)" aria-label="Add">+</button>
+                  `}
+                </div>
+              </div>
             </div>
-            ${entry.missing > 0 ? `<span class="missing-pill">חסרים ${entry.missing} מוצרים — לא כולל במחיר</span>` : ''}
-          </div>
-          <div class="num" style="font-size:1.1rem;font-weight:800;">₪${entry.total.toFixed(2)}</div>
-        </div>`;
-    }).join('');
 
-    if (splitTotal > 0 && perStore.length > 1) {
-      html += `
-        <div class="store-total-row" style="border-style:dashed;">
-          <div>
-            <strong>⚡ קנייה מפוצלת (הכי זול לכל מוצר)</strong>
-            <div style="font-size:0.78rem;color:var(--muted)">שילוב הסניפים הזולים ביותר</div>
-          </div>
-          <div class="num" style="font-size:1.05rem;font-weight:800;color:var(--accent)">₪${splitTotal.toFixed(2)}</div>
-        </div>`;
+            <div class="matches-list">
+              ${visibleMatches.map((m, idx) => renderMatchRow(m, idx, idx === 0, idx === walkHighlightIdx)).join("")}
+            </div>
+
+            ${matches.length > 2 ? `
+              <button class="expand-btn" onclick="toggleExpand('${escapeHtml(item.name).replace(/'/g, "\\'")}')">
+                ${isExpanded
+                  ? "Show top picks ▲"
+                  : `Compare all ${uniqueStores} stores (${matches.length} options) ▾`}
+              </button>
+            ` : ""}
+          </article>
+        `;
+      }).join("");
     }
-    totalsEl.innerHTML = html || '<div class="empty-state">אין נתונים להשוואה</div>';
 
-    document.getElementById('drawerItems').innerHTML = basketKeys.map(name => {
-      const itemIdx = appData.items.findIndex(i => i.name === name);
-      const item = appData.items[itemIdx];
-      const { he } = splitTitle(name);
-      const { unit, step } = getItemUnitInfo(item);
-      const entry = basket[name];
-      const pinCount = Object.keys(entry.pins || {}).length;
-      return `
-        <div class="basket-qty-row">
-          <div class="basket-qty-info">
-            <div class="basket-qty-name">${he}</div>
-            ${pinCount > 0 ? `<div class="basket-qty-pin">📌 ${pinCount} מותגים נעוצים</div>` : ''}
-          </div>
-          <div class="stepper num">
-            <button onclick="changeQty(${itemIdx}, -${step})">−</button>
-            <span class="stepper-val">${formatQty(entry.qty)} ${unit}</span>
-            <button onclick="changeQty(${itemIdx}, ${step})">+</button>
-          </div>
-          <button class="remove-item-btn" onclick="toggleBasket(${itemIdx})" title="הסר מהסל">✕</button>
-        </div>`;
-    }).join('');
-  }
-
-  function saveCurrentPreset() {
-    const name = prompt('שם לסל השמור (למשל: קנייה שבועית, אירוח):');
-    if (!name || !name.trim()) return;
-    presets[name.trim()] = JSON.parse(JSON.stringify(basket));
-    savePresets();
-    renderBasketUI();
-  }
-
-  function loadPreset(idx) {
-    const name = Object.keys(presets)[idx];
-    if (!name || !presets[name]) return;
-    basket = JSON.parse(JSON.stringify(presets[name]));
-    saveBasket();
-    renderCards();
-    renderBasketUI();
-  }
-
-  function deletePreset(idx) {
-    const name = Object.keys(presets)[idx];
-    if (!name) return;
-    delete presets[name];
-    savePresets();
-    renderBasketUI();
-  }
-
-  function exportToWhatsApp() {
-    const selectedItems = appData.items.filter(i => Boolean(basket[i.name]));
-    if (!selectedItems.length) return;
-
-    const { perStore } = computeBasketTotals();
-    const winner = perStore[0];
-    const lines = ['🛒 *רשימת קניות · SabiPricez*'];
-
-    if (winner) {
-      lines.push(`📍 סניף מומלץ: *${winner.store.short_name}* (סה"כ משוער: ₪${winner.total.toFixed(2)})`);
+    /* Smart Basket Logic */
+    function openBasket() {
+      document.getElementById("drawerBackdrop").classList.add("open");
+      renderBasketDrawer();
     }
-    lines.push('');
 
-    for (const item of selectedItems) {
-      const { he } = splitTitle(item.name);
-      const { unit } = getItemUnitInfo(item);
-      const qty = basket[item.name].qty;
-      const match = winner ? getStoreMatchForItem(item, winner.store.label) : null;
-      if (match) {
-        const unitCost = getBasketUnitPrice(match, qty);
-        const est = (unitCost * qty).toFixed(2);
-        const pinTag = basket[item.name]?.pins?.[winner.store.label] ? ` (${match.product})` : '';
-        lines.push(`• ${he}${pinTag} — ${formatQty(qty)} ${unit} (~₪${est})`);
-      } else {
-        lines.push(`• ${he} — ${formatQty(qty)} ${unit} (לא נמצא בסניף)`);
+    function closeBasket() {
+      document.getElementById("drawerBackdrop").classList.remove("open");
+    }
+
+    function handleBackdropClick(e) {
+      if (e.target.id === "drawerBackdrop") closeBasket();
+    }
+
+    function setBasketMode(mode) {
+      state.basketMode = mode;
+      document.getElementById("modePlanBtn").classList.toggle("active", mode === "plan");
+      document.getElementById("modeAisleBtn").classList.toggle("active", mode === "aisle");
+      renderBasketDrawer();
+    }
+
+    function addCustomItem(e) {
+      e.preventDefault();
+      const nameEl = document.getElementById("customItemName");
+      const priceEl = document.getElementById("customItemPrice");
+      const name = nameEl.value.trim();
+      if (!name) return;
+      const price = parseFloat(priceEl.value) || 0;
+      state.customItems.push({
+        id: "c_" + Date.now(),
+        name,
+        price,
+        qty: 1
+      });
+      nameEl.value = "";
+      priceEl.value = "";
+      saveState();
+      updateBasketBadge();
+      renderBasketDrawer();
+    }
+
+    function removeCustomItem(id) {
+      state.customItems = state.customItems.filter(c => c.id !== id);
+      delete state.checkedIds[id];
+      saveState();
+      updateBasketBadge();
+      renderBasketDrawer();
+    }
+
+    function toggleChecked(key) {
+      state.checkedIds[key] = !state.checkedIds[key];
+      saveState();
+      renderBasketDrawer();
+    }
+
+    function clearBasket() {
+      state.basket = {};
+      state.customItems = [];
+      state.checkedIds = {};
+      saveState();
+      updateBasketBadge();
+      renderCards();
+      renderBasketDrawer();
+    }
+
+    function computeStoreSummaries() {
+      const basketEntries = Object.entries(state.basket);
+      const customTotal = state.customItems.reduce((sum, c) => sum + (c.price || 0) * (c.qty || 1), 0);
+
+      // Build list of active stores that actually have data
+      const activeStores = appData.stores.filter(s =>
+        appData.items.some(it => (it.matches || []).some(m => m.store === s.label))
+      );
+
+      let splitTotal = customTotal;
+      basketEntries.forEach(([itemName, qty]) => {
+        const item = appData.items.find(i => i.name === itemName);
+        if (!item || !item.matches.length) return;
+        const best = item.matches[0];
+        const unitShelf = (best.promo && best.promo.promo_unit_price && qty >= (best.promo.min_qty || 1))
+          ? best.price * (best.promo.promo_unit_price / best.unit_price)
+          : best.price;
+        splitTotal += unitShelf * qty;
+      });
+
+      const summaries = activeStores.map(store => {
+        let total = customTotal;
+        let missing = 0;
+        const lineItems = [];
+
+        basketEntries.forEach(([itemName, qty]) => {
+          const item = appData.items.find(i => i.name === itemName);
+          if (!item) return;
+          const storeMatches = (item.matches || []).filter(m => m.store === store.label);
+          if (!storeMatches.length) {
+            missing++;
+            lineItems.push({ itemName, qty, match: null, lineCost: 0, promoApplied: false });
+            return;
+          }
+          const best = storeMatches[0];
+          const minQty = (best.promo && best.promo.min_qty) ? best.promo.min_qty : 1;
+          const hasOpenPromo = !!(best.promo && best.promo.promo_unit_price);
+          const promoApplied = hasOpenPromo && qty >= minQty;
+          const effectiveShelf = promoApplied
+            ? best.price * (best.promo.promo_unit_price / best.unit_price)
+            : best.price;
+          const lineCost = effectiveShelf * qty;
+          total += lineCost;
+
+          lineItems.push({
+            itemName,
+            qty,
+            match: best,
+            lineCost,
+            promoApplied,
+            hasOpenPromo,
+            minQty,
+            effectiveShelf
+          });
+        });
+
+        return {
+          store,
+          total,
+          missing,
+          lineItems
+        };
+      }).sort((a, b) => (a.missing - b.missing) || (a.total - b.total));
+
+      return { summaries, splitTotal, customTotal };
+    }
+
+    function renderBasketDrawer() {
+      const body = document.getElementById("drawerBody");
+      const basketEntries = Object.entries(state.basket);
+
+      if (basketEntries.length === 0 && state.customItems.length === 0) {
+        body.innerHTML = `<div class="empty-state">Your basket is empty.<br/>Tap <strong>+</strong> on any item card to build your list.</div>`;
+        return;
+      }
+
+      const { summaries, splitTotal } = computeStoreSummaries();
+      if (!summaries.length) {
+        body.innerHTML = `<div class="empty-state">No store pricing loaded yet.</div>`;
+        return;
+      }
+
+      if (!state.selectedStore || !summaries.some(s => s.store.label === state.selectedStore)) {
+        state.selectedStore = summaries[0].store.label;
+      }
+
+      const activeSummary = summaries.find(s => s.store.label === state.selectedStore) || summaries[0];
+      const cheapestOverall = summaries[0];
+      const cheapestWalk = summaries.find(s => s.store.tier === "neighborhood");
+
+      if (state.basketMode === "aisle") {
+        // IN-AISLE CHECKLIST MODE
+        const allRows = [
+          ...activeSummary.lineItems.map(li => ({
+            key: "staple:" + li.itemName,
+            title: li.itemName,
+            hebrew: li.match ? li.match.product : "Not stocked at this branch",
+            qty: li.qty,
+            cost: li.lineCost,
+            promo: li.promoApplied ? li.match.promo.desc : ""
+          })),
+          ...state.customItems.map(c => ({
+            key: c.id,
+            title: c.name,
+            hebrew: "Custom item",
+            qty: c.qty || 1,
+            cost: (c.price || 0) * (c.qty || 1),
+            promo: ""
+          }))
+        ];
+
+        const unchecked = allRows.filter(r => !state.checkedIds[r.key]);
+        const checked = allRows.filter(r => state.checkedIds[r.key]);
+        const sortedRows = [...unchecked, ...checked];
+        const remainingCost = unchecked.reduce((sum, r) => sum + r.cost, 0);
+        const pctDone = allRows.length ? Math.round((checked.length / allRows.length) * 100) : 0;
+
+        body.innerHTML = `
+          <div class="store-tabs">
+            ${summaries.map(s => `
+              <button class="store-tab ${s.store.label === activeSummary.store.label ? "active" : ""}"
+                      onclick="state.selectedStore='${escapeHtml(s.store.label).replace(/'/g, "\\'")}'; renderBasketDrawer();">
+                <div class="store-tab-name">${s.store.tier === "neighborhood" ? "🚶" : "🚗"} ${escapeHtml(s.store.short_name)}</div>
+                <div class="store-tab-total num">₪${s.total.toFixed(0)}</div>
+              </button>
+            `).join("")}
+          </div>
+
+          <div class="aisle-progress">
+            <div class="aisle-progress-top">
+              <span>${checked.length} of ${allRows.length} items in cart</span>
+              <span class="num" style="color: var(--brand);">Remaining: ₪${remainingCost.toFixed(2)}</span>
+            </div>
+            <div class="progress-track">
+              <div class="progress-fill" style="width: ${pctDone}%"></div>
+            </div>
+          </div>
+
+          <div class="basket-list">
+            ${sortedRows.map(r => {
+              const isChecked = !!state.checkedIds[r.key];
+              return `
+                <div class="aisle-row ${isChecked ? "checked" : ""}" onclick="toggleChecked('${escapeHtml(r.key).replace(/'/g, "\\'")}')">
+                  <div class="aisle-check">${isChecked ? "✓" : ""}</div>
+                  <div class="basket-item-meta">
+                    <div class="aisle-name basket-item-title">${r.qty}× ${escapeHtml(r.title)}</div>
+                    <div class="basket-item-he">${escapeHtml(r.hebrew)}</div>
+                    ${r.promo ? `<div class="promo-pill active-deal" style="margin-top:4px;">🏷️ ${escapeHtml(r.promo)}</div>` : ""}
+                  </div>
+                  <div class="num" style="font-weight:800; font-size:15px;">
+                    ${r.cost > 0 ? `₪${r.cost.toFixed(2)}` : "—"}
+                  </div>
+                </div>
+              `;
+            }).join("")}
+          </div>
+        `;
+        return;
+      }
+
+      // PLAN AT HOME MODE
+      let walkVsDriveHtml = "";
+      if (cheapestWalk && cheapestOverall.store.tier === "big_box" && cheapestWalk.total > cheapestOverall.total + 1) {
+        const diff = cheapestWalk.total - cheapestOverall.total;
+        walkVsDriveHtml = `<div>🚗 Driving to <strong>${escapeHtml(cheapestOverall.store.short_name)}</strong> saves <span class="callout-highlight num">₪${diff.toFixed(2)}</span> vs walking to <strong>${escapeHtml(cheapestWalk.store.short_name)}</strong>.</div>`;
+      } else if (cheapestWalk && cheapestWalk.store.label === cheapestOverall.store.label) {
+        walkVsDriveHtml = `<div>🚶 <strong>${escapeHtml(cheapestWalk.store.short_name)}</strong> is both walkable and the cheapest single store!</div>`;
+      }
+
+      const splitSavings = activeSummary.total - splitTotal;
+      const splitHtml = splitSavings > 3
+        ? `<div>🔀 Splitting across stores drops total to <span class="callout-highlight num">₪${splitTotal.toFixed(2)}</span> (saves ₪${splitSavings.toFixed(2)}).</div>`
+        : "";
+
+      body.innerHTML = `
+        <div class="store-tabs">
+          ${summaries.map(s => `
+            <button class="store-tab ${s.store.label === activeSummary.store.label ? "active" : ""}"
+                    onclick="state.selectedStore='${escapeHtml(s.store.label).replace(/'/g, "\\'")}'; renderBasketDrawer();">
+              <div class="store-tab-name">${s.store.tier === "neighborhood" ? "🚶" : "🚗"} ${escapeHtml(s.store.short_name)}</div>
+              <div class="store-tab-total num">₪${s.total.toFixed(2)}</div>
+            </button>
+          `).join("")}
+        </div>
+
+        ${(walkVsDriveHtml || splitHtml) ? `<div class="callout-card">${walkVsDriveHtml}${splitHtml}</div>` : ""}
+
+        <form class="custom-add-form" onsubmit="addCustomItem(event)">
+          <input id="customItemName" class="custom-name-input" type="text" placeholder="Add extra item (e.g. Dish soap)..." />
+          <input id="customItemPrice" class="custom-price-input num" type="number" step="0.5" min="0" placeholder="₪ Est." />
+          <button type="submit" class="custom-add-btn">+ Add</button>
+        </form>
+
+        <div class="basket-list">
+          ${activeSummary.lineItems.map(li => {
+            const needMore = li.hasOpenPromo && li.qty < li.minQty;
+            const addCount = Math.ceil(li.minQty - li.qty);
+            const bundleCost = li.match ? (li.match.price * (li.match.promo.promo_unit_price / li.match.unit_price) * li.minQty) : 0;
+
+            return `
+              <div class="basket-row">
+                <div class="basket-row-main">
+                  <div class="basket-item-meta">
+                    <div class="basket-item-title">${escapeHtml(li.itemName)}</div>
+                    <div class="basket-item-he">${li.match ? escapeHtml(li.match.product) : "Not available at this store"}</div>
+                  </div>
+                  <div class="stepper">
+                    <button class="stepper-btn" onclick="changeQty('${escapeHtml(li.itemName).replace(/'/g, "\\'")}', -1)">−</button>
+                    <span class="stepper-qty num">${li.qty}</span>
+                    <button class="stepper-btn add-primary" onclick="changeQty('${escapeHtml(li.itemName).replace(/'/g, "\\'")}', 1)">+</button>
+                  </div>
+                  <div class="num" style="min-width:64px; text-align:right; font-weight:800; font-size:15px;">
+                    ${li.match ? `₪${li.lineCost.toFixed(2)}` : "—"}
+                  </div>
+                </div>
+
+                ${needMore ? `
+                  <button class="nudge-pill" onclick="setExactQty('${escapeHtml(li.itemName).replace(/'/g, "\\'")}', ${li.minQty})">
+                    <span>🏷️ Add ${addCount} more to unlock: ${escapeHtml(li.match.promo.desc)}</span>
+                    <span class="num">→ ₪${bundleCost.toFixed(2)}</span>
+                  </button>
+                ` : (li.promoApplied ? `
+                  <div class="promo-pill active-deal">✓ Deal unlocked: ${escapeHtml(li.match.promo.desc)}</div>
+                ` : "")}
+              </div>
+            `;
+          }).join("")}
+
+          ${state.customItems.map(c => `
+            <div class="basket-row">
+              <div class="basket-row-main">
+                <div class="basket-item-meta">
+                  <div class="basket-item-title">${escapeHtml(c.name)}</div>
+                  <div style="font-size:11.5px; color:var(--ink-muted);">Custom item</div>
+                </div>
+                <div class="num" style="font-weight:800; font-size:14px;">
+                  ${c.price > 0 ? `₪${(c.price * (c.qty || 1)).toFixed(2)}` : "Est. ₪0"}
+                </div>
+                <button class="icon-close" style="width:28px; height:28px; font-size:12px;" onclick="removeCustomItem('${escapeHtml(c.id)}')">✕</button>
+              </div>
+            </div>
+          `).join("")}
+        </div>
+      `;
+    }
+
+    function shareWhatsApp() {
+      const { summaries } = computeStoreSummaries();
+      const active = summaries.find(s => s.store.label === state.selectedStore) || summaries[0];
+      if (!active) return;
+
+      const lines = [`🛒 *SabiPricez List — ${active.store.short_name}*`, ""];
+      active.lineItems.forEach(li => {
+        if (li.match) {
+          lines.push(`• ${li.qty}× ${li.itemName} (${li.match.product}) — ₪${li.lineCost.toFixed(2)}`);
+        } else {
+          lines.push(`• ${li.qty}× ${li.itemName}`);
+        }
+      });
+      state.customItems.forEach(c => {
+        lines.push(`• ${c.qty || 1}× ${c.name}${c.price > 0 ? ` — ₪${c.price.toFixed(2)}` : ""}`);
+      });
+      lines.push("", `*Estimated Total: ₪${active.total.toFixed(2)}*`);
+
+      const url = `https://wa.me/?text=${encodeURIComponent(lines.join("\n"))}`;
+      window.open(url, "_blank");
+    }
+
+    async function init() {
+      updateBasketBadge();
+      try {
+        const res = await fetch("data.json?t=" + Date.now());
+        appData = await res.json();
+        updateFreshness(appData.updated_at);
+        renderCategories();
+        renderCards();
+      } catch (e) {
+        document.getElementById("cardsGrid").innerHTML =
+          `<div class="empty-state">Could not load <code>data.json</code>. Check your connection or run the price scraper.</div>`;
+      }
+
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.register("sw.js").catch(() => {});
       }
     }
 
-    const url = `https://wa.me/?text=${encodeURIComponent(lines.join('\n'))}`;
-    window.open(url, '_blank', 'noopener');
-  }
-
-  function toggleStore(storeIdx) {
-    const label = appData.stores[storeIdx].label;
-    if (activeStores.has(label)) {
-      if (activeStores.size === 1) return;
-      activeStores.delete(label);
-    } else {
-      activeStores.add(label);
-    }
-    renderStoreFilters();
-    renderCards();
-    renderBasketUI();
-  }
-
-  function setCategory(catIdx) {
-    activeCategory = categories[catIdx];
-    renderCategoryTabs();
-    renderCards();
-  }
-
-  function toggleExpand(itemIdx) {
-    const name = appData.items[itemIdx].name;
-    if (expandedCards.has(name)) expandedCards.delete(name);
-    else expandedCards.add(name);
-    renderCards();
-  }
-
-  function toggleBasket(itemIdx) {
-    const name = appData.items[itemIdx].name;
-    if (basket[name]) delete basket[name];
-    else basket[name] = { qty: 1, pins: {} };
-    saveBasket();
-    renderCards();
-    renderBasketUI();
-  }
-
-  function changeQty(itemIdx, delta) {
-    const item = appData.items[itemIdx];
-    const entry = basket[item.name];
-    if (!entry) return;
-    const { step } = getItemUnitInfo(item);
-    const next = Math.round((entry.qty + delta) * 10) / 10;
-    if (next < step) {
-      delete basket[item.name];
-    } else {
-      entry.qty = next;
-    }
-    saveBasket();
-    renderCards();
-    renderBasketUI();
-  }
-
-  function togglePin(itemIdx, origMatchIdx) {
-    const item = appData.items[itemIdx];
-    const match = item.matches[origMatchIdx];
-    if (!match) return;
-    if (!basket[item.name]) {
-      basket[item.name] = { qty: 1, pins: {} };
-    }
-    const pins = basket[item.name].pins;
-    if (pins[match.store] === match.product) {
-      delete pins[match.store];
-    } else {
-      pins[match.store] = match.product;
-    }
-    saveBasket();
-    renderCards();
-    renderBasketUI();
-  }
-
-  function clearBasket() {
-    basket = {};
-    saveBasket();
-    renderCards();
-    renderBasketUI();
-  }
-
-  function openDrawer() { document.getElementById('drawerBackdrop').classList.add('open'); }
-  function closeDrawer() { document.getElementById('drawerBackdrop').classList.remove('open'); }
-
-  function updateOfflineBanner() {
-    document.getElementById('offlineBanner').classList.toggle('visible', !navigator.onLine);
-  }
-  window.addEventListener('online', updateOfflineBanner);
-  window.addEventListener('offline', updateOfflineBanner);
-
-  document.getElementById('searchInput').addEventListener('input', e => {
-    searchQuery = e.target.value;
-    renderCards();
-  });
-
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('./sw.js').catch(() => {});
-    });
-  }
-
-  async function init() {
-    updateOfflineBanner();
-    try {
-      const res = await fetch(`data.json?t=${Date.now()}`);
-      if (!res.ok) throw new Error('missing data.json');
-      appData = await res.json();
-      activeStores = new Set(appData.stores.map(s => s.label));
-      document.getElementById('updatedAt').textContent = formatUpdated(appData.updated_at);
-      renderStoreFilters();
-      renderCategoryTabs();
-      renderCards();
-      renderBasketUI();
-    } catch (err) {
-      document.getElementById('updatedAt').textContent = 'ממתין לעדכון ראשון';
-      document.getElementById('cardsGrid').innerHTML =
-        '<div class="card"><div class="empty-state">קובץ <code>data.json</code> עדיין לא נמצא. הריצו את ה-Workflow ב-GitHub Actions כדי למשוך מחירים.</div></div>';
-    }
-  }
-
-  init();
-</script>
+    init();
+  </script>
 </body>
 </html>
