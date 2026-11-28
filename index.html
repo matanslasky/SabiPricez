@@ -79,14 +79,13 @@
     .brand {
       display: flex;
       align-items: center;
-      gap: 10px;
       min-width: 0;
     }
 
     .logo-wrap {
-      height: 38px;
+      height: 44px;
       padding: 4px 10px;
-      border-radius: 10px;
+      border-radius: 12px;
       background: var(--surface);
       border: 1px solid var(--border);
       display: flex;
@@ -96,7 +95,7 @@
     }
 
     .logo-wrap img {
-      max-height: 28px;
+      max-height: 34px;
       width: auto;
       height: auto;
       object-fit: contain;
@@ -105,28 +104,19 @@
 
     .logo-fallback {
       font-weight: 800;
-      font-size: 15px;
+      font-size: 18px;
       color: var(--brand);
       letter-spacing: -0.02em;
       white-space: nowrap;
-    }
-
-    .brand-sub {
-      font-size: 12px;
-      color: var(--ink-secondary);
-      font-weight: 600;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
     }
 
     .freshness-pill {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      padding: 5px 10px;
+      padding: 6px 11px;
       border-radius: var(--radius-pill);
-      font-size: 11.5px;
+      font-size: 12px;
       font-weight: 600;
       background: var(--surface);
       border: 1px solid var(--border);
@@ -156,18 +146,18 @@
     .container {
       max-width: 780px;
       margin: 0 auto;
-      padding: 14px 16px 24px;
+      padding: 12px 16px 24px;
     }
 
-    .quick-toggles {
+    .filter-row {
       display: flex;
-      gap: 8px;
+      gap: 7px;
       overflow-x: auto;
       scrollbar-width: none;
-      margin-bottom: 14px;
+      margin-bottom: 10px;
       padding-bottom: 2px;
     }
-    .quick-toggles::-webkit-scrollbar { display: none; }
+    .filter-row::-webkit-scrollbar { display: none; }
 
     .chip {
       border: 1px solid var(--border);
@@ -176,7 +166,7 @@
       font-family: inherit;
       font-size: 12.5px;
       font-weight: 600;
-      padding: 7px 12px;
+      padding: 6px 12px;
       border-radius: var(--radius-pill);
       cursor: pointer;
       white-space: nowrap;
@@ -189,10 +179,17 @@
       border-color: var(--brand);
     }
 
+    .chip.store-chip.active {
+      background: var(--ink);
+      color: #FFFFFF;
+      border-color: var(--ink);
+    }
+
     .cards-grid {
       display: flex;
       flex-direction: column;
       gap: 14px;
+      margin-top: 4px;
     }
 
     .card {
@@ -980,7 +977,6 @@
           />
           <span id="logoFallback" class="logo-fallback" style="display:none;">SabiPricez</span>
         </div>
-        <div class="brand-sub">Tel Aviv Grocery Prices</div>
       </div>
       <div id="freshnessPill" class="freshness-pill">
         <span class="freshness-dot"></span>
@@ -990,7 +986,9 @@
   </header>
 
   <main class="container">
-    <div class="quick-toggles">
+    <div id="storeFilterRow" class="filter-row"></div>
+
+    <div class="filter-row">
       <button class="chip" id="toggleDeals" onclick="toggleFilter('deals')">🏷️ Active Promos</button>
       <button class="chip" id="toggleLows" onclick="toggleFilter('lows')">📉 30-Day Lows</button>
       <button class="chip" id="toggleWalkOnly" onclick="toggleFilter('walk')">🚶 Walkable Only</button>
@@ -1044,6 +1042,7 @@
     let appData = { updated_at: "", stores: [], items: [] };
     let state = {
       category: "All",
+      storeFilter: "All",
       search: "",
       onlyDeals: false,
       onlyLows: false,
@@ -1064,10 +1063,10 @@
 
     function escapeHtml(str) {
       return String(str ?? "")
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;");
+        .replace(/&/g, "&")
+        .replace(/</g, "<")
+        .replace(/>/g, ">")
+        .replace(/"/g, """);
     }
 
     function escapeJs(str) {
@@ -1113,6 +1112,38 @@
         text.textContent = `Updated ${days}d ago`;
         pill.classList.add("stale");
       }
+    }
+
+    function renderStoreFilters() {
+      const row = document.getElementById("storeFilterRow");
+      const activeStores = (appData.stores || []).filter(s =>
+        (appData.items || []).some(it => (it.matches || []).some(m => m.store === s.label))
+      );
+
+      if (!activeStores.length) {
+        row.innerHTML = "";
+        return;
+      }
+
+      const buttons = [
+        `<button class="chip store-chip ${state.storeFilter === "All" ? "active" : ""}" onclick="setStoreFilter('All')">All Stores</button>`,
+        ...activeStores.map(s => {
+          const icon = s.tier === "neighborhood" ? "🚶" : "🚗";
+          const isActive = state.storeFilter === s.label;
+          return `
+            <button class="chip store-chip ${isActive ? "active" : ""}" onclick="setStoreFilter('${escapeJs(s.label)}')">
+              ${icon} ${escapeHtml(s.short_name || s.label)}
+            </button>
+          `;
+        })
+      ];
+      row.innerHTML = buttons.join("");
+    }
+
+    function setStoreFilter(storeLabel) {
+      state.storeFilter = storeLabel;
+      renderStoreFilters();
+      renderCards();
     }
 
     function renderCategories() {
@@ -1190,6 +1221,20 @@
       document.getElementById("basketCountBadge").textContent = stapleCount + customCount;
     }
 
+    function getFilteredMatches(item) {
+      let matches = item.matches || [];
+      if (state.storeFilter !== "All") {
+        matches = matches.filter(m => m.store === state.storeFilter);
+      }
+      if (state.walkOnly) {
+        matches = matches.filter(m => getStoreMeta(m.short_store, m.store).isWalk);
+      }
+      if (state.onlyDeals) {
+        matches = matches.filter(m => m.promo && m.promo.promo_unit_price);
+      }
+      return matches;
+    }
+
     function renderMatchRow(m, isWinner, isWalkHighlight) {
       const meta = getStoreMeta(m.short_store, m.store);
       const effUp = Number(m.effective_unit_price ?? m.unit_price ?? m.price ?? 0);
@@ -1243,12 +1288,8 @@
 
       const filtered = items.filter(item => {
         if (state.category !== "All" && item.category !== state.category) return false;
-        let matches = item.matches || [];
-        if (state.walkOnly) {
-          matches = matches.filter(m => getStoreMeta(m.short_store, m.store).isWalk);
-        }
+        const matches = getFilteredMatches(item);
         if (matches.length === 0) return false;
-        if (state.onlyDeals && !matches.some(m => m.promo && m.promo.promo_unit_price)) return false;
         if (state.onlyLows && !(item.trend && item.trend.is_low)) return false;
         if (state.search) {
           const inTitle = item.name.toLowerCase().includes(state.search);
@@ -1264,10 +1305,7 @@
       }
 
       grid.innerHTML = filtered.map(item => {
-        let matches = item.matches || [];
-        if (state.walkOnly) {
-          matches = matches.filter(m => getStoreMeta(m.short_store, m.store).isWalk);
-        }
+        const matches = getFilteredMatches(item);
         const qty = state.basket[item.name] || 0;
         const isExpanded = !!state.expanded[item.name];
         const isLow = item.trend && item.trend.is_low;
@@ -1319,7 +1357,9 @@
               <button class="expand-btn" onclick="toggleExpand('${safeName}')">
                 ${isExpanded
                   ? "Show top picks ▲"
-                  : `Compare all ${uniqueStores} stores (${matches.length} options) ▾`}
+                  : (uniqueStores > 1
+                      ? `Compare all ${uniqueStores} stores (${matches.length} options) ▾`
+                      : `Show all ${matches.length} options ▾`)}
               </button>
             ` : ""}
           </article>
@@ -1661,6 +1701,7 @@
           if (cached && Array.isArray(cached.items) && cached.items.length > 0) {
             appData = cached;
             updateFreshness(appData.updated_at, true);
+            renderStoreFilters();
             renderCategories();
             renderCards();
           }
@@ -1677,6 +1718,7 @@
             appData = fresh;
             try { localStorage.setItem(CACHE_KEY, JSON.stringify(fresh)); } catch (_) {}
             updateFreshness(appData.updated_at, false);
+            renderStoreFilters();
             renderCategories();
             renderCards();
             return;
