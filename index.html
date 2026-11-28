@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="theme-color" content="#0F5132" />
-  <title>SabiPricez · Tel Aviv Grocery Price Intelligence</title>
+  <title>SabiPricez</title>
   <link rel="manifest" href="manifest.json" />
   <link rel="apple-touch-icon" href="icon.jpg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -21,7 +21,6 @@
       --ink-secondary: #4B5563;
       --ink-muted: #6B7280;
       --brand: #0F5132;
-      --brand-hover: #0B3D26;
       --emerald: #10B981;
       --emerald-bg: #ECFDF5;
       --emerald-border: #A7F3D0;
@@ -61,7 +60,7 @@
       position: sticky;
       top: 0;
       z-index: 30;
-      background: rgba(247, 247, 245, 0.92);
+      background: rgba(247, 247, 245, 0.94);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
       border-bottom: 1px solid var(--border);
@@ -86,9 +85,7 @@
 
     .logo-wrap {
       height: 38px;
-      min-width: 38px;
-      max-width: 120px;
-      padding: 4px 8px;
+      padding: 4px 10px;
       border-radius: 10px;
       background: var(--surface);
       border: 1px solid var(--border);
@@ -100,7 +97,6 @@
 
     .logo-wrap img {
       max-height: 28px;
-      max-width: 100%;
       width: auto;
       height: auto;
       object-fit: contain;
@@ -109,24 +105,16 @@
 
     .logo-fallback {
       font-weight: 800;
-      font-size: 14px;
+      font-size: 15px;
       color: var(--brand);
       letter-spacing: -0.02em;
       white-space: nowrap;
     }
 
-    .brand-title {
-      font-weight: 800;
-      font-size: 16.5px;
-      letter-spacing: -0.02em;
-      color: var(--ink);
-      line-height: 1.2;
-    }
-
     .brand-sub {
-      font-size: 11.5px;
-      color: var(--ink-muted);
-      font-weight: 500;
+      font-size: 12px;
+      color: var(--ink-secondary);
+      font-weight: 600;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -992,14 +980,11 @@
           />
           <span id="logoFallback" class="logo-fallback" style="display:none;">SabiPricez</span>
         </div>
-        <div style="min-width:0;">
-          <div class="brand-title">SabiPricez</div>
-          <div class="brand-sub">Tel Aviv Grocery Price Intelligence</div>
-        </div>
+        <div class="brand-sub">Tel Aviv Grocery Prices</div>
       </div>
       <div id="freshnessPill" class="freshness-pill">
         <span class="freshness-dot"></span>
-        <span id="freshnessText">Ready</span>
+        <span id="freshnessText">Syncing...</span>
       </div>
     </div>
   </header>
@@ -1012,7 +997,7 @@
     </div>
 
     <div id="cardsGrid" class="cards-grid">
-      <div class="empty-state">Fetching latest prices...</div>
+      <div class="empty-state">Loading prices...</div>
     </div>
   </main>
 
@@ -1055,7 +1040,7 @@
   </div>
 
   <script>
-    const CACHE_KEY = "sabipricez_data_cache_v1";
+    const CACHE_KEY = "sabipricez_data_cache_v2";
     let appData = { updated_at: "", stores: [], items: [] };
     let state = {
       category: "All",
@@ -1079,10 +1064,10 @@
 
     function escapeHtml(str) {
       return String(str ?? "")
-        .replace(/&/g, "&")
-        .replace(/</g, "<")
-        .replace(/>/g, ">")
-        .replace(/"/g, """);
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
     }
 
     function escapeJs(str) {
@@ -1091,7 +1076,7 @@
 
     function getStoreMeta(shortStore, fullStore) {
       const s = (shortStore || fullStore || "").toLowerCase();
-      const storeObj = appData.stores.find(st => st.label === fullStore || st.short_name === shortStore);
+      const storeObj = (appData.stores || []).find(st => st.label === fullStore || st.short_name === shortStore);
       const isWalk = storeObj
         ? storeObj.tier === "neighborhood"
         : (s.includes("בן יהודה") || s.includes("שופרסל שלי") || s.includes("am:pm"));
@@ -1107,7 +1092,7 @@
       const pill = document.getElementById("freshnessPill");
       const text = document.getElementById("freshnessText");
       if (!updatedAt) {
-        text.textContent = "Awaiting data";
+        text.textContent = "No timestamp";
         return;
       }
       const parsed = new Date(updatedAt.replace(" ", "T") + "+02:00");
@@ -1207,7 +1192,10 @@
 
     function renderMatchRow(m, isWinner, isWalkHighlight) {
       const meta = getStoreMeta(m.short_store, m.store);
-      const hasDiscount = m.effective_unit_price < m.unit_price - 0.01;
+      const effUp = Number(m.effective_unit_price ?? m.unit_price ?? m.price ?? 0);
+      const baseUp = Number(m.unit_price ?? effUp);
+      const shelf = Number(m.price ?? effUp);
+      const hasDiscount = effUp < baseUp - 0.01;
       const promoHtml = m.promo
         ? `<div class="promo-pill ${m.promo.promo_unit_price ? "active-deal" : "info-deal"}">
              ${m.promo.promo_unit_price ? "🏷️" : "ℹ️"} ${escapeHtml(m.promo.desc)}
@@ -1227,27 +1215,27 @@
           </div>
           <div class="price-col num">
             <div>
-              <span class="price-hero">₪${Number(m.effective_unit_price).toFixed(2)}</span>
-              <span class="price-unit">/ ${escapeHtml(m.unit)}</span>
+              <span class="price-hero">₪${effUp.toFixed(2)}</span>
+              <span class="price-unit">/ ${escapeHtml(m.unit || "יח'")}</span>
             </div>
             <div class="price-sub">
-              ${hasDiscount ? `<span class="price-strike">₪${Number(m.unit_price).toFixed(2)}</span>` : ""}
-              Shelf ₪${Number(m.price).toFixed(2)}
+              ${hasDiscount ? `<span class="price-strike">₪${baseUp.toFixed(2)}</span>` : ""}
+              Shelf ₪${shelf.toFixed(2)}
             </div>
           </div>
         </div>
       `;
     }
 
-    function renderCards() {
+    function renderCards(errorDetail = "") {
       const grid = document.getElementById("cardsGrid");
       const items = appData.items || [];
 
       if (!items.length) {
         grid.innerHTML = `
           <div class="empty-state">
-            <div>No price snapshot available yet.</div>
-            <button class="retry-btn" onclick="loadPrices(true)">Reload Prices</button>
+            <div>No items found in <code>data.json</code>${errorDetail ? ` (${escapeHtml(errorDetail)})` : ""}.</div>
+            <button class="retry-btn" onclick="loadPrices(true)">Retry Load</button>
           </div>
         `;
         return;
@@ -1653,49 +1641,55 @@
       window.open(`https://wa.me/?text=${encodeURIComponent(lines.join("\n"))}`, "_blank");
     }
 
+    async function fetchJsonWithTimeout(url, timeoutMs = 10000) {
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), timeoutMs);
+      try {
+        const res = await fetch(url, { signal: controller.signal });
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        return await res.json();
+      } finally {
+        clearTimeout(timer);
+      }
+    }
+
     async function loadPrices(isRetry = false) {
-      const grid = document.getElementById("cardsGrid");
       const cachedRaw = localStorage.getItem(CACHE_KEY);
       if (!isRetry && cachedRaw) {
         try {
-          appData = JSON.parse(cachedRaw);
-          updateFreshness(appData.updated_at, true);
-          renderCategories();
-          renderCards();
+          const cached = JSON.parse(cachedRaw);
+          if (cached && Array.isArray(cached.items) && cached.items.length > 0) {
+            appData = cached;
+            updateFreshness(appData.updated_at, true);
+            renderCategories();
+            renderCards();
+          }
         } catch (_) {}
       }
 
-      const controller = new AbortController();
-      const timer = setTimeout(() => controller.abort(), 8000);
+      const urls = [`./data.json?t=${Date.now()}`, "./data.json"];
+      let lastErr = null;
 
-      try {
-        const res = await fetch("data.json?t=" + Date.now(), {
-          signal: controller.signal,
-          cache: "no-store"
-        });
-        clearTimeout(timer);
-        if (!res.ok) throw new Error("HTTP " + res.status);
-        const fresh = await res.json();
-        if (fresh && Array.isArray(fresh.items)) {
-          appData = fresh;
-          localStorage.setItem(CACHE_KEY, JSON.stringify(fresh));
-          updateFreshness(appData.updated_at, false);
-          renderCategories();
-          renderCards();
-        } else {
-          throw new Error("Invalid data format");
+      for (const url of urls) {
+        try {
+          const fresh = await fetchJsonWithTimeout(url, 10000);
+          if (fresh && Array.isArray(fresh.items)) {
+            appData = fresh;
+            try { localStorage.setItem(CACHE_KEY, JSON.stringify(fresh)); } catch (_) {}
+            updateFreshness(appData.updated_at, false);
+            renderCategories();
+            renderCards();
+            return;
+          }
+          lastErr = new Error("Missing items array");
+        } catch (err) {
+          lastErr = err;
         }
-      } catch (err) {
-        clearTimeout(timer);
-        if (!appData.items || !appData.items.length) {
-          updateFreshness("", false);
-          grid.innerHTML = `
-            <div class="empty-state">
-              <div>Couldn't load <code>data.json</code> (${escapeHtml(err.message || "network error")}).</div>
-              <button class="retry-btn" onclick="loadPrices(true)">Try Again</button>
-            </div>
-          `;
-        }
+      }
+
+      if (!appData.items || !appData.items.length) {
+        updateFreshness("", false);
+        renderCards(lastErr ? lastErr.message : "fetch failed");
       }
     }
 
@@ -1703,7 +1697,10 @@
       updateBasketBadge();
       loadPrices(false);
       if ("serviceWorker" in navigator) {
-        navigator.serviceWorker.register("sw.js").catch(() => {});
+        navigator.serviceWorker.getRegistrations().then(regs => {
+          regs.forEach(r => r.update().catch(() => {}));
+        }).catch(() => {});
+        navigator.serviceWorker.register("./sw.js").catch(() => {});
       }
     }
 
