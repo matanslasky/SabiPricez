@@ -1038,7 +1038,7 @@
   </div>
 
   <script>
-    const CACHE_KEY = "sabipricez_data_cache_v2";
+    const CACHE_KEY = "sabipricez_data_cache_v3";
     let appData = { updated_at: "", stores: [], items: [] };
     let state = {
       category: "All",
@@ -1054,6 +1054,13 @@
       selectedStore: null,
       basketMode: "plan"
     };
+
+    window.addEventListener("error", (ev) => {
+      const grid = document.getElementById("cardsGrid");
+      if (grid && (!appData.items || !appData.items.length)) {
+        grid.innerHTML = `<div class="empty-state">Script error: ${escapeHtml(ev.message || "unknown")}<br/><button class="retry-btn" onclick="loadPrices(true)">Retry</button></div>`;
+      }
+    });
 
     function saveState() {
       localStorage.setItem("sabipricez_basket_v2", JSON.stringify(state.basket));
@@ -1091,12 +1098,12 @@
       const pill = document.getElementById("freshnessPill");
       const text = document.getElementById("freshnessText");
       if (!updatedAt) {
-        text.textContent = "No timestamp";
+        text.textContent = "Offline / Check Data";
         return;
       }
-      const parsed = new Date(updatedAt.replace(" ", "T") + "+02:00");
+      const parsed = new Date(String(updatedAt).replace(" ", "T") + "+02:00");
       if (isNaN(parsed.getTime())) {
-        text.textContent = updatedAt;
+        text.textContent = String(updatedAt);
         return;
       }
       const diffHrs = Math.max(0, Math.round((Date.now() - parsed.getTime()) / 3600000));
@@ -1222,7 +1229,7 @@
     }
 
     function getFilteredMatches(item) {
-      let matches = item.matches || [];
+      let matches = Array.isArray(item.matches) ? item.matches : [];
       if (state.storeFilter !== "All") {
         matches = matches.filter(m => m.store === state.storeFilter);
       }
@@ -1237,9 +1244,9 @@
 
     function renderMatchRow(m, isWinner, isWalkHighlight) {
       const meta = getStoreMeta(m.short_store, m.store);
-      const effUp = Number(m.effective_unit_price ?? m.unit_price ?? m.price ?? 0);
-      const baseUp = Number(m.unit_price ?? effUp);
-      const shelf = Number(m.price ?? effUp);
+      const effUp = Number(m.effective_unit_price ?? m.unit_price ?? m.price ?? 0) || 0;
+      const baseUp = Number(m.unit_price ?? effUp) || effUp;
+      const shelf = Number(m.price ?? effUp) || effUp;
       const hasDiscount = effUp < baseUp - 0.01;
       const promoHtml = m.promo
         ? `<div class="promo-pill ${m.promo.promo_unit_price ? "active-deal" : "info-deal"}">
@@ -1274,12 +1281,12 @@
 
     function renderCards(errorDetail = "") {
       const grid = document.getElementById("cardsGrid");
-      const items = appData.items || [];
+      const items = Array.isArray(appData.items) ? appData.items : [];
 
       if (!items.length) {
         grid.innerHTML = `
           <div class="empty-state">
-            <div>No items found in <code>data.json</code>${errorDetail ? ` (${escapeHtml(errorDetail)})` : ""}.</div>
+            <div>Unable to load <code>data.json</code>${errorDetail ? `<br/><small>${escapeHtml(errorDetail)}</small>` : ""}.</div>
             <button class="retry-btn" onclick="loadPrices(true)">Retry Load</button>
           </div>
         `;
@@ -1287,13 +1294,14 @@
       }
 
       const filtered = items.filter(item => {
+        if (!item || !item.name) return false;
         if (state.category !== "All" && item.category !== state.category) return false;
         const matches = getFilteredMatches(item);
         if (matches.length === 0) return false;
         if (state.onlyLows && !(item.trend && item.trend.is_low)) return false;
         if (state.search) {
-          const inTitle = item.name.toLowerCase().includes(state.search);
-          const inProducts = matches.some(m => m.product.toLowerCase().includes(state.search));
+          const inTitle = String(item.name).toLowerCase().includes(state.search);
+          const inProducts = matches.some(m => String(m.product || "").toLowerCase().includes(state.search));
           if (!inTitle && !inProducts) return false;
         }
         return true;
@@ -1332,11 +1340,11 @@
           <article class="card">
             <div class="card-header">
               <div class="card-title-group">
-                <div class="card-cat">${escapeHtml(item.category)}</div>
+                <div class="card-cat">${escapeHtml(item.category || "Groceries")}</div>
                 <div class="card-title">${escapeHtml(item.name)}</div>
               </div>
               <div class="card-badges">
-                ${isLow ? `<span class="low-badge num">↓ ${item.trend.pct_below_avg}% · 30d Low</span>` : ""}
+                ${isLow ? `<span class="low-badge num">↓ ${Number(item.trend.pct_below_avg || 0)}% · 30d Low</span>` : ""}
                 <div class="stepper">
                   ${qty > 0 ? `
                     <button class="stepper-btn" onclick="changeQty('${safeName}', -1)" aria-label="Decrease">−</button>
@@ -1437,7 +1445,7 @@
       let splitTotal = customTotal;
       basketEntries.forEach(([itemName, qty]) => {
         const item = (appData.items || []).find(i => i.name === itemName);
-        if (!item || !item.matches.length) return;
+        if (!item || !item.matches || !item.matches.length) return;
         const best = item.matches[0];
         const unitShelf = (best.promo && best.promo.promo_unit_price && qty >= (best.promo.min_qty || 1))
           ? best.price * (best.promo.promo_unit_price / best.unit_price)
@@ -1681,13 +1689,14 @@
       window.open(`https://wa.me/?text=${encodeURIComponent(lines.join("\n"))}`, "_blank");
     }
 
-    async function fetchJsonWithTimeout(url, timeoutMs = 10000) {
+    async function fetchJsonWithTimeout(url, timeoutMs = 12000) {
       const controller = new AbortController();
       const timer = setTimeout(() => controller.abort(), timeoutMs);
       try {
         const res = await fetch(url, { signal: controller.signal });
-        if (!res.ok) throw new Error("HTTP " + res.status);
-        return await res.json();
+        if (!res.ok) throw new Error(`HTTP ${res.status} on ${url}`);
+        const text = await res.text();
+        return JSON.parse(text);
       } finally {
         clearTimeout(timer);
       }
@@ -1708,12 +1717,12 @@
         } catch (_) {}
       }
 
-      const urls = [`./data.json?t=${Date.now()}`, "./data.json"];
+      const candidates = [`data.json?t=${Date.now()}`, `./data.json?t=${Date.now()}`, "data.json"];
       let lastErr = null;
 
-      for (const url of urls) {
+      for (const url of candidates) {
         try {
-          const fresh = await fetchJsonWithTimeout(url, 10000);
+          const fresh = await fetchJsonWithTimeout(url, 12000);
           if (fresh && Array.isArray(fresh.items)) {
             appData = fresh;
             try { localStorage.setItem(CACHE_KEY, JSON.stringify(fresh)); } catch (_) {}
@@ -1723,27 +1732,19 @@
             renderCards();
             return;
           }
-          lastErr = new Error("Missing items array");
+          lastErr = new Error("JSON missing items array");
         } catch (err) {
           lastErr = err;
         }
       }
 
-      if (!appData.items || !appData.items.length) {
-        updateFreshness("", false);
-        renderCards(lastErr ? lastErr.message : "fetch failed");
-      }
+      updateFreshness("", false);
+      renderCards(lastErr ? (lastErr.name === "AbortError" ? "Request timed out" : lastErr.message) : "Failed to fetch data.json");
     }
 
     function init() {
       updateBasketBadge();
       loadPrices(false);
-      if ("serviceWorker" in navigator) {
-        navigator.serviceWorker.getRegistrations().then(regs => {
-          regs.forEach(r => r.update().catch(() => {}));
-        }).catch(() => {});
-        navigator.serviceWorker.register("./sw.js").catch(() => {});
-      }
     }
 
     init();
