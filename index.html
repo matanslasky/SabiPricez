@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="theme-color" content="#0F5132" />
-  <title>SabiPricez · Tel Aviv Grocery Intelligence</title>
+  <title>SabiPricez · Tel Aviv Grocery Price Intelligence</title>
   <link rel="manifest" href="manifest.json" />
   <link rel="apple-touch-icon" href="icon.jpg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -15,11 +15,11 @@
       --bg: #F7F7F5;
       --surface: #FFFFFF;
       --surface-subtle: #F2F2EE;
-      --border: #EAEAE6;
-      --border-strong: #DCDCD6;
+      --border: #E5E5E0;
+      --border-strong: #D4D4CE;
       --ink: #14171A;
-      --ink-secondary: #525866;
-      --ink-muted: #717784;
+      --ink-secondary: #4B5563;
+      --ink-muted: #6B7280;
       --brand: #0F5132;
       --brand-hover: #0B3D26;
       --emerald: #10B981;
@@ -48,7 +48,7 @@
       background: var(--bg);
       color: var(--ink);
       line-height: 1.4;
-      padding-bottom: calc(136px + env(safe-area-inset-bottom));
+      padding-bottom: calc(124px + env(safe-area-inset-bottom));
       -webkit-font-smoothing: antialiased;
     }
 
@@ -56,20 +56,20 @@
       font-variant-numeric: tabular-nums;
     }
 
-    /* Frosted Top Header */
+    /* Header */
     .topbar {
       position: sticky;
       top: 0;
       z-index: 30;
-      background: rgba(247, 247, 245, 0.86);
+      background: rgba(247, 247, 245, 0.92);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
       border-bottom: 1px solid var(--border);
-      padding: 12px 16px;
+      padding: 10px 16px;
     }
 
     .topbar-inner {
-      max-width: 760px;
+      max-width: 780px;
       margin: 0 auto;
       display: flex;
       align-items: center;
@@ -81,40 +81,55 @@
       display: flex;
       align-items: center;
       gap: 10px;
+      min-width: 0;
     }
 
-    .brand-mark {
-      width: 34px;
-      height: 34px;
+    .logo-wrap {
+      height: 38px;
+      min-width: 38px;
+      max-width: 120px;
+      padding: 4px 8px;
       border-radius: 10px;
-      background: var(--brand);
-      color: #fff;
-      display: grid;
-      place-items: center;
-      font-weight: 800;
-      font-size: 16px;
-      letter-spacing: -0.03em;
-      overflow: hidden;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
       flex-shrink: 0;
     }
 
-    .brand-mark img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+    .logo-wrap img {
+      max-height: 28px;
+      max-width: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      display: block;
+    }
+
+    .logo-fallback {
+      font-weight: 800;
+      font-size: 14px;
+      color: var(--brand);
+      letter-spacing: -0.02em;
+      white-space: nowrap;
     }
 
     .brand-title {
       font-weight: 800;
-      font-size: 17px;
+      font-size: 16.5px;
       letter-spacing: -0.02em;
       color: var(--ink);
+      line-height: 1.2;
     }
 
     .brand-sub {
-      font-size: 11px;
+      font-size: 11.5px;
       color: var(--ink-muted);
       font-weight: 500;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .freshness-pill {
@@ -129,6 +144,7 @@
       border: 1px solid var(--border);
       color: var(--ink-secondary);
       white-space: nowrap;
+      flex-shrink: 0;
     }
 
     .freshness-dot {
@@ -136,11 +152,6 @@
       height: 7px;
       border-radius: 50%;
       background: var(--emerald);
-      flex-shrink: 0;
-    }
-
-    .freshness-pill.stale .freshness-dot {
-      background: #F59E0B;
     }
 
     .freshness-pill.stale {
@@ -149,14 +160,17 @@
       border-color: var(--amber-border);
     }
 
-    /* Main Container */
+    .freshness-pill.stale .freshness-dot {
+      background: #F59E0B;
+    }
+
+    /* Main Content */
     .container {
-      max-width: 760px;
+      max-width: 780px;
       margin: 0 auto;
       padding: 14px 16px 24px;
     }
 
-    /* Quick Filter Bar (Deals / Lows / Store Focus) */
     .quick-toggles {
       display: flex;
       gap: 8px;
@@ -179,9 +193,6 @@
       cursor: pointer;
       white-space: nowrap;
       transition: all 0.15s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
     }
 
     .chip.active {
@@ -190,7 +201,6 @@
       border-color: var(--brand);
     }
 
-    /* Product Cards */
     .cards-grid {
       display: flex;
       flex-direction: column;
@@ -203,7 +213,6 @@
       border-radius: var(--radius-card);
       box-shadow: var(--shadow-card);
       padding: 16px;
-      transition: border-color 0.15s ease;
     }
 
     .card-header {
@@ -231,13 +240,12 @@
       font-size: 16px;
       font-weight: 700;
       color: var(--ink);
-      letter-spacing: -0.01em;
     }
 
     .card-badges {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
       flex-shrink: 0;
     }
 
@@ -255,7 +263,6 @@
       white-space: nowrap;
     }
 
-    /* Stepper Control */
     .stepper {
       display: inline-flex;
       align-items: center;
@@ -277,8 +284,7 @@
       display: grid;
       place-items: center;
       cursor: pointer;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.06);
-      transition: transform 0.1s ease, background 0.15s ease;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
     }
 
     .stepper-btn:active {
@@ -287,18 +293,16 @@
 
     .stepper-btn.add-primary {
       background: var(--brand);
-      color: #fff;
+      color: #FFFFFF;
     }
 
     .stepper-qty {
-      min-width: 28px;
+      min-width: 26px;
       text-align: center;
       font-size: 13.5px;
       font-weight: 800;
-      color: var(--ink);
     }
 
-    /* RTL Match Rows */
     .matches-list {
       display: flex;
       flex-direction: column;
@@ -338,7 +342,6 @@
       flex-wrap: wrap;
     }
 
-    /* Muted Brand-Tinted Store Pills */
     .store-pill {
       display: inline-flex;
       align-items: center;
@@ -410,7 +413,6 @@
       color: var(--ink-secondary);
     }
 
-    /* 3-Tier Price Hierarchy */
     .price-col {
       text-align: left;
       direction: ltr;
@@ -450,7 +452,6 @@
       margin-right: 4px;
     }
 
-    /* Progressive Disclosure Toggle */
     .expand-btn {
       margin-top: 10px;
       width: 100%;
@@ -463,25 +464,20 @@
       padding: 8px 12px;
       border-radius: 10px;
       cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      transition: background 0.15s ease;
     }
 
     .expand-btn:hover {
       background: var(--surface-subtle);
     }
 
-    /* Bottom Thumb-Zone Dock */
+    /* Bottom Dock */
     .bottom-dock {
       position: fixed;
       bottom: 0;
       left: 0;
       right: 0;
       z-index: 40;
-      background: rgba(247, 247, 245, 0.9);
+      background: rgba(247, 247, 245, 0.94);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       border-top: 1px solid var(--border);
@@ -490,7 +486,7 @@
     }
 
     .dock-inner {
-      max-width: 760px;
+      max-width: 780px;
       margin: 0 auto;
       display: flex;
       flex-direction: column;
@@ -520,7 +516,7 @@
 
     .cat-pill.active {
       background: var(--ink);
-      color: #fff;
+      color: #FFFFFF;
       border-color: var(--ink);
     }
 
@@ -544,7 +540,6 @@
       padding: 0 34px 0 14px;
       font-family: inherit;
       font-size: 14px;
-      font-weight: 500;
       color: var(--ink);
       outline: none;
     }
@@ -586,11 +581,6 @@
       cursor: pointer;
       white-space: nowrap;
       box-shadow: 0 2px 10px rgba(15, 81, 50, 0.25);
-      transition: transform 0.1s ease, background 0.15s ease;
-    }
-
-    .basket-fab:active {
-      transform: scale(0.97);
     }
 
     .basket-count {
@@ -601,7 +591,7 @@
       font-weight: 800;
     }
 
-    /* Smart Basket Drawer */
+    /* Basket Drawer */
     .drawer-backdrop {
       position: fixed;
       inset: 0;
@@ -619,14 +609,13 @@
 
     .drawer {
       width: 100%;
-      max-width: 760px;
+      max-width: 780px;
       max-height: 90vh;
       background: var(--bg);
       border-radius: 22px 22px 0 0;
       display: flex;
       flex-direction: column;
       overflow: hidden;
-      box-shadow: 0 -10px 30px rgba(0,0,0,0.18);
     }
 
     .drawer-header {
@@ -647,7 +636,6 @@
     .drawer-title {
       font-size: 17px;
       font-weight: 800;
-      letter-spacing: -0.02em;
     }
 
     .icon-close {
@@ -663,7 +651,6 @@
       place-items: center;
     }
 
-    /* Mode Segmented Control */
     .mode-switch {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -683,13 +670,12 @@
       border-radius: 9px;
       color: var(--ink-secondary);
       cursor: pointer;
-      transition: all 0.15s ease;
     }
 
     .mode-btn.active {
       background: var(--surface);
       color: var(--brand);
-      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
     }
 
     .drawer-body {
@@ -701,7 +687,6 @@
       flex: 1;
     }
 
-    /* Store Selector & Callout */
     .store-tabs {
       display: flex;
       gap: 6px;
@@ -758,7 +743,6 @@
       font-weight: 700;
     }
 
-    /* Custom Free-Text Item Adder */
     .custom-add-form {
       display: flex;
       gap: 6px;
@@ -780,10 +764,10 @@
     }
 
     .custom-price-input {
-      width: 74px;
+      width: 76px;
       border: 1px solid var(--border);
       border-radius: 8px;
-      padding: 8px 8px;
+      padding: 8px;
       font-family: inherit;
       font-size: 13px;
       outline: none;
@@ -792,7 +776,7 @@
     .custom-add-btn {
       border: none;
       background: var(--ink);
-      color: #fff;
+      color: #FFFFFF;
       font-family: inherit;
       font-size: 12.5px;
       font-weight: 700;
@@ -802,7 +786,6 @@
       white-space: nowrap;
     }
 
-    /* Basket Item Rows (Plan & In-Aisle) */
     .basket-list {
       display: flex;
       flex-direction: column;
@@ -865,7 +848,6 @@
       text-align: left;
     }
 
-    /* In-Aisle Checklist Row */
     .aisle-progress {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -907,7 +889,6 @@
       gap: 12px;
       cursor: pointer;
       user-select: none;
-      transition: opacity 0.15s ease, background 0.15s ease;
     }
 
     .aisle-row.checked {
@@ -924,7 +905,7 @@
       place-items: center;
       font-size: 15px;
       font-weight: 800;
-      color: #fff;
+      color: #FFFFFF;
       flex-shrink: 0;
       background: var(--surface);
     }
@@ -965,7 +946,7 @@
       border-radius: 12px;
       border: none;
       background: #16A34A;
-      color: #fff;
+      color: #FFFFFF;
       font-family: inherit;
       font-size: 13.5px;
       font-weight: 700;
@@ -973,10 +954,26 @@
     }
 
     .empty-state {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-card);
       text-align: center;
-      padding: 36px 16px;
+      padding: 32px 20px;
       color: var(--ink-muted);
       font-size: 14px;
+    }
+
+    .retry-btn {
+      margin-top: 12px;
+      border: none;
+      background: var(--brand);
+      color: #FFFFFF;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 9px 16px;
+      border-radius: 10px;
+      cursor: pointer;
     }
   </style>
 </head>
@@ -985,17 +982,24 @@
   <header class="topbar">
     <div class="topbar-inner">
       <div class="brand">
-        <div class="brand-mark">
-          <img src="logo.jpg" alt="SabiPricez" onerror="this.remove(); this.parentElement.textContent='S';" />
+        <div class="logo-wrap" id="logoWrap">
+          <img
+            id="brandLogo"
+            src="logo.jpg"
+            alt="SabiPricez"
+            onload="this.style.display='block';"
+            onerror="if (!this.dataset.triedIcon) { this.dataset.triedIcon='1'; this.src='icon.jpg'; } else { this.remove(); document.getElementById('logoFallback').style.display='inline'; }"
+          />
+          <span id="logoFallback" class="logo-fallback" style="display:none;">SabiPricez</span>
         </div>
-        <div>
+        <div style="min-width:0;">
           <div class="brand-title">SabiPricez</div>
           <div class="brand-sub">Tel Aviv Grocery Price Intelligence</div>
         </div>
       </div>
       <div id="freshnessPill" class="freshness-pill">
         <span class="freshness-dot"></span>
-        <span id="freshnessText">Loading...</span>
+        <span id="freshnessText">Ready</span>
       </div>
     </div>
   </header>
@@ -1008,11 +1012,10 @@
     </div>
 
     <div id="cardsGrid" class="cards-grid">
-      <div class="empty-state">Loading live supermarket prices...</div>
+      <div class="empty-state">Fetching latest prices...</div>
     </div>
   </main>
 
-  <!-- Bottom Thumb-Zone Action Dock -->
   <div class="bottom-dock">
     <div class="dock-inner">
       <div id="catStrip" class="cat-strip"></div>
@@ -1029,7 +1032,6 @@
     </div>
   </div>
 
-  <!-- Smart Basket & In-Aisle Drawer -->
   <div id="drawerBackdrop" class="drawer-backdrop" onclick="handleBackdropClick(event)">
     <div class="drawer" role="dialog" aria-modal="true">
       <div class="drawer-header">
@@ -1053,6 +1055,7 @@
   </div>
 
   <script>
+    const CACHE_KEY = "sabipricez_data_cache_v1";
     let appData = { updated_at: "", stores: [], items: [] };
     let state = {
       category: "All",
@@ -1082,10 +1085,16 @@
         .replace(/"/g, """);
     }
 
+    function escapeJs(str) {
+      return String(str ?? "").replace(/\\/g, "\\\\").replace(/'/g, "\\'");
+    }
+
     function getStoreMeta(shortStore, fullStore) {
       const s = (shortStore || fullStore || "").toLowerCase();
       const storeObj = appData.stores.find(st => st.label === fullStore || st.short_name === shortStore);
-      const isWalk = storeObj ? storeObj.tier === "neighborhood" : (s.includes("בן יהודה") || s.includes("שופרסל שלי") || s.includes("am:pm"));
+      const isWalk = storeObj
+        ? storeObj.tier === "neighborhood"
+        : (s.includes("בן יהודה") || s.includes("שופרסל שלי") || s.includes("am:pm"));
       let cls = "store-default";
       if (s.includes("רמי לוי")) cls = "store-rami";
       else if (s.includes("אושר עד")) cls = "store-osher";
@@ -1094,11 +1103,11 @@
       return { cls, isWalk, icon: isWalk ? "🚶" : "🚗" };
     }
 
-    function updateFreshness(updatedAt) {
+    function updateFreshness(updatedAt, isCached) {
       const pill = document.getElementById("freshnessPill");
       const text = document.getElementById("freshnessText");
       if (!updatedAt) {
-        text.textContent = "Offline snapshot";
+        text.textContent = "Awaiting data";
         return;
       }
       const parsed = new Date(updatedAt.replace(" ", "T") + "+02:00");
@@ -1107,11 +1116,12 @@
         return;
       }
       const diffHrs = Math.max(0, Math.round((Date.now() - parsed.getTime()) / 3600000));
+      const suffix = isCached ? "Cached" : "Live";
       if (diffHrs < 1) {
-        text.textContent = "Updated just now · Live";
+        text.textContent = `Updated <1h ago · ${suffix}`;
         pill.classList.remove("stale");
       } else if (diffHrs <= 24) {
-        text.textContent = `Updated ${diffHrs}h ago · Live`;
+        text.textContent = `Updated ${diffHrs}h ago · ${suffix}`;
         pill.classList.remove("stale");
       } else {
         const days = Math.floor(diffHrs / 24);
@@ -1121,10 +1131,10 @@
     }
 
     function renderCategories() {
-      const cats = ["All", ...new Set(appData.items.map(i => i.category))];
+      const cats = ["All", ...new Set((appData.items || []).map(i => i.category).filter(Boolean))];
       const strip = document.getElementById("catStrip");
       strip.innerHTML = cats.map(c => `
-        <button class="cat-pill ${state.category === c ? "active" : ""}" onclick="setCategory('${escapeHtml(c)}')">
+        <button class="cat-pill ${state.category === c ? "active" : ""}" onclick="setCategory('${escapeJs(c)}')">
           ${escapeHtml(c)}
         </button>
       `).join("");
@@ -1195,7 +1205,7 @@
       document.getElementById("basketCountBadge").textContent = stapleCount + customCount;
     }
 
-    function renderMatchRow(m, idx, isWinner, isWalkHighlight) {
+    function renderMatchRow(m, isWinner, isWalkHighlight) {
       const meta = getStoreMeta(m.short_store, m.store);
       const hasDiscount = m.effective_unit_price < m.unit_price - 0.01;
       const promoHtml = m.promo
@@ -1217,12 +1227,12 @@
           </div>
           <div class="price-col num">
             <div>
-              <span class="price-hero">₪${m.effective_unit_price.toFixed(2)}</span>
+              <span class="price-hero">₪${Number(m.effective_unit_price).toFixed(2)}</span>
               <span class="price-unit">/ ${escapeHtml(m.unit)}</span>
             </div>
             <div class="price-sub">
-              ${hasDiscount ? `<span class="price-strike">₪${m.unit_price.toFixed(2)}</span>` : ""}
-              Shelf ₪${m.price.toFixed(2)}
+              ${hasDiscount ? `<span class="price-strike">₪${Number(m.unit_price).toFixed(2)}</span>` : ""}
+              Shelf ₪${Number(m.price).toFixed(2)}
             </div>
           </div>
         </div>
@@ -1231,7 +1241,19 @@
 
     function renderCards() {
       const grid = document.getElementById("cardsGrid");
-      const filtered = appData.items.filter(item => {
+      const items = appData.items || [];
+
+      if (!items.length) {
+        grid.innerHTML = `
+          <div class="empty-state">
+            <div>No price snapshot available yet.</div>
+            <button class="retry-btn" onclick="loadPrices(true)">Reload Prices</button>
+          </div>
+        `;
+        return;
+      }
+
+      const filtered = items.filter(item => {
         if (state.category !== "All" && item.category !== state.category) return false;
         let matches = item.matches || [];
         if (state.walkOnly) {
@@ -1262,7 +1284,6 @@
         const isExpanded = !!state.expanded[item.name];
         const isLow = item.trend && item.trend.is_low;
 
-        // Progressive disclosure: show #1 overall + cheapest walkable store (if different)
         let visibleMatches = [];
         let walkHighlightIdx = -1;
         if (isExpanded || matches.length <= 2) {
@@ -1279,6 +1300,7 @@
         }
 
         const uniqueStores = new Set(matches.map(m => m.short_store || m.store)).size;
+        const safeName = escapeJs(item.name);
 
         return `
           <article class="card">
@@ -1291,22 +1313,22 @@
                 ${isLow ? `<span class="low-badge num">↓ ${item.trend.pct_below_avg}% · 30d Low</span>` : ""}
                 <div class="stepper">
                   ${qty > 0 ? `
-                    <button class="stepper-btn" onclick="changeQty('${escapeHtml(item.name).replace(/'/g, "\\'")}', -1)" aria-label="Decrease">−</button>
+                    <button class="stepper-btn" onclick="changeQty('${safeName}', -1)" aria-label="Decrease">−</button>
                     <span class="stepper-qty num">${qty}</span>
-                    <button class="stepper-btn add-primary" onclick="changeQty('${escapeHtml(item.name).replace(/'/g, "\\'")}', 1)" aria-label="Increase">+</button>
+                    <button class="stepper-btn add-primary" onclick="changeQty('${safeName}', 1)" aria-label="Increase">+</button>
                   ` : `
-                    <button class="stepper-btn add-primary" onclick="changeQty('${escapeHtml(item.name).replace(/'/g, "\\'")}', 1)" aria-label="Add">+</button>
+                    <button class="stepper-btn add-primary" onclick="changeQty('${safeName}', 1)" aria-label="Add">+</button>
                   `}
                 </div>
               </div>
             </div>
 
             <div class="matches-list">
-              ${visibleMatches.map((m, idx) => renderMatchRow(m, idx, idx === 0, idx === walkHighlightIdx)).join("")}
+              ${visibleMatches.map((m, idx) => renderMatchRow(m, idx === 0, idx === walkHighlightIdx)).join("")}
             </div>
 
             ${matches.length > 2 ? `
-              <button class="expand-btn" onclick="toggleExpand('${escapeHtml(item.name).replace(/'/g, "\\'")}')">
+              <button class="expand-btn" onclick="toggleExpand('${safeName}')">
                 ${isExpanded
                   ? "Show top picks ▲"
                   : `Compare all ${uniqueStores} stores (${matches.length} options) ▾`}
@@ -1317,7 +1339,6 @@
       }).join("");
     }
 
-    /* Smart Basket Logic */
     function openBasket() {
       document.getElementById("drawerBackdrop").classList.add("open");
       renderBasketDrawer();
@@ -1345,12 +1366,7 @@
       const name = nameEl.value.trim();
       if (!name) return;
       const price = parseFloat(priceEl.value) || 0;
-      state.customItems.push({
-        id: "c_" + Date.now(),
-        name,
-        price,
-        qty: 1
-      });
+      state.customItems.push({ id: "c_" + Date.now(), name, price, qty: 1 });
       nameEl.value = "";
       priceEl.value = "";
       saveState();
@@ -1386,14 +1402,13 @@
       const basketEntries = Object.entries(state.basket);
       const customTotal = state.customItems.reduce((sum, c) => sum + (c.price || 0) * (c.qty || 1), 0);
 
-      // Build list of active stores that actually have data
-      const activeStores = appData.stores.filter(s =>
-        appData.items.some(it => (it.matches || []).some(m => m.store === s.label))
+      const activeStores = (appData.stores || []).filter(s =>
+        (appData.items || []).some(it => (it.matches || []).some(m => m.store === s.label))
       );
 
       let splitTotal = customTotal;
       basketEntries.forEach(([itemName, qty]) => {
-        const item = appData.items.find(i => i.name === itemName);
+        const item = (appData.items || []).find(i => i.name === itemName);
         if (!item || !item.matches.length) return;
         const best = item.matches[0];
         const unitShelf = (best.promo && best.promo.promo_unit_price && qty >= (best.promo.min_qty || 1))
@@ -1408,7 +1423,7 @@
         const lineItems = [];
 
         basketEntries.forEach(([itemName, qty]) => {
-          const item = appData.items.find(i => i.name === itemName);
+          const item = (appData.items || []).find(i => i.name === itemName);
           if (!item) return;
           const storeMatches = (item.matches || []).filter(m => m.store === store.label);
           if (!storeMatches.length) {
@@ -1433,20 +1448,14 @@
             lineCost,
             promoApplied,
             hasOpenPromo,
-            minQty,
-            effectiveShelf
+            minQty
           });
         });
 
-        return {
-          store,
-          total,
-          missing,
-          lineItems
-        };
+        return { store, total, missing, lineItems };
       }).sort((a, b) => (a.missing - b.missing) || (a.total - b.total));
 
-      return { summaries, splitTotal, customTotal };
+      return { summaries, splitTotal };
     }
 
     function renderBasketDrawer() {
@@ -1472,8 +1481,19 @@
       const cheapestOverall = summaries[0];
       const cheapestWalk = summaries.find(s => s.store.tier === "neighborhood");
 
+      const storeTabsHtml = `
+        <div class="store-tabs">
+          ${summaries.map(s => `
+            <button class="store-tab ${s.store.label === activeSummary.store.label ? "active" : ""}"
+                    onclick="state.selectedStore='${escapeJs(s.store.label)}'; renderBasketDrawer();">
+              <div class="store-tab-name">${s.store.tier === "neighborhood" ? "🚶" : "🚗"} ${escapeHtml(s.store.short_name)}</div>
+              <div class="store-tab-total num">₪${s.total.toFixed(2)}</div>
+            </button>
+          `).join("")}
+        </div>
+      `;
+
       if (state.basketMode === "aisle") {
-        // IN-AISLE CHECKLIST MODE
         const allRows = [
           ...activeSummary.lineItems.map(li => ({
             key: "staple:" + li.itemName,
@@ -1500,16 +1520,7 @@
         const pctDone = allRows.length ? Math.round((checked.length / allRows.length) * 100) : 0;
 
         body.innerHTML = `
-          <div class="store-tabs">
-            ${summaries.map(s => `
-              <button class="store-tab ${s.store.label === activeSummary.store.label ? "active" : ""}"
-                      onclick="state.selectedStore='${escapeHtml(s.store.label).replace(/'/g, "\\'")}'; renderBasketDrawer();">
-                <div class="store-tab-name">${s.store.tier === "neighborhood" ? "🚶" : "🚗"} ${escapeHtml(s.store.short_name)}</div>
-                <div class="store-tab-total num">₪${s.total.toFixed(0)}</div>
-              </button>
-            `).join("")}
-          </div>
-
+          ${storeTabsHtml}
           <div class="aisle-progress">
             <div class="aisle-progress-top">
               <span>${checked.length} of ${allRows.length} items in cart</span>
@@ -1524,7 +1535,7 @@
             ${sortedRows.map(r => {
               const isChecked = !!state.checkedIds[r.key];
               return `
-                <div class="aisle-row ${isChecked ? "checked" : ""}" onclick="toggleChecked('${escapeHtml(r.key).replace(/'/g, "\\'")}')">
+                <div class="aisle-row ${isChecked ? "checked" : ""}" onclick="toggleChecked('${escapeJs(r.key)}')">
                   <div class="aisle-check">${isChecked ? "✓" : ""}</div>
                   <div class="basket-item-meta">
                     <div class="aisle-name basket-item-title">${r.qty}× ${escapeHtml(r.title)}</div>
@@ -1542,7 +1553,6 @@
         return;
       }
 
-      // PLAN AT HOME MODE
       let walkVsDriveHtml = "";
       if (cheapestWalk && cheapestOverall.store.tier === "big_box" && cheapestWalk.total > cheapestOverall.total + 1) {
         const diff = cheapestWalk.total - cheapestOverall.total;
@@ -1557,16 +1567,7 @@
         : "";
 
       body.innerHTML = `
-        <div class="store-tabs">
-          ${summaries.map(s => `
-            <button class="store-tab ${s.store.label === activeSummary.store.label ? "active" : ""}"
-                    onclick="state.selectedStore='${escapeHtml(s.store.label).replace(/'/g, "\\'")}'; renderBasketDrawer();">
-              <div class="store-tab-name">${s.store.tier === "neighborhood" ? "🚶" : "🚗"} ${escapeHtml(s.store.short_name)}</div>
-              <div class="store-tab-total num">₪${s.total.toFixed(2)}</div>
-            </button>
-          `).join("")}
-        </div>
-
+        ${storeTabsHtml}
         ${(walkVsDriveHtml || splitHtml) ? `<div class="callout-card">${walkVsDriveHtml}${splitHtml}</div>` : ""}
 
         <form class="custom-add-form" onsubmit="addCustomItem(event)">
@@ -1577,9 +1578,12 @@
 
         <div class="basket-list">
           ${activeSummary.lineItems.map(li => {
+            const safeItem = escapeJs(li.itemName);
             const needMore = li.hasOpenPromo && li.qty < li.minQty;
             const addCount = Math.ceil(li.minQty - li.qty);
-            const bundleCost = li.match ? (li.match.price * (li.match.promo.promo_unit_price / li.match.unit_price) * li.minQty) : 0;
+            const bundleCost = li.match
+              ? (li.match.price * (li.match.promo.promo_unit_price / li.match.unit_price) * li.minQty)
+              : 0;
 
             return `
               <div class="basket-row">
@@ -1589,9 +1593,9 @@
                     <div class="basket-item-he">${li.match ? escapeHtml(li.match.product) : "Not available at this store"}</div>
                   </div>
                   <div class="stepper">
-                    <button class="stepper-btn" onclick="changeQty('${escapeHtml(li.itemName).replace(/'/g, "\\'")}', -1)">−</button>
+                    <button class="stepper-btn" onclick="changeQty('${safeItem}', -1)">−</button>
                     <span class="stepper-qty num">${li.qty}</span>
-                    <button class="stepper-btn add-primary" onclick="changeQty('${escapeHtml(li.itemName).replace(/'/g, "\\'")}', 1)">+</button>
+                    <button class="stepper-btn add-primary" onclick="changeQty('${safeItem}', 1)">+</button>
                   </div>
                   <div class="num" style="min-width:64px; text-align:right; font-weight:800; font-size:15px;">
                     ${li.match ? `₪${li.lineCost.toFixed(2)}` : "—"}
@@ -1599,7 +1603,7 @@
                 </div>
 
                 ${needMore ? `
-                  <button class="nudge-pill" onclick="setExactQty('${escapeHtml(li.itemName).replace(/'/g, "\\'")}', ${li.minQty})">
+                  <button class="nudge-pill" onclick="setExactQty('${safeItem}', ${li.minQty})">
                     <span>🏷️ Add ${addCount} more to unlock: ${escapeHtml(li.match.promo.desc)}</span>
                     <span class="num">→ ₪${bundleCost.toFixed(2)}</span>
                   </button>
@@ -1620,7 +1624,7 @@
                 <div class="num" style="font-weight:800; font-size:14px;">
                   ${c.price > 0 ? `₪${(c.price * (c.qty || 1)).toFixed(2)}` : "Est. ₪0"}
                 </div>
-                <button class="icon-close" style="width:28px; height:28px; font-size:12px;" onclick="removeCustomItem('${escapeHtml(c.id)}')">✕</button>
+                <button class="icon-close" style="width:28px; height:28px; font-size:12px;" onclick="removeCustomItem('${escapeJs(c.id)}')">✕</button>
               </div>
             </div>
           `).join("")}
@@ -1646,23 +1650,58 @@
       });
       lines.push("", `*Estimated Total: ₪${active.total.toFixed(2)}*`);
 
-      const url = `https://wa.me/?text=${encodeURIComponent(lines.join("\n"))}`;
-      window.open(url, "_blank");
+      window.open(`https://wa.me/?text=${encodeURIComponent(lines.join("\n"))}`, "_blank");
     }
 
-    async function init() {
-      updateBasketBadge();
-      try {
-        const res = await fetch("data.json?t=" + Date.now());
-        appData = await res.json();
-        updateFreshness(appData.updated_at);
-        renderCategories();
-        renderCards();
-      } catch (e) {
-        document.getElementById("cardsGrid").innerHTML =
-          `<div class="empty-state">Could not load <code>data.json</code>. Check your connection or run the price scraper.</div>`;
+    async function loadPrices(isRetry = false) {
+      const grid = document.getElementById("cardsGrid");
+      const cachedRaw = localStorage.getItem(CACHE_KEY);
+      if (!isRetry && cachedRaw) {
+        try {
+          appData = JSON.parse(cachedRaw);
+          updateFreshness(appData.updated_at, true);
+          renderCategories();
+          renderCards();
+        } catch (_) {}
       }
 
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), 8000);
+
+      try {
+        const res = await fetch("data.json?t=" + Date.now(), {
+          signal: controller.signal,
+          cache: "no-store"
+        });
+        clearTimeout(timer);
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        const fresh = await res.json();
+        if (fresh && Array.isArray(fresh.items)) {
+          appData = fresh;
+          localStorage.setItem(CACHE_KEY, JSON.stringify(fresh));
+          updateFreshness(appData.updated_at, false);
+          renderCategories();
+          renderCards();
+        } else {
+          throw new Error("Invalid data format");
+        }
+      } catch (err) {
+        clearTimeout(timer);
+        if (!appData.items || !appData.items.length) {
+          updateFreshness("", false);
+          grid.innerHTML = `
+            <div class="empty-state">
+              <div>Couldn't load <code>data.json</code> (${escapeHtml(err.message || "network error")}).</div>
+              <button class="retry-btn" onclick="loadPrices(true)">Try Again</button>
+            </div>
+          `;
+        }
+      }
+    }
+
+    function init() {
+      updateBasketBadge();
+      loadPrices(false);
       if ("serviceWorker" in navigator) {
         navigator.serviceWorker.register("sw.js").catch(() => {});
       }
