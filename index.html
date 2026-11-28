@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="theme-color" content="#0F5132" />
   <title>SabiPricez</title>
+  <link rel="icon" href="icon.jpg" />
   <link rel="manifest" href="manifest.json" />
   <link rel="apple-touch-icon" href="icon.jpg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -55,7 +56,6 @@
       font-variant-numeric: tabular-nums;
     }
 
-    /* Header */
     .topbar {
       position: sticky;
       top: 0;
@@ -142,7 +142,6 @@
       background: #F59E0B;
     }
 
-    /* Main Content */
     .container {
       max-width: 780px;
       margin: 0 auto;
@@ -455,7 +454,6 @@
       background: var(--surface-subtle);
     }
 
-    /* Bottom Dock */
     .bottom-dock {
       position: fixed;
       bottom: 0;
@@ -576,7 +574,6 @@
       font-weight: 800;
     }
 
-    /* Basket Drawer */
     .drawer-backdrop {
       position: fixed;
       inset: 0;
@@ -989,9 +986,9 @@
     <div id="storeFilterRow" class="filter-row"></div>
 
     <div class="filter-row">
-      <button class="chip" id="toggleDeals" onclick="toggleFilter('deals')">🏷️ Active Promos</button>
-      <button class="chip" id="toggleLows" onclick="toggleFilter('lows')">📉 30-Day Lows</button>
-      <button class="chip" id="toggleWalkOnly" onclick="toggleFilter('walk')">🚶 Walkable Only</button>
+      <button class="chip" id="toggleDeals" data-filter="deals">🏷️ Active Promos</button>
+      <button class="chip" id="toggleLows" data-filter="lows">📉 30-Day Lows</button>
+      <button class="chip" id="toggleWalkOnly" data-filter="walk">🚶 Walkable Only</button>
     </div>
 
     <div id="cardsGrid" class="cards-grid">
@@ -1004,10 +1001,10 @@
       <div id="catStrip" class="cat-strip"></div>
       <div class="dock-controls">
         <div class="search-box">
-          <input id="searchInput" class="search-input" type="text" placeholder="Search English or עברית..." oninput="onSearchInput()" />
-          <button id="searchClear" class="search-clear" onclick="clearSearch()" aria-label="Clear search">✕</button>
+          <input id="searchInput" class="search-input" type="text" placeholder="Search English or עברית..." />
+          <button id="searchClear" class="search-clear" type="button" aria-label="Clear search">✕</button>
         </div>
-        <button class="basket-fab" onclick="openBasket()">
+        <button id="basketFab" class="basket-fab" type="button">
           <span>Basket</span>
           <span id="basketCountBadge" class="basket-count num">0</span>
         </button>
@@ -1015,739 +1012,774 @@
     </div>
   </div>
 
-  <div id="drawerBackdrop" class="drawer-backdrop" onclick="handleBackdropClick(event)">
+  <div id="drawerBackdrop" class="drawer-backdrop">
     <div class="drawer" role="dialog" aria-modal="true">
       <div class="drawer-header">
         <div class="drawer-top-row">
           <div class="drawer-title">Smart Basket</div>
-          <button class="icon-close" onclick="closeBasket()" aria-label="Close">✕</button>
+          <button id="closeDrawerBtn" class="icon-close" type="button" aria-label="Close">✕</button>
         </div>
         <div class="mode-switch">
-          <button id="modePlanBtn" class="mode-btn active" onclick="setBasketMode('plan')">🏠 Plan at Home</button>
-          <button id="modeAisleBtn" class="mode-btn" onclick="setBasketMode('aisle')">🛒 Shop in Aisle</button>
+          <button id="modePlanBtn" class="mode-btn active" type="button" data-mode="plan">🏠 Plan at Home</button>
+          <button id="modeAisleBtn" class="mode-btn" type="button" data-mode="aisle">🛒 Shop in Aisle</button>
         </div>
       </div>
 
       <div id="drawerBody" class="drawer-body"></div>
 
       <div class="drawer-footer">
-        <button class="btn-secondary" onclick="clearBasket()">Clear</button>
-        <button class="btn-whatsapp" onclick="shareWhatsApp()">Share to WhatsApp</button>
+        <button id="clearBasketBtn" class="btn-secondary" type="button">Clear</button>
+        <button id="shareWhatsappBtn" class="btn-whatsapp" type="button">Share to WhatsApp</button>
       </div>
     </div>
   </div>
 
   <script>
-    const CACHE_KEY = "sabipricez_data_cache_v3";
-    let appData = { updated_at: "", stores: [], items: [] };
-    let state = {
-      category: "All",
-      storeFilter: "All",
-      search: "",
-      onlyDeals: false,
-      onlyLows: false,
-      walkOnly: false,
-      expanded: {},
-      basket: JSON.parse(localStorage.getItem("sabipricez_basket_v2") || "{}"),
-      customItems: JSON.parse(localStorage.getItem("sabipricez_custom_v1") || "[]"),
-      checkedIds: JSON.parse(localStorage.getItem("sabipricez_checked_v1") || "{}"),
-      selectedStore: null,
-      basketMode: "plan"
-    };
+    (function () {
+      const CACHE_KEY = "sabipricez_data_cache_v4";
+      let appData = { updated_at: "", stores: [], items: [] };
+      let state = {
+        category: "All",
+        storeFilter: "All",
+        search: "",
+        onlyDeals: false,
+        onlyLows: false,
+        walkOnly: false,
+        expanded: {},
+        basket: JSON.parse(localStorage.getItem("sabipricez_basket_v2") || "{}"),
+        customItems: JSON.parse(localStorage.getItem("sabipricez_custom_v1") || "[]"),
+        checkedIds: JSON.parse(localStorage.getItem("sabipricez_checked_v1") || "{}"),
+        selectedStore: null,
+        basketMode: "plan"
+      };
 
-    window.addEventListener("error", (ev) => {
-      const grid = document.getElementById("cardsGrid");
-      if (grid && (!appData.items || !appData.items.length)) {
-        grid.innerHTML = `<div class="empty-state">Script error: ${escapeHtml(ev.message || "unknown")}<br/><button class="retry-btn" onclick="loadPrices(true)">Retry</button></div>`;
-      }
-    });
-
-    function saveState() {
-      localStorage.setItem("sabipricez_basket_v2", JSON.stringify(state.basket));
-      localStorage.setItem("sabipricez_custom_v1", JSON.stringify(state.customItems));
-      localStorage.setItem("sabipricez_checked_v1", JSON.stringify(state.checkedIds));
-    }
-
-    function escapeHtml(str) {
-      return String(str ?? "")
-        .replace(/&/g, "&")
-        .replace(/</g, "<")
-        .replace(/>/g, ">")
-        .replace(/"/g, """);
-    }
-
-    function escapeJs(str) {
-      return String(str ?? "").replace(/\\/g, "\\\\").replace(/'/g, "\\'");
-    }
-
-    function getStoreMeta(shortStore, fullStore) {
-      const s = (shortStore || fullStore || "").toLowerCase();
-      const storeObj = (appData.stores || []).find(st => st.label === fullStore || st.short_name === shortStore);
-      const isWalk = storeObj
-        ? storeObj.tier === "neighborhood"
-        : (s.includes("בן יהודה") || s.includes("שופרסל שלי") || s.includes("am:pm"));
-      let cls = "store-default";
-      if (s.includes("רמי לוי")) cls = "store-rami";
-      else if (s.includes("אושר עד")) cls = "store-osher";
-      else if (s.includes("שופרסל")) cls = "store-shufersal";
-      else if (s.includes("am:pm")) cls = "store-ampm";
-      return { cls, isWalk, icon: isWalk ? "🚶" : "🚗" };
-    }
-
-    function updateFreshness(updatedAt, isCached) {
-      const pill = document.getElementById("freshnessPill");
-      const text = document.getElementById("freshnessText");
-      if (!updatedAt) {
-        text.textContent = "Offline / Check Data";
-        return;
-      }
-      const parsed = new Date(String(updatedAt).replace(" ", "T") + "+02:00");
-      if (isNaN(parsed.getTime())) {
-        text.textContent = String(updatedAt);
-        return;
-      }
-      const diffHrs = Math.max(0, Math.round((Date.now() - parsed.getTime()) / 3600000));
-      const suffix = isCached ? "Cached" : "Live";
-      if (diffHrs < 1) {
-        text.textContent = `Updated <1h ago · ${suffix}`;
-        pill.classList.remove("stale");
-      } else if (diffHrs <= 24) {
-        text.textContent = `Updated ${diffHrs}h ago · ${suffix}`;
-        pill.classList.remove("stale");
-      } else {
-        const days = Math.floor(diffHrs / 24);
-        text.textContent = `Updated ${days}d ago`;
-        pill.classList.add("stale");
-      }
-    }
-
-    function renderStoreFilters() {
-      const row = document.getElementById("storeFilterRow");
-      const activeStores = (appData.stores || []).filter(s =>
-        (appData.items || []).some(it => (it.matches || []).some(m => m.store === s.label))
-      );
-
-      if (!activeStores.length) {
-        row.innerHTML = "";
-        return;
+      function saveState() {
+        localStorage.setItem("sabipricez_basket_v2", JSON.stringify(state.basket));
+        localStorage.setItem("sabipricez_custom_v1", JSON.stringify(state.customItems));
+        localStorage.setItem("sabipricez_checked_v1", JSON.stringify(state.checkedIds));
       }
 
-      const buttons = [
-        `<button class="chip store-chip ${state.storeFilter === "All" ? "active" : ""}" onclick="setStoreFilter('All')">All Stores</button>`,
-        ...activeStores.map(s => {
-          const icon = s.tier === "neighborhood" ? "🚶" : "🚗";
-          const isActive = state.storeFilter === s.label;
-          return `
-            <button class="chip store-chip ${isActive ? "active" : ""}" onclick="setStoreFilter('${escapeJs(s.label)}')">
-              ${icon} ${escapeHtml(s.short_name || s.label)}
-            </button>
-          `;
-        })
-      ];
-      row.innerHTML = buttons.join("");
-    }
-
-    function setStoreFilter(storeLabel) {
-      state.storeFilter = storeLabel;
-      renderStoreFilters();
-      renderCards();
-    }
-
-    function renderCategories() {
-      const cats = ["All", ...new Set((appData.items || []).map(i => i.category).filter(Boolean))];
-      const strip = document.getElementById("catStrip");
-      strip.innerHTML = cats.map(c => `
-        <button class="cat-pill ${state.category === c ? "active" : ""}" onclick="setCategory('${escapeJs(c)}')">
-          ${escapeHtml(c)}
-        </button>
-      `).join("");
-    }
-
-    function setCategory(cat) {
-      state.category = cat;
-      renderCategories();
-      renderCards();
-    }
-
-    function toggleFilter(type) {
-      if (type === "deals") state.onlyDeals = !state.onlyDeals;
-      if (type === "lows") state.onlyLows = !state.onlyLows;
-      if (type === "walk") state.walkOnly = !state.walkOnly;
-      document.getElementById("toggleDeals").classList.toggle("active", state.onlyDeals);
-      document.getElementById("toggleLows").classList.toggle("active", state.onlyLows);
-      document.getElementById("toggleWalkOnly").classList.toggle("active", state.walkOnly);
-      renderCards();
-    }
-
-    function onSearchInput() {
-      const input = document.getElementById("searchInput");
-      state.search = input.value.trim().toLowerCase();
-      document.getElementById("searchClear").style.display = state.search ? "grid" : "none";
-      renderCards();
-    }
-
-    function clearSearch() {
-      const input = document.getElementById("searchInput");
-      input.value = "";
-      onSearchInput();
-    }
-
-    function toggleExpand(itemName) {
-      state.expanded[itemName] = !state.expanded[itemName];
-      renderCards();
-    }
-
-    function changeQty(itemName, delta) {
-      const curr = state.basket[itemName] || 0;
-      const next = Math.max(0, curr + delta);
-      if (next === 0) {
-        delete state.basket[itemName];
-        delete state.checkedIds["staple:" + itemName];
-      } else {
-        state.basket[itemName] = next;
-      }
-      saveState();
-      updateBasketBadge();
-      renderCards();
-      if (document.getElementById("drawerBackdrop").classList.contains("open")) {
-        renderBasketDrawer();
-      }
-    }
-
-    function setExactQty(itemName, qty) {
-      state.basket[itemName] = qty;
-      saveState();
-      updateBasketBadge();
-      renderCards();
-      renderBasketDrawer();
-    }
-
-    function updateBasketBadge() {
-      const stapleCount = Object.values(state.basket).reduce((a, b) => a + b, 0);
-      const customCount = state.customItems.reduce((a, b) => a + (b.qty || 1), 0);
-      document.getElementById("basketCountBadge").textContent = stapleCount + customCount;
-    }
-
-    function getFilteredMatches(item) {
-      let matches = Array.isArray(item.matches) ? item.matches : [];
-      if (state.storeFilter !== "All") {
-        matches = matches.filter(m => m.store === state.storeFilter);
-      }
-      if (state.walkOnly) {
-        matches = matches.filter(m => getStoreMeta(m.short_store, m.store).isWalk);
-      }
-      if (state.onlyDeals) {
-        matches = matches.filter(m => m.promo && m.promo.promo_unit_price);
-      }
-      return matches;
-    }
-
-    function renderMatchRow(m, isWinner, isWalkHighlight) {
-      const meta = getStoreMeta(m.short_store, m.store);
-      const effUp = Number(m.effective_unit_price ?? m.unit_price ?? m.price ?? 0) || 0;
-      const baseUp = Number(m.unit_price ?? effUp) || effUp;
-      const shelf = Number(m.price ?? effUp) || effUp;
-      const hasDiscount = effUp < baseUp - 0.01;
-      const promoHtml = m.promo
-        ? `<div class="promo-pill ${m.promo.promo_unit_price ? "active-deal" : "info-deal"}">
-             ${m.promo.promo_unit_price ? "🏷️" : "ℹ️"} ${escapeHtml(m.promo.desc)}
-           </div>`
-        : "";
-
-      return `
-        <div class="match-row ${isWinner ? "winner" : ""}">
-          <div class="match-info">
-            <div class="match-top-line">
-              <span class="store-pill ${meta.cls}">${meta.icon} ${escapeHtml(m.short_store || m.store)}</span>
-              ${isWinner ? `<span class="winner-tag">#1 Best</span>` : ""}
-              ${!isWinner && isWalkHighlight ? `<span class="walk-tag">Best Walk</span>` : ""}
-            </div>
-            <div class="product-name" title="${escapeHtml(m.product)}">${escapeHtml(m.product)}</div>
-            ${promoHtml}
-          </div>
-          <div class="price-col num">
-            <div>
-              <span class="price-hero">₪${effUp.toFixed(2)}</span>
-              <span class="price-unit">/ ${escapeHtml(m.unit || "יח'")}</span>
-            </div>
-            <div class="price-sub">
-              ${hasDiscount ? `<span class="price-strike">₪${baseUp.toFixed(2)}</span>` : ""}
-              Shelf ₪${shelf.toFixed(2)}
-            </div>
-          </div>
-        </div>
-      `;
-    }
-
-    function renderCards(errorDetail = "") {
-      const grid = document.getElementById("cardsGrid");
-      const items = Array.isArray(appData.items) ? appData.items : [];
-
-      if (!items.length) {
-        grid.innerHTML = `
-          <div class="empty-state">
-            <div>Unable to load <code>data.json</code>${errorDetail ? `<br/><small>${escapeHtml(errorDetail)}</small>` : ""}.</div>
-            <button class="retry-btn" onclick="loadPrices(true)">Retry Load</button>
-          </div>
-        `;
-        return;
+      function escapeHtml(str) {
+        return String(str ?? "")
+          .replace(/&/g, "&")
+          .replace(/</g, "<")
+          .replace(/>/g, ">")
+          .replace(/"/g, """);
       }
 
-      const filtered = items.filter(item => {
-        if (!item || !item.name) return false;
-        if (state.category !== "All" && item.category !== state.category) return false;
-        const matches = getFilteredMatches(item);
-        if (matches.length === 0) return false;
-        if (state.onlyLows && !(item.trend && item.trend.is_low)) return false;
-        if (state.search) {
-          const inTitle = String(item.name).toLowerCase().includes(state.search);
-          const inProducts = matches.some(m => String(m.product || "").toLowerCase().includes(state.search));
-          if (!inTitle && !inProducts) return false;
+      function getStoreMeta(shortStore, fullStore) {
+        const s = String(shortStore || fullStore || "").toLowerCase();
+        const storeObj = (appData.stores || []).find(function (st) {
+          return st.label === fullStore || st.short_name === shortStore;
+        });
+        const isWalk = storeObj
+          ? storeObj.tier === "neighborhood"
+          : (s.includes("בן יהודה") || s.includes("שופרסל שלי") || s.includes("am:pm"));
+        let cls = "store-default";
+        if (s.includes("רמי לוי")) cls = "store-rami";
+        else if (s.includes("אושר עד")) cls = "store-osher";
+        else if (s.includes("שופרסל")) cls = "store-shufersal";
+        else if (s.includes("am:pm")) cls = "store-ampm";
+        return { cls: cls, isWalk: isWalk, icon: isWalk ? "🚶" : "🚗" };
+      }
+
+      function updateFreshness(updatedAt, isCached) {
+        const pill = document.getElementById("freshnessPill");
+        const text = document.getElementById("freshnessText");
+        if (!updatedAt) {
+          text.textContent = "Offline / Check Data";
+          return;
         }
-        return true;
-      });
-
-      if (filtered.length === 0) {
-        grid.innerHTML = `<div class="empty-state">No matching items found. Try clearing a filter or search term.</div>`;
-        return;
-      }
-
-      grid.innerHTML = filtered.map(item => {
-        const matches = getFilteredMatches(item);
-        const qty = state.basket[item.name] || 0;
-        const isExpanded = !!state.expanded[item.name];
-        const isLow = item.trend && item.trend.is_low;
-
-        let visibleMatches = [];
-        let walkHighlightIdx = -1;
-        if (isExpanded || matches.length <= 2) {
-          visibleMatches = matches;
+        const parsed = new Date(String(updatedAt).replace(" ", "T") + "+02:00");
+        if (isNaN(parsed.getTime())) {
+          text.textContent = String(updatedAt);
+          return;
+        }
+        const diffHrs = Math.max(0, Math.round((Date.now() - parsed.getTime()) / 3600000));
+        const suffix = isCached ? "Cached" : "Live";
+        if (diffHrs < 1) {
+          text.textContent = "Updated <1h ago · " + suffix;
+          pill.classList.remove("stale");
+        } else if (diffHrs <= 24) {
+          text.textContent = "Updated " + diffHrs + "h ago · " + suffix;
+          pill.classList.remove("stale");
         } else {
-          visibleMatches.push(matches[0]);
-          const firstWalkIdx = matches.findIndex((m, i) => i > 0 && getStoreMeta(m.short_store, m.store).isWalk);
-          if (firstWalkIdx !== -1 && matches[firstWalkIdx].short_store !== matches[0].short_store) {
-            visibleMatches.push(matches[firstWalkIdx]);
-            walkHighlightIdx = 1;
-          } else {
-            visibleMatches.push(matches[1]);
-          }
+          const days = Math.floor(diffHrs / 24);
+          text.textContent = "Updated " + days + "d ago";
+          pill.classList.add("stale");
         }
+      }
 
-        const uniqueStores = new Set(matches.map(m => m.short_store || m.store)).size;
-        const safeName = escapeJs(item.name);
-
-        return `
-          <article class="card">
-            <div class="card-header">
-              <div class="card-title-group">
-                <div class="card-cat">${escapeHtml(item.category || "Groceries")}</div>
-                <div class="card-title">${escapeHtml(item.name)}</div>
-              </div>
-              <div class="card-badges">
-                ${isLow ? `<span class="low-badge num">↓ ${Number(item.trend.pct_below_avg || 0)}% · 30d Low</span>` : ""}
-                <div class="stepper">
-                  ${qty > 0 ? `
-                    <button class="stepper-btn" onclick="changeQty('${safeName}', -1)" aria-label="Decrease">−</button>
-                    <span class="stepper-qty num">${qty}</span>
-                    <button class="stepper-btn add-primary" onclick="changeQty('${safeName}', 1)" aria-label="Increase">+</button>
-                  ` : `
-                    <button class="stepper-btn add-primary" onclick="changeQty('${safeName}', 1)" aria-label="Add">+</button>
-                  `}
-                </div>
-              </div>
-            </div>
-
-            <div class="matches-list">
-              ${visibleMatches.map((m, idx) => renderMatchRow(m, idx === 0, idx === walkHighlightIdx)).join("")}
-            </div>
-
-            ${matches.length > 2 ? `
-              <button class="expand-btn" onclick="toggleExpand('${safeName}')">
-                ${isExpanded
-                  ? "Show top picks ▲"
-                  : (uniqueStores > 1
-                      ? `Compare all ${uniqueStores} stores (${matches.length} options) ▾`
-                      : `Show all ${matches.length} options ▾`)}
-              </button>
-            ` : ""}
-          </article>
-        `;
-      }).join("");
-    }
-
-    function openBasket() {
-      document.getElementById("drawerBackdrop").classList.add("open");
-      renderBasketDrawer();
-    }
-
-    function closeBasket() {
-      document.getElementById("drawerBackdrop").classList.remove("open");
-    }
-
-    function handleBackdropClick(e) {
-      if (e.target.id === "drawerBackdrop") closeBasket();
-    }
-
-    function setBasketMode(mode) {
-      state.basketMode = mode;
-      document.getElementById("modePlanBtn").classList.toggle("active", mode === "plan");
-      document.getElementById("modeAisleBtn").classList.toggle("active", mode === "aisle");
-      renderBasketDrawer();
-    }
-
-    function addCustomItem(e) {
-      e.preventDefault();
-      const nameEl = document.getElementById("customItemName");
-      const priceEl = document.getElementById("customItemPrice");
-      const name = nameEl.value.trim();
-      if (!name) return;
-      const price = parseFloat(priceEl.value) || 0;
-      state.customItems.push({ id: "c_" + Date.now(), name, price, qty: 1 });
-      nameEl.value = "";
-      priceEl.value = "";
-      saveState();
-      updateBasketBadge();
-      renderBasketDrawer();
-    }
-
-    function removeCustomItem(id) {
-      state.customItems = state.customItems.filter(c => c.id !== id);
-      delete state.checkedIds[id];
-      saveState();
-      updateBasketBadge();
-      renderBasketDrawer();
-    }
-
-    function toggleChecked(key) {
-      state.checkedIds[key] = !state.checkedIds[key];
-      saveState();
-      renderBasketDrawer();
-    }
-
-    function clearBasket() {
-      state.basket = {};
-      state.customItems = [];
-      state.checkedIds = {};
-      saveState();
-      updateBasketBadge();
-      renderCards();
-      renderBasketDrawer();
-    }
-
-    function computeStoreSummaries() {
-      const basketEntries = Object.entries(state.basket);
-      const customTotal = state.customItems.reduce((sum, c) => sum + (c.price || 0) * (c.qty || 1), 0);
-
-      const activeStores = (appData.stores || []).filter(s =>
-        (appData.items || []).some(it => (it.matches || []).some(m => m.store === s.label))
-      );
-
-      let splitTotal = customTotal;
-      basketEntries.forEach(([itemName, qty]) => {
-        const item = (appData.items || []).find(i => i.name === itemName);
-        if (!item || !item.matches || !item.matches.length) return;
-        const best = item.matches[0];
-        const unitShelf = (best.promo && best.promo.promo_unit_price && qty >= (best.promo.min_qty || 1))
-          ? best.price * (best.promo.promo_unit_price / best.unit_price)
-          : best.price;
-        splitTotal += unitShelf * qty;
-      });
-
-      const summaries = activeStores.map(store => {
-        let total = customTotal;
-        let missing = 0;
-        const lineItems = [];
-
-        basketEntries.forEach(([itemName, qty]) => {
-          const item = (appData.items || []).find(i => i.name === itemName);
-          if (!item) return;
-          const storeMatches = (item.matches || []).filter(m => m.store === store.label);
-          if (!storeMatches.length) {
-            missing++;
-            lineItems.push({ itemName, qty, match: null, lineCost: 0, promoApplied: false });
-            return;
-          }
-          const best = storeMatches[0];
-          const minQty = (best.promo && best.promo.min_qty) ? best.promo.min_qty : 1;
-          const hasOpenPromo = !!(best.promo && best.promo.promo_unit_price);
-          const promoApplied = hasOpenPromo && qty >= minQty;
-          const effectiveShelf = promoApplied
-            ? best.price * (best.promo.promo_unit_price / best.unit_price)
-            : best.price;
-          const lineCost = effectiveShelf * qty;
-          total += lineCost;
-
-          lineItems.push({
-            itemName,
-            qty,
-            match: best,
-            lineCost,
-            promoApplied,
-            hasOpenPromo,
-            minQty
+      function renderStoreFilters() {
+        const row = document.getElementById("storeFilterRow");
+        const activeStores = (appData.stores || []).filter(function (s) {
+          return (appData.items || []).some(function (it) {
+            return (it.matches || []).some(function (m) { return m.store === s.label; });
           });
         });
 
-        return { store, total, missing, lineItems };
-      }).sort((a, b) => (a.missing - b.missing) || (a.total - b.total));
-
-      return { summaries, splitTotal };
-    }
-
-    function renderBasketDrawer() {
-      const body = document.getElementById("drawerBody");
-      const basketEntries = Object.entries(state.basket);
-
-      if (basketEntries.length === 0 && state.customItems.length === 0) {
-        body.innerHTML = `<div class="empty-state">Your basket is empty.<br/>Tap <strong>+</strong> on any item card to build your list.</div>`;
-        return;
-      }
-
-      const { summaries, splitTotal } = computeStoreSummaries();
-      if (!summaries.length) {
-        body.innerHTML = `<div class="empty-state">No store pricing loaded yet.</div>`;
-        return;
-      }
-
-      if (!state.selectedStore || !summaries.some(s => s.store.label === state.selectedStore)) {
-        state.selectedStore = summaries[0].store.label;
-      }
-
-      const activeSummary = summaries.find(s => s.store.label === state.selectedStore) || summaries[0];
-      const cheapestOverall = summaries[0];
-      const cheapestWalk = summaries.find(s => s.store.tier === "neighborhood");
-
-      const storeTabsHtml = `
-        <div class="store-tabs">
-          ${summaries.map(s => `
-            <button class="store-tab ${s.store.label === activeSummary.store.label ? "active" : ""}"
-                    onclick="state.selectedStore='${escapeJs(s.store.label)}'; renderBasketDrawer();">
-              <div class="store-tab-name">${s.store.tier === "neighborhood" ? "🚶" : "🚗"} ${escapeHtml(s.store.short_name)}</div>
-              <div class="store-tab-total num">₪${s.total.toFixed(2)}</div>
-            </button>
-          `).join("")}
-        </div>
-      `;
-
-      if (state.basketMode === "aisle") {
-        const allRows = [
-          ...activeSummary.lineItems.map(li => ({
-            key: "staple:" + li.itemName,
-            title: li.itemName,
-            hebrew: li.match ? li.match.product : "Not stocked at this branch",
-            qty: li.qty,
-            cost: li.lineCost,
-            promo: li.promoApplied ? li.match.promo.desc : ""
-          })),
-          ...state.customItems.map(c => ({
-            key: c.id,
-            title: c.name,
-            hebrew: "Custom item",
-            qty: c.qty || 1,
-            cost: (c.price || 0) * (c.qty || 1),
-            promo: ""
-          }))
-        ];
-
-        const unchecked = allRows.filter(r => !state.checkedIds[r.key]);
-        const checked = allRows.filter(r => state.checkedIds[r.key]);
-        const sortedRows = [...unchecked, ...checked];
-        const remainingCost = unchecked.reduce((sum, r) => sum + r.cost, 0);
-        const pctDone = allRows.length ? Math.round((checked.length / allRows.length) * 100) : 0;
-
-        body.innerHTML = `
-          ${storeTabsHtml}
-          <div class="aisle-progress">
-            <div class="aisle-progress-top">
-              <span>${checked.length} of ${allRows.length} items in cart</span>
-              <span class="num" style="color: var(--brand);">Remaining: ₪${remainingCost.toFixed(2)}</span>
-            </div>
-            <div class="progress-track">
-              <div class="progress-fill" style="width: ${pctDone}%"></div>
-            </div>
-          </div>
-
-          <div class="basket-list">
-            ${sortedRows.map(r => {
-              const isChecked = !!state.checkedIds[r.key];
-              return `
-                <div class="aisle-row ${isChecked ? "checked" : ""}" onclick="toggleChecked('${escapeJs(r.key)}')">
-                  <div class="aisle-check">${isChecked ? "✓" : ""}</div>
-                  <div class="basket-item-meta">
-                    <div class="aisle-name basket-item-title">${r.qty}× ${escapeHtml(r.title)}</div>
-                    <div class="basket-item-he">${escapeHtml(r.hebrew)}</div>
-                    ${r.promo ? `<div class="promo-pill active-deal" style="margin-top:4px;">🏷️ ${escapeHtml(r.promo)}</div>` : ""}
-                  </div>
-                  <div class="num" style="font-weight:800; font-size:15px;">
-                    ${r.cost > 0 ? `₪${r.cost.toFixed(2)}` : "—"}
-                  </div>
-                </div>
-              `;
-            }).join("")}
-          </div>
-        `;
-        return;
-      }
-
-      let walkVsDriveHtml = "";
-      if (cheapestWalk && cheapestOverall.store.tier === "big_box" && cheapestWalk.total > cheapestOverall.total + 1) {
-        const diff = cheapestWalk.total - cheapestOverall.total;
-        walkVsDriveHtml = `<div>🚗 Driving to <strong>${escapeHtml(cheapestOverall.store.short_name)}</strong> saves <span class="callout-highlight num">₪${diff.toFixed(2)}</span> vs walking to <strong>${escapeHtml(cheapestWalk.store.short_name)}</strong>.</div>`;
-      } else if (cheapestWalk && cheapestWalk.store.label === cheapestOverall.store.label) {
-        walkVsDriveHtml = `<div>🚶 <strong>${escapeHtml(cheapestWalk.store.short_name)}</strong> is both walkable and the cheapest single store!</div>`;
-      }
-
-      const splitSavings = activeSummary.total - splitTotal;
-      const splitHtml = splitSavings > 3
-        ? `<div>🔀 Splitting across stores drops total to <span class="callout-highlight num">₪${splitTotal.toFixed(2)}</span> (saves ₪${splitSavings.toFixed(2)}).</div>`
-        : "";
-
-      body.innerHTML = `
-        ${storeTabsHtml}
-        ${(walkVsDriveHtml || splitHtml) ? `<div class="callout-card">${walkVsDriveHtml}${splitHtml}</div>` : ""}
-
-        <form class="custom-add-form" onsubmit="addCustomItem(event)">
-          <input id="customItemName" class="custom-name-input" type="text" placeholder="Add extra item (e.g. Dish soap)..." />
-          <input id="customItemPrice" class="custom-price-input num" type="number" step="0.5" min="0" placeholder="₪ Est." />
-          <button type="submit" class="custom-add-btn">+ Add</button>
-        </form>
-
-        <div class="basket-list">
-          ${activeSummary.lineItems.map(li => {
-            const safeItem = escapeJs(li.itemName);
-            const needMore = li.hasOpenPromo && li.qty < li.minQty;
-            const addCount = Math.ceil(li.minQty - li.qty);
-            const bundleCost = li.match
-              ? (li.match.price * (li.match.promo.promo_unit_price / li.match.unit_price) * li.minQty)
-              : 0;
-
-            return `
-              <div class="basket-row">
-                <div class="basket-row-main">
-                  <div class="basket-item-meta">
-                    <div class="basket-item-title">${escapeHtml(li.itemName)}</div>
-                    <div class="basket-item-he">${li.match ? escapeHtml(li.match.product) : "Not available at this store"}</div>
-                  </div>
-                  <div class="stepper">
-                    <button class="stepper-btn" onclick="changeQty('${safeItem}', -1)">−</button>
-                    <span class="stepper-qty num">${li.qty}</span>
-                    <button class="stepper-btn add-primary" onclick="changeQty('${safeItem}', 1)">+</button>
-                  </div>
-                  <div class="num" style="min-width:64px; text-align:right; font-weight:800; font-size:15px;">
-                    ${li.match ? `₪${li.lineCost.toFixed(2)}` : "—"}
-                  </div>
-                </div>
-
-                ${needMore ? `
-                  <button class="nudge-pill" onclick="setExactQty('${safeItem}', ${li.minQty})">
-                    <span>🏷️ Add ${addCount} more to unlock: ${escapeHtml(li.match.promo.desc)}</span>
-                    <span class="num">→ ₪${bundleCost.toFixed(2)}</span>
-                  </button>
-                ` : (li.promoApplied ? `
-                  <div class="promo-pill active-deal">✓ Deal unlocked: ${escapeHtml(li.match.promo.desc)}</div>
-                ` : "")}
-              </div>
-            `;
-          }).join("")}
-
-          ${state.customItems.map(c => `
-            <div class="basket-row">
-              <div class="basket-row-main">
-                <div class="basket-item-meta">
-                  <div class="basket-item-title">${escapeHtml(c.name)}</div>
-                  <div style="font-size:11.5px; color:var(--ink-muted);">Custom item</div>
-                </div>
-                <div class="num" style="font-weight:800; font-size:14px;">
-                  ${c.price > 0 ? `₪${(c.price * (c.qty || 1)).toFixed(2)}` : "Est. ₪0"}
-                </div>
-                <button class="icon-close" style="width:28px; height:28px; font-size:12px;" onclick="removeCustomItem('${escapeJs(c.id)}')">✕</button>
-              </div>
-            </div>
-          `).join("")}
-        </div>
-      `;
-    }
-
-    function shareWhatsApp() {
-      const { summaries } = computeStoreSummaries();
-      const active = summaries.find(s => s.store.label === state.selectedStore) || summaries[0];
-      if (!active) return;
-
-      const lines = [`🛒 *SabiPricez List — ${active.store.short_name}*`, ""];
-      active.lineItems.forEach(li => {
-        if (li.match) {
-          lines.push(`• ${li.qty}× ${li.itemName} (${li.match.product}) — ₪${li.lineCost.toFixed(2)}`);
-        } else {
-          lines.push(`• ${li.qty}× ${li.itemName}`);
+        if (!activeStores.length) {
+          row.innerHTML = "";
+          return;
         }
-      });
-      state.customItems.forEach(c => {
-        lines.push(`• ${c.qty || 1}× ${c.name}${c.price > 0 ? ` — ₪${c.price.toFixed(2)}` : ""}`);
-      });
-      lines.push("", `*Estimated Total: ₪${active.total.toFixed(2)}*`);
 
-      window.open(`https://wa.me/?text=${encodeURIComponent(lines.join("\n"))}`, "_blank");
-    }
-
-    async function fetchJsonWithTimeout(url, timeoutMs = 12000) {
-      const controller = new AbortController();
-      const timer = setTimeout(() => controller.abort(), timeoutMs);
-      try {
-        const res = await fetch(url, { signal: controller.signal });
-        if (!res.ok) throw new Error(`HTTP ${res.status} on ${url}`);
-        const text = await res.text();
-        return JSON.parse(text);
-      } finally {
-        clearTimeout(timer);
+        const buttons = [
+          '<button type="button" class="chip store-chip ' + (state.storeFilter === "All" ? "active" : "") + '" data-store="All">All Stores</button>'
+        ].concat(activeStores.map(function (s) {
+          const icon = s.tier === "neighborhood" ? "🚶" : "🚗";
+          const isActive = state.storeFilter === s.label;
+          return '<button type="button" class="chip store-chip ' + (isActive ? "active" : "") + '" data-store="' + escapeHtml(s.label) + '">' + icon + ' ' + escapeHtml(s.short_name || s.label) + '</button>';
+        }));
+        row.innerHTML = buttons.join("");
       }
-    }
 
-    async function loadPrices(isRetry = false) {
-      const cachedRaw = localStorage.getItem(CACHE_KEY);
-      if (!isRetry && cachedRaw) {
-        try {
-          const cached = JSON.parse(cachedRaw);
-          if (cached && Array.isArray(cached.items) && cached.items.length > 0) {
-            appData = cached;
-            updateFreshness(appData.updated_at, true);
-            renderStoreFilters();
-            renderCategories();
-            renderCards();
+      function renderCategories() {
+        const cats = ["All"].concat(Array.from(new Set((appData.items || []).map(function (i) { return i.category; }).filter(Boolean))));
+        const strip = document.getElementById("catStrip");
+        strip.innerHTML = cats.map(function (c) {
+          return '<button type="button" class="cat-pill ' + (state.category === c ? "active" : "") + '" data-cat="' + escapeHtml(c) + '">' + escapeHtml(c) + '</button>';
+        }).join("");
+      }
+
+      function updateBasketBadge() {
+        const stapleCount = Object.values(state.basket).reduce(function (a, b) { return a + b; }, 0);
+        const customCount = state.customItems.reduce(function (a, b) { return a + (b.qty || 1); }, 0);
+        document.getElementById("basketCountBadge").textContent = String(stapleCount + customCount);
+      }
+
+      function changeQty(itemName, delta) {
+        const curr = state.basket[itemName] || 0;
+        const next = Math.max(0, curr + delta);
+        if (next === 0) {
+          delete state.basket[itemName];
+          delete state.checkedIds["staple:" + itemName];
+        } else {
+          state.basket[itemName] = next;
+        }
+        saveState();
+        updateBasketBadge();
+        renderCards();
+        if (document.getElementById("drawerBackdrop").classList.contains("open")) {
+          renderBasketDrawer();
+        }
+      }
+
+      function getFilteredMatches(item) {
+        let matches = Array.isArray(item.matches) ? item.matches : [];
+        if (state.storeFilter !== "All") {
+          matches = matches.filter(function (m) { return m.store === state.storeFilter; });
+        }
+        if (state.walkOnly) {
+          matches = matches.filter(function (m) { return getStoreMeta(m.short_store, m.store).isWalk; });
+        }
+        if (state.onlyDeals) {
+          matches = matches.filter(function (m) { return m.promo && m.promo.promo_unit_price; });
+        }
+        return matches;
+      }
+
+      function renderMatchRow(m, isWinner, isWalkHighlight) {
+        const meta = getStoreMeta(m.short_store, m.store);
+        const effUp = Number(m.effective_unit_price ?? m.unit_price ?? m.price ?? 0) || 0;
+        const baseUp = Number(m.unit_price ?? effUp) || effUp;
+        const shelf = Number(m.price ?? effUp) || effUp;
+        const hasDiscount = effUp < baseUp - 0.01;
+        const promoHtml = m.promo
+          ? '<div class="promo-pill ' + (m.promo.promo_unit_price ? "active-deal" : "info-deal") + '">' + (m.promo.promo_unit_price ? "🏷️" : "ℹ️") + ' ' + escapeHtml(m.promo.desc) + '</div>'
+          : "";
+
+        return (
+          '<div class="match-row ' + (isWinner ? "winner" : "") + '">' +
+            '<div class="match-info">' +
+              '<div class="match-top-line">' +
+                '<span class="store-pill ' + meta.cls + '">' + meta.icon + ' ' + escapeHtml(m.short_store || m.store) + '</span>' +
+                (isWinner ? '<span class="winner-tag">#1 Best</span>' : '') +
+                (!isWinner && isWalkHighlight ? '<span class="walk-tag">Best Walk</span>' : '') +
+              '</div>' +
+              '<div class="product-name" title="' + escapeHtml(m.product) + '">' + escapeHtml(m.product) + '</div>' +
+              promoHtml +
+            '</div>' +
+            '<div class="price-col num">' +
+              '<div>' +
+                '<span class="price-hero">₪' + effUp.toFixed(2) + '</span>' +
+                '<span class="price-unit">/ ' + escapeHtml(m.unit || "יח'") + '</span>' +
+              '</div>' +
+              '<div class="price-sub">' +
+                (hasDiscount ? '<span class="price-strike">₪' + baseUp.toFixed(2) + '</span>' : '') +
+                'Shelf ₪' + shelf.toFixed(2) +
+              '</div>' +
+            '</div>' +
+          '</div>'
+        );
+      }
+
+      function renderCards(errorDetail) {
+        const grid = document.getElementById("cardsGrid");
+        const items = Array.isArray(appData.items) ? appData.items : [];
+
+        if (!items.length) {
+          grid.innerHTML =
+            '<div class="empty-state">' +
+              '<div>Unable to load <code>data.json</code>' + (errorDetail ? '<br/><small>' + escapeHtml(errorDetail) + '</small>' : '') + '.</div>' +
+              '<button type="button" class="retry-btn" id="retryLoadBtn">Retry Load</button>' +
+            '</div>';
+          const retryBtn = document.getElementById("retryLoadBtn");
+          if (retryBtn) retryBtn.addEventListener("click", function () { loadPrices(true); });
+          return;
+        }
+
+        const filtered = items.filter(function (item) {
+          if (!item || !item.name) return false;
+          if (state.category !== "All" && item.category !== state.category) return false;
+          const matches = getFilteredMatches(item);
+          if (matches.length === 0) return false;
+          if (state.onlyLows && !(item.trend && item.trend.is_low)) return false;
+          if (state.search) {
+            const inTitle = String(item.name).toLowerCase().includes(state.search);
+            const inProducts = matches.some(function (m) {
+              return String(m.product || "").toLowerCase().includes(state.search);
+            });
+            if (!inTitle && !inProducts) return false;
           }
-        } catch (_) {}
+          return true;
+        });
+
+        if (filtered.length === 0) {
+          grid.innerHTML = '<div class="empty-state">No matching items found. Try clearing a filter or search term.</div>';
+          return;
+        }
+
+        grid.innerHTML = filtered.map(function (item) {
+          const matches = getFilteredMatches(item);
+          const qty = state.basket[item.name] || 0;
+          const isExpanded = !!state.expanded[item.name];
+          const isLow = item.trend && item.trend.is_low;
+
+          let visibleMatches = [];
+          let walkHighlightIdx = -1;
+          if (isExpanded || matches.length <= 2) {
+            visibleMatches = matches;
+          } else {
+            visibleMatches.push(matches[0]);
+            const firstWalkIdx = matches.findIndex(function (m, i) {
+              return i > 0 && getStoreMeta(m.short_store, m.store).isWalk;
+            });
+            if (firstWalkIdx !== -1 && matches[firstWalkIdx].short_store !== matches[0].short_store) {
+              visibleMatches.push(matches[firstWalkIdx]);
+              walkHighlightIdx = 1;
+            } else {
+              visibleMatches.push(matches[1]);
+            }
+          }
+
+          const uniqueStores = new Set(matches.map(function (m) { return m.short_store || m.store; })).size;
+          const itemAttr = escapeHtml(item.name);
+
+          return (
+            '<article class="card">' +
+              '<div class="card-header">' +
+                '<div class="card-title-group">' +
+                  '<div class="card-cat">' + escapeHtml(item.category || "Groceries") + '</div>' +
+                  '<div class="card-title">' + escapeHtml(item.name) + '</div>' +
+                '</div>' +
+                '<div class="card-badges">' +
+                  (isLow ? '<span class="low-badge num">↓ ' + Number(item.trend.pct_below_avg || 0) + '% · 30d Low</span>' : '') +
+                  '<div class="stepper">' +
+                    (qty > 0
+                      ? '<button type="button" class="stepper-btn" data-qty-delta="-1" data-item="' + itemAttr + '" aria-label="Decrease">−</button>' +
+                        '<span class="stepper-qty num">' + qty + '</span>' +
+                        '<button type="button" class="stepper-btn add-primary" data-qty-delta="1" data-item="' + itemAttr + '" aria-label="Increase">+</button>'
+                      : '<button type="button" class="stepper-btn add-primary" data-qty-delta="1" data-item="' + itemAttr + '" aria-label="Add">+</button>') +
+                  '</div>' +
+                '</div>' +
+              '</div>' +
+              '<div class="matches-list">' +
+                visibleMatches.map(function (m, idx) {
+                  return renderMatchRow(m, idx === 0, idx === walkHighlightIdx);
+                }).join("") +
+              '</div>' +
+              (matches.length > 2
+                ? '<button type="button" class="expand-btn" data-expand-item="' + itemAttr + '">' +
+                    (isExpanded
+                      ? "Show top picks ▲"
+                      : (uniqueStores > 1
+                          ? "Compare all " + uniqueStores + " stores (" + matches.length + " options) ▾"
+                          : "Show all " + matches.length + " options ▾")) +
+                  '</button>'
+                : '') +
+            '</article>'
+          );
+        }).join("");
       }
 
-      const candidates = [`data.json?t=${Date.now()}`, `./data.json?t=${Date.now()}`, "data.json"];
-      let lastErr = null;
+      function computeStoreSummaries() {
+        const basketEntries = Object.entries(state.basket);
+        const customTotal = state.customItems.reduce(function (sum, c) {
+          return sum + (Number(c.price) || 0) * (Number(c.qty) || 1);
+        }, 0);
 
-      for (const url of candidates) {
+        const activeStores = (appData.stores || []).filter(function (s) {
+          return (appData.items || []).some(function (it) {
+            return (it.matches || []).some(function (m) { return m.store === s.label; });
+          });
+        });
+
+        let splitTotal = customTotal;
+        basketEntries.forEach(function (pair) {
+          const itemName = pair[0];
+          const qty = pair[1];
+          const item = (appData.items || []).find(function (i) { return i.name === itemName; });
+          if (!item || !item.matches || !item.matches.length) return;
+          const best = item.matches[0];
+          const unitShelf = (best.promo && best.promo.promo_unit_price && qty >= (best.promo.min_qty || 1))
+            ? best.price * (best.promo.promo_unit_price / best.unit_price)
+            : best.price;
+          splitTotal += unitShelf * qty;
+        });
+
+        const summaries = activeStores.map(function (store) {
+          let total = customTotal;
+          let missing = 0;
+          const lineItems = [];
+
+          basketEntries.forEach(function (pair) {
+            const itemName = pair[0];
+            const qty = pair[1];
+            const item = (appData.items || []).find(function (i) { return i.name === itemName; });
+            if (!item) return;
+            const storeMatches = (item.matches || []).filter(function (m) { return m.store === store.label; });
+            if (!storeMatches.length) {
+              missing++;
+              lineItems.push({ itemName: itemName, qty: qty, match: null, lineCost: 0, promoApplied: false });
+              return;
+            }
+            const best = storeMatches[0];
+            const minQty = (best.promo && best.promo.min_qty) ? best.promo.min_qty : 1;
+            const hasOpenPromo = !!(best.promo && best.promo.promo_unit_price);
+            const promoApplied = hasOpenPromo && qty >= minQty;
+            const effectiveShelf = promoApplied
+              ? best.price * (best.promo.promo_unit_price / best.unit_price)
+              : best.price;
+            const lineCost = effectiveShelf * qty;
+            total += lineCost;
+
+            lineItems.push({
+              itemName: itemName,
+              qty: qty,
+              match: best,
+              lineCost: lineCost,
+              promoApplied: promoApplied,
+              hasOpenPromo: hasOpenPromo,
+              minQty: minQty
+            });
+          });
+
+          return { store: store, total: total, missing: missing, lineItems: lineItems };
+        }).sort(function (a, b) {
+          return (a.missing - b.missing) || (a.total - b.total);
+        });
+
+        return { summaries: summaries, splitTotal: splitTotal };
+      }
+
+      function renderBasketDrawer() {
+        const body = document.getElementById("drawerBody");
+        const basketEntries = Object.entries(state.basket);
+
+        if (basketEntries.length === 0 && state.customItems.length === 0) {
+          body.innerHTML = '<div class="empty-state">Your basket is empty.<br/>Tap <strong>+</strong> on any item card to build your list.</div>';
+          return;
+        }
+
+        const computed = computeStoreSummaries();
+        const summaries = computed.summaries;
+        const splitTotal = computed.splitTotal;
+        if (!summaries.length) {
+          body.innerHTML = '<div class="empty-state">No store pricing loaded yet.</div>';
+          return;
+        }
+
+        if (!state.selectedStore || !summaries.some(function (s) { return s.store.label === state.selectedStore; })) {
+          state.selectedStore = summaries[0].store.label;
+        }
+
+        const activeSummary = summaries.find(function (s) { return s.store.label === state.selectedStore; }) || summaries[0];
+        const cheapestOverall = summaries[0];
+        const cheapestWalk = summaries.find(function (s) { return s.store.tier === "neighborhood"; });
+
+        const storeTabsHtml =
+          '<div class="store-tabs">' +
+            summaries.map(function (s) {
+              return (
+                '<button type="button" class="store-tab ' + (s.store.label === activeSummary.store.label ? "active" : "") + '" data-select-store="' + escapeHtml(s.store.label) + '">' +
+                  '<div class="store-tab-name">' + (s.store.tier === "neighborhood" ? "🚶" : "🚗") + ' ' + escapeHtml(s.store.short_name) + '</div>' +
+                  '<div class="store-tab-total num">₪' + s.total.toFixed(2) + '</div>' +
+                '</button>'
+              );
+            }).join("") +
+          '</div>';
+
+        if (state.basketMode === "aisle") {
+          const allRows = activeSummary.lineItems.map(function (li) {
+            return {
+              key: "staple:" + li.itemName,
+              title: li.itemName,
+              hebrew: li.match ? li.match.product : "Not stocked at this branch",
+              qty: li.qty,
+              cost: li.lineCost,
+              promo: li.promoApplied ? li.match.promo.desc : ""
+            };
+          }).concat(state.customItems.map(function (c) {
+            return {
+              key: c.id,
+              title: c.name,
+              hebrew: "Custom item",
+              qty: c.qty || 1,
+              cost: (Number(c.price) || 0) * (Number(c.qty) || 1),
+              promo: ""
+            };
+          }));
+
+          const unchecked = allRows.filter(function (r) { return !state.checkedIds[r.key]; });
+          const checked = allRows.filter(function (r) { return !!state.checkedIds[r.key]; });
+          const sortedRows = unchecked.concat(checked);
+          const remainingCost = unchecked.reduce(function (sum, r) { return sum + r.cost; }, 0);
+          const pctDone = allRows.length ? Math.round((checked.length / allRows.length) * 100) : 0;
+
+          body.innerHTML =
+            storeTabsHtml +
+            '<div class="aisle-progress">' +
+              '<div class="aisle-progress-top">' +
+                '<span>' + checked.length + ' of ' + allRows.length + ' items in cart</span>' +
+                '<span class="num" style="color: var(--brand);">Remaining: ₪' + remainingCost.toFixed(2) + '</span>' +
+              '</div>' +
+              '<div class="progress-track"><div class="progress-fill" style="width:' + pctDone + '%"></div></div>' +
+            '</div>' +
+            '<div class="basket-list">' +
+              sortedRows.map(function (r) {
+                const isChecked = !!state.checkedIds[r.key];
+                return (
+                  '<div class="aisle-row ' + (isChecked ? "checked" : "") + '" data-check-key="' + escapeHtml(r.key) + '">' +
+                    '<div class="aisle-check">' + (isChecked ? "✓" : "") + '</div>' +
+                    '<div class="basket-item-meta">' +
+                      '<div class="aisle-name basket-item-title">' + r.qty + '× ' + escapeHtml(r.title) + '</div>' +
+                      '<div class="basket-item-he">' + escapeHtml(r.hebrew) + '</div>' +
+                      (r.promo ? '<div class="promo-pill active-deal" style="margin-top:4px;">🏷️ ' + escapeHtml(r.promo) + '</div>' : '') +
+                    '</div>' +
+                    '<div class="num" style="font-weight:800;font-size:15px;">' + (r.cost > 0 ? "₪" + r.cost.toFixed(2) : "—") + '</div>' +
+                  '</div>'
+                );
+              }).join("") +
+            '</div>';
+          return;
+        }
+
+        let walkVsDriveHtml = "";
+        if (cheapestWalk && cheapestOverall.store.tier === "big_box" && cheapestWalk.total > cheapestOverall.total + 1) {
+          const diff = cheapestWalk.total - cheapestOverall.total;
+          walkVsDriveHtml = '<div>🚗 Driving to <strong>' + escapeHtml(cheapestOverall.store.short_name) + '</strong> saves <span class="callout-highlight num">₪' + diff.toFixed(2) + '</span> vs walking to <strong>' + escapeHtml(cheapestWalk.store.short_name) + '</strong>.</div>';
+        } else if (cheapestWalk && cheapestWalk.store.label === cheapestOverall.store.label) {
+          walkVsDriveHtml = '<div>🚶 <strong>' + escapeHtml(cheapestWalk.store.short_name) + '</strong> is both walkable and the cheapest single store!</div>';
+        }
+
+        const splitSavings = activeSummary.total - splitTotal;
+        const splitHtml = splitSavings > 3
+          ? '<div>🔀 Splitting across stores drops total to <span class="callout-highlight num">₪' + splitTotal.toFixed(2) + '</span> (saves ₪' + splitSavings.toFixed(2) + ').</div>'
+          : "";
+
+        body.innerHTML =
+          storeTabsHtml +
+          ((walkVsDriveHtml || splitHtml) ? '<div class="callout-card">' + walkVsDriveHtml + splitHtml + '</div>' : '') +
+          '<form class="custom-add-form" id="customAddForm">' +
+            '<input id="customItemName" class="custom-name-input" type="text" placeholder="Add extra item (e.g. Dish soap)..." />' +
+            '<input id="customItemPrice" class="custom-price-input num" type="number" step="0.5" min="0" placeholder="₪ Est." />' +
+            '<button type="submit" class="custom-add-btn">+ Add</button>' +
+          '</form>' +
+          '<div class="basket-list">' +
+            activeSummary.lineItems.map(function (li) {
+              const itemAttr = escapeHtml(li.itemName);
+              const needMore = li.hasOpenPromo && li.qty < li.minQty;
+              const addCount = Math.ceil(li.minQty - li.qty);
+              const bundleCost = li.match
+                ? (li.match.price * (li.match.promo.promo_unit_price / li.match.unit_price) * li.minQty)
+                : 0;
+
+              return (
+                '<div class="basket-row">' +
+                  '<div class="basket-row-main">' +
+                    '<div class="basket-item-meta">' +
+                      '<div class="basket-item-title">' + escapeHtml(li.itemName) + '</div>' +
+                      '<div class="basket-item-he">' + (li.match ? escapeHtml(li.match.product) : "Not available at this store") + '</div>' +
+                    '</div>' +
+                    '<div class="stepper">' +
+                      '<button type="button" class="stepper-btn" data-qty-delta="-1" data-item="' + itemAttr + '">−</button>' +
+                      '<span class="stepper-qty num">' + li.qty + '</span>' +
+                      '<button type="button" class="stepper-btn add-primary" data-qty-delta="1" data-item="' + itemAttr + '">+</button>' +
+                    '</div>' +
+                    '<div class="num" style="min-width:64px;text-align:right;font-weight:800;font-size:15px;">' + (li.match ? "₪" + li.lineCost.toFixed(2) : "—") + '</div>' +
+                  '</div>' +
+                  (needMore
+                    ? '<button type="button" class="nudge-pill" data-nudge-item="' + itemAttr + '" data-nudge-qty="' + li.minQty + '">' +
+                        '<span>🏷️ Add ' + addCount + ' more to unlock: ' + escapeHtml(li.match.promo.desc) + '</span>' +
+                        '<span class="num">→ ₪' + bundleCost.toFixed(2) + '</span>' +
+                      '</button>'
+                    : (li.promoApplied
+                        ? '<div class="promo-pill active-deal">✓ Deal unlocked: ' + escapeHtml(li.match.promo.desc) + '</div>'
+                        : '')) +
+                '</div>'
+              );
+            }).join("") +
+            state.customItems.map(function (c) {
+              const p = Number(c.price) || 0;
+              const q = Number(c.qty) || 1;
+              return (
+                '<div class="basket-row">' +
+                  '<div class="basket-row-main">' +
+                    '<div class="basket-item-meta">' +
+                      '<div class="basket-item-title">' + escapeHtml(c.name) + '</div>' +
+                      '<div style="font-size:11.5px;color:var(--ink-muted);">Custom item</div>' +
+                    '</div>' +
+                    '<div class="num" style="font-weight:800;font-size:14px;">' + (p > 0 ? "₪" + (p * q).toFixed(2) : "Est. ₪0") + '</div>' +
+                    '<button type="button" class="icon-close" style="width:28px;height:28px;font-size:12px;" data-remove-custom="' + escapeHtml(c.id) + '">✕</button>' +
+                  '</div>' +
+                '</div>'
+              );
+            }).join("") +
+          '</div>';
+
+        const form = document.getElementById("customAddForm");
+        if (form) {
+          form.addEventListener("submit", function (e) {
+            e.preventDefault();
+            const nameEl = document.getElementById("customItemName");
+            const priceEl = document.getElementById("customItemPrice");
+            const name = nameEl.value.trim();
+            if (!name) return;
+            const price = parseFloat(priceEl.value) || 0;
+            state.customItems.push({ id: "c_" + Date.now(), name: name, price: price, qty: 1 });
+            nameEl.value = "";
+            priceEl.value = "";
+            saveState();
+            updateBasketBadge();
+            renderBasketDrawer();
+          });
+        }
+      }
+
+      function shareWhatsApp() {
+        const computed = computeStoreSummaries();
+        const active = computed.summaries.find(function (s) { return s.store.label === state.selectedStore; }) || computed.summaries[0];
+        if (!active) return;
+
+        const lines = ["🛒 *SabiPricez List — " + active.store.short_name + "*", ""];
+        active.lineItems.forEach(function (li) {
+          if (li.match) {
+            lines.push("• " + li.qty + "× " + li.itemName + " (" + li.match.product + ") — ₪" + li.lineCost.toFixed(2));
+          } else {
+            lines.push("• " + li.qty + "× " + li.itemName);
+          }
+        });
+        state.customItems.forEach(function (c) {
+          const p = Number(c.price) || 0;
+          lines.push("• " + (c.qty || 1) + "× " + c.name + (p > 0 ? " — ₪" + p.toFixed(2) : ""));
+        });
+        lines.push("", "*Estimated Total: ₪" + active.total.toFixed(2) + "*");
+
+        window.open("https://wa.me/?text=" + encodeURIComponent(lines.join("\n")), "_blank");
+      }
+
+      async function fetchJsonWithTimeout(url, timeoutMs) {
+        const controller = new AbortController();
+        const timer = setTimeout(function () { controller.abort(); }, timeoutMs || 12000);
         try {
-          const fresh = await fetchJsonWithTimeout(url, 12000);
-          if (fresh && Array.isArray(fresh.items)) {
-            appData = fresh;
-            try { localStorage.setItem(CACHE_KEY, JSON.stringify(fresh)); } catch (_) {}
-            updateFreshness(appData.updated_at, false);
-            renderStoreFilters();
-            renderCategories();
+          const res = await fetch(url, { signal: controller.signal });
+          if (!res.ok) throw new Error("HTTP " + res.status);
+          const txt = await res.text();
+          return JSON.parse(txt);
+        } finally {
+          clearTimeout(timer);
+        }
+      }
+
+      async function loadPrices(isRetry) {
+        const cachedRaw = localStorage.getItem(CACHE_KEY);
+        if (!isRetry && cachedRaw) {
+          try {
+            const cached = JSON.parse(cachedRaw);
+            if (cached && Array.isArray(cached.items) && cached.items.length > 0) {
+              appData = cached;
+              updateFreshness(appData.updated_at, true);
+              renderStoreFilters();
+              renderCategories();
+              renderCards();
+            }
+          } catch (_) {}
+        }
+
+        const candidates = ["data.json?t=" + Date.now(), "./data.json?t=" + Date.now(), "data.json"];
+        let lastErr = null;
+
+        for (let i = 0; i < candidates.length; i++) {
+          try {
+            const fresh = await fetchJsonWithTimeout(candidates[i], 12000);
+            if (fresh && Array.isArray(fresh.items)) {
+              appData = fresh;
+              try { localStorage.setItem(CACHE_KEY, JSON.stringify(fresh)); } catch (_) {}
+              updateFreshness(appData.updated_at, false);
+              renderStoreFilters();
+              renderCategories();
+              renderCards();
+              return;
+            }
+            lastErr = new Error("JSON missing items array");
+          } catch (err) {
+            lastErr = err;
+          }
+        }
+
+        updateFreshness("", false);
+        renderCards(lastErr ? (lastErr.name === "AbortError" ? "Request timed out" : lastErr.message) : "Failed to fetch data.json");
+      }
+
+      function bindEvents() {
+        document.getElementById("storeFilterRow").addEventListener("click", function (e) {
+          const btn = e.target.closest("[data-store]");
+          if (!btn) return;
+          state.storeFilter = btn.getAttribute("data-store");
+          renderStoreFilters();
+          renderCards();
+        });
+
+        document.querySelectorAll("[data-filter]").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            const type = btn.getAttribute("data-filter");
+            if (type === "deals") state.onlyDeals = !state.onlyDeals;
+            if (type === "lows") state.onlyLows = !state.onlyLows;
+            if (type === "walk") state.walkOnly = !state.walkOnly;
+            document.getElementById("toggleDeals").classList.toggle("active", state.onlyDeals);
+            document.getElementById("toggleLows").classList.toggle("active", state.onlyLows);
+            document.getElementById("toggleWalkOnly").classList.toggle("active", state.walkOnly);
             renderCards();
+          });
+        });
+
+        document.getElementById("catStrip").addEventListener("click", function (e) {
+          const btn = e.target.closest("[data-cat]");
+          if (!btn) return;
+          state.category = btn.getAttribute("data-cat");
+          renderCategories();
+          renderCards();
+        });
+
+        const searchInput = document.getElementById("searchInput");
+        const searchClear = document.getElementById("searchClear");
+        searchInput.addEventListener("input", function () {
+          state.search = searchInput.value.trim().toLowerCase();
+          searchClear.style.display = state.search ? "grid" : "none";
+          renderCards();
+        });
+        searchClear.addEventListener("click", function () {
+          searchInput.value = "";
+          state.search = "";
+          searchClear.style.display = "none";
+          renderCards();
+        });
+
+        document.getElementById("cardsGrid").addEventListener("click", function (e) {
+          const qtyBtn = e.target.closest("[data-qty-delta]");
+          if (qtyBtn) {
+            changeQty(qtyBtn.getAttribute("data-item"), Number(qtyBtn.getAttribute("data-qty-delta")));
             return;
           }
-          lastErr = new Error("JSON missing items array");
-        } catch (err) {
-          lastErr = err;
-        }
+          const expBtn = e.target.closest("[data-expand-item]");
+          if (expBtn) {
+            const name = expBtn.getAttribute("data-expand-item");
+            state.expanded[name] = !state.expanded[name];
+            renderCards();
+          }
+        });
+
+        document.getElementById("basketFab").addEventListener("click", function () {
+          document.getElementById("drawerBackdrop").classList.add("open");
+          renderBasketDrawer();
+        });
+        document.getElementById("closeDrawerBtn").addEventListener("click", function () {
+          document.getElementById("drawerBackdrop").classList.remove("open");
+        });
+        document.getElementById("drawerBackdrop").addEventListener("click", function (e) {
+          if (e.target.id === "drawerBackdrop") {
+            document.getElementById("drawerBackdrop").classList.remove("open");
+          }
+        });
+
+        document.querySelectorAll("[data-mode]").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            state.basketMode = btn.getAttribute("data-mode");
+            document.getElementById("modePlanBtn").classList.toggle("active", state.basketMode === "plan");
+            document.getElementById("modeAisleBtn").classList.toggle("active", state.basketMode === "aisle");
+            renderBasketDrawer();
+          });
+        });
+
+        document.getElementById("drawerBody").addEventListener("click", function (e) {
+          const storeBtn = e.target.closest("[data-select-store]");
+          if (storeBtn) {
+            state.selectedStore = storeBtn.getAttribute("data-select-store");
+            renderBasketDrawer();
+            return;
+          }
+          const qtyBtn = e.target.closest("[data-qty-delta]");
+          if (qtyBtn) {
+            changeQty(qtyBtn.getAttribute("data-item"), Number(qtyBtn.getAttribute("data-qty-delta")));
+            return;
+          }
+          const nudgeBtn = e.target.closest("[data-nudge-item]");
+          if (nudgeBtn) {
+            const itemName = nudgeBtn.getAttribute("data-nudge-item");
+            const minQty = Number(nudgeBtn.getAttribute("data-nudge-qty"));
+            state.basket[itemName] = minQty;
+            saveState();
+            updateBasketBadge();
+            renderCards();
+            renderBasketDrawer();
+            return;
+          }
+          const remBtn = e.target.closest("[data-remove-custom]");
+          if (remBtn) {
+            const id = remBtn.getAttribute("data-remove-custom");
+            state.customItems = state.customItems.filter(function (c) { return c.id !== id; });
+            delete state.checkedIds[id];
+            saveState();
+            updateBasketBadge();
+            renderBasketDrawer();
+            return;
+          }
+          const checkRow = e.target.closest("[data-check-key]");
+          if (checkRow) {
+            const key = checkRow.getAttribute("data-check-key");
+            state.checkedIds[key] = !state.checkedIds[key];
+            saveState();
+            renderBasketDrawer();
+          }
+        });
+
+        document.getElementById("clearBasketBtn").addEventListener("click", function () {
+          state.basket = {};
+          state.customItems = [];
+          state.checkedIds = {};
+          saveState();
+          updateBasketBadge();
+          renderCards();
+          renderBasketDrawer();
+        });
+
+        document.getElementById("shareWhatsappBtn").addEventListener("click", shareWhatsApp);
       }
 
-      updateFreshness("", false);
-      renderCards(lastErr ? (lastErr.name === "AbortError" ? "Request timed out" : lastErr.message) : "Failed to fetch data.json");
-    }
-
-    function init() {
+      bindEvents();
       updateBasketBadge();
       loadPrices(false);
-    }
-
-    init();
+    })();
   </script>
 </body>
 </html>
